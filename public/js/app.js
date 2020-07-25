@@ -14192,7 +14192,8 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo__["a" /* default */](
   key: "websocketkey",
   wsHost: window.location.hostname,
   wsPort: 6001,
-  disableStats: true
+  disableStats: true,
+  enabledTransports: ['ws', 'wss'] // <- added this param
 });
 
 /***/ }),
