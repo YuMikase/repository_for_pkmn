@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Laravel</title>
 
         <!-- Fonts -->
@@ -67,6 +67,12 @@
         {{-- USE PUSHER --}}
         <script src="https://js.pusher.com/5.1/pusher.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+        	
+        <div id="message">
+
+        </div>
+
         <script>
         Pusher.logToConsole = true;
         
@@ -79,12 +85,58 @@
         channel.bind('my-event', (data) => {
         alert(JSON.stringify(data));
         $("#message").html('<p>'+ JSON.stringify(data) +'</p>');
+        $("#message_list").prepend('<li>'+JSON.stringify(data)+'</li>');
+        });
+
+
+        //メッセージをポスト
+        
+
+        $(function() {
+            $("#form1").submit(function() {
+            var val = {
+                "user": "default_user",
+                "message": $('#form1 [name=message]').val()
+            };
+            $.ajaxSetup({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+            });
+            $.ajax({	
+                url:"{{ url('/test2') }}",
+                type:"post",
+                contentType: "application/json",
+                data:JSON.stringify(val),
+                dataType:"json",
+                }).done(function(data1,textStatus,jqXHR) {
+                    $("#p4").text(jqXHR.status); //例：200
+                    console.log(data1);
+                    $("#p5").text(JSON.stringify(data1));
+                }).fail(function(jqXHR, textStatus, errorThrown){
+                    $("#p4").text("err:"+jqXHR.status); //例：404
+                    $("#p5").text(textStatus); //例：error
+                    $("#p6").text(errorThrown); //例：NOT FOUND
+                }).always(function(){
+                });
+            //formの中身をリセット
+            $('#form1')[0].reset();
+            $('#formtext').focus();
+
+            //画面遷移を食い止める
+            return false;
+            });
         });
         </script>
+        
 
-        <div id="message">
+        <p id="p4">p4</p>
+        <p id="p5">p5</p>
+        <p id="p6">p6</p>
+        <form id="form1">
+            <input  id="formtext" type="text" name="message" />
+            <input type="submit" value="送信">
+        </form>
 
-        </div>
+        <ul id="message_list"></ul>
 
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))

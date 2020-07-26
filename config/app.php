@@ -1,6 +1,12 @@
 <?php
 
 return [
+    
+    //Pusher用の環境変数
+    'pusher_id' => env('PUSHER_APP_ID'),
+    'pusher_key' => env('PUSHER_APP_KEY'),
+    'pusher_secret' => env('PUSHER_APP_SECRET'),
+    'pusher_cluster' => env('PUSHER_APP_CLUSTER'),
 
     /*
     |--------------------------------------------------------------------------
@@ -225,5 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+
+    
 
 ];
