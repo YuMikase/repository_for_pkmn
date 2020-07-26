@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    $chats = App\Messages::all();
+    $chats = App\Messages::orderBy('created_at','desc')->get();
     $pusher_app_id = config('app.pusher_id');
     $pusher_app_key = config('app.pusher_key');
     $pusher_app_secret = config('app.pusher_secret');
