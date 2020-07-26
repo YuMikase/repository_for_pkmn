@@ -111,6 +111,7 @@
                     $("#p4").text(jqXHR.status); //例：200
                     console.log(data1);
                     $("#p5").text(JSON.stringify(data1));
+                    $("#message_list").prepend('<li>'+JSON.stringify(data1)+'</li>');
                 }).fail(function(jqXHR, textStatus, errorThrown){
                     $("#p4").text("err:"+jqXHR.status); //例：404
                     $("#p5").text(textStatus); //例：error
@@ -136,7 +137,13 @@
             <input type="submit" value="送信">
         </form>
 
-        <ul id="message_list"></ul>
+        <ul id="message_list">
+            @if ($chats)
+                @foreach ($chats as $chat)
+                    <li>{{ $chat }}</li>
+                @endforeach
+            @endif
+        </ul>
 
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))

@@ -12,11 +12,12 @@
 */
 
 Route::get('/', function () {
+    $chats = App\Messages::all();
     $pusher_app_id = config('app.pusher_id');
     $pusher_app_key = config('app.pusher_key');
     $pusher_app_secret = config('app.pusher_secret');
     $pusher_app_cluster = config('app.pusher_cluster');
-    return view('index', compact('pusher_app_id','pusher_app_key','pusher_app_secret','pusher_app_cluster'));
+    return view('index', compact('chats','pusher_app_id','pusher_app_key','pusher_app_secret','pusher_app_cluster'));
 });
 
 
