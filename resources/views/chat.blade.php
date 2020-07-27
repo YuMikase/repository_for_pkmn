@@ -13,7 +13,11 @@
             <span v-text="m.created_at"></span>：&nbsp;
 
             <!-- メッセージ内容 -->
-            <span v-text="m.body"></span>
+            ユッザー：<span v-text="m.user_name"></span>&nbsp;
+
+            <!-- メッセージ内容 -->
+            メッセージ<span v-text="m.body"></span>
+
 
         </div>
 
@@ -34,7 +38,7 @@
                     axios.get(url)
                         .then((response) => {
 
-                            this.messages = response.data;
+                            this.messages = response.data
 
                         });
 
@@ -42,7 +46,7 @@
                 send() {
 
                     const url = '/ajax/chat';
-                    const params = { message: this.message };
+                    const params = { message: this.message,user_name: "aa" };
                     axios.post(url, params)
                         .then((response) => {
 
