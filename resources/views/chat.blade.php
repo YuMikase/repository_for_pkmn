@@ -13,10 +13,10 @@
             <span v-text="m.created_at"></span>：&nbsp;
 
             <!-- メッセージ内容 -->
-            ユッザー：<span v-text="m.user_name"></span>&nbsp;
+            user_name:<span v-text="m.user_name"></span><br> 
 
             <!-- メッセージ内容 -->
-            メッセージ<span v-text="m.body"></span>
+            メッセージ：<span v-text="m.body"></span>
 
 
         </div>
