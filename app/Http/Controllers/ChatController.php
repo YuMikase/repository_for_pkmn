@@ -29,6 +29,11 @@ class ChatController extends Controller
 				break;
 		}
 		$user_name = "name";
+
+	    $message = \App\Message::create([
+	        'body' => $re->input('button')."を押しました。",
+	        'user_name' => "たかし"
+	    ]);
 	    return view('chat',compact('image','user_name'));  // フォームページのビュー
 
 	}
