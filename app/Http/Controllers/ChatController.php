@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Events\MessageCreated;
 
 class ChatController extends Controller
 {
@@ -34,6 +35,7 @@ class ChatController extends Controller
 	        'body' => $re->input('button')."を押しました。",
 	        'user_name' => "たかし"
 	    ]);
+	    event(new MessageCreated($message));
 	    return view('chat',compact('image','user_name'));
 
 	}
