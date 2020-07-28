@@ -21,7 +21,7 @@
 // });
 
 Route::get('chat', 'ChatController@index');
-
+Route::post('chat', 'ChatController@progress');
 
 //Pusherに送る
 // require __DIR__ . '/../vendor/autoload.php';

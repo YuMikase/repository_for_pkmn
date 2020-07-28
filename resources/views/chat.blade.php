@@ -1,9 +1,21 @@
 <html>
 <body>
     <div id="chat">
+        <img alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
+        <br>
         <textarea v-model="message"></textarea>
+<!--         <textarea v-model="user_name" style="display: none;">a</textarea> -->
         <br>
         <button type="button" @click="send()">送信</button>
+        <br>
+
+        <form  name="input_form"  method="post"  action="/chat">
+          @csrf
+          <input class="btn  btn-primary"  type="submit"  name="button"   value="1">
+          <input class="btn  btn-primary"  type="submit"  name="button"  value="2">
+          <input class="btn  btn-primary"  type="submit"  name="button"   value="3">
+          <input class="btn  btn-primary"  type="submit"  name="button"   value="4">
+        </form>
 
         <hr>
 
@@ -22,13 +34,15 @@
         </div>
 
     </div>
-      <script src="/js/app.js"></script>
+
+    <script src="/js/app.js"></script>
     <script>
 
         new Vue({
             el: '#chat',
             data: {
                 message: '',
+                user_name: '',
                 messages: []
             },
             methods: {
@@ -46,7 +60,7 @@
                 send() {
 
                     const url = '/ajax/chat';
-                    const params = { message: this.message,user_name: "aa" };
+                    const params = { message: this.message,user_name:"a" };
                     axios.post(url, params)
                         .then((response) => {
 
