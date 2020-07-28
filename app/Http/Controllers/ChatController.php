@@ -9,7 +9,7 @@ class ChatController extends Controller
 	public function index() {
 		$image = "normal";
 		$user_name = "name";
-	    return view('chat',compact('image','user_name')); // フォームページのビュー
+	    return view('chat',compact('image','user_name'));
 
 	}
 
@@ -34,7 +34,7 @@ class ChatController extends Controller
 	        'body' => $re->input('button')."を押しました。",
 	        'user_name' => "たかし"
 	    ]);
-	    return view('chat',compact('image','user_name'));  // フォームページのビュー
+	    return view('chat',compact('image','user_name'));
 
 	}
 
