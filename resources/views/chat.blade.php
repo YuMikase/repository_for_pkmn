@@ -27,7 +27,7 @@
             user_name:<span v-text="m.user_name"></span><br> 
 
             <!-- メッセージ内容 -->
-            メッセージ：<span v-text="m.body"></span>
+            <span v-text="m.body"></span>
 
             <hr style="border:0;border-top:1px solid blue;">
 
@@ -61,7 +61,7 @@
                 send() {
 
                     const url = '/ajax/chat';
-                    const params = { message: this.message,user_name:this.user_name };
+                    const params = { message: 'メッセージ：'+this.message,user_name:this.user_name };
                     axios.post(url, params)
                         .then((response) => {
 
