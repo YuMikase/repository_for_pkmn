@@ -38,7 +38,7 @@ Route::post('/sendmessage', 'MessageController@send');
 
 Route::post('/test2','MainController@write2');
 
-Route::get('ajax/chat', 'Ajax\ChatController@index'); // メッセージ一覧を取得
+Route::get('ajax/chat/{id}', 'Ajax\ChatController@index'); // メッセージ一覧を取得
 Route::post('ajax/chat', 'Ajax\ChatController@create'); // チャット登録
 
 

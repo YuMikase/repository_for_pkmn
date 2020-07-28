@@ -4,7 +4,6 @@
         <img alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
         <br>
         <textarea v-model="message"></textarea>
-        <textarea v-model="user_name" style="display: none;" value="1">a</textarea>
         <br>
         <button type="button" @click="send()">送信</button>
         <br>
@@ -50,7 +49,7 @@
             methods: {
                 getMessages() {
 
-                    const url = '/ajax/chat';
+                    const url = '/ajax/chat/1';
                     axios.get(url)
                         .then((response) => {
 
