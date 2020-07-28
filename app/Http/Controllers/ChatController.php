@@ -8,7 +8,8 @@ class ChatController extends Controller
 {
 	public function index() {
 		$image = "normal";
-	    return view('chat',compact('image')); // フォームページのビュー
+		$user_name = "name";
+	    return view('chat',compact('image','user_name')); // フォームページのビュー
 
 	}
 
@@ -27,7 +28,8 @@ class ChatController extends Controller
 				$image = "four";
 				break;
 		}
-	    return view('chat',compact('image'));  // フォームページのビュー
+		$user_name = "name";
+	    return view('chat',compact('image','user_name'));  // フォームページのビュー
 
 	}
 

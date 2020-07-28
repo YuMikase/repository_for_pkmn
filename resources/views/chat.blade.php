@@ -4,7 +4,7 @@
         <img alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
         <br>
         <textarea v-model="message"></textarea>
-<!--         <textarea v-model="user_name" style="display: none;">a</textarea> -->
+        <textarea v-model="user_name" style="display: none;" value="1">a</textarea>
         <br>
         <button type="button" @click="send()">送信</button>
         <br>
@@ -12,9 +12,9 @@
         <form  name="input_form"  method="post"  action="/chat">
           @csrf
           <input class="btn  btn-primary"  type="submit"  name="button"   value="1">
-          <input class="btn  btn-primary"  type="submit"  name="button"  value="2">
-          <input class="btn  btn-primary"  type="submit"  name="button"   value="3">
-          <input class="btn  btn-primary"  type="submit"  name="button"   value="4">
+          <input class="btn  btn btn-success"  type="submit"  name="button"  value="2">
+          <input class="btn  btn-danger"  type="submit"  name="button"   value="3">
+          <input class="btn  btn-warning"  type="submit"  name="button"   value="4">
         </form>
 
         <hr>
@@ -30,6 +30,8 @@
             <!-- メッセージ内容 -->
             メッセージ：<span v-text="m.body"></span>
 
+            <hr style="border:0;border-top:1px solid blue;">
+
 
         </div>
 
@@ -42,7 +44,7 @@
             el: '#chat',
             data: {
                 message: '',
-                user_name: '',
+                user_name: "{{$user_name}}",
                 messages: []
             },
             methods: {
@@ -60,7 +62,7 @@
                 send() {
 
                     const url = '/ajax/chat';
-                    const params = { message: this.message,user_name:"a" };
+                    const params = { message: this.message,user_name:this.user_name };
                     axios.post(url, params)
                         .then((response) => {
 
