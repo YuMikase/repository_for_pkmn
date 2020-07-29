@@ -1,0 +1,73 @@
+/*初期設定
+--------------------------------------------------*/
+body{
+margin:0;
+padding:0;
+color:#333;
+background:#fff;
+}
+
+
+/*ページ枠組み
+------------------------------*/
+#page{
+    magrin:0 auto;
+    width:800px;
+}
+
+#div1{
+  text-align: center;
+  margin:50px;
+  font-size: 60px;
+  border-width: 8px;
+  background-color: grey;
+}
+
+#name{
+  text-align: center;
+  height:30px;
+  background-color: grey;
+}
+
+.select{
+  float:left;
+  margin-left: 30%;
+}
+#room{
+  float:right;
+  margin-right: 30%;
+}
+#clearfix{
+  content: "";
+	display: block;
+	clear: both;
+}
+
+#div2{
+  background-color: grey;
+  width:50%;
+  height:auto;
+  float: left;
+  margin-left: 10px;
+}
+
+#menu{
+  background-color: green;
+  width:35%;
+  height:auto;
+  float: right;
+  margin-right: 10px;
+}
+
+#div2_1{
+  background-color: red;
+  font-size: 14px;
+  float: left;
+  width:50%;
+}
+#div2_2{
+    background-color: yellow;
+    font-size: 14px;
+    float: right;
+      width:50%;
+}

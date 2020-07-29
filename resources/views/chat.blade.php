@@ -1,9 +1,15 @@
-<html>
+@extends('layouts.common')
 
-<head>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>
+@section('content')
+
+    @section('head')
+    @section('title','chat')
+
+    @section('header')
+    @endsection
+
+    @section('main')
+        
     <div id="chat">
         <img alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
         <br>
@@ -13,11 +19,11 @@
         <br>
 
         <form  name="input_form"  method="post"  action="/chat">
-          @csrf
-          <input class="btn  btn-primary"  type="submit"  name="button"   value="1">
-          <input class="btn  btn btn-success"  type="submit"  name="button"  value="2">
-          <input class="btn  btn-danger"  type="submit"  name="button"   value="3">
-          <input class="btn  btn-warning"  type="submit"  name="button"   value="4">
+        @csrf
+        <input class="btn  btn-primary"  type="submit"  name="button"   value="1">
+        <input class="btn  btn btn-success"  type="submit"  name="button"  value="2">
+        <input class="btn  btn-danger"  type="submit"  name="button"   value="3">
+        <input class="btn  btn-warning"  type="submit"  name="button"   value="4">
         </form>
 
         <hr>
@@ -91,5 +97,10 @@
         });
 
     </script>
-</body>
-</html>
+    @endsection
+
+    @section('footer')
+    @endsection
+
+
+@endsection
