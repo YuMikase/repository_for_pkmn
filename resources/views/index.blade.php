@@ -1,36 +1,26 @@
-{{-- @extends('layouts.common')
+@extends('layouts.common')
 
 @section('content')
 
     @section('head')
-    @section('title','INDEX')
+    @section('title','A1')
 
     @section('header')
     @endsection
 
     @section('main')
+    <div class="div1">ポコモン</div>
+
+      <form action="A2.html" methood="POST">
+        <input type="text" class="name"></input>
+        <button type="submit" class="play">PLAY</button>
+      </form>
     @endsection
 
     @section('footer')
     @endsection
 
 
-@endsection --}}
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>A1</title>
-    <link rel="stylesheet" href="{{ asset('css/styleA1.css') }}">
-  </head>
-  <body>
-      <div id="div1"> TITLE  </div>
-
-      <form action="A2.html" methood="POST">
-        <input type="text" id="name"></input>
-        <button type="submit" id="play">PLAY</button>
-      </form>
+@endsection
 
 
-  </body>
-</html>

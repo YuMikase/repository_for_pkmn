@@ -5,9 +5,26 @@
     <link rel="stylesheet" href="{{ asset('css/styleB1.css') }}">
   </header>
   <body>
-    <div id="div1">Status</div>
-    <p id="name">Hello,####</p>
-    <div id="div2">
+    
+
+  </body>
+</html>
+
+
+@extends('layouts.common')
+
+@section('content')
+
+    @section('head')
+    @section('title','B1')
+
+    @section('header')
+    @endsection
+
+    @section('main')
+    <div class="div1">Status</div>
+    <p class="name">Hello,####</p>
+    <div class="div2">
       <p>現在のLv.#</p>
       <p>　　レブルアップまで＃＃</p>
       <p>Money ####</p>
@@ -17,6 +34,10 @@
         <li>Skill 2:#############</li>
       </ul>
     </div>
+    @endsection
 
-  </body>
-</html>
+    @section('footer')
+    @endsection
+
+
+@endsection

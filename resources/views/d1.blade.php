@@ -1,14 +1,18 @@
-<!DOCTYPE html>
-<html>
-  <header>
-    <title>D1</title>
-    <link rel="stylesheet" href="{{ asset('css/styleD1.css') }}">
-  </header>
-  <body>
-    <div id="div1">Shop</div>
-    <div id="money">￥####</div>
-    <p id="name">Hello,####</p>
-    <div id="div2">
+@extends('layouts.common')
+
+@section('content')
+
+    @section('head')
+    @section('title','D1')
+
+    @section('header')
+    @endsection
+
+    @section('main')
+    <div class="div1">Shop</div>
+    <div class="money">￥####</div>
+    <p class="name">Hello,####</p>
+    <div class="div2">
   
       <p>Item1:(アイテム名) [￥###]<button value="buy" class="Itembuy">[buy]</button></br>
       　　(説明)</p>
@@ -19,6 +23,10 @@
       <p>Item4:(アイテム名) [￥###]<button value="buy" class="Itembuy">[buy]</button></br>
       　　(説明)</p>
     </div>
+    @endsection
 
-  </body>
-</html>
+    @section('footer')
+    @endsection
+
+
+@endsection

@@ -1,13 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <header>
-    <title>C1</title>
-        <link rel="stylesheet" href="{{ asset('css/styleC1.css') }}">
-  </header>
-  <body>
-    <div id="div1">Items</div>
-    <p id="name">Hello,####</p>
-    <div id="div2">
+@extends('layouts.common')
+
+@section('content')
+
+    @section('head')
+    @section('title','C1')
+
+    @section('header')
+    @endsection
+
+    @section('main')
+    <div class="div1">Items</div>
+    <p class="name">Hello,####</p>
+    <div class="div2">
       <p>Item1:(アイテム名) <button value="use" class="Itemuse">[Use]</button></br>
       　　(説明)</p>
       <p>Item2:(アイテム名) <button value="use" class="Itemuse">[Use]</button></br>
@@ -17,6 +21,10 @@
       <p>Item4:(アイテム名) <button value="use" class="Itemuse">[Use]</button></br>
       　　(説明)</p>
     </div>
+    @endsection
 
-  </body>
-</html>
+    @section('footer')
+    @endsection
+
+
+@endsection

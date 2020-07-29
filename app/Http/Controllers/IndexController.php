@@ -14,7 +14,7 @@ class IndexController extends Controller
         return view('a2');
     }
     public function b1(){
-        return view('a2');
+        return view('b1');
     }
     public function c1(){
         return view('c1');

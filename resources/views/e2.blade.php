@@ -1,31 +1,35 @@
-<!DOCTYPE html>
-<html>
-  <header>
-    <title>E2</title>
-            <link rel="stylesheet" href="{{ asset('css/styleE2.css') }}">
-  </header>
-  <body>
-    <div id="time">
+@extends('layouts.common')
+
+@section('content')
+
+    @section('head')
+    @section('title','E2')
+
+    @section('header')
+    @endsection
+
+    @section('main')
+    <div class="time">
       time
     </div>
-    <div id="gauge">
+    <div class="gauge">
       Progress(jQueryかなんかである？bootstrap?)</br>
        Burning(jQueryかなんかである？bootstrap?)
     </div>
-    <div id="Enemy_img">
+    <div class="Enemy_img">
       Enemyの画像
     </div>
-    <div id="Player_img">
+    <div class="Player_img">
       Playerの画像＃この画像ってプレーヤーが用意するんですかね
     </div>
-    <div id="runtime">Run Time</div>
-    <div id="Attack_Container">
-      <div id="attack_foreach"><button value="attack" class="Itembuy">[for each]</button></div>
-      <div id="attack_while"><button value="attack" class="Itembuy">[for each]</button></div>
-　    <div id="attack_switch"><button value="attack" class="Itembuy">[for each]</button></div>
-      <div id="attack_format"><button value="attack" class="Itembuy">[for each]</button></div>
-      <div id="clearfix"></div>
-    　<div id="Console"><button value="attack" class="Itembuy">[for each]</button></div>
+    <div class="runtime">Run Time</div>
+    <div class="Attack_Container">
+      <div class="attack_foreach Itembuy"><button value="attack">[for each]</button></div>
+      <div class="attack_while Itembuy"><button value="attack">[for each]</button></div>
+　    <div class="attack_switch Itembuy"><button value="attack">[for each]</button></div>
+      <div class="attack_format Itembuy"><button value="attack">[for each]</button></div>
+      <div class="clearfix"></div>
+    　<div class="Console Itembuy"><button value="attack">[for each]</button></div>
     </div>
     <div id="Action_Container">
       <ul>
@@ -34,5 +38,10 @@
         <li><button value="attack" class="Itembuy">アイテム</button></li>
         <li><button value="attack" class="Itembuy">にげる</button></li>
       </ul>
-  </body>
-</html>
+    @endsection
+
+    @section('footer')
+    @endsection
+
+
+@endsection
