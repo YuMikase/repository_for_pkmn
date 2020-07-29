@@ -13,6 +13,17 @@ class IndexController extends Controller
     public function a2(){
         return view('a2');
     }
+    public function a2post(Request $req){
+
+        $req_datas['name'] = $req->name;
+        
+        //空なら名無しにしとこかな
+        if(empty($req_datas['name'])){
+            $req_datas['name'] = "NANASHI";
+        }
+        
+        return view('a2', compact('req_datas'));
+    }
     public function b1(){
         return view('b1');
     }

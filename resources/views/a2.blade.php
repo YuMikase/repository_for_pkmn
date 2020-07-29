@@ -10,8 +10,7 @@
 
     @section('main')
     <div class="div1">TITLE</div>
-    <p class="name">Hello,####</p>
-    <div ="selectlang">
+<p class="name">Hello,{{$req_datas['name']}}</p>
     <select name="roomSelect" form="room" class="select">
       <option value="javascript">javascript</option>
       <option value="PHP">PHP</option>

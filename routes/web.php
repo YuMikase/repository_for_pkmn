@@ -11,18 +11,9 @@
 |
 */
 
-// Route::get('/', function () {
-//     $chats = App\Messages::orderBy('created_at','desc')->get();
-//     $pusher_app_id = config('app.pusher_id');
-//     $pusher_app_key = config('app.pusher_key');
-//     $pusher_app_secret = config('app.pusher_secret');
-//     $pusher_app_cluster = config('app.pusher_cluster');
-//     return view('index', compact('chats','pusher_app_id','pusher_app_key','pusher_app_secret','pusher_app_cluster'));
-// });
-
-
 Route::get('/', 'IndexController@index');
 Route::get('/a2', 'IndexController@a2');
+Route::post('a2', 'IndexController@a2post');
 Route::get('/b1', 'IndexController@b1');
 Route::get('/c1', 'IndexController@c1');
 Route::get('/d1', 'IndexController@d1');
@@ -32,17 +23,7 @@ Route::get('/e2', 'IndexController@e2');
 Route::get('chat', 'ChatController@index');
 Route::post('chat', 'ChatController@progress');
 
-//Pusherに送る
-// require __DIR__ . '/../vendor/autoload.php';
-// Route::get('/sendmessage', function(){
-//     echo 'run';
-//     $pusher_app_id = config('app.pusher_id');
-//     $pusher_app_key = config('app.pusher_key');
-//     $pusher_app_secret = config('app.pusher_secret');
-//     $pusher_app_cluster = config('app.pusher_cluster');
-//     $pusher = new Pusher\Pusher($pusher_app_key, $pusher_app_secret, $pusher_app_id, array('cluster' => $pusher_app_cluster));
-//     $pusher->trigger('my-channel', 'my-event', array('message' => 'hello world'));
-// });
+
 Route::post('/sendmessage', 'MessageController@send');
 
 Route::post('/test2','MainController@write2');
