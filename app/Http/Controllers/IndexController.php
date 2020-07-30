@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Log;
+use MyFunc;
 
 class IndexController extends Controller
 {
@@ -17,10 +19,16 @@ class IndexController extends Controller
 
         $req_datas['name'] = $req->name;
         
-        //空なら名無しにしとこかな
-        if(empty($req_datas['name'])){
-            $req_datas['name'] = "NANASHI";
-        }
+        
+
+        //空（empty）なら【 無 】にする
+        $req_datas = MyFunc::fill_empty($req_datas);
+        
+        Log::info(__class__);
+        Log::info($req_datas);
+        
+        
+
         
         return view('a2', compact('req_datas'));
     }
