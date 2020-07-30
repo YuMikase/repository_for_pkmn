@@ -140,3 +140,20 @@ body{
 
   grid-area: select_btns;
 }
+
+/* -----------タイムアウトの画面---------- */
+.time_out{
+  background-color: blueviolet;
+  position: absolute;
+  z-index: 5;
+  width: 100%;
+  height: 500px;
+}
+/* -----------リザルトの画面---------- */
+.result{
+  background-color: orange;
+  position: absolute;
+  z-index: 5;
+  width: 100%;
+  height: 500px;
+}

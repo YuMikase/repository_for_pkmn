@@ -5,6 +5,25 @@
     @section('head')
     @section('title','chat')
 
+    @if ($time_over >= 1)
+    <div class="time_out">
+        タイムアウトになり申した
+        <form name="input_form"  method="post"  action="/chat">
+            @csrf
+            <input type="submit"  name="button"   value="5">
+        </form>
+    </div>
+    @endif
+    @if ($time_over >= 2)
+    <div class="result">
+        リザルト
+        <form name="input_form"  method="post"  action="/chat">
+            @csrf
+            <input type="submit"  name="button"   value="6">
+        </form>
+    </div>
+    @endif
+
     @section('header')
     <div class="grid_gauge">
         <div class="enjo">炎上</div>
