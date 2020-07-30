@@ -12,13 +12,17 @@ class IndexController extends Controller
     public function index(){
         return view('index');
     }
-    public function a2(){
-        return view('a2');
+    public function mypage(){
+        return view('mypage');
     }
-    public function a2post(Request $req){
+    public function mypagepost(Request $req){
 
         $req_datas['name'] = $req->name;
-        
+
+        //言語のデータを読み込む
+        $lang_datas = config('const.LANG_DATAS');
+        Log::info(__class__);
+        Log::info($lang_datas);
         
 
         //空（empty）なら【 無 】にする
@@ -30,18 +34,15 @@ class IndexController extends Controller
         
 
         
-        return view('a2', compact('req_datas'));
+        return view('mypage', compact('req_datas','lang_datas'));
     }
-    public function b1(){
-        return view('b1');
+    public function status(){
+        return view('status');
     }
-    public function c1(){
-        return view('c1');
+    public function items(){
+        return view('items');
     }
-    public function d1(){
-        return view('d1');
-    }
-    public function e2(){
-        return view('e2');
+    public function shop(){
+        return view('shop');
     }
 }

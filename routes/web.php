@@ -12,12 +12,11 @@
 */
 
 Route::get('/', 'IndexController@index');
-Route::get('/a2', 'IndexController@a2');
-Route::post('a2', 'IndexController@a2post');
-Route::get('/b1', 'IndexController@b1');
-Route::get('/c1', 'IndexController@c1');
-Route::get('/d1', 'IndexController@d1');
-Route::get('/e2', 'IndexController@e2');
+Route::get('/mypage', 'IndexController@mypage');
+Route::post('mypage', 'IndexController@mypagepost');
+Route::get('/status', 'IndexController@status');
+Route::get('/items', 'IndexController@items');
+Route::get('/shop', 'IndexController@shop');
 
 
 Route::get('chat', 'ChatController@index');

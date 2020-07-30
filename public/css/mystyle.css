@@ -1,178 +1,57 @@
-/*初期設定
---------------------------------------------------*/
+
+/* -------基本枠組み-------- */
+
 body{
-    margin:0;
-    padding:0;
-    color:#333;
-    background:#fff;
-    }
+  display: grid;
+  grid-template: 
+  "header" 20%
+  "main" 75%
+  "footer" 5%
+  / 1fr;
+}
 
-/*ページ枠組み
-------------------------------*/
-.div1{
+/* -------ヘッダー-------- */
+.header {
+  padding: 10px;
   text-align: center;
-  margin:50px;
-  font-size: 60px;
-  border-width: 8px;
-  background-color: grey;
-  margin-bottom: 200px;
+  grid-area: header;
+}
+/* -------メイン-------- */
+.main {
+  padding: 10px;
+
+  text-align: center;
+  grid-area: main;
+}
+/* -------フッター-------- */
+.footer {
+  padding: 10px;
+
+  text-align: center;
+  grid-area: footer;
 }
 
+/* -------その他枠組み-------- */
 
-.name{
-  margin-left: 300px;
-  height:30px
+.grid_mypage{
+  justify-content: center;
+  display: grid;
+  grid-template: 
+  "button button button" 20%
+  ". . ." 10px
+  "status . item" 75%
+  / 45% 10px 45%;
 }
 
-.play{
-  margin-left: 300px;
-  height:50px
+.enter_button{
+  grid-area: button;
 }
-
-
-
-.select{
-  float:left;
-  margin-left: 30%;
+.status{
+  grid-area: status;
+  border: solid 1px black;
+  overflow: scroll;
 }
-
-.room{
-  float:right;
-  margin-right: 30%;
+.item{
+  grid-area: item;
+  border: solid 1px black;
 }
-
-.clearfix{
-  content: "";
-	display: block;
-	clear: both;
-}
-
-.div2{
-  background-color: grey;
-  width:50%;
-  height:auto;
-  float: left;
-  margin-left: 10px;
-}
-
-.menu{
-  background-color: green;
-  width:35%;
-  height:auto;
-  float: right;
-  margin-right: 10px;
-}
-
-.div2_1{
-  background-color: red;
-  font-size: 14px;
-  float: left;
-  width:50%;
-}
-.div2_2{
-    background-color: yellow;
-    font-size: 14px;
-    float: right;
-      width:50%;
-}
-
-
-.money{
-    text-align: center;
-    height:30px;
-    margin-left:150px;
-    background-color: grey;
-}
-
-
-.time{
-    text-align: center;
-    margin:50px;
-    font-size: 60px;
-    border-width: 8px;
-    background-color: grey;
-  }
-  
-  .gauge{
-      margin:10px;
-      width:60%;
-      height:75px;
-      background-color: grey;
-    }
-  
-  .Enemy_img{
-    margin:10px;
-    width:30%;
-      height:75px;
-      background-color: grey;
-  }
-  
-  .gauge,.Enemy_img{
-    display: inline-flex;
-  }
-  
-  .Player_img{
-    margin:10px;
-    background-color: grey;
-  }
-  
-  .runtime{
-    margin:10px;
-    background-color: grey;
-  }
-  .Player_img,.runtime{
-    display: inline-flex;
-  }
-  
-  
-  .Attack_Container{
-  
-      margin-left: 15px;
-      margin-right: auto;
-      width:65%;
-      float: left;
-  }
-  .Action_Container{
-  
-      margin-left: auto;
-      margin-right: 15px;
-      width:25%;
-      float: right;
-  }
-  .attack_foreach{
-        background-color: yellow;
-        width:40%;
-        height:50px;
-        float: left;
-        margin-left: 10px;
-  }
-  .attack_while{
-        background-color: green;
-        width:40%;
-        height:50px;
-        float: right;
-        margin-right: 10px;
-  }
-  .attack_switch{
-        background-color: aqua;
-        width:40%;
-        height:50px;
-        float: left;
-        margin-left: 10px;
-  }
-  .attack_format{
-        background-color: lime;
-        width:40%;
-        height:50px;
-        float: right;
-        margin-right: 10px;
-  }
-  .clearfix{
-    content: "";
-      display: block;
-      clear: both;
-  }
-  .Console{
-    overflow: hidden;
-    background-color: grey;
-  }

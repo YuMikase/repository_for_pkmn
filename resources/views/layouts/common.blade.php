@@ -9,18 +9,17 @@
     <body>
         
         
-        <div>
+        <div class="header">
             @yield('header')
-            <h>THIS IS A HEADER</h>
         </div>
 
-        <div>
+        <div class="main">
             @yield('main')
         </div>
         
-        <div>
+        <div class="footer">
             @yield('footer')
-            <small>THIS IS A FOOTER</small>
+            <small>Rispect Pokemon Copylight 2020. TeamOG</small>
         </div>
     </body>
 </html>
