@@ -6,29 +6,21 @@
     @section('title','chat')
 
     @section('header')
+    <div class="grid_gauge">
+        <div class="enjo">炎上</div>
+        <div class="sintyoku">進捗</div>
+    </div>
     @endsection
 
     @section('main')
         
-    <div id="chat">
-        <img alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
-        <br>
-        <textarea v-model="message"></textarea>
-        <br>
-        <button type="button" @click="send()">送信</button>
-        <br>
+    <div class="grid_chat" id="chat">
+        <div class="enemy_img">
+        <img  class="img" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
+        </div>
 
-        <form  name="input_form"  method="post"  action="/chat">
-        @csrf
-        <input class="btn  btn-primary"  type="submit"  name="button"   value="1">
-        <input class="btn  btn btn-success"  type="submit"  name="button"  value="2">
-        <input class="btn  btn-danger"  type="submit"  name="button"   value="3">
-        <input class="btn  btn-warning"  type="submit"  name="button"   value="4">
-        </form>
-
-        <hr>
-
-        <div v-for="m in messages">
+        <div class="messages">
+            <div v-for="m in messages">
 
             <!-- 登録された日時 -->
             <span v-text="m.created_at"></span>：&nbsp;
@@ -42,7 +34,31 @@
             <hr style="border:0;border-top:1px solid blue;">
 
 
+            </div>
         </div>
+
+        <form class="grid_commands" name="input_form"  method="post"  action="/chat">
+            @csrf
+            <input class="btn1 btn btn-primary"  type="submit"  name="button"   value="1">
+            <input class="btn2 btn btn btn-success"  type="submit"  name="button"  value="2">
+            <input class="btn3 btn btn-danger"  type="submit"  name="button"   value="3">
+            <input class="btn4 btn btn-warning"  type="submit"  name="button"   value="4">
+            <textarea class="textbox" v-model="message"></textarea>
+            <button class="send_btn" type="button" @click="send()">送信</button>
+            </form>
+            
+    
+    
+    <div class="select_btns">
+        <button>たたかう</button><br>
+        <button>デバッグ</button><br>
+        <button>アイテム</button><br>
+        <button>にげる</button>
+    </div>
+
+        <hr>
+
+        
 
     </div>
 

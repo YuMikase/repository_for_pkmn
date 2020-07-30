@@ -16,4 +16,14 @@ class MyFunc
         return $datas;
     }
 
+    //userなどnameをチェックする
+    public static function check_name($name)
+    {
+        if (empty($name)) {
+            $name = "【 名無し 】";
+        }
+
+        return $name;
+    }
+
 }

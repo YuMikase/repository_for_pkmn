@@ -13,7 +13,7 @@
 
     @section('main')
     <div>Status</div>
-    <p>Hello,</p>
+    <p>Hello,{{$user_datas['name']}}</p>
     <div>
       <p>現在のLv.</p>
       <p>　　レブルアップまで</p>

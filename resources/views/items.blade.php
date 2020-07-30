@@ -10,17 +10,13 @@
 
     @section('main')
     <div>Items</div>
-    <p>Hello,</p>
-    <div>
-      <p>Item1:(アイテム名) <button value="use">USE</button></br>
-      　　(説明)</p>
-      <p>Item2:(アイテム名) <button value="use">USE</button></br>
-      　　(説明)</p>
-      <p>Item3:(アイテム名) <button value="use">USE</button></br>
-      　　(説明)</p>
-      <p>Item4:(アイテム名) <button value="use">USE</button></br>
-      　　(説明)</p>
-    </div>
+    <p>Hello,{{ $user_datas['name'] }}</p>
+
+    <ul>
+      @foreach ($item_datas as $item)
+          <li>{{ $item }}</li><button>USE</button></br>
+      @endforeach
+      </ul>
     @endsection
 
     @section('footer')

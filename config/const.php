@@ -7,4 +7,12 @@ return [
         'Python',
         'Java Script',
     ],
+
+    //アイテムのデータ
+    'ITEM_DATAS' => [
+        'しょぼPC',
+        'そこそこのPC',
+        'なかなかのPC',
+        '最高のPC',
+    ],
 ];

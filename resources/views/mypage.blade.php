@@ -7,7 +7,7 @@
 
 @section('header')
   <h>ポコモン</h>
-  <p>Hello,{{$req_datas['name']}}</p>
+  <p>Hello,{{$user_datas['name']}}</p>
 @endsection
 
 @section('main')
@@ -18,14 +18,18 @@
   </button>
   
   <div class="status">
-      <h3><a href="{{ url('status') }}">Status</a></h3>
+      <h3>Status</h3>
+      <button class="status_button">
+        <a href="{{ url('status') }}">Check your status detail</a>
+      </button>
       <p>Level:</p>
       <p>Money:</p>
-      <p>skill</p>
       <p>Your Lang Lv.</p>
-      <p>javascript:</p>
-      <p>PHP:</p>
-      <p>Python:</p>
+      <div class="langs">
+        <p>javascript:</p>
+        <p>PHP:</p>
+        <p>Python:</p>
+      </div>
   </div>
 
   <div class="item">
