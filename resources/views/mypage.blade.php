@@ -19,9 +19,9 @@
   
   <div class="status">
       <h3>Status</h3>
-      <button class="status_button">
-        <a href="{{ url('status') }}">Check your status detail</a>
-      </button>
+      
+        <a href="{{ url('status') }}"><button class="status_button">Check your status detail</button></a>
+      
       <p>Level:</p>
       <p>Money:</p>
       <p>Your Lang Lv.</p>

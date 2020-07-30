@@ -16,24 +16,18 @@
         
     <div class="grid_chat" id="chat">
         <div class="enemy_img">
-        <img  class="img" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
+            <img  class="img" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
         </div>
 
         <div class="messages">
             <div v-for="m in messages">
-
-            <!-- 登録された日時 -->
-            <span v-text="m.created_at"></span>：&nbsp;
-
-            <!-- メッセージ内容 -->
-            user_name:<span v-text="m.user_name"></span><br> 
-
-            <!-- メッセージ内容 -->
-            <span v-text="m.body"></span>
-
-            <hr style="border:0;border-top:1px solid blue;">
-
-
+                <!-- 登録された日時 -->
+                <span v-text="m.created_at"></span>：&nbsp;
+                <!-- メッセージ内容 -->
+                user_name:<span v-text="m.user_name"></span><br> 
+                <!-- メッセージ内容 -->
+                <span v-text="m.body"></span>
+                <hr style="border:0;border-top:1px solid blue;">
             </div>
         </div>
 
@@ -45,21 +39,14 @@
             <input class="btn4 btn btn-warning"  type="submit"  name="button"   value="4">
             <textarea class="textbox" v-model="message"></textarea>
             <button class="send_btn" type="button" @click="send()">送信</button>
-            </form>
-            
-    
-    
-    <div class="select_btns">
-        <button>たたかう</button><br>
-        <button>デバッグ</button><br>
-        <button>アイテム</button><br>
-        <button>にげる</button>
-    </div>
+        </form>
 
-        <hr>
-
-        
-
+        <div class="select_btns">
+            <button>たたかう</button><br>
+            <button>デバッグ</button><br>
+            <button>アイテム</button><br>
+            <button>にげる</button>
+        </div>
     </div>
 
     <script src="/js/app.js"></script>

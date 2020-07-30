@@ -19,7 +19,7 @@
         
         <div class="footer">
             @yield('footer')
-            <small>Rispect Pokemon Copylight 2020. TeamOG</small>
+            <small>Respect Pokemon Copylight 2020. TeamOG</small>
         </div>
     </body>
 </html>
