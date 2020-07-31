@@ -11,6 +11,7 @@
 |
 */
 
+//画面遷移系
 Route::get('/', 'IndexController@index');
 Route::get('/mypage', 'IndexController@mypage');
 Route::post('mypage', 'IndexController@mypagepost');
@@ -18,17 +19,20 @@ Route::get('/status', 'IndexController@status');
 Route::get('/items', 'IndexController@items');
 Route::get('/shop', 'IndexController@shop');
 
+//ログアウト
+Route::post('/logout', 'IndexController@logout');
 
+//チャット部分
 Route::get('chat', 'ChatController@index');
 Route::post('chat', 'ChatController@progress');
-
-
-Route::post('/sendmessage', 'MessageController@send');
-
-Route::post('/test2','MainController@write2');
-
 Route::get('ajax/chat/{id}', 'Ajax\ChatController@index'); // メッセージ一覧を取得
 Route::post('ajax/chat', 'Ajax\ChatController@create'); // チャット登録
+
+
+//その他（削除予定）
+Route::post('/sendmessage', 'MessageController@send');
+Route::post('/test2','MainController@write2');
+
 
 
 

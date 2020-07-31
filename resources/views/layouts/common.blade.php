@@ -7,10 +7,19 @@
         <title>@yield('title')</title>
     </head>
     <body>
-        
-        
+              
         <div class="header">
             @yield('header')
+        </div>
+
+       
+
+        <div class="logout">
+            @yield('logout')
+            <form action="{{ url('logout') }}" method="post">
+                @csrf
+                <input type="submit" class="logout" value="LOGOUT">
+              </form>
         </div>
 
         <div class="main">

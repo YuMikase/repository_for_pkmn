@@ -31,6 +31,8 @@
     </div>
     @endsection
 
+    <h>Hello, {{ Cookie::get('user_name') }}</h>
+
     @section('main')
         
     <div class="grid_chat" id="chat">

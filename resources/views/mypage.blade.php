@@ -7,10 +7,15 @@
 
 @section('header')
   <h>ポコモン</h>
-  <p>Hello,{{$user_datas['name']}}</p>
+  <h>Hello, {{ $user_datas['name'] }}</h>
 @endsection
+  
+
 
 @section('main')
+
+@section('logout')
+@endsection
 
 <div class="grid_mypage">
   <button class="enter_button">
