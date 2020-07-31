@@ -6,7 +6,7 @@
 @section('head')
 
 @section('header')
-<h>ポコモン</h>
+<h>反映確認0731</h>
 @endsection
 
 @section('main')
@@ -25,5 +25,3 @@
 
 
 @endsection
-
-

@@ -7,16 +7,16 @@
         <title>@yield('title')</title>
     </head>
     <body>
-        
-        
-        <div class="header">
+
+
+        <div class="container bg-primary">
             @yield('header')
         </div>
 
         <div class="main">
             @yield('main')
         </div>
-        
+
         <div class="footer">
             @yield('footer')
             <small>Respect Pokemon Copylight 2020. TeamOG</small>
