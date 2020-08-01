@@ -176,3 +176,18 @@ body{
   width: 100%;
   height: 500px;
 }
+
+
+/* ----------メッセージの書式---------- */
+.announce{
+  color: black;
+}
+.my_do{
+  color: blue;
+}
+.friends_do{
+  color: green;
+}
+.enemy_do{
+  color: red;
+}

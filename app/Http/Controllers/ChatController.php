@@ -53,7 +53,8 @@ class ChatController extends Controller
 
 	    $message = \App\Message::create([
 	        'body' => $re->input('button')."を押しました。",
-	        'user_name' => "たかし"
+			'user_name' => "たかし",
+			'type' => 'my_do'
 	    ]);
 	    event(new MessageCreated($message));
 	    return view('chat',compact('image','user_name','time_over'));

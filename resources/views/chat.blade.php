@@ -5,6 +5,7 @@
     @section('head')
     @section('title','chat')
 
+    {{-- 時折全画面覆うや－つ --}}
     @if ($time_over >= 1)
     <div class="time_out">
         タイムアウトになり申した
@@ -24,6 +25,7 @@
     </div>
     @endif
 
+    {{-- ゲージの表示 --}}
     @section('header')
     <div class="grid_gauge">
         <div class="enjo">炎上</div>
@@ -35,7 +37,9 @@
 
     @section('main')
         
+    {{-- 全体の表示 --}}
     <div class="grid_chat" id="chat">
+        {{-- 画像 --}}
         <div class="img">
             <img  class="enemy_img" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
             <div class="enemy_status">
@@ -47,18 +51,22 @@
             </div>
         </div>
 
+        {{-- チャットメッセージ --}}
         <div class="messages">
             <div v-for="m in messages">
+            <div v-bind:class="m.type">
                 <!-- 登録された日時 -->
                 <span v-text="m.created_at"></span>：&nbsp;
                 <!-- メッセージ内容 -->
                 user_name:<span v-text="m.user_name"></span><br> 
                 <!-- メッセージ内容 -->
                 <span v-text="m.body"></span>
+                </div>
                 <hr style="border:0;border-top:1px solid blue;">
             </div>
         </div>
 
+        {{-- 左下の4つのコマンド --}}
         <form class="grid_commands" name="input_form"  method="post"  action="/chat">
             @csrf
             <input class="btn1 btn btn-primary"  type="submit"  name="button"   value="1">
@@ -69,6 +77,7 @@
             <button class="send_btn" type="button" @click="send()">送信</button>
         </form>
 
+        {{-- 右下のコマンド --}}
         <div class="select_btns">
             <button>たたかう</button><br>
             <button>デバッグ</button><br>
@@ -77,6 +86,7 @@
         </div>
     </div>
 
+    {{-- スクリプト --}}
     <script src="/js/app.js"></script>
     <script>
 

@@ -17,6 +17,7 @@ class CreateMessagesTable extends Migration
             $table->increments('id');
             $table->text('body'); // メッセージ本文
             $table->text('user_name'); // メッセージ本文
+            $table->text('type'); // メッセージの種類
             $table->timestamps();
         });
     }
