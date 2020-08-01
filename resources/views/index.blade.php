@@ -7,6 +7,14 @@
 
 @section('header')
 <h>ポコモン</h>
+
+    <div class="container jumbotron">
+      <h1 class="glow in tlt">Pokomon</h1>
+      <p class="tlt" data-in-effect="bounceInDown">
+        Respect Pokemon
+      </p>
+    </div>
+
 @endsection
 
 @section('main')

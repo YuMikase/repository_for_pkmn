@@ -46,8 +46,49 @@
       <a href="{{ url('shop') }}">'Go shopping'</a>
     </button>
   </div>
-
 </div>
+
+  <div class="container">
+    <div class="col-lg-12" style="text-align: center; margin-top: 10px;">
+      <span class="test1" style="font-size: 26px;">案件に参加</span>
+    </div>
+  </div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="textillate/jquery.fittext.js"></script>
+<script src="textillate/jquery.lettering.js"></script>
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+<script src="textillate/jquery.textillate.js"></script>
+
+<script>
+$(function() {
+    $('.test1').textillate({
+      loop: true,  
+      minDisplayTime: 2000,  
+      initialDelay: 500,  
+      autoStart: true,  
+  
+      // アニメーション設定(開始)
+      in: {
+        effect: 'flash',  
+        delayScale: 3,  
+        delay: 50,  
+        sync: false,  
+        shuffle: false
+      },  
+  
+      // アニメーション設定(終了)
+      out: {
+        effect: 'bounce',  
+        delayScale: 2,  
+        delay: 45,  
+        sync: false,  
+        shuffle: false
+      }
+    });
+});
+
+</script>
 
 @endsection
 
