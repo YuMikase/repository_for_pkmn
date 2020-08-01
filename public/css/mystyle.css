@@ -80,7 +80,7 @@ body{
   justify-content: center;
   display: grid;
   grid-template: 
-  "chat . enemy_img" 250px
+  "chat . img" 250px
   ". . ." 10px
   "commands . select_btns" 250px
   / 45% 10px 45%;
@@ -92,14 +92,33 @@ body{
   overflow: scroll;
   grid-area: chat;
 }
-.enemy_img{
+.img{
   border: solid 1px black;
-  grid-area: enemy_img;
+  grid-area: img;
   justify-content: center;
   align-items:center;
+  display: grid;
+  grid-template: 
+  "enemy_status . enemy" 45%
+  ". . ." 10px
+  "me . me_status" 45%
+  / 45% 10px 45%;
 }
-.img{
+.me_img{
   height: 100px;
+  grid-area: me;
+}
+.me_status{
+  height: 100px;
+  grid-area: me_status;
+}
+.enemy_img{
+  height: 100px;
+  grid-area: enemy;
+}
+.enemy_status{
+  height: 100px;
+  grid-area: enemy_status;
 }
 
 /* コマンド部分 */

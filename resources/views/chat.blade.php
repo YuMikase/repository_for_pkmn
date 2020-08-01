@@ -36,8 +36,15 @@
     @section('main')
         
     <div class="grid_chat" id="chat">
-        <div class="enemy_img">
-            <img  class="img" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
+        <div class="img">
+            <img  class="enemy_img" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
+            <div class="enemy_status">
+                <p>敵のステータス<p>
+            </div>
+            <img  class="me_img" alt="ロゴ" src="{{ asset('/img/me/programming_man.png') }}">
+            <div class="me_status">
+                <p>自分のステータス<p>        
+            </div>
         </div>
 
         <div class="messages">
