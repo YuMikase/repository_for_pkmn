@@ -35,3 +35,7 @@ Route::post('ajax/chat', 'Ajax\ChatController@create'); // チャット登録
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
