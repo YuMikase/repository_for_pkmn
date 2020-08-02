@@ -1,0 +1,62 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="scss.css">
+</head>
+
+<body>
+
+    <a href="https://codepen.io/codesmart1/pen/PowadJY">https://codepen.io/codesmart1/pen/PowadJY</a>
+    
+    <div class="container fullscreen">
+		<div class="twinkling fullscreen"></div>
+		<div class="overlay fullscreen"></div>
+		<div class="sun"></div>
+		<div class="mountains"></div>
+		<div class="glow"></div>
+		<div class="ground"></div>
+		<div class="moving-grid">
+		  <div class="grid-inner">
+			<div class="grid-x"></div>
+			<div class="grid-y"></div>
+		  </div>
+		  <div class="grid-inner grid-inner-2">
+			<div class="grid-y"></div>
+		  </div>
+		</div>
+	  
+		<div class="logo">
+		  <h1>
+			<div class="chrome80s centered" data-text="CODE">CODE</div>
+			<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+			  <defs>
+				<filter id="bevel">
+				  <feMorphology operator="dilate" radius="3" in="SourceGraphic" result="bevel" />
+				</filter>
+			  </defs>
+			</svg>
+		  </h1>
+		  <h2>Wave</h2>
+		  <svg height="240" width="360" class="logo-triangle">
+			<defs>
+			  <linearGradient id="grad1" x1="0%" y1="100%" x2="100%" y2="0%">
+				<stop offset="0%" style="stop-color:rgb(50,50,50);stop-opacity:1" />
+				<stop offset="100%" style="stop-color:black;stop-opacity:1" />
+			  </linearGradient>
+			</defs>
+			<filter id="dropshadow" height="130%">
+			  <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+			  <feOffset dx="2" dy="2" result="offsetblur" />
+			  <feMerge>
+				<feMergeNode />
+				<feMergeNode in="SourceGraphic" />
+			  </feMerge>
+			</filter>
+			<polygon points="0,0 320,0 160,240" stroke="#3e7ef5" stroke-width="0" />
+		  </svg>
+		</div>
+	  </div>
+    
+</body>
+
+</html>
