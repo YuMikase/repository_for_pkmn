@@ -1,7 +1,6 @@
 <?php
 
 return [
-    
     //Pusher用の環境変数
     'pusher_id' => env('PUSHER_APP_ID'),
     'pusher_key' => env('PUSHER_APP_KEY'),
@@ -229,6 +228,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        //自作関数用
+        'MyFunc' => App\MyLib\MyFunc::class,
 
     ],
 

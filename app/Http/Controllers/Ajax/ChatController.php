@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 class ChatController extends Controller
 {
-	public function index() {// 新着順にメッセージ一覧を取得
+	public function index($id) {// 新着順にメッセージ一覧を取得
 	    return \App\Message::orderBy('id', 'desc')->get();
 
 	}

@@ -1,0 +1,159 @@
+
+/* -------基本枠組み-------- */
+
+body{
+  display: grid;
+  grid-template: 
+  "header" 10%
+  "main" 85%
+  "footer" 5%
+  / 1fr;
+}
+
+/* -------ヘッダー-------- */
+.header {
+  padding: 10px;
+  text-align: center;
+  grid-area: header;
+}
+/* -------メイン-------- */
+.main {
+  padding: 10px;
+
+  text-align: center;
+  grid-area: main;
+}
+/* -------フッター-------- */
+.footer {
+  padding: 10px;
+
+  text-align: center;
+  grid-area: footer;
+}
+
+/* -------マイページ枠組み-------- */
+.grid_mypage{
+  justify-content: center;
+  display: grid;
+  grid-template: 
+  "button button button" 20%
+  ". . ." 10px
+  "status . item" 75%
+  / 45% 10px 45%;
+}
+
+.enter_button{
+  grid-area: button;
+}
+.status{
+  grid-area: status;
+  border: solid 1px black;
+  overflow: scroll;
+}
+.item{
+  grid-area: item;
+  border: solid 1px black;
+}
+
+/* -------チャットページ枠組み-------- */
+/* ゲージ部分 */
+.grid_gauge{
+  justify-content: center;
+  display: grid;
+  grid-template: 
+  "enjo sintyoku" 90%
+  / 45% 45%;
+}
+.enjo{
+  grid-area: enjo;
+  border: solid 1px black;
+
+}
+.sintyoku{
+  border: solid 1px black;
+
+  grid-area: sintyoku;
+}
+
+/* チャット部分 */
+.grid_chat{
+  justify-content: center;
+  display: grid;
+  grid-template: 
+  "chat . enemy_img" 250px
+  ". . ." 10px
+  "commands . select_btns" 250px
+  / 45% 10px 45%;
+}
+.messages{
+  border: solid 1px black;
+
+  height: 200px;
+  overflow: scroll;
+  grid-area: chat;
+}
+.enemy_img{
+  border: solid 1px black;
+  grid-area: enemy_img;
+  justify-content: center;
+  align-items:center;
+}
+.img{
+  height: 100px;
+}
+
+/* コマンド部分 */
+.grid_commands{
+  border: solid 1px black;
+  grid-area: commands;
+  justify-content: center;
+  display: grid;
+  grid-template: 
+  "btn1 btn1 . btn2 btn2" 25%
+  ". . . . ." 10px
+  "btn3 btn3 . btn4 btn4" 25%
+  ". . . . ." 10px
+  "textbox textbox textbox textbox send_btn" 10%
+  / 15% 30% 5px 30% 15%;
+}
+.btn1{
+  grid-area: btn1;
+}
+.btn2{
+  grid-area: btn2;
+}
+.btn3{
+  grid-area: btn3;
+}
+.btn4{
+  grid-area: btn4;
+}
+.textbox{
+  grid-area: textbox;
+}
+.send_btn{
+  grid-area: send_btn;
+}
+/* セレクトボタン部分 */
+.select_btns{
+  border: solid 1px black;
+
+  grid-area: select_btns;
+}
+
+/* -----------タイムアウトの画面---------- */
+.time_out{
+  background-color: blueviolet;
+  position: absolute;
+  z-index: 5;
+  width: 100%;
+  height: 500px;
+}
+/* -----------リザルトの画面---------- */
+.result{
+  background-color: orange;
+  position: absolute;
+  z-index: 5;
+  width: 100%;
+  height: 500px;
+}
