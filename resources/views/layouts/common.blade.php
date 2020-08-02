@@ -4,7 +4,8 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/mystyle.css') }}" rel="stylesheet">
         <link href="textillate/animate.css" rel="stylesheet">
-      
+        <link href="css/copype.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
         @yield('head')
         <title>@yield('title')</title>
     </head>

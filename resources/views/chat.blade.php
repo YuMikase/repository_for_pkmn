@@ -3,6 +3,10 @@
 @section('content')
 
     @section('head')
+    {{-- <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+  /> --}}
     @section('title','chat')
 
     {{-- 時折全画面覆うや－つ --}}
@@ -33,7 +37,7 @@
     </div>
     @endsection
 
-    <h>Hello, {{ Cookie::get('user_name') }}</h>
+    <h class="animate__animated animate__bounce">Hello, {{ Cookie::get('user_name') }}</h>
 
     @section('main')
         

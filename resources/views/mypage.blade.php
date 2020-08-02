@@ -53,6 +53,22 @@
       <span class="test1" style="font-size: 26px;">案件に参加</span>
     </div>
   </div>
+  
+  <div class="container">
+    <!-- 画像と背景・文字を配置 -->
+    <div class="bg-pic">
+      <div class="pic" style="background-image : url('https://images.unsplash.com/photo-1519221739757-4df89b4d0efe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80');">
+        <div class="screen one"></div>
+        <!-- 背景１段目 -->
+        <div class="screen two"></div>
+        <!-- 背景２段目 -->
+        <div class="fonts">
+          <h1>Malta's Building</h1>
+          <p>this is a photo in malta <br><br><br>Have A Good Time</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script src="textillate/jquery.fittext.js"></script>
