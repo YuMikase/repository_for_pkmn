@@ -14,10 +14,10 @@ class AddSkillUserTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('skill_id')->unsigned();
-            $table->foreign('skill_id')
-            ->references('id')->on('users')
-            ->onDelete('cascade');
+            $table->integer('skill1')->unsigned()->nullable();
+            $table->integer('skill2')->unsigned()->nullable();
+            $table->integer('skill3')->unsigned()->nullable();
+            $table->integer('skill4')->unsigned()->nullable();
         });
     }
 
@@ -28,8 +28,6 @@ class AddSkillUserTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign('skill_id');
-        });
+        //
     }
 }
