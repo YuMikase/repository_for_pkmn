@@ -13,7 +13,9 @@ class ChatController extends Controller
 		$time_over = 0;
 		$image = "normal";
 		$user_name = "name";
-	    return view('chat',compact('image','user_name', 'time_over'));
+		$lang = 'php';
+		$commands = config('const.COMMANDS')[$lang];
+	    return view('chat',compact('image','user_name', 'time_over', 'commands'));
 
 	}
 

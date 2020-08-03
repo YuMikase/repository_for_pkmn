@@ -90,15 +90,30 @@
 
     {{-- コマンド --}}
     <div id='commands'>
-        <button v-on:click="sendb('1')">ボタン1</button>
-        <button v-on:click="sendb('2')">ボタン2</button>
-        <button v-on:click="sendb('3')">ボタン3</button>
-        <button v-on:click="sendb('4')">ボタン4</button>
+        <div v-for="c in commands">
+            <button v-on:click="sendb(c.name)"><span v-text="c.name"></span></button>
+        </div>
     </div>
 
     {{-- スクリプト --}}
     <script src="/js/app.js"></script>
     <script>
+
+
+        //コマンドの配列を取得
+        var commands = @json($commands);
+
+        //配列をシャッフル（Fisher–Yates shuffle）して4つ返す
+        const shuffle = ([...array]) => {
+        for (let i = array.length - 1; i >= 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return [array[0],array[1],array[2],array[3]];
+        }
+
+        //シャッフルて4つ取得
+        var cfour = shuffle(commands);
 
         //ロード画面用
         window.onload = function() {
@@ -110,13 +125,18 @@
         var command_vue = new Vue({
             el: '#commands',
             data: {
-            user_name: "{{$user_name}}"
+                commands: cfour,
+                user_name: "{{$user_name}}"
             },
             methods: {
                 sendb(value) {
                     const url = '/ajax/chat';
                     const params = { message: value+'のボタンを押した。',user_name:this.user_name,type: 'my_do' };
-                    axios.post(url, params);
+                    axios.post(url, params)
+                    .then((response) => {
+                        //成功したらまたランダムな4つに
+                        this.commands = shuffle(commands);
+                    });
                 }
             }
         })
