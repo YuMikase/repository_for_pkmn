@@ -17,7 +17,8 @@ class IndexController extends Controller
         if(!empty($user_datas['name'])){
             //言語のデータを読み込む
             $lang_datas = config('const.LANG_DATAS');
-            return view('mypage', compact('user_datas','lang_datas'));
+            // return view('mypage', compact('user_datas','lang_datas'));
+            return view('index');
         }
 
         return view('index');
