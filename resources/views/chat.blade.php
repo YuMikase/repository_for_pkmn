@@ -29,6 +29,11 @@
     </div>
     @endif
 
+    {{-- ローディング画面 --}}
+    <div id="loading">
+        <div class="spinner"></div>
+    </div>
+
     {{-- ゲージの表示 --}}
     @section('header')
     <div class="grid_gauge">
@@ -93,6 +98,13 @@
     {{-- スクリプト --}}
     <script src="/js/app.js"></script>
     <script>
+
+        //ロード画面用
+        window.onload = function() {
+            const spinner = document.getElementById('loading');
+            spinner.classList.add('loaded');
+          }
+
 
         new Vue({
             el: '#chat',
