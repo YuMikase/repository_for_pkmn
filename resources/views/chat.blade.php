@@ -99,7 +99,8 @@
             data: {
                 message: '',
                 user_name: "{{$user_name}}",
-                messages: []
+                messages: [],
+                type: '',
             },
             methods: {
                 getMessages() {
@@ -116,7 +117,7 @@
                 send() {
 
                     const url = '/ajax/chat';
-                    const params = { message: 'メッセージ：'+this.message,user_name:this.user_name };
+                    const params = { message: 'メッセージ：'+this.message,user_name:this.user_name,type: 'my_do' };
                     axios.post(url, params)
                         .then((response) => {
 

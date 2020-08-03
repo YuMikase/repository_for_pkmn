@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMessagesTable extends Migration
+class CreateMattersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('matters', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('body')->default('0'); // メッセージ本文
-            $table->text('user_name')->default('0'); // メッセージ本文
-            $table->text('type')->default('0'); // メッセージの種類
+            $table->integer('skill_count');
+            $table->integer('barning');
+            $table->integer('priogress');
+            $table->integer('time');
             $table->timestamps();
+
         });
     }
 
@@ -29,6 +31,6 @@ class CreateMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('matters');
     }
 }

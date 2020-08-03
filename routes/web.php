@@ -28,14 +28,7 @@ Route::post('chat', 'ChatController@progress');
 Route::get('ajax/chat/{id}', 'Ajax\ChatController@index'); // メッセージ一覧を取得
 Route::post('ajax/chat', 'Ajax\ChatController@create'); // チャット登録
 
-
-//その他（削除予定）
-Route::post('/sendmessage', 'MessageController@send');
-Route::post('/test2','MainController@write2');
-
-
-
-
-
-
+//認証系
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
 
