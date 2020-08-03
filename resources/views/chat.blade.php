@@ -3,10 +3,6 @@
 @section('content')
 
     @section('head')
-    {{-- <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
-  /> --}}
     @section('title','chat')
 
     {{-- 時折全画面覆うや－つ --}}
@@ -63,28 +59,25 @@
         {{-- チャットメッセージ --}}
         <div class="messages">
             <div v-for="m in messages">
-            <div v-bind:class="m.type">
-                <!-- 登録された日時 -->
-                <span v-text="m.created_at"></span>：&nbsp;
-                <!-- メッセージ内容 -->
-                user_name:<span v-text="m.user_name"></span><br> 
-                <!-- メッセージ内容 -->
-                <span v-text="m.body"></span>
+                <div v-bind:class="m.type">
+                    <!-- 登録された日時 -->
+                    <span v-text="m.created_at"></span>：&nbsp;
+                    <!-- メッセージ内容 -->
+                    user_name:<span v-text="m.user_name"></span><br> 
+                    <!-- メッセージ内容 -->
+                    <span v-text="m.body"></span>
                 </div>
                 <hr style="border:0;border-top:1px solid blue;">
             </div>
         </div>
 
         {{-- 左下の4つのコマンド --}}
-        <form class="grid_commands" name="input_form"  method="post"  action="/chat">
-            @csrf
-            <input class="btn1 btn btn-primary"  type="submit"  name="button"   value="1">
-            <input class="btn2 btn btn btn-success"  type="submit"  name="button"  value="2">
-            <input class="btn3 btn btn-danger"  type="submit"  name="button"   value="3">
-            <input class="btn4 btn btn-warning"  type="submit"  name="button"   value="4">
-            <textarea class="textbox" v-model="message"></textarea>
-            <button class="send_btn" type="button" @click="send()">送信</button>
-        </form>
+        <div class="grid_commands">
+            <div>          
+                <textarea class="textbox" v-model="message"></textarea>
+                <button class="send_btn" type="button" @click="send()">送信</button>
+            </div>
+        </div>
 
         {{-- 右下のコマンド --}}
         <div class="select_btns">
@@ -95,6 +88,14 @@
         </div>
     </div>
 
+    {{-- コマンド --}}
+    <div id='commands'>
+        <button v-on:click="sendb('1')">ボタン1</button>
+        <button v-on:click="sendb('2')">ボタン2</button>
+        <button v-on:click="sendb('3')">ボタン3</button>
+        <button v-on:click="sendb('4')">ボタン4</button>
+    </div>
+
     {{-- スクリプト --}}
     <script src="/js/app.js"></script>
     <script>
@@ -103,10 +104,25 @@
         window.onload = function() {
             const spinner = document.getElementById('loading');
             spinner.classList.add('loaded');
-          }
+        }
 
-
-        new Vue({
+        //----------コマンド用----------
+        var command_vue = new Vue({
+            el: '#commands',
+            data: {
+            user_name: "{{$user_name}}"
+            },
+            methods: {
+                sendb(value) {
+                    const url = '/ajax/chat';
+                    const params = { message: value+'のボタンを押した。',user_name:this.user_name,type: 'my_do' };
+                    axios.post(url, params);
+                }
+            }
+        })
+        
+        //----------チャットメッセージ用----------
+        var chat_vue = new Vue({
             el: '#chat',
             data: {
                 message: '',
@@ -116,43 +132,30 @@
             },
             methods: {
                 getMessages() {
-
                     const url = '/ajax/chat/1';
                     axios.get(url)
                         .then((response) => {
-
                             this.messages = response.data
-
                         });
-
                 },
                 send() {
-
                     const url = '/ajax/chat';
                     const params = { message: 'メッセージ：'+this.message,user_name:this.user_name,type: 'my_do' };
                     axios.post(url, params)
                         .then((response) => {
-
                             // 成功したらメッセージをクリア
                             this.message = '';
-
                         });
-
                 }
             },
             mounted() {
-
                 this.getMessages();
-
                 Echo.channel('chat')
                     .listen('MessageCreated', (e) => {
-
                         this.getMessages(); // 全メッセージを再読込
-
                     });
-
             }
-        });
+        })
 
     </script>
     @endsection
