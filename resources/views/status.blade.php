@@ -13,7 +13,8 @@
 
     @section('main')
     <div>Status</div>
-    <p>Hello,{{$user_datas['name']}}</p>
+    <h>Hello, {{ Cookie::get('user_name') }}</h>
+
     <div>
       <p>現在のLv.</p>
       <p>　　レブルアップまで</p>

@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="css.css">
+</head>
+
+<body>
+
+    <a href="https://codepen.io/inegoita/pen/zVabmy">https://codepen.io/inegoita/pen/zVabmy</a>
+    
+    <div class="chrome80s centered" data-text="COMMANDO">COMMANDO</div>
+
+
+<a style="color:white" href="http://www.coding-dude.com/wp/css/svg-filters/">SVG Filters</a>
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <filter id="bevel">
+      <!-- filter stuff happening here -->
+      <feMorphology operator="dilate" radius="3" in="SourceGraphic" result="bevel" />
+    </filter>
+    <filter id="noise" x="0vw" y="0vh" width="100vw" height="100vh">
+      <feFlood flood-color="#808080" result="neutral-gray" />      
+      <feTurbulence in="neutral-gray" type="fractalNoise" baseFrequency="0.8" numOctaves="10" stitchTiles="stitch" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="destaturatedNoise"></feColorMatrix>
+      <feComponentTransfer in="desaturatedNoise" result="theNoise">
+        <feFuncA type="table" tableValues="0 0 0.2 0"></feFuncA>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="theNoise" mode="soft-light" result="noisy-image"/>      
+    </filter>
+ 
+  </defs>
+</svg>
+    
+</body>
+
+</html>

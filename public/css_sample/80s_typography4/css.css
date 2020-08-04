@@ -1,0 +1,48 @@
+:root{
+  background:radial-gradient(#0d2f52 0%,black 40%) -20vw 10vh no-repeat black;
+  
+  filter:url('#noise') contrast(110%);
+  margin:0;
+  padding:0;
+  width:100vw;
+  height:100vh;
+  position:absolute;
+  
+}
+
+.centered{
+  text-align:center;
+  margin-top:calc(50vh - 0.5em);
+  
+}
+.chrome80s{
+  font-family: 'Commando', sans-serif;
+  font-size:8rem;
+  font-weight:100;
+  position:relative;
+  white-space:nowrap;
+  
+  background-image:linear-gradient(#010012 20%,#4694c9 40%,#fdf9f7 50%,#010923 50%,#d7674f 60%, #ffc2a4 70%, #edb18c 90%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  -webkit-text-stroke-width: 0.1rem;
+  -webkit-text-stroke-color: rgba(0,0,0,0.2);
+}
+
+.chrome80s:before{
+  content:attr(data-text);
+  filter:url(#bevel);
+  background:linear-gradient(#ffffff 20%,#58bee4 30%, #204a68 50%,#62a7d1 70%, #ffffff 80%) 0% 0% repeat;
+  -webkit-background-clip:text;
+  position:absolute;
+  z-index:-1;
+  
+}
+
+.chrome80s:after{
+  content:attr(data-text);
+  position:absolute;
+  text-shadow:0 0 25px rgba(255,255,255,0.5);
+  transform:translate(-100%);
+  z-index:-2;
+}

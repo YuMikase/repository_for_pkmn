@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="css.css">
+</head>
+
+<body>
+
+    <a href="https://codepen.io/GeorgePark/pen/MXmBNg">https://codepen.io/GeorgePark/pen/MXmBNg</a>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+    
+    const screenText = document.querySelectorAll("p"),
+          delay = [100, 2200, 3200, 4200, 5700, 7200];
+
+    screenText.forEach((text, i) => setTimeout(() => text.classList.add("show"), delay[i]));
+    
+});
+
+      </script>
+      
+    <div class="screen">
+
+      <p>greetings professor falken</p>
+  
+      <p>hello</p>
+  
+      <div>
+  
+          <p>A strange game.</p>
+  
+          <p>The only winning move is</p>
+  
+          <p>not to play.</p>
+  
+      </div>
+  
+      <p>How about a nice game of chess?</p>
+  
+  </div>
+    
+</body>
+
+</html>

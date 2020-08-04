@@ -11,10 +11,12 @@
     @section('main')
     <div>Shop</div>
     <div>￥</div>
-    <p>Hello,{{ $user_datas['name'] }}</p>
+    <h>Hello, {{ Cookie::get('user_name') }}</h>
+
 
       <ul>
-      @foreach ($item_datas as $item)
+      {{-- アイテム一覧表示 --}}
+      @foreach (Config::get('const.ITEM_DATAS') as $item)
           <li>{{ $item }}</li><button>BUY</button></br>
       @endforeach
       </ul>

@@ -1,0 +1,108 @@
+@import url(https://fonts.googleapis.com/css?family=Audiowide);
+@import url(https://fonts.googleapis.com/css?family=Permanent+Marker);
+body {
+  background: #000;
+  color: #fff;
+  position: relative;
+}
+
+.capatv {
+  animation: 0.1s normal parpadeo infinite;
+  opacity: 0.1;
+  z-index: 200;
+  position: fixed;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAGCAYAAAD37n+BAAAALElEQVQYV2NkYGD4/x9IMAIxAxoDmzhIHfU0gCxFB9S1AacfsFmNJQzAoQIAH84j/OCkeYUAAAAASUVORK5CYII=');
+}
+
+@keyframes parpadeoConsulting {
+  0% {
+    -webkit-filter: drop-shadow(2px 2px 25px #f008b7);
+    -webkit-text-stroke: 4px #f008b7;
+   
+  }
+  50% {
+    -webkit-filter: drop-shadow(2px 2px 5px #f008b7);
+    -webkit-text-stroke: 4px #561446;
+   
+    
+  }
+  100% {
+    -webkit-filter: drop-shadow(2px 2px 25px #f008b7);
+    -webkit-text-stroke: 4px #f008b7;
+    
+  }
+}
+
+@keyframes parpadeoAbsolom {
+  0% {
+    -webkit-filter: drop-shadow(2px 2px 25px #8fdcea);
+  }
+  50% {
+    -webkit-filter: drop-shadow(2px 2px 5px #8fdcea);
+  }
+  100% {
+    -webkit-filter: drop-shadow(2px 2px 25px #8fdcea);
+  }
+}
+
+@keyframes parpadeo {
+  0% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0.13;
+  }
+}
+
+.oscurecer {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.8);
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.centro {
+  
+  position: absolute;
+  top: 0;
+  bottom: 0;
+ 
+  right: 0;
+  margin: auto;
+  width:100%;
+  z-index: 105;
+  text-align:center;
+}
+
+.absolom {
+  animation: 4s normal parpadeoAbsolom infinite;
+  font-family: 'Audiowide', cursive;
+  font-size: 160px;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.5px #8fdcea;
+  -webkit-background-clip: text;
+  background-image: -webkit-linear-gradient(top, #000000 0%, #8fdcea 27%, #e8e8e8 55%, #891f68 71%, #ef379f 82%, #ff59e0 100%);
+  -webkit-filter: drop-shadow(2px 2px 15px #8fdcea);
+}
+
+.consulting {
+  font-family: 'Permanent Marker', cursive;
+  animation: 4s normal parpadeoConsulting infinite;
+  font-size: 100px;
+  position: absolute;
+  transform: rotate(-15deg);
+  -webkit-transform: rotate(-14deg);
+  margin-left: 50%;
+  margin-top: -12%;
+  
+  -webkit-text-fill-color: #F975F7;
+  -webkit-text-stroke: 4px #f008b7;
+  -webkit-filter: drop-shadow(2px 2px 15px #f008b7);
+}
