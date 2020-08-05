@@ -16,7 +16,7 @@ class CreateMatterHasAtackTable extends Migration
         Schema::create('matter_has_atack', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('skill_id');
+            $table->string('skill_name');
         });
     }
 
