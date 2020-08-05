@@ -79,37 +79,58 @@
             </div>
         </div>
 
-        {{-- 右下のコマンド --}}
-        <div class="select_btns">
-            <button>たたかう</button><br>
-            <button>デバッグ</button><br>
-            <button>アイテム</button><br>
-            <button>にげる</button>
-        </div>
+        
+
+    </div>
+
+    {{-- アクション --}}
+    <div id='actions' style="border: solid 1px black;">
+        <span>アクション</span><br>
+        <button v-on:click="send_a('debug')">デバッグ</button><br>
+        <button v-on:click="view_items()">アイテム</button><br>
+        <button v-on:click="send_a('run')">にげる</button>
     </div>
 
     {{-- コマンド --}}
-    <div id='commands'>
+    <div id='commands' style="border: solid 1px black;">
+        <span>コマンド</span>
         <div v-for="c in commands">
             <button v-on:click="sendb(c.name)"><span v-text="c.name"></span></button>
         </div>
     </div>
+
+    {{-- アイテム --}}
+    <div id='items' v-bind:class="{ display_none:noneView }" style="border: solid 1px black;">
+        <span>アイテム</span>
+        <div v-for="i in items">
+            <button v-on:click="send_i(i.name)"><span v-text="i.name"></span></button>
+        </div>
+    </div>
+
+    <style>
+        .display_none {
+            display: none;
+        }
+    </style>
 
     {{-- スクリプト --}}
     <script src="/js/app.js"></script>
     <script>
 
 
-        //コマンドの配列を取得
+        //PHPからJSへ渡す
+        //コマンド
         var commands = @json($commands);
+        //コマンド
+        var items = @json($items);
 
         //配列をシャッフル（Fisher–Yates shuffle）して4つ返す
         const shuffle = ([...array]) => {
-        for (let i = array.length - 1; i >= 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return [array[0],array[1],array[2],array[3]];
+            for (let i = array.length - 1; i >= 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return [array[0],array[1],array[2],array[3]];
         }
 
         //シャッフルて4つ取得
@@ -137,6 +158,47 @@
                         //成功したらまたランダムな4つに
                         this.commands = shuffle(commands);
                     });
+                }
+            }
+        })
+
+        //----------アイテム用----------
+        var item_vue = new Vue({
+            el: '#items',
+            data: {
+                noneView: true,
+                items: items,
+                user_name: "{{$user_name}}"
+            },
+            methods: {
+                send_i(value) {
+                    const url = '/ajax/chat';
+                    const params = { message: value+'のアイテムを使用した。',user_name:this.user_name,type: 'use_item' };
+                    axios.post(url, params)
+                    .then((response) => {
+                        //成功後の処理
+                    });
+                }
+            }
+        })
+
+        //----------アクション用----------
+        var action_vue = new Vue({
+            el: '#actions',
+            data: {
+                user_name: "{{$user_name}}"
+            },
+            methods: {
+                send_a(value) {
+                    const url = '/ajax/chat';
+                    const params = { message: value+'のアクションを起こした',user_name:this.user_name,type: 'action' };
+                    axios.post(url, params)
+                    .then((response) => {
+                        //成功後の処理
+                    });
+                },
+                view_items() {
+                    item_vue.noneView = !item_vue.noneView;
                 }
             }
         })

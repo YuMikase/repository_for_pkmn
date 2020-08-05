@@ -13,9 +13,14 @@ class ChatController extends Controller
 		$time_over = 0;
 		$image = "normal";
 		$user_name = "name";
+		
+		//コマンド読み込み
 		$lang = 'php';
 		$commands = config('const.COMMANDS')[$lang];
-	    return view('chat',compact('image','user_name', 'time_over', 'commands'));
+		//アイテム読み込み
+		$items = config('const.ITEMS');
+
+	    return view('chat',compact('image','user_name', 'time_over', 'commands', 'items'));
 
 	}
 
