@@ -3,6 +3,7 @@
 namespace App\MyLib;
 
 use Log;
+use Cookie;
 
 class MyFunc
 {
@@ -16,14 +17,19 @@ class MyFunc
         return $datas;
     }
 
-    //userなどnameをチェックする
+    //userなどnameをチェックし、空なら適当に埋める
     public static function check_name($name)
     {
         if (empty($name)) {
-            $name = "【 名無し 】";
+            //適当な名前一覧からランダムに付ける
+            $equations = config('const.EQUATIONS');
+            $eq = $equations[array_rand($equations)];
+            $name = "名無しの ".$eq;
         }
 
         return $name;
     }
+
+    
 
 }

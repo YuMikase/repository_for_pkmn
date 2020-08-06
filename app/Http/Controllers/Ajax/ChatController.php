@@ -17,7 +17,8 @@ class ChatController extends Controller
 
 	    $message = \App\Message::create([
 	        'body' => $request->message,
-	        'user_name' => $request->user_name
+			'user_name' => $request->user_name,
+			'type' => $request->type
 	    ]);
 	    event(new MessageCreated($message));
 

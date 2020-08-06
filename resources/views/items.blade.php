@@ -8,12 +8,14 @@
     @section('header')
     @endsection
 
+
     @section('main')
     <div>Items</div>
-    <p>Hello,{{ $user_datas['name'] }}</p>
+    <h>Hello, {{ Cookie::get('user_name') }}</h>
+
 
     <ul>
-      @foreach ($item_datas as $item)
+      @foreach (Config::get('const.ITEM_DATAS') as $item)
           <li>{{ $item }}</li><button>USE</button></br>
       @endforeach
       </ul>

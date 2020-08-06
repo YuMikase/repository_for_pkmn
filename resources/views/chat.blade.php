@@ -5,6 +5,7 @@
     @section('head')
     @section('title','chat')
 
+    {{-- 時折全画面覆うや－つ --}}
     @if ($time_over >= 1)
     <div class="time_out">
         タイムアウトになり申した
@@ -24,6 +25,12 @@
     </div>
     @endif
 
+    {{-- ローディング画面 --}}
+    <div id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    {{-- ゲージの表示 --}}
     @section('header')
     <div class="grid_gauge">
         <div class="enjo">炎上</div>
@@ -31,94 +38,104 @@
     </div>
     @endsection
 
+    <h class="animate__animated animate__bounce">Hello, {{ Cookie::get('user_name') }}</h>
+
     @section('main')
         
+    {{-- 全体の表示 --}}
     <div class="grid_chat" id="chat">
-        <div class="enemy_img">
-            <img  class="img" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
+        {{-- 画像 --}}
+        <div class="img">
+            <img  class="enemy_img" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
+            <div class="enemy_status">
+                <p>敵のステータス<p>
+            </div>
+            <img  class="me_img" alt="ロゴ" src="{{ asset('/img/me/programming_man.png') }}">
+            <div class="me_status">
+                <p>自分のステータス<p>        
+            </div>
         </div>
 
+        {{-- チャットメッセージ --}}
         <div class="messages">
             <div v-for="m in messages">
-                <!-- 登録された日時 -->
-                <span v-text="m.created_at"></span>：&nbsp;
-                <!-- メッセージ内容 -->
-                user_name:<span v-text="m.user_name"></span><br> 
-                <!-- メッセージ内容 -->
-                <span v-text="m.body"></span>
+                <div v-bind:class="m.type">
+                    <!-- 登録された日時 -->
+                    <span v-text="m.created_at"></span>：&nbsp;
+                    <!-- メッセージ内容 -->
+                    user_name:<span v-text="m.user_name"></span><br> 
+                    <!-- メッセージ内容 -->
+                    <span v-text="m.body"></span>
+                </div>
                 <hr style="border:0;border-top:1px solid blue;">
             </div>
         </div>
 
-        <form class="grid_commands" name="input_form"  method="post"  action="/chat">
-            @csrf
-            <input class="btn1 btn btn-primary"  type="submit"  name="button"   value="1">
-            <input class="btn2 btn btn btn-success"  type="submit"  name="button"  value="2">
-            <input class="btn3 btn btn-danger"  type="submit"  name="button"   value="3">
-            <input class="btn4 btn btn-warning"  type="submit"  name="button"   value="4">
-            <textarea class="textbox" v-model="message"></textarea>
-            <button class="send_btn" type="button" @click="send()">送信</button>
-        </form>
+        {{-- 左下の4つのコマンド --}}
+        <div class="grid_commands">
+            <div>          
+                <textarea class="textbox" v-model="message"></textarea>
+                <button class="send_btn" type="button" @click="send()">送信</button>
+            </div>
+        </div>
 
-        <div class="select_btns">
-            <button>たたかう</button><br>
-            <button>デバッグ</button><br>
-            <button>アイテム</button><br>
-            <button>にげる</button>
+        
+
+    </div>
+
+    {{-- アクション --}}
+    <div id='actions' style="border: solid 1px black;">
+        <span>アクション</span><br>
+        <button v-on:click="send_a('debug')">デバッグ</button><br>
+        <button v-on:click="view_items()">アイテム</button><br>
+        <button v-on:click="send_a('run')">にげる</button>
+    </div>
+
+    {{-- コマンド --}}
+    <div id='commands' style="border: solid 1px black;">
+        <span>コマンド</span>
+        <div v-for="c in commands">
+            <button v-on:click="sendb(c.name)"><span v-text="c.name"></span></button>
         </div>
     </div>
 
+    {{-- アイテム --}}
+    <div id='items' v-bind:class="{ display_none:noneView }" style="border: solid 1px black;">
+        <span>アイテム</span>
+        <div v-for="i in items">
+            <button v-on:click="send_i(i.name)"><span v-text="i.name"></span></button>
+        </div>
+    </div>
+
+    <style>
+        .display_none {
+            display: none;
+        }
+    </style>
+
+    {{-- スクリプト --}}
     <script src="/js/app.js"></script>
+    
+    {{-- ロード画面用 --}}
     <script>
-
-        new Vue({
-            el: '#chat',
-            data: {
-                message: '',
-                user_name: "{{$user_name}}",
-                messages: []
-            },
-            methods: {
-                getMessages() {
-
-                    const url = '/ajax/chat/1';
-                    axios.get(url)
-                        .then((response) => {
-
-                            this.messages = response.data
-
-                        });
-
-                },
-                send() {
-
-                    const url = '/ajax/chat';
-                    const params = { message: 'メッセージ：'+this.message,user_name:this.user_name };
-                    axios.post(url, params)
-                        .then((response) => {
-
-                            // 成功したらメッセージをクリア
-                            this.message = '';
-
-                        });
-
-                }
-            },
-            mounted() {
-
-                this.getMessages();
-
-                Echo.channel('chat')
-                    .listen('MessageCreated', (e) => {
-
-                        this.getMessages(); // 全メッセージを再読込
-
-                    });
-
-            }
-        });
-
+        window.onload = function() {
+            const spinner = document.getElementById('loading');
+            spinner.classList.add('loaded');
+        }
     </script>
+    
+    {{-- ---------------------------------Vueでの処理用にここから --}}
+    <script>
+        //PHPからJSで使うものを渡す
+        //渡されていないときにどうするか後回しにしている
+        //コマンド
+        var commands = @json($commands);
+        //アイテム
+        var items = @json($items);
+    </script>
+    <script src="/js/myvue.js"></script>
+    {{-- ----------------------------------ここまでがセット --}}
+
     @endsection
 
     @section('footer')

@@ -13,7 +13,14 @@ class ChatController extends Controller
 		$time_over = 0;
 		$image = "normal";
 		$user_name = "name";
-	    return view('chat',compact('image','user_name', 'time_over'));
+		
+		//コマンド読み込み
+		$lang = 'php';
+		$commands = config('const.COMMANDS')[$lang];
+		//アイテム読み込み
+		$items = config('const.ITEMS');
+
+	    return view('chat',compact('image','user_name', 'time_over', 'commands', 'items'));
 
 	}
 
@@ -53,7 +60,8 @@ class ChatController extends Controller
 
 	    $message = \App\Message::create([
 	        'body' => $re->input('button')."を押しました。",
-	        'user_name' => "たかし"
+			'user_name' => "たかし",
+			'type' => 'my_do'
 	    ]);
 	    event(new MessageCreated($message));
 	    return view('chat',compact('image','user_name','time_over'));
