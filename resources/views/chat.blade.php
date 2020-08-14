@@ -44,18 +44,19 @@
             data: {
                 message: '',
                 user_name: "{{$user_name}}",
+                id: "{{$matter_id}}",
                 messages: []
             },
             methods: {
                 getMessages() {
-                    const url = '/ajax/chat/1';
+                    const url = "/ajax/chat/"+this.id;
                     axios.get(url)
                         .then((response) => {
                             this.messages = response.data
                         });
                 },
                 send() {
-                    const url = '/ajax/chat/1';
+                    const url = "/ajax/chat/"+this.id;
                     const params = { message: 'メッセージ：'+this.message,user_name:this.user_name };
                     axios.post(url, params)
                         .then((response) => {

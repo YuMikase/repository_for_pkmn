@@ -7,14 +7,16 @@ use App\Events\MessageCreated;
 
 class ChatController extends Controller
 {
-	public function index() {
+	public function index($id) {
 		$image = "normal";
 		$user_name = "name";
-	    return view('chat',compact('image','user_name'));
+		$matter_id = $id;
+	    return view('chat',compact('image','user_name','matter_id'));
 
 	}
 
-	public function progress(Request $re) {
+	public function progress(Request $re,$id) {
+		$matter_id = $id;
 		switch ($re->input('button')){
 			case '1':
 				$image = "one";
@@ -32,13 +34,13 @@ class ChatController extends Controller
 		$user_name = "name";
 
 	    $message = \App\Message::create([
-	    	'matter_id' => 1,
+	    	'matter_id' => $id,
 	        'body' => $re->input('button')."を押しました。",
 	        'user_name' => "たかし",
 	        'type' => "button"
 	    ]);
 	    event(new MessageCreated($message));
-	    return view('chat',compact('image','user_name'));
+	    return view('chat',compact('image','user_name','matter_id'));
 
 	}
 
