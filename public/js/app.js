@@ -55560,6 +55560,18 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+function _toArray(arr) { return _arrayWithHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -55584,9 +55596,97 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+//-----------------�K�v�ȃf�[�^��blade.php�ł�datas�ϐ�����󂯎��------------------
 
+var items = datas['items'];
+var commands = datas['commands'];
+var user_name = datas['user_name']; //�z����V���b�t���iFisher?Yates shuffle�j����4�Ԃ�
+
+var shuffle = function shuffle(_ref) {
+  var _ref2 = _toArray(_ref),
+      array = _ref2.slice(0);
+
+  for (var i = array.length - 1; i >= 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var _ref3 = [array[j], array[i]];
+    array[i] = _ref3[0];
+    array[j] = _ref3[1];
+  }
+
+  return [array[0], array[1], array[2], array[3]];
+}; //�V���b�t������4�擾
+
+
+var cfour = shuffle(commands);
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: {
+    commands: cfour,
+    user_name: user_name,
+    items: items,
+    message: '',
+    messages: []
+  },
+  methods: {
+    send: function send(type, value) {
+      var _this = this;
+
+      var url = '/ajax/chat';
+
+      switch (type) {
+        case "chat":
+          var params = {
+            user_name: this.user_name,
+            type: type,
+            message: this.message
+          };
+          break;
+
+        default:
+          var params = {
+            user_name: this.user_name,
+            type: type,
+            message: value
+          };
+          break;
+      }
+
+      axios.post(url, params).then(function (response) {
+        //������̏���
+        switch (type) {
+          case "chat":
+            // ���������烁�b�Z�[�W���N���A
+            _this.message = '';
+            break;
+
+          case "command":
+            //����������܂������_����4��
+            _this.commands = shuffle(commands);
+            break;
+
+          default:
+            break;
+        }
+      });
+    },
+    getMessages: function getMessages() {
+      var _this2 = this;
+
+      var url = '/ajax/chat/1';
+      axios.get(url).then(function (response) {
+        _this2.messages = response.data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this3 = this;
+
+    this.getMessages();
+    Echo.channel('chat').listen('MessageCreated', function (e) {
+      _this3.getMessages(); // �S���b�Z�[�W���ēǍ�
+
+    });
+  }
 });
 
 /***/ }),
@@ -55741,8 +55841,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\ost4598\Documents\pocomon\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\ost4598\Documents\pocomon\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\yu\Desktop\MyWorks\PKMN\7_29_develop\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\yu\Desktop\MyWorks\PKMN\7_29_develop\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -28,6 +28,78 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app'
+//-----------------必要なデータをblade.phpでのdatas変数から受け取り------------------
+
+var items = datas['items'];
+var commands = datas['commands'];
+var user_name = datas['user_name']; 
+
+//配列をシャッフル（Fisher?Yates shuffle）して4つ返す
+const shuffle = ([...array]) => {
+    for (let i = array.length - 1; i >= 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return [array[0], array[1], array[2], array[3]];
+}
+
+//シャッフルして4つ取得
+var cfour = shuffle(commands);
+
+
+
+var app = new Vue({
+    el: '#app',
+    data: {
+        commands: cfour,
+        user_name: user_name,
+        items: items,
+        message: '',
+        messages: []
+    },
+    methods: {
+        send(type, value) {
+            const url = '/ajax/chat';
+            switch (type) {
+                case "chat":
+                    var params = { user_name: this.user_name, type: type, message: this.message };
+                    break;
+            
+                default:
+                    var params = { user_name: this.user_name, type: type, message: value };
+                    break;
+            }
+            axios.post(url, params)
+                .then((response) => {
+                    //成功後の処理
+                    switch (type) {
+                        case "chat":
+                            // 成功したらメッセージをクリア
+                            this.message = '';
+                            break;
+                        case "command":
+                            //成功したらまたランダムな4つに
+                            this.commands = shuffle(commands);
+                            break;
+                        default:
+                            break;
+                    }
+                    
+                });
+        },
+        getMessages() {
+            const url = '/ajax/chat/1';
+            axios.get(url)
+                .then((response) => {
+                    this.messages = response.data
+                });
+        }
+    },
+    mounted() {
+        this.getMessages();
+        Echo.channel('chat')
+            .listen('MessageCreated', (e) => {
+                this.getMessages(); // 全メッセージを再読込
+            });
+    }
 });

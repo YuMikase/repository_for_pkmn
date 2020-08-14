@@ -14,10 +14,35 @@ class ChatController extends Controller
 	}
 
 	public function create(Request $request) {
+		
+		
+		$type = $request->type;
+
+		switch ($type) {
+			case 'chat':
+				$body = "メッセージ：".$request->message;
+				break;
+			case 'command':
+				$body = $request->message."のボタンを押した。";
+				break;
+			case 'debug':
+				$body = $request->message."を行った。";
+				break;
+			case 'item':
+				$body = $request->message."のアイテムを使用した。";
+				break;
+			case 'run':
+				$body = "逃げることができた。";
+				break;
+			default:
+				# code...
+				break;
+		}
 
 	    $message = \App\Message::create([
-	        'body' => $request->message,
-	        'user_name' => $request->user_name
+	        'body' => $body,
+			'user_name' => $request->user_name,
+			'type' => $type
 	    ]);
 	    event(new MessageCreated($message));
 
