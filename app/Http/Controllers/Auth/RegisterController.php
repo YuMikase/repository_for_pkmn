@@ -63,10 +63,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $commands = config('command');
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'skill1' => array_rand($commands[array_rand($commands)]),
+            'skill2' => array_rand($commands[array_rand($commands)]),
+            'skill3' => array_rand($commands[array_rand($commands)]),
+            'skill4' => array_rand($commands[array_rand($commands)]),
         ]);
     }
 }

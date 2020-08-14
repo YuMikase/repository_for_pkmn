@@ -48,28 +48,20 @@
             },
             methods: {
                 getMessages() {
-
                     const url = '/ajax/chat/1';
                     axios.get(url)
                         .then((response) => {
-
                             this.messages = response.data
-
                         });
-
                 },
                 send() {
-
                     const url = '/ajax/chat/1';
                     const params = { message: 'メッセージ：'+this.message,user_name:this.user_name };
                     axios.post(url, params)
                         .then((response) => {
-
                             // 成功したらメッセージをクリア
                             this.message = '';
-
                         });
-
                 }
             },
             mounted() {

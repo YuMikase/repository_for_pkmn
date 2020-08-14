@@ -31,17 +31,11 @@ class ChatController extends Controller
 		}
 		$user_name = "name";
 
-		\App\Matter::create([
-	    	'skill_count' => 5,
-	        'barning' => 0,
-	        'priogress' => 0,
-	        'time' => 0,
-	    ]);
-
 	    $message = \App\Message::create([
 	    	'matter_id' => 1,
 	        'body' => $re->input('button')."を押しました。",
-	        'user_name' => "たかし"
+	        'user_name' => "たかし",
+	        'type' => "button"
 	    ]);
 	    event(new MessageCreated($message));
 	    return view('chat',compact('image','user_name'));
