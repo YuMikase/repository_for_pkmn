@@ -8,7 +8,7 @@
         <button type="button" @click="send()">送信</button>
         <br>
 
-        <form  name="input_form"  method="post"  action="/chat/1">
+        <form  name="input_form"  method="post"  action="/chat/{{$id}}">
           @csrf
           <input class="btn  btn-primary"  type="submit"  name="button"   value="1">
           <input class="btn  btn btn-success"  type="submit"  name="button"  value="2">
