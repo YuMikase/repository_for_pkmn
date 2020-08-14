@@ -31,6 +31,6 @@ class CreateMattersTable extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('matters');
+        Schema::dropIfExists('matters');
     }
 }

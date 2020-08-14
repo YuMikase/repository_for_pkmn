@@ -14,10 +14,10 @@ class AddSkillUserTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('skill1')->unsigned()->nullable();
-            $table->integer('skill2')->unsigned()->nullable();
-            $table->integer('skill3')->unsigned()->nullable();
-            $table->integer('skill4')->unsigned()->nullable();
+            $table->string('skill1')->nullable();
+            $table->string('skill2')->nullable();
+            $table->string('skill3')->nullable();
+            $table->string('skill4')->nullable();
         });
     }
 
