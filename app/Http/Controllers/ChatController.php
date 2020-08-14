@@ -14,6 +14,13 @@ class ChatController extends Controller
 
 	}
 
+	public function index_doteki($id) {
+		$image = "normal";
+		$user_name = "name";
+	    return view('chat_doteki',compact('image','user_name','id'));
+
+	}
+
 	public function progress(Request $re,$id) {
 		switch ($re->input('button')){
 			case '1':

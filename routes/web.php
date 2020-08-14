@@ -14,6 +14,7 @@
 
 Route::get('chat/{id}', 'ChatController@index');
 Route::post('chat/{id}', 'ChatController@progress');
+Route::get('chat/doteki/{id}', 'ChatController@index_doteki');
 
 Route::post('/sendmessage', 'MessageController@send');
 
@@ -21,6 +22,7 @@ Route::post('/test2','MainController@write2');
 
 Route::get('ajax/chat/{id}', 'Ajax\ChatController@index'); // メッセージ一覧を取得
 Route::post('ajax/chat/{id}', 'Ajax\ChatController@create'); // チャット登録
+Route::post('ajax/command/{id}', 'Ajax\ChatController@create_command'); // コマンド
 
 Auth::routes();
 
