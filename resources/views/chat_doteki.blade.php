@@ -8,13 +8,10 @@
         <button type="button" @click="send('chat','')">送信</button>
         <br>
 
-        <form  name="input_form"  method="post"  action="/chat/{{$id}}">
-          @csrf
           <input class="btn  btn-primary"  type="button" @click="send('command',1)"  name="button"   value="1">
           <input class="btn  btn btn-success"  type="button" @click="send('command',2)"  name="button"  value="2">
           <input class="btn  btn-danger"  type="button" @click="send('command',3)"  name="button"   value="3">
           <input class="btn  btn-warning"  type="button" @click="send('command',4)"  name="button"   value="4">
-        </form>
 
         <hr>
 
