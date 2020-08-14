@@ -9,13 +9,14 @@ use App\Http\Controllers\Controller;
 class ChatController extends Controller
 {
 	public function index($id) {// 新着順にメッセージ一覧を取得
-	    return \App\Message::orderBy('id', 'desc')->get();
+	    return \App\Message::where('matter_id',$id)->orderBy('id', 'desc')->get();
 
 	}
 
 	public function create(Request $request) {
 
 	    $message = \App\Message::create([
+	    	'matter_id' => $request->id,
 	        'body' => $request->message,
 	        'user_name' => $request->user_name
 	    ]);

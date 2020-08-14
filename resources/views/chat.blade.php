@@ -8,7 +8,7 @@
         <button type="button" @click="send()">送信</button>
         <br>
 
-        <form  name="input_form"  method="post"  action="/chat">
+        <form  name="input_form"  method="post"  action="/chat/1">
           @csrf
           <input class="btn  btn-primary"  type="submit"  name="button"   value="1">
           <input class="btn  btn btn-success"  type="submit"  name="button"  value="2">
@@ -60,7 +60,7 @@
                 },
                 send() {
 
-                    const url = '/ajax/chat';
+                    const url = '/ajax/chat/1';
                     const params = { message: 'メッセージ：'+this.message,user_name:this.user_name };
                     axios.post(url, params)
                         .then((response) => {

@@ -20,8 +20,8 @@
 //     return view('index', compact('chats','pusher_app_id','pusher_app_key','pusher_app_secret','pusher_app_cluster'));
 // });
 
-Route::get('chat', 'ChatController@index');
-Route::post('chat', 'ChatController@progress');
+Route::get('chat/{id}', 'ChatController@index');
+Route::post('chat/{id}', 'ChatController@progress');
 
 //Pusherに送る
 // require __DIR__ . '/../vendor/autoload.php';
@@ -39,7 +39,7 @@ Route::post('/sendmessage', 'MessageController@send');
 Route::post('/test2','MainController@write2');
 
 Route::get('ajax/chat/{id}', 'Ajax\ChatController@index'); // メッセージ一覧を取得
-Route::post('ajax/chat', 'Ajax\ChatController@create'); // チャット登録
+Route::post('ajax/chat/{id}', 'Ajax\ChatController@create'); // チャット登録
 
 
 
