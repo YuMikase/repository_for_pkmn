@@ -44,7 +44,7 @@
             data: {
                 message: '',
                 user_name: "{{$user_name}}",
-                id: "{{$matter_id}}",
+                id: "{{$id}}",
                 messages: []
             },
             methods: {

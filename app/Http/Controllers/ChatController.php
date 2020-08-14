@@ -10,13 +10,11 @@ class ChatController extends Controller
 	public function index($id) {
 		$image = "normal";
 		$user_name = "name";
-		$matter_id = $id;
-	    return view('chat',compact('image','user_name','matter_id'));
+	    return view('chat',compact('image','user_name','id'));
 
 	}
 
 	public function progress(Request $re,$id) {
-		$matter_id = $id;
 		switch ($re->input('button')){
 			case '1':
 				$image = "one";
@@ -40,7 +38,7 @@ class ChatController extends Controller
 	        'type' => "button"
 	    ]);
 	    event(new MessageCreated($message));
-	    return view('chat',compact('image','user_name','matter_id'));
+	    return view('chat',compact('image','user_name','id'));
 
 	}
 
