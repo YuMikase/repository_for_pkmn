@@ -10,10 +10,10 @@
 
         <form  name="input_form"  method="post"  action="/chat/{{$id}}">
           @csrf
-          <input class="btn  btn-primary"  type="submit"  name="button"   value="1">
-          <input class="btn  btn btn-success"  type="submit"  name="button"  value="2">
-          <input class="btn  btn-danger"  type="submit"  name="button"   value="3">
-          <input class="btn  btn-warning"  type="submit"  name="button"   value="4">
+          <input class="btn  btn-primary"  type="submit"  name="button"   value="{{Auth::user()->skill1}}">
+          <input class="btn  btn btn-success"  type="submit"  name="button"  value="{{Auth::user()->skill2}}">
+          <input class="btn  btn-danger"  type="submit"  name="button"   value="{{Auth::user()->skill3}}">
+          <input class="btn  btn-warning"  type="submit"  name="button"   value="{{Auth::user()->skill4}}">
         </form>
 
         <hr>
