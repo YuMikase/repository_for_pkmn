@@ -12,9 +12,9 @@
 */
 
 
-Route::get('chat/{id}', 'ChatController@index');
-Route::post('chat/{id}', 'ChatController@progress');
-Route::get('chat/doteki/{id}', 'ChatController@index_doteki');
+Route::get('chat/{id}', 'ChatController@index')->middleware('auth');
+Route::post('chat/{id}', 'ChatController@progress')->middleware('auth');
+Route::get('chat/doteki/{id}', 'ChatController@index_doteki')->middleware('auth');
 
 Route::post('/sendmessage', 'MessageController@send');
 
