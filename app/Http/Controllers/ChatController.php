@@ -48,8 +48,6 @@ class ChatController extends Controller
 
 		$user_name = $user->name;
 
-		$commands[array_rand($commands)]['name'];
-
         $user->skill1  = $commands[array_rand($commands)]['name'];
         $user->skill2  = $commands[array_rand($commands)]['name'];
         $user->skill3  = $commands[array_rand($commands)]['name'];
