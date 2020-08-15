@@ -9,15 +9,17 @@ use Illuminate\Support\Facades\Auth;
 class ChatController extends Controller
 {
 	public function index($id) {
+		$user = Auth::user();
 		$image = "normal";
-		$user_name = "name";
+		$user_name = $user->name;
 	    return view('chat',compact('image','user_name','id'));
 
 	}
 
 	public function index_doteki($id) {
+		$user = Auth::user();
 		$image = "normal";
-		$user_name = "name";
+		$user_name = $user->name;
 	    return view('chat_doteki',compact('image','user_name','id'));
 
 	}
@@ -41,9 +43,10 @@ class ChatController extends Controller
 				$image = "four";
 				break;
 		}
-		$user_name = "name";
 
-        $user = Auth::user();
+		$user = Auth::user();
+
+		$user_name = $user->name;
 
         $user->skill1  = array_rand($commands[array_rand($commands)]);
         $user->skill2  = array_rand($commands[array_rand($commands)]);
@@ -55,7 +58,7 @@ class ChatController extends Controller
 	    $message = \App\Message::create([
 	    	'matter_id' => $id,
 	        'body' => $re->input('button')."を押しました。",
-	        'user_name' => "たかし",
+	        'user_name' => $user_name ,
 	        'type' => "button"
 	    ]);
 
