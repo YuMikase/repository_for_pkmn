@@ -47,7 +47,7 @@ return [
 
     //Python
     201 => [
-        'id' => 101,
+        'id' => 201,
         'lang' => 'Python',
         'name' => 'if',
         'barning' => 10,
