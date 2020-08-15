@@ -48,10 +48,12 @@ class ChatController extends Controller
 
 		$user_name = $user->name;
 
-        $user->skill1  = array_rand($commands);
-        $user->skill2  = array_rand($commands);
-        $user->skill3  = array_rand($commands);
-        $user->skill4  = array_rand($commands);
+		$commands[array_rand($commands)]['name'];
+
+        $user->skill1  = $commands[array_rand($commands)]['name'];
+        $user->skill2  = $commands[array_rand($commands)]['name'];
+        $user->skill3  = $commands[array_rand($commands)]['name'];
+        $user->skill4  = $commands[array_rand($commands)]['name'];
 
 		$user->save();
 	    $message = \App\Message::create([
