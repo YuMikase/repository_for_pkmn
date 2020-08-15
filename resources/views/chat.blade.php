@@ -1,5 +1,6 @@
-<html>
-<body>
+@extends('layouts.app')
+
+@section('content')
     <div id="chat">
         <img alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
         <br>
@@ -80,5 +81,4 @@
         });
 
     </script>
-</body>
-</html>
+@endsection

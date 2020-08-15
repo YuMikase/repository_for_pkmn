@@ -27,3 +27,7 @@ Route::post('ajax/command/{id}', 'Ajax\ChatController@create_command'); // ã‚³ãƒ
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/', function () {
+    return redirect('/login');
+});
