@@ -48,13 +48,12 @@ class ChatController extends Controller
 
 		$user_name = $user->name;
 
-        $user->skill1  = array_rand($commands[array_rand($commands)]);
-        $user->skill2  = array_rand($commands[array_rand($commands)]);
-        $user->skill3  = array_rand($commands[array_rand($commands)]);
-        $user->skill4  = array_rand($commands[array_rand($commands)]);
+        $user->skill1  = array_rand($commands);
+        $user->skill2  = array_rand($commands);
+        $user->skill3  = array_rand($commands);
+        $user->skill4  = array_rand($commands);
 
-        $user->save();
-
+		$user->save();
 	    $message = \App\Message::create([
 	    	'matter_id' => $id,
 	        'body' => $re->input('button')."を押しました。",
