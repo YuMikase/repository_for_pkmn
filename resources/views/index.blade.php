@@ -28,7 +28,7 @@
       @csrf
       <label for="Entername" >Enter Yourname</label>
       <div class="row">
-        <input type="text" class="form-control col-6" name="name" placeholder="Enter email">
+        <input type="text" class="form-control col-6" name="name" placeholder="Enter youename">
         <input type="submit" class="col-1 float-right" value="PLAY">
     </div>
   </form>
