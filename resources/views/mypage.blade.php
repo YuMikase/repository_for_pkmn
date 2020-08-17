@@ -7,7 +7,7 @@
 
 @section('header')
   <h>ポコモン</h>
-  <h>Hello, {{ $user_datas['name'] }}</h>
+  <h>Hello, {{Auth::user()->name}}　</h>
 @endsection
 
 
@@ -23,7 +23,7 @@
   </button>
 
   <div class="status">
-      <h3>Status</h3>
+      <h3>{{Auth::user()->name}}　：Status</h3>
       <p>Level:</p>
       <p>Money:</p>
       <p>Your Lang Lv.</p>

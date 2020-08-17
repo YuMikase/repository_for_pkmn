@@ -38,7 +38,7 @@ class IndexController extends Controller
         $user_datas['name'] = MyFunc::check_name($req->name);
         //クッキーに保存しておく（60分）
         Cookie::queue('user_name', $user_datas['name'],60);
-        
+
         //言語のデータを読み込む
         $lang_datas = config('const.LANG_DATAS');
         Log::info(__class__);
@@ -83,11 +83,24 @@ class IndexController extends Controller
         if(empty(Cookie::get('user_name'))){
             return view('index');
         }
-        
+
         //クッキーから取得
         $user_datas['name'] = Cookie::get('user_name');
 
 
         return view('shop', compact('user_datas'));
+    }
+    //バトル画面テスト用コンtローラー0815
+    public function battletest(){
+      //ユーザー名が無かったらindexをviewする
+      if(empty(Cookie::get('user_name'))){
+          return view('index');
+      }
+
+      //クッキーから取得
+      $user_datas['name'] = Cookie::get('user_name');
+
+
+      return view('battle_matter_test2', compact('user_datas'));
     }
 }
