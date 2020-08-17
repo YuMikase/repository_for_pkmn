@@ -16,7 +16,7 @@ class CreateMatterHasItemTable extends Migration
         Schema::create('matter_has_item', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('item_id');//成功報酬（ドロップ）
+            $table->integer('item_id');
         });
     }
 

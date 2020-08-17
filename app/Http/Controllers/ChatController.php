@@ -4,37 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Events\MessageCreated;
-use Log;
-use MyFunc;
+use Illuminate\Support\Facades\Auth;
 
 class ChatController extends Controller
 {
-	public function index() {
-		$time_over = 0;
+	public function index($id) {
+		$user = Auth::user();
 		$image = "normal";
-		$user_name = "name";
-		
-		//コマンド読み込み
-		$lang = 'php';
-		$commands = config('const.COMMANDS')[$lang];
-		//アイテム読み込み
-		$items = config('const.ITEMS');
-
-	    return view('chat',compact('image','user_name', 'time_over', 'commands', 'items'));
+		$user_name = $user->name;
+	    return view('chat',compact('image','user_name','id'));
 
 	}
 
-	public function progress(Request $re) {
-		$time_over = 0; 
-		//攻撃回数を１回増やして
-		$atack_count = session('atack_count') + 1;
-		//セッションに攻撃回数を保存
-		session(['atack_count' => $atack_count]);
+	public function index_doteki($id) {
+		$user = Auth::user();
+		$image = "normal";
+		$user_name = $user->name;
+	    return view('chat_doteki',compact('image','user_name','id'));
 
-		//攻撃回数が5回になったらタイムオーバーフラグを立てる
-		if($atack_count >= 5){
-			$time_over = 1;
-		}
+	}
+
+	public function progress(Request $re,$id) {
+        $image = "normal";
+
+        $commands = config('command');
 
 		switch ($re->input('button')){
 			case '1':
@@ -49,22 +42,27 @@ class ChatController extends Controller
 			case '4':
 				$image = "four";
 				break;
-			case '5':
-				$image = "one";
-				$atack_count = 0;
-				session(['atack_count' => $atack_count]);
-				break;
-			
 		}
-		$user_name = "name";
 
+		$user = Auth::user();
+
+		$user_name = $user->name;
+
+        $user->skill1  = $commands[array_rand($commands)]['name'];
+        $user->skill2  = $commands[array_rand($commands)]['name'];
+        $user->skill3  = $commands[array_rand($commands)]['name'];
+        $user->skill4  = $commands[array_rand($commands)]['name'];
+
+		$user->save();
 	    $message = \App\Message::create([
+	    	'matter_id' => $id,
 	        'body' => $re->input('button')."を押しました。",
-			'user_name' => "たかし",
-			'type' => 'my_do'
+	        'user_name' => $user_name ,
+	        'type' => "button"
 	    ]);
+
 	    event(new MessageCreated($message));
-	    return view('chat',compact('image','user_name','time_over'));
+	    return view('chat',compact('image','user_name','id'));
 
 	}
 

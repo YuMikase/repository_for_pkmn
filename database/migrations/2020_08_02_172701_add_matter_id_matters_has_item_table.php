@@ -28,8 +28,8 @@ class AddMatterIdMattersHasItemTable extends Migration
      */
     public function down()
     {
-        Schema::table('matter_has_item', function (Blueprint $table) {
-            $table->dropForeign('matter_id');
-        });
+        // Schema::table('matter_has_item', function (Blueprint $table) {
+        //     $table->dropForeign('matter_id');
+        // });
     }
 }

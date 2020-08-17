@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMatterHasAtackTable extends Migration
+class AddTypeMessageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateMatterHasAtackTable extends Migration
      */
     public function up()
     {
-        Schema::create('matter_has_atack', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-            $table->integer('skill_id');
+        Schema::table('messages', function (Blueprint $table) {
+            $table->string('type');
         });
     }
 
@@ -27,6 +25,6 @@ class CreateMatterHasAtackTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('matter_has_atack');
+        //
     }
 }

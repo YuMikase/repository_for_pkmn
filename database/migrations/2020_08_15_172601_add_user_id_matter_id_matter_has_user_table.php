@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUserIdUserHasItemTable extends Migration
+class AddUserIdMatterIdMatterHasUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,11 @@ class AddUserIdUserHasItemTable extends Migration
      */
     public function up()
     {
-        Schema::table('user_has_item', function (Blueprint $table) {
+        Schema::table('matter_has_user', function (Blueprint $table) {
+            $table->integer('matter_id')->unsigned();
+            $table->foreign('matter_id')
+            ->references('id')->on('matters')
+            ->onDelete('cascade');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
             ->references('id')->on('user_has_item')
@@ -28,8 +32,6 @@ class AddUserIdUserHasItemTable extends Migration
      */
     public function down()
     {
-        // Schema::table('user_has_item', function (Blueprint $table) {
-        //     $table->dropForeign('user_id');
-        // });
+        //
     }
 }

@@ -15,7 +15,7 @@ class CreateUserHasItemTable extends Migration
     {
         Schema::create('user_has_item', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('item_id');//ユーザーの所持品
+            $table->integer('item_id');
         });
     }
 

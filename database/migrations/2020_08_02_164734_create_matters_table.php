@@ -15,10 +15,10 @@ class CreateMattersTable extends Migration
     {
         Schema::create('matters', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('skill_count');//コマンドを押した回数
-            $table->integer('barning');//炎上
-            $table->integer('priogress');//進捗
-            $table->integer('time');//終了までのコマンド回数（つまり上限値）としての時間 skill_countと同じでタイムアップ
+            $table->integer('skill_count');
+            $table->integer('barning');
+            $table->integer('priogress');
+            $table->integer('time');
             $table->timestamps();
 
         });

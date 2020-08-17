@@ -28,8 +28,8 @@ class AddMatterIdMattersHasAtackTable extends Migration
      */
     public function down()
     {
-        Schema::table('matter_has_atack', function (Blueprint $table) {
-            $table->dropForeign('matter_id');
-        });
+        // Schema::table('matter_has_atack', function (Blueprint $table) {
+        //     $table->dropForeign('matter_id');
+        // });
     }
 }

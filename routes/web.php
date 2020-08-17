@@ -11,28 +11,23 @@
 |
 */
 
-//画面遷移系
-Route::get('/', 'IndexController@index');
-Route::get('/mypage', 'IndexController@mypage');
-Route::post('mypage', 'IndexController@mypagepost');
-Route::get('/status', 'IndexController@status');
-Route::get('/items', 'IndexController@items');
-Route::get('/shop', 'IndexController@shop');
 
-//ログアウト
-Route::post('/logout', 'IndexController@logout');
+Route::get('chat/{id}', 'ChatController@index')->middleware('auth');
+Route::post('chat/{id}', 'ChatController@progress')->middleware('auth');
+Route::get('chat/doteki/{id}', 'ChatController@index_doteki')->middleware('auth');
 
-//チャット部分
-Route::get('chat', 'ChatController@index');
-Route::post('chat', 'ChatController@progress');
+Route::post('/sendmessage', 'MessageController@send');
+
+Route::post('/test2','MainController@write2');
+
 Route::get('ajax/chat/{id}', 'Ajax\ChatController@index'); // メッセージ一覧を取得
-Route::post('ajax/chat', 'Ajax\ChatController@create'); // チャット登録
-
-//認証系
-Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
-
+Route::post('ajax/chat/{id}', 'Ajax\ChatController@create'); // チャット登録
+Route::post('ajax/command/{id}', 'Ajax\ChatController@create_command'); // コマンド
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/', function () {
+    return redirect('/login');
+});
