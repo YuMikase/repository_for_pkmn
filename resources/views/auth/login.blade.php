@@ -1,11 +1,44 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <!--タイトルロゴどーーん-->
+<div id="logo"　class="container">
+  <div class="row justify-content-center">
+    <img src="https://t1.kn3.net/taringa/6/0/3/0/8/0/Piika77/10C.jpg">
+  </div>
+</div>
+
+
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+<!--登録しないでプレイ-->
+        <div class="col-md-5">
+          <div class="card">
+              <div class="card-header">{{ __('登録しないでプレイ') }}</div>
+              <div class="card-body">
+                  <form method="POST" action="{{ route('home') }}">
+                      @csrf
+                      <div class="form-group">
+                         <label for="InstanceName">Your Name</label>
+                         <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="たなかたろう">
+                      </div>
+                      <div class="form-group row mb-0">
+                          <div class="col-md-8 offset-md-4">
+                              <button type="submit" class="btn btn-primary">
+                                  {{ __('かんたんぷれい！') }}
+                              </button>
+
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+        </div>
+<!--登録してプレイ-->      
+        <div class="col-md-5">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header">{{ __('登録してプレイ') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">

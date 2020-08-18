@@ -24,6 +24,13 @@ Route::get('ajax/chat/{id}', 'Ajax\ChatController@index'); // メッセージ一
 Route::post('ajax/chat/{id}', 'Ajax\ChatController@create'); // チャット登録
 Route::post('ajax/command/{id}', 'Ajax\ChatController@create_command'); // コマンド
 
+/*バトル画面施策を/battletestでルーティング
+Route::get('/battletest',fuction(){
+  return "<h1>バトル画面</h1>";
+});
+*/
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
