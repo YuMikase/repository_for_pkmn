@@ -11,7 +11,12 @@
     <meta name="author" content="LayoutIt!">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="battle_test.css">
+    <link rel="stylesheet" href="{{ asset('css/battle_test.css') }}">
+<!--写真サイズ-->
+    <style>
+     .img_size{width: 150px;
+	             height: 150px;}
+    </style>
 
   </head>
   <body>
@@ -30,16 +35,12 @@
             </div>
           </div>
           <div class="col-md-6">
-            <p>ここ写真</p>
-            <!--
-            <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">-->
+            <img alt="Bootstrap Image Preview" src="{{ asset('img/myu.jpg') }}" class="img_size">
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
-            <p>ここ写真</p>
-            <!--
-            <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">-->
+            <img alt="Bootstrap Image Preview" src="{{ asset('img/trainer.jpg') }}" class="img_size">
           </div>
           <div class="col-md-6">
             <div class="progress">
@@ -53,9 +54,7 @@
         <p>Info</p>
         <div class="row">
           <div class="col-md-6">
-            <p>ここ写真</p>
-              <!--
-            <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">-->
+            <img alt="Bootstrap Image Preview" src="{{ asset('img/trainer.jpg') }}" class="img_size">
           </div>
           <div class="col-md-6">
             <p>infos</p>

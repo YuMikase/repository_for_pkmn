@@ -16,31 +16,68 @@
 @section('logout')
 @endsection
 
-<div class="grid_mypage">
-  <button class="enter_button">
-    <a href="{{ url('chat') }}">案件に参加</a>
-  </button>
-
-  <div class="status">
-      <h3>あなたのステータス</h3>
-      <p>Level:</p>
-      <p>Money:</p>
-      <p>Your Lang Lv.</p>
-      <div class="langs">
-        <p>javascript:</p>
-        <p>PHP:</p>
-        <p>Python:</p>
-      </div>
+<div class="container-md">
+  <div class="row">
+    <div class="col">
+      <button class="enter_button">
+        <a href="{{ url('chat') }}">〇〇案件に参加1/3</a>
+      </button>
+    </div>
+    <div class="col">
+      <button class="enter_button">
+        <a href="{{ url('chat') }}">〇〇案件に参加2/3</a>
+      </button>
+    </div>
+    <div class="col">
+      <button class="enter_button">
+        <a href="{{ url('chat') }}">〇〇案件に参加3/3</a>
+      </button>
+    </div>
   </div>
-
-  <div class="item">
-    <h3>Items</h3>
-    <button class="enter_button">
-      <a href="{{ url('shop') }}">'Go shopping'</a>
-    </button>
-    <!--
-    のちのちここにアイテムリストを表示、クリックで使用できるように
-  -->
+  <div class="row">
+    <div class="col">
+      <button class="enter_button">
+        <a href="{{ url('chat') }}">〇〇案件に参加1/3</a>
+      </button>
+    </div>
+    <div class="col">
+      <button class="enter_button">
+        <a href="{{ url('chat') }}">〇〇案件に参加2/3</a>
+      </button>
+    </div>
+    <div class="col">
+      <button class="enter_button">
+        <a href="{{ url('chat') }}">〇〇案件に参加3/3</a>
+      </button>
+    </div>
+  </div>
+</div>
+<div class='container'>
+  <div class='row justify-content-md-center w-100'>
+    <div class='col-6'>
+        <div class="status">
+            <h3>あなたのステータスにゃーん</h3>
+            <p>Level:</p>
+            <p>Money:</p>
+            <p>Your Lang Lv.</p>
+            <div class="langs">
+              <p>javascript:</p>
+              <p>PHP:</p>
+              <p>Python:</p>
+            </div>
+        </div>
+    </div>
+    <div class='col-6 '>
+        <div class="item h-100">
+          <h3>Items</h3>
+          <button class="enter_button">
+            <a href="{{ url('shop') }}">'Go shopping'</a>
+          </button>
+          <!--
+          のちのちここにアイテムリストを表示、クリックで使用できるように
+        -->
+        </div>
+    </div>
   </div>
 </div>
 
