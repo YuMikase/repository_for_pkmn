@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Events\MessageCreated;
+use App\Matter;
 use Illuminate\Support\Facades\Auth;
 
 class ChatController extends Controller
@@ -49,6 +50,15 @@ class ChatController extends Controller
 		$user_name = $user->name;
 
 		$input_command = $re->input('button');
+		
+		//案件TBL加算処理
+		$matter = \App\Matter::where('user_id', $user->id)->first();
+		$matter->barning = $matter->barning + $commands[$input_command]['barning'];
+		$matter->priogress = $matter->priogress + $commands[$input_command]['priogress'];
+		$matter->time = $matter->time + $commands[$input_command]['time'];
+		$matter->save();
+
+		//コマンドをランダムに入れなおし
 		$rand_commands = array_rand($commands, 4);
         $user->skill1  = $rand_commands[0];
         $user->skill2  = $rand_commands[1];
