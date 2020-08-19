@@ -9,12 +9,18 @@
         <button type="button" @click="send()">送信</button>
         <br>
 
+        @php
+            $c1 = config('command')[Auth::user()->skill1];
+            $c2 = config('command')[Auth::user()->skill2];
+            $c3 = config('command')[Auth::user()->skill3];
+            $c4 = config('command')[Auth::user()->skill4];
+        @endphp
         <form  name="input_form"  method="post"  action="/chat/{{$id}}">
           @csrf
-          <input class="btn  btn-primary"  type="submit"  name="button"   value="{{Auth::user()->skill1}}">
-          <input class="btn  btn btn-success"  type="submit"  name="button"  value="{{Auth::user()->skill2}}">
-          <input class="btn  btn-danger"  type="submit"  name="button"   value="{{Auth::user()->skill3}}">
-          <input class="btn  btn-warning"  type="submit"  name="button"   value="{{Auth::user()->skill4}}">
+            <button class="btn  btn-primary" type="submit" name="button" value=" {{ $c1['id'] }} "> {{ $c1['name'] }} </button>
+            <button class="btn  btn-success" type="submit" name="button" value=" {{ $c2['id'] }} "> {{ $c2['name'] }} </button>
+            <button class="btn  btn-danger" type="submit" name="button" value=" {{ $c3['id'] }} "> {{ $c3['name'] }} </button>
+            <button class="btn  btn-warning" type="submit" name="button" value=" {{ $c4['id'] }} "> {{ $c4['name'] }} </button>
         </form>
 
         <hr>
