@@ -5,8 +5,13 @@
     <!--タイトルロゴどーーん-->
 <div id="logo"　class="container">
   <div class="row justify-content-center">
-    <img src="https://t1.kn3.net/taringa/6/0/3/0/8/0/Piika77/10C.jpg">
+    <img src="{{ asset('img/pokomon_logo.png')}}">
   </div>
+</div>
+
+<!--登録画面へ遷移したい！-->
+<div class="conrtaier">
+  と売る
 </div>
 
 
@@ -35,7 +40,7 @@
               </div>
           </div>
         </div>
-<!--登録してプレイ-->      
+<!--登録してプレイ-->
         <div class="col-md-5">
             <div class="card">
                 <div class="card-header">{{ __('登録してプレイ') }}</div>
