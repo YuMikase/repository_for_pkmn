@@ -20,7 +20,14 @@ class ChatController extends Controller
 		$user = Auth::user();
 		$image = "normal";
 		$user_name = $user->name;
-	    return view('chat_doteki',compact('image','user_name','id'));
+		$cmds = config('command');
+		$cmds_now = [ 
+			$cmds[$user->skill1],
+			$cmds[$user->skill2],
+			$cmds[$user->skill3],
+			$cmds[$user->skill4],
+		];
+	    return view('chat_doteki',compact('image','user_name','id','cmds_now'));
 
 	}
 

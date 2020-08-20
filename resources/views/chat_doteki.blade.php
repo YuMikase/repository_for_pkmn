@@ -1,17 +1,18 @@
-<html>
-<body>
+@extends('layouts.app')
+
+@section('content')
     <div id="chat">
         <img alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
         <br>
         <textarea v-model="message"></textarea>
         <br>
-        <button type="button" @click="send('chat','')">送信</button>
+        <button type="button" @click="send('chat', 'chat')">送信</button>
         <br>
 
-          <input class="btn  btn-primary"  type="button" @click="send('command',1)"  name="button"   value="1">
-          <input class="btn  btn btn-success"  type="button" @click="send('command',2)"  name="button"  value="2">
-          <input class="btn  btn-danger"  type="button" @click="send('command',3)"  name="button"   value="3">
-          <input class="btn  btn-warning"  type="button" @click="send('command',4)"  name="button"   value="4">
+        <button class="btn  btn-primary" type="button" name="button" @click="send('command', commands[0] )" ><span v-text="commands[0]['name']"></span></button>
+        <button class="btn  btn-success" type="button" name="button" @click="send('command', commands[1] )" ><span v-text="commands[1]['name']"></span></button>
+        <button class="btn  btn-danger" type="button" name="button" @click="send('command', commands[2] )" ><span v-text="commands[2]['name']"></span></button>
+        <button class="btn  btn-warning" type="button" name="button" @click="send('command', commands[3] )" ><span v-text="commands[3]['name']"></span></button>
 
         <hr>
 
@@ -35,14 +36,15 @@
 
     <script src="/js/app.js"></script>
     <script>
-
         new Vue({
             el: '#chat',
             data: {
                 message: '',
                 user_name: "{{$user_name}}",
                 id: "{{$id}}",
-                messages: []
+                messages: [],
+                user_id: "{{Auth::user()->id}}",
+                commands: @json($cmds_now)
             },
             methods: {
                 getMessages() {
@@ -50,6 +52,13 @@
                     axios.get(url)
                         .then((response) => {
                             this.messages = response.data
+                        });
+                },
+                getCommands() {
+                    const url = "/ajax/command/"+this.user_id;
+                    axios.get(url)
+                        .then((response) => {
+                            this.commands = response.data
                         });
                 },
                 send(type,value) {
@@ -65,10 +74,11 @@
                             break;
                     
                         case "command":
-                            var params = { message: value+'のコマンドを発動',user_name:this.user_name };
+                            var params = { message: value.name+'のコマンドを発動',user_name:this.user_name,command: value.id };
                             axios.post(url, params)
                             .then((response) => {
                                 // 成功したときの処理
+                                this.getCommands();
                             });
                             break;
                     }
@@ -90,5 +100,4 @@
         });
 
     </script>
-</body>
-</html>
+@endsection
