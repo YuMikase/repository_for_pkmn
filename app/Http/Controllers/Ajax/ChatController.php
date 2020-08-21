@@ -64,4 +64,8 @@ class ChatController extends Controller
 	    event(new MessageCreated($message));
 
 	}
+	public function index_bar($matter_id) {// ユーザーのコマンドを取得
+		$bars = \App\Matter::find($matter_id);
+	    return [ $bars['barning'], $bars['priogress'] ];
+	}
 }

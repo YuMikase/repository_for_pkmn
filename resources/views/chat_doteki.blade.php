@@ -2,6 +2,12 @@
 
 @section('content')
     <div id="chat">
+        <div class="progress">
+            <div class="progress-bar bg-danger" role="progressbar" v-bind:style="'width:'+barning+'%'" v-bind:aria-valuenow="barning" aria-valuemin="0" aria-valuemax="1000"></div>
+        </div>
+        <div class="progress">
+            <div class="progress-bar bg-info" role="progressbar" v-bind:style="'width:'+progress+'%'" v-bind:aria-valuenow="progress" aria-valuemin="0" aria-valuemax="1000"></div>
+        </div>
         <img alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
         <br>
         <textarea v-model="message"></textarea>
@@ -45,7 +51,9 @@
                 messages: [],
                 user_id: "{{Auth::user()->id}}",
                 commands: @json($cmds_now),
-                isProcessing: false
+                isProcessing: false,
+                barning: 0,
+                progress: 0,
             },
             methods: {
                 getMessages() {
@@ -53,6 +61,14 @@
                     axios.get(url)
                         .then((response) => {
                             this.messages = response.data
+                        });
+                },
+                getBars() {
+                    const url = "/ajax/bar/"+this.id;
+                    axios.get(url)
+                        .then((response) => {
+                            this.barning = response.data[0];
+                            this.progress = response.data[1];
                         });
                 },
                 getCommands() {
@@ -82,6 +98,7 @@
                             .then((response) => {
                                 // 成功したときの処理
                                 this.getCommands();
+                                this.getBars();
                             });
                             break;
                     }
@@ -91,6 +108,7 @@
             mounted() {
 
                 this.getMessages();
+                this.getBars();
 
                 Echo.channel('chat')
                     .listen('MessageCreated', (e) => {
