@@ -39,7 +39,7 @@ class ChatController extends Controller
 
 		$input_command = $request->command;
 		//案件TBL加算処理
-		$matter = \App\Matter::where('id', $id)->first();
+		$matter = \App\Matter::find($id);
 		$matter->barning = $matter->barning + $commands[$input_command]['barning'];
 		$matter->priogress = $matter->priogress + $commands[$input_command]['priogress'];
 		$matter->time = $matter->time + $commands[$input_command]['time'];
@@ -47,6 +47,7 @@ class ChatController extends Controller
 
 		//コマンドをランダムに入れなおし（選定１回）
 		$rand_commands = array_rand($commands, 4);
+		shuffle($rand_commands);
 		$user = Auth::user();
         $user->skill1  = $rand_commands[0];
         $user->skill2  = $rand_commands[1];
