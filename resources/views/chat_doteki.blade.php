@@ -19,10 +19,10 @@
                             <div class="row h-50">
                                 <div class="col border">
                                     <div class="progress">
-                                        <div class="progress-bar bg-danger" role="progressbar" v-bind:style="'width:'+barning+'%'" v-bind:aria-valuenow="barning" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div class="progress">
                                         <div class="progress-bar bg-info" role="progressbar" v-bind:style="'width:'+progress+'%'" v-bind:aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="progress" v-if="onDebug">
+                                        <div class="progress-bar bg-danger" role="progressbar" v-bind:style="'width:'+barning+'%'" v-bind:aria-valuenow="barning" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                         <div class="col" v-if="!onCommands">
                             <div class="row h-50">
                                 <button class="col m-1 btn  btn-primary" type="button" name="button" @click="toggleBattle()">BATTLE</button>
-                                <button class="col m-1 btn  btn-primary" type="button" name="button">DEBUG</button>
+                                <button class="col m-1 btn  btn-primary" type="button" name="button" @click="onDebugButon()">DEBUG</button>
                             </div>
                             <div class="row h-50">
                                 <button class="col m-1 btn  btn-primary" type="button" name="button">ITEM</button>
@@ -135,10 +135,15 @@
                 barning: 0,
                 progress: 0,
                 onCommands: false,
+                onDebug: false,
             },
             methods: {
                 toggleBattle() {
                     this.onCommands = !this.onCommands;
+                },
+                onDebugButon() {
+                    this.onDebug = !this.onDebug;
+                    setTimeout(() => {this.onDebug = !this.onDebug;}, 5000);
                 },
                 getMessages() {
                     const url = "/ajax/chat/"+this.id;
