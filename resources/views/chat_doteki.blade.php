@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <div class="container-fluid" style="height: 600px;">
+        <div class="container-fluid" style="height: 90vh;">
             <div class="row h-100">
                 <div class="col-7">
                     <div class="row h-75 border">
@@ -49,7 +49,7 @@
                     </div>
                     <div class="row h-25 border">
                         <div class="col h-100">
-                            <div class="row overflow-auto" style="height: 110px">
+                            <div class="row overflow-auto" style="height:7em">
                                 <div class="col">
                                     <div class="row border mt-1" v-for="m in messages">
                                         <div class="col">
@@ -63,7 +63,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row h-25">
+                            <div class="row" style="height:1em">
                                 <div class="col input-group">
                                     <input type="text" class="form-control" placeholder="Your message" aria-describedby="button-addon2" v-model="message">
                                     <div class="input-group-append">
@@ -89,7 +89,7 @@
                         <div class="col" v-if="!onCommands">
                             <div class="row h-50">
                                 <button class="col m-1 btn  btn-primary" type="button" name="button" @click="toggleBattle()">BATTLE</button>
-                                <button class="col m-1 btn  btn-primary" type="button" name="button" @click="onDebugButon()">DEBUG</button>
+                                <button class="col m-1 btn  btn-primary" type="button" name="button" @click="onDebugButon()" v-bind:disabled="onDebug">DEBUG</button>
                             </div>
                             <div class="row h-50">
                                 <button class="col m-1 btn  btn-primary" type="button" name="button">ITEM</button>
