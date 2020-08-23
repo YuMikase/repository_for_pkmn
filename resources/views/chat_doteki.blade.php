@@ -2,6 +2,15 @@
 
 @section('content')
     <div id="chat">
+
+        <div v-if="onLoading" class="container-fluid" style="background-color: white;z-index: 5000; width:100vw; height: 100vh;">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border text-primary m-5" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+
         <div class="container-fluid" style="height: 600px;">
             <div class="row h-100">
                 <div class="col-7">
@@ -27,7 +36,8 @@
                             <div class="row h-50">
                                 <div class="col border">
                                     <img class="img-fluid" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
-                                </div>                            </div>
+                                </div>
+                            </div>
                             <div class="row h-50">
                                 <div class="col border">
                                     <div class="progress">
@@ -114,6 +124,7 @@
         new Vue({
             el: '#chat',
             data: {
+                onLoading: true,
                 message: '',
                 user_name: "{{$user_name}}",
                 id: "{{$id}}",
@@ -190,7 +201,8 @@
                         this.getMessages(); // 全メッセージを再読込
 
                     });
-
+                
+                this.onLoading = false;
             }
         });
 
