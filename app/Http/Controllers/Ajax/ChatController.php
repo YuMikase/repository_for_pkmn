@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Ajax;
 
 use App\Events\MessageCreated;
+use App\Events\MatterEnded;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -44,6 +45,12 @@ class ChatController extends Controller
 		$matter->priogress = $matter->priogress + $commands[$input_command]['priogress'];
 		$matter->time = $matter->time + $commands[$input_command]['time'];
 		$matter->save();
+
+		if( $matter->time >= $matter->time_limit) {
+			$matter->end_flag = 1;
+			$matter->save();
+			event(new MatterEnded($matter));
+		}
 
 		//コマンドをランダムに入れなおし（選定１回）
 		$rand_commands = array_rand($commands, 4);

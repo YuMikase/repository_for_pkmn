@@ -17,6 +17,9 @@ class ChatController extends Controller
 	}
 
 	public function index_doteki($id) {
+		if ( \App\Matter::find($id)->end_flag ) {
+			return redirect('/home');
+		}
 		$user = Auth::user();
 		$image = "normal";
 		$user_name = $user->name;
