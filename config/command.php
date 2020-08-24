@@ -69,7 +69,7 @@ return [
         'time' => 1,
     ],
     109 => [
-        'id' => 109
+        'id' => 109,
         'lang' => 'PHP',
         'name' => 'minify',
         'barning' => 40,
