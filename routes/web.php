@@ -22,7 +22,9 @@ Route::post('/test2','MainController@write2');
 
 Route::get('ajax/chat/{id}', 'Ajax\ChatController@index'); // メッセージ一覧を取得
 Route::post('ajax/chat/{id}', 'Ajax\ChatController@create'); // チャット登録
+Route::get('ajax/command/{user_id}', 'Ajax\ChatController@index_command'); // ユーザーテーブルからコマンドを取得
 Route::post('ajax/command/{id}', 'Ajax\ChatController@create_command'); // コマンド
+Route::get('ajax/bar/{id}', 'Ajax\ChatController@index_bar'); // 炎上、進捗を取得
 
 Auth::routes();
 
