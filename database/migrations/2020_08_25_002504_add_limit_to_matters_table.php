@@ -17,6 +17,7 @@ class AddLimitToMattersTable extends Migration
             $table->integer('barning_limit');
             $table->integer('progress_limit');
             $table->integer('time_limit');
+            $table->integer('end_flag');
         });
     }
 
