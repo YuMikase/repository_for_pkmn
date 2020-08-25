@@ -23,6 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $matters = \App\Matter::where('end_flag',false);
+        if ( ! $matters->exists() || $matters->count() < 5 ) {
+            \App\Http\Controllers\Ajax\ChatController::createMatter();
+        }
+        $matters = $matters->get()->toArray();
+        return view('home', compact('matters'));
     }
 }

@@ -8,10 +8,7 @@ class Matter extends Model
 {
     protected $table = 'matters';
 
-        protected $fillable = [
-        'skill_count',
-        'barning',
-        'priogress',
-        'time',
+        protected $guarded = [
+        'id',
     ];
 }

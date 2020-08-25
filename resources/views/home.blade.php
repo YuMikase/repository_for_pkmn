@@ -27,28 +27,14 @@
       </div>
     </nav>
     <div class="container overflow-auto"data-spy="scroll" data-target="#Navbar">
-      <div id="matter1" class="border">
-        <h3>案件１</h3>
-        <p>
-          案件１：詳細情報  <button type="button" class="btn btn-primary">参加</button>
-        </p>
-      </div>
-      <div id="matter2" class="border">
-        <h3>案件2</h3>
-        <p>
-          案件2：詳細情報<button type="button" class="btn btn-primary">参加</button>
-        </p>
-      </div>
-      <div id="matter3" class="border">
-        <h3>案件3</h3>
-        <p>  案件3：詳細情報<button type="button" class="btn btn-primary">参加</button></p>
-      </div>
-      <div id="matter4" class="border">
-        <h3>案件4</h3>
-        <p>
-          案件4：詳細情報<button type="button" class="btn btn-primary">参加</button>
-        </p>
-      </div>
+      @foreach ($matters as $matter)
+      <div id="matter{{ $matter['id'] }}" class="border">
+          <h3>案件{{ $matter['id'] }}</h3>
+          <p>
+            案件{{ $matter['id'] }}：詳細情報  <button type="button" class="btn btn-primary"><a href="chat/doteki/{{ $matter['id'] }}">参加</a></button>
+          </p>
+        </div>
+      @endforeach
     </div>
   </div>
     </div>

@@ -17,6 +17,7 @@ class AddLimitToMattersTable extends Migration
             $table->integer('barning_limit');
             $table->integer('progress_limit');
             $table->integer('time_limit');
+            $table->integer('rate_type');
             $table->boolean('end_flag')->default(false);
         });
     }

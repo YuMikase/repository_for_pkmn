@@ -41,14 +41,16 @@ class ChatController extends Controller
 		$input_command = $request->command;
 		//案件TBL加算処理
 		$matter = \App\Matter::find($id);
-		$matter->barning = $matter->barning + $commands[$input_command]['barning'];
-		$matter->priogress = $matter->priogress + $commands[$input_command]['priogress'];
-		$matter->time = $matter->time + $commands[$input_command]['time'];
+		$rate_type = config('rate_type')[$matter['rate_type']];
+		$matter->barning = $matter->barning + ( $commands[$input_command]['barning'] * $rate_type['barning'][$commands[$input_command]['lang']] );
+		$matter->priogress = $matter->priogress + ( $commands[$input_command]['priogress'] * $rate_type['priogress'][$commands[$input_command]['lang']] );
+		$matter->time = $matter->time + ( $commands[$input_command]['time'] * $rate_type['time'][$commands[$input_command]['lang']] );
 		$matter->save();
 
 		if( $matter->time >= $matter->time_limit) {
 			$matter->end_flag = 1;
 			$matter->save();
+			self::createMatter();
 			event(new MatterEnded($matter));
 		}
 
@@ -74,5 +76,22 @@ class ChatController extends Controller
 	public function index_bar($matter_id) {// ユーザーのコマンドを取得
 		$bars = \App\Matter::find($matter_id);
 	    return [ $bars['barning'], $bars['priogress'] ];
+	}
+
+	public static function createMatter()
+	{
+		$rate_type = config('rate_type');
+		$data = [
+			'skill_count' => 0,
+			'barning' => 0,
+			'priogress' => 0,
+			'time' => 0,
+			'barning_limit' => rand(100, 1000),
+			'progress_limit' => rand(100, 1000),
+			'time_limit' => rand(1, 10),
+			'rate_type' => array_rand($rate_type),
+		];
+
+		\App\Matter::create($data);
 	}
 }
