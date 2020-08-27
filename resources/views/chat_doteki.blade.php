@@ -219,6 +219,10 @@
                     .listen('MatterEnded', (e) => {
                         this.matterEnded = true;
                     });
+                Echo.channel('chat'+this.id)
+                    .listen('MatterEnded', (e) => {
+                        this.matterEnded = true;
+                    });
                 
                 this.onLoading = false;
             }
