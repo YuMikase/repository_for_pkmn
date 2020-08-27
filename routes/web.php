@@ -26,6 +26,11 @@ Route::get('ajax/command/{user_id}', 'Ajax\ChatController@index_command'); // �
 Route::post('ajax/command/{id}', 'Ajax\ChatController@create_command'); // コマンド
 Route::get('ajax/bar/{id}', 'Ajax\ChatController@index_bar'); // 炎上、進捗を取得
 
+//認証が必要なグループ
+Route::middleware('auth')->group(function () {
+    Route::get('shop', 'ShopController@index');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

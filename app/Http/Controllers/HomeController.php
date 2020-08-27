@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Auth;
+use App\Matter;
+use App\UserHasItem;
+use App\Http\Controllers\Ajax\ChatController;
+
 class HomeController extends Controller
 {
     /**
@@ -23,9 +28,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $matters = \App\Matter::where('end_flag',false);
+        $user = Auth::user()->toArray();
+
+        $matters = Matter::where('end_flag',false);
+
         if ( ! $matters->exists() || $matters->count() < 5 ) {
-            \App\Http\Controllers\Ajax\ChatController::createMatter();
+            ChatController::createMatter();
+        }
+        if ( ! UserHasItem::where('user_id', $user['id'])->exists() ) {
+            UserHasItem::create([ 'item_id' => 101, 'user_id' => $user['id'] ]);
         }
         $matters = $matters->get()->toArray();
         return view('home', compact('matters'));
