@@ -214,11 +214,6 @@
                         this.getMessages(); // 全メッセージを再読込
 
                     });
-
-                Echo.channel('chat')
-                    .listen('MatterEnded', (e) => {
-                        this.matterEnded = true;
-                    });
                 Echo.channel('chat'+this.id)
                     .listen('MatterEnded', (e) => {
                         this.matterEnded = true;
