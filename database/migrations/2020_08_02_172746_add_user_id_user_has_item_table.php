@@ -28,8 +28,9 @@ class AddUserIdUserHasItemTable extends Migration
      */
     public function down()
     {
-        // Schema::table('user_has_item', function (Blueprint $table) {
-        //     $table->dropForeign('user_id');
-        // });
+        Schema::table('user_has_item', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
+        });
     }
 }

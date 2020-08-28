@@ -25,6 +25,9 @@ class AddTypeMessageTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('messages', function (Blueprint $table) {
+            $table->dropColumn('type');
+        });
+
     }
 }

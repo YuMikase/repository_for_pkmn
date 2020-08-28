@@ -28,6 +28,11 @@ class AddSkillUserTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('skill1');
+            $table->dropColumn('skill2');
+            $table->dropColumn('skill3');
+            $table->dropColumn('skill4');
+        });
     }
 }

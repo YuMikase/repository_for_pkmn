@@ -28,8 +28,9 @@ class AddMatterIdMessageTable extends Migration
      */
     public function down()
     {
-        // Schema::table('messages', function (Blueprint $table) {
-        //     $table->dropForeign('matter_id');
-        // });
+        Schema::table('messages', function (Blueprint $table) {
+            $table->dropForeign(['matter_id']);
+            $table->dropColumn('matter_id');
+        });
     }
 }

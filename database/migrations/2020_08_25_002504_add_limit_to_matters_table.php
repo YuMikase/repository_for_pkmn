@@ -30,7 +30,11 @@ class AddLimitToMattersTable extends Migration
     public function down()
     {
         Schema::table('matters', function (Blueprint $table) {
-            //
+            $table->dropColumn('barning_limit');
+            $table->dropColumn('progress_limit');
+            $table->dropColumn('time_limit');
+            $table->dropColumn('rate_type');
+            $table->dropColumn('end_flag');
         });
     }
 }
