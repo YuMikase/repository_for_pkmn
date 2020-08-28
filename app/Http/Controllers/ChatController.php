@@ -21,7 +21,7 @@ class ChatController extends Controller
 		if ( empty($matter) || $matter->end_flag ) {
 			return redirect('/home');
 		}
-
+		$items = config('item');
 		$user = Auth::user();
 		$image = "normal";
 		$user_name = $user->name;
@@ -32,7 +32,7 @@ class ChatController extends Controller
 			$cmds[$user->skill3],
 			$cmds[$user->skill4],
 		];
-	    return view('chat_doteki',compact('image','user_name','id','cmds_now'));
+	    return view('chat_doteki',compact('user','image','user_name','id','cmds_now','items'));
 
 	}
 

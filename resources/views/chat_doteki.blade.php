@@ -91,16 +91,18 @@
                             </div>
                         </div>
                         <div class="row h-75 border">
-                            <div class="col" v-if="!onCommands">
+                            <div class="col" v-if="!onCommands && !onItems">
                                 <div class="row h-50">
                                     <button class="col m-1 btn  btn-primary" type="button" name="button" @click="toggleBattle()">BATTLE</button>
                                     <button class="col m-1 btn  btn-primary" type="button" name="button" @click="onDebugButon()" v-bind:disabled="onDebug">DEBUG</button>
                                 </div>
                                 <div class="row h-50">
-                                    <button class="col m-1 btn  btn-primary" type="button" name="button">ITEM</button>
+                                    <button class="col m-1 btn  btn-primary" type="button" name="button" @click="toggleItem()">ITEM</button>
                                     <button class="col m-1 btn  btn-primary" type="button" name="button">RUN</button>
                                 </div>
                             </div>
+
+                            {{-- コマンド --}}
                             <div class="col" v-if="onCommands">
                                 <div class="row h-75">
                                     <div class="col">
@@ -116,6 +118,24 @@
                                 </div>
                                 <div class="row h-25">
                                     <button class="col m-1 btn  btn-secondary" type="button" name="button" v-bind:disabled="isProcessing" @click="toggleBattle()">RETURN</button>
+                                </div>
+                            </div>
+
+                            {{-- アイテム --}}
+                            <div class="col" v-if="onItems">
+                                <div class="row" style="height: 320px; overflow: scroll;">
+                                    <div class="list-group m-1 w-100">
+                                        <button class="list-group-item list-group-item-action" v-for="i in items">
+                                            <div @click='useItem(i.id)' class="row">
+                                                <div class="col-2"><span class="badge badge-light" v-text="i.type"></span></div>
+                                                <div class="col-8"><span v-text="i.name"></span></div>
+                                                <div class="col-2"><span class="badge badge-light" v-text="has_items[i.id]"></span></div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row h-25">
+                                    <button class="col m-1 btn  btn-secondary" type="button" name="button" v-bind:disabled="isProcessing" @click="toggleItem()">RETURN</button>
                                 </div>
                             </div>
                         </div>
@@ -143,11 +163,18 @@
                 progress: 0,
                 onCommands: false,
                 onDebug: false,
-                matterEnded: false
+                matterEnded: false,
+                user: @json($user->toArray()),
+                items: @json($items),
+                has_items: {},
+                onItems: false
             },
             methods: {
                 toggleBattle() {
                     this.onCommands = !this.onCommands;
+                },
+                toggleItem() {
+                    this.onItems = !this.onItems;
                 },
                 onDebugButon() {
                     this.onDebug = !this.onDebug;
@@ -175,6 +202,20 @@
                             this.commands = response.data;
                             this.isProcessing = false;
                             this.toggleBattle();
+                        });
+                },
+                getItems() {
+                    axios.get("../../shop/"+this.user['id'])
+                        .then((response) => {
+                            this.has_items = response.data;
+                        });
+                },
+                useItem(item_id) {
+                    var params = { item_id: item_id};
+                    axios.post("/shop/use", params)
+                        .then((response) => {
+                            //成功時処理
+                            this.getItems();
                         });
                 },
                 send(type,value) {
@@ -207,6 +248,7 @@
 
                 this.getMessages();
                 this.getBars();
+                this.getItems();
 
                 Echo.channel('chat')
                     .listen('MessageCreated', (e) => {

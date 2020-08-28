@@ -54,5 +54,32 @@ return [
         'progress' => 30,
         'time' => 1,
     ],
+
+    301 => [
+        'id' => 301,
+        'name' => 'クッキー',
+        'type' => 'Food',
+        'barning' => -10,
+        'progress' => 10,
+        'time' => 1,
+    ],
+    
+    302 => [
+        'id' => 302,
+        'name' => 'チョコ',
+        'type' => 'Food',
+        'barning' => -20,
+        'progress' => 20,
+        'time' => 1,
+    ],
+
+    303 => [
+        'id' => 303,
+        'name' => '焼肉',
+        'type' => 'Food',
+        'barning' => -30,
+        'progress' => 30,
+        'time' => 1,
+    ],
     
 ];

@@ -21,6 +21,12 @@ class ShopController extends Controller
         UserHasItem::create([ 'item_id' => $re->item_id, 'user_id' => $user['id'] ]);
     }
 
+    public function use(Request $re) {
+        $user = Auth::user()->with('has_item')->first();
+        $items = config('item');
+        UserHasItem::where('item_id', $re->item_id)->where('user_id', $user['id'])->first()->delete();
+    }
+
     public function getHasItems($user_id) {
         $has_items = Auth::user()->has_item;
         $items = config('item');

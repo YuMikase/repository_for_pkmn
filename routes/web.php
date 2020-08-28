@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('shop', 'ShopController@index');
     Route::post('shop', 'ShopController@buy');
     Route::get('shop/{user_id}', 'ShopController@getHasItems');
+    Route::post('shop/use', 'ShopController@use');
 });
 
 Auth::routes();
