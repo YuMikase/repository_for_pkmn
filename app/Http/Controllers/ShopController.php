@@ -19,6 +19,15 @@ class ShopController extends Controller
         $user = Auth::user()->with('has_item')->first();
         $items = config('item');
         UserHasItem::create([ 'item_id' => $re->item_id, 'user_id' => $user['id'] ]);
-        return view('shop',compact('user', 'items'));
+    }
+
+    public function getHasItems($user_id) {
+        $has_items = Auth::user()->has_item;
+        $items = config('item');
+        $res = [];
+        foreach ($items as $id => $item) {
+            $res[$id] = $has_items->where('item_id', $id)->count();
+        }
+        return $res;
 	}
 }

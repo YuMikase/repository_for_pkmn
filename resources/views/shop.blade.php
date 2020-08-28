@@ -4,15 +4,13 @@
     <div id="shop">
         <h1>SHOP</h1>
         <div class="list-group">
-            @forelse ($items as $item)
-                <button class="list-group-item list-group-item-action" @click='buy({{ $item['id'] }})'>
-                    <span class="badge badge-light">{{ $item['type'] }}</span>
-                    {{ $item['name'] }}
-                    <span class="badge badge-light">{{ count($user->has_item->where('item_id', $item['id'])->toArray()) }}</span>
-                </button>
-            @empty
-                <span class="list-group-item list-group-item-action">アイテムは存在しない。</span>
-            @endforelse
+            <button class="list-group-item list-group-item-action" v-for="i in items">
+                <div @click='buy(i.id)'>
+                    <span class="badge badge-light" v-text="i.type"></span>
+                    <span v-text="i.name"></span>
+                    <span class="badge badge-light" v-text="has_items[i.id]"></span>
+                </div>
+            </button>
         </div>
         
 
@@ -24,7 +22,9 @@
         new Vue({
             el: '#shop',
             data: {
-                user: @json($user)
+                user: @json($user),
+                items: @json($items),
+                has_items: {}
             },
             methods: {
                 buy(item_id) {
@@ -32,10 +32,18 @@
                     axios.post("/shop", params)
                         .then((response) => {
                             //成功時処理
+                            this.getItems();
+                        });
+                },
+                getItems() {
+                    axios.get("shop/"+this.user['id'])
+                        .then((response) => {
+                            this.has_items = response.data;
                         });
                 }
             },
             mounted() {
+                this.getItems();
             }
         });
 
