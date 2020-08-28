@@ -5,10 +5,10 @@
         <h1>SHOP</h1>
         <div class="list-group">
             <button class="list-group-item list-group-item-action" v-for="i in items">
-                <div @click='buy(i.id)'>
-                    <span class="badge badge-light" v-text="i.type"></span>
-                    <span v-text="i.name"></span>
-                    <span class="badge badge-light" v-text="has_items[i.id]"></span>
+                <div @click='buy(i.id)' class="row">
+                    <div class="col-2"><span class="badge badge-light" v-text="i.type"></span></div>
+                    <div class="col-8"><span v-text="i.name"></span></div>
+                    <div class="col-2"><span class="badge badge-light" v-text="has_items[i.id]"></span></div>
                 </div>
             </button>
         </div>
