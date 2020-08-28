@@ -16,7 +16,7 @@ class AddUserIdUserHasItemTable extends Migration
         Schema::table('user_has_item', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
-            ->references('id')->on('user_has_item')
+            ->references('id')->on('users')
             ->onDelete('cascade');
         });
     }
