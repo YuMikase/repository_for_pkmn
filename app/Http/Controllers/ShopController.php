@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Auth;
 use App\UserHasItem;
+use App\UserStatuses;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class ShopController extends Controller
 {
@@ -19,6 +21,9 @@ class ShopController extends Controller
         $user = Auth::user()->with('has_item')->first();
         $items = config('item');
         UserHasItem::create([ 'item_id' => $re->item_id, 'user_id' => $user['id'] ]);
+        $money = UserStatuses::where('user_id', $user['id'])->where('type', 'money')->first();
+        $money->value1 = $money->value1 - $items[$re->item_id]['money'];
+        $money->save();
     }
 
     public function use(Request $re) {
@@ -35,5 +40,9 @@ class ShopController extends Controller
             $res[$id] = $has_items->where('item_id', $id)->count();
         }
         return $res;
+    }
+    
+    public function getMoney($user_id) {
+        return UserStatuses::where('user_id', $user_id)->where('type', 'money')->first()->value1;
 	}
 }
