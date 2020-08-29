@@ -45,14 +45,13 @@
   <div class='row justify-content-md-center w-100'>
     <div class='col-6  border border-primary'>
         <div class="status">
-            <h3>あなたのステータス</h3>
-            <p>Level:</p>
-            <p>Money:</p>
-            <p>Your Lang Lv.</p>
+          <h3>あなたのステータス</h3>
+            <p>Level:{{ $status->where('type', 'level_basic')->first()->value1 }}</p>
+            <p>Money:{{ $status->where('type', 'money')->first()->value1 }}</p>
             <div class="langs">
-              <p>javascript:</p>
-              <p>PHP:</p>
-              <p>Python:</p>
+              <p>PHP:{{ $status->where('type', 'level_php')->first()->value1 }}</p>
+              <p>Python:{{ $status->where('type', 'level_python')->first()->value1 }}</p>
+              <p>Ruby:{{ $status->where('type', 'level_ruby')->first()->value1 }}</p>
             </div>
         </div>
     </div>

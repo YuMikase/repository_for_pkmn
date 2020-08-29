@@ -41,4 +41,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\UserHasItem');
     }
+    public function status()
+    {
+        return $this->hasMany('App\UserStatuses');
+    }
 }

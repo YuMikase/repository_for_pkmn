@@ -15,11 +15,11 @@ class CreateUserStatusesTable extends Migration
     {
         Schema::create('user_statuses', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('type');
-            $table->integer('value1');
-            $table->integer('value2');
-            $table->integer('value3');
-            $table->integer('value4');
+            $table->string('type');
+            $table->string('value1')->default('0');
+            $table->string('value2')->default('0');
+            $table->string('value3')->default('0');
+            $table->string('value4')->default('0');
             $table->timestamps();
         });
     }
