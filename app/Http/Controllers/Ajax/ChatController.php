@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Matter;
 use App\UserStatuses;
+use App\MatterHasUser;
 use Illuminate\Support\Facades\Auth;
 
 class ChatController extends Controller
@@ -92,41 +93,17 @@ class ChatController extends Controller
 	    ]);
 		event(new MessageCreated($message));
 		
+		// 案件終了時処理
 		if( $matter->time >= $matter->time_limit) {
 			$matter->end_flag = 1;
 			$matter->save();
 			self::createMatter();
-			$money->value1 = $money->value1 + $rate_type['reward']['money'];
-			$money->save();
-			$ex_basic = $status->where('type', 'level_basic')->first();
-			switch ($rate_type['name']) {
-				case 'PHP':
-					$ex_lang = $status->where('type', 'level_php')->first();
-					break;
-				case 'Python':
-					$ex_lang = $status->where('type', 'level_python')->first();
-					break;
-				case 'Ruby':
-					$ex_lang = $status->where('type', 'level_ruby')->first();
-					break;
-				case 'ふつう':
-					$ex_lang = $status->where('type', 'level_basic')->first();
-					break;
+			$users = MatterHasUser::where('matter_id', $id)->get();
+			foreach ($users as $key => $value) {
+				self::addUserStatus($value['user_id'], 'money', $rate_type['reward']['money']);
+				self::addUserStatus($value['user_id'], 'ふつう', $rate_type['reward']['ex']);
+				self::addUserStatus($value['user_id'], $rate_type['name'], $rate_type['reward']['ex']);
 			}
-			$ex_basic->value2 = $ex_basic->value2 + $rate_type['reward']['ex'];
-			$ex_basic->save();
-			if ( $ex_basic->value2 >= 100 ) {
-				$ex_basic->value2 = $ex_basic->value2 - 100;
-				$ex_basic->value1 = $ex_basic->value1 + 1;
-			}
-			$ex_basic->save();
-			$ex_lang->value2 = $ex_lang->value2 + $rate_type['reward']['ex'];
-			$ex_lang->save();			
-			if ( $ex_lang->value2 >= 100 ) {
-				$ex_lang->value2 = $ex_lang->value2 - 100;
-				$ex_lang->value1 = $ex_lang->value1 + 1;
-			}
-			$ex_lang->save();
 			event(new MatterEnded($matter));
 		}
 
@@ -165,5 +142,64 @@ class ChatController extends Controller
 		$matter->progress = $matter->progress + $pregress;
 		$matter->time = $matter->time + $time;
 		$matter->save();
+	}
+
+	public static function addUserStatus($user_id, $type, $value)
+	{
+		$status = UserStatuses::where('user_id', $user_id)->get();
+		switch ($type) {
+			case 'money':
+				$status = $status->where('type', 'money')->first();
+				$status->value1 = $status->value1 + $value;
+				$status->save();
+				break;
+			
+			case 'PHP':
+				$status = $status->where('type', 'level_php')->first();
+				if ( $status->value2 + $value >= 100 ) {
+					$status->value2 = $status->value2 + $value - 100;
+					$status->value1 = $status->value1 + 1;
+					$status->save();
+				} else {
+					$status->value2 = $status->value2 + $value;
+					$status->save();
+				}
+				break;
+
+			case 'Python':
+				$status = $status->where('type', 'level_python')->first();
+				if ( $status->value2 + $value >= 100 ) {
+					$status->value2 = $status->value2 + $value - 100;
+					$status->value1 = $status->value1 + 1;
+					$status->save();
+				} else {
+					$status->value2 = $status->value2 + $value;
+					$status->save();
+				}
+				break;
+			case 'Ruby':
+				$status = $status->where('type', 'level_ruby')->first();
+				if ( $status->value2 + $value >= 100 ) {
+					$status->value2 = $status->value2 + $value - 100;
+					$status->value1 = $status->value1 + 1;
+					$status->save();
+				} else {
+					$status->value2 = $status->value2 + $value;
+					$status->save();
+				}
+				break;
+			case 'ふつう':
+				$status = $status->where('type', 'level_basic')->first();
+				if ( $status->value2 + $value >= 100 ) {
+					$status->value2 = $status->value2 + $value - 100;
+					$status->value1 = $status->value1 + 1;
+					$status->save();
+				} else {
+					$status->value2 = $status->value2 + $value;
+					$status->save();
+				}
+				break;
+
+		}
 	}
 }

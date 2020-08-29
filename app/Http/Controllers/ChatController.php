@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Events\MessageCreated;
 use Illuminate\Support\Facades\Auth;
 
+use App\MatterHasUser;
+
 class ChatController extends Controller
 {
 	public function index($id) {
@@ -33,6 +35,9 @@ class ChatController extends Controller
 			$cmds[$user->skill3],
 			$cmds[$user->skill4],
 		];
+		if ( empty( MatterHasUser::where('matter_id', $id)->where('user_id', $user->id)->first() ) ) {
+			MatterHasUser::create(['matter_id' => $matter->id, 'user_id' => $user->id]);
+		}
 	    return view('chat_doteki',compact('user','image','user_name','id','cmds_now','items', 'reward'));
 
 	}
