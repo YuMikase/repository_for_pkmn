@@ -7,6 +7,7 @@ use App\Events\MatterEnded;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Matter;
+use App\UserStatuses;
 use Illuminate\Support\Facades\Auth;
 
 class ChatController extends Controller
@@ -66,12 +67,6 @@ class ChatController extends Controller
 			event(new MessageCreated($message));
 		}
 
-		if( $matter->time >= $matter->time_limit) {
-			$matter->end_flag = 1;
-			$matter->save();
-			self::createMatter();
-			event(new MatterEnded($matter));
-		}
 
 		//コマンドをランダムに入れなおし（選定１回）
 		$rand_commands = array_rand($commands, 4);
@@ -83,13 +78,25 @@ class ChatController extends Controller
         $user->skill4  = $rand_commands[3];
 		$user->save();
 
+		$money = UserStatuses::where('user_id', $user->id)->where('type', 'money')->first();
+		$money->value1 = round($money->value1 * 1.01);
+		$money->save();
+
+
 	    $message = \App\Message::create([
 	    	'matter_id' => $id,
 	        'body' => $request->message,
 	        'user_name' => $request->user_name,
 	        'type' => "normal"
 	    ]);
-	    event(new MessageCreated($message));
+		event(new MessageCreated($message));
+		
+		if( $matter->time >= $matter->time_limit) {
+			$matter->end_flag = 1;
+			$matter->save();
+			self::createMatter();
+			event(new MatterEnded($matter));
+		}
 
 	}
 	public function index_bar($matter_id) {// ユーザーのコマンドを取得
