@@ -32,8 +32,8 @@
           <h3>案件{{ $matter['id'] }} ( {{ config('rate_type')[$matter['rate_type']]['name'] }} ) </h3>
           <p>
             案件{{ $matter['id'] }}：
-            工数【 {{ $matter['time'] }} / {{ $matter['time_limit'] }} 】
-            進捗 {{ $matter['progress'] }} / {{ $matter['progress_limit'] }} 】           
+            工数【 {{ $matter['time'] }} / {{ $matter['time_limit'] }} ( {{ floor($matter['time'] / $matter['time_limit'] * 100) }} % ) 】
+            進捗 {{ $matter['progress'] }} / {{ $matter['progress_limit'] }} ( {{ floor($matter['progress'] / $matter['progress_limit'] * 100) }} % ) 】           
             <button type="button" class="btn btn-primary"><a href="chat/doteki/{{ $matter['id'] }}">参加</a></button>
           </p>
         </div>

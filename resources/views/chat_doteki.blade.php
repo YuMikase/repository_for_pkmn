@@ -23,11 +23,23 @@
                             <div class="col-6">
                                 <div class="row h-50">
                                     <div class="col border">
-                                        <div class="progress">
-                                            <div class="progress-bar bg-info" role="progressbar" v-bind:style="'width:'+progress+'%'" v-bind:aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="row">
+                                            <span class="col-2 m-1 badge badge-light">工数</span>
+                                            <div class="col-8 p-0 m-1 progress">
+                                                <div class="progress-bar bg-success" role="progressbar" v-bind:style="'width:'+time+'%'" v-bind:aria-valuenow="time" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
                                         </div>
-                                        <div class="progress" v-if="onDebug">
-                                            <div class="progress-bar bg-danger" role="progressbar" v-bind:style="'width:'+barning+'%'" v-bind:aria-valuenow="barning" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="row">
+                                            <span class="col-2 m-1 badge badge-light">進捗</span>
+                                            <div class="col-8 p-0 m-1 progress">
+                                                <div class="progress-bar bg-info" role="progressbar" v-bind:style="'width:'+progress+'%'" v-bind:aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row" v-if="onDebug">
+                                            <span class="col-2 m-1 badge badge-light">炎上</span>
+                                            <div class="col-8 p-0 m-1 progress">
+                                                <div class="progress-bar bg-danger" role="progressbar" v-bind:style="'width:'+barning+'%'" v-bind:aria-valuenow="barning" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -45,11 +57,8 @@
                                 </div>
                                 <div class="row h-50">
                                     <div class="col border">
-                                        <div class="progress row">
-                                            <div class="progress-bar bg-info" role="progressbar" v-bind:style="'width:'+progress+'%'" v-bind:aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
                                         <div class="row"><p></p></div>
-                                        <h4 class="row">所持金：<span class="badge badge-light" v-text="'￥'+money" v-bind:style="{ color: color}"></span></h4>
+                                        <h4 class="row m-1">所持金：<span class="badge badge-light" v-text="'￥'+money" v-bind:style="{ color: color}"></span></h4>
                                     </div>
                                 </div>
                             </div>
@@ -163,6 +172,7 @@
                 isProcessing: false,
                 barning: 0,
                 progress: 0,
+                time: 0,
                 onCommands: false,
                 onDebug: false,
                 matterEnded: false,
@@ -197,6 +207,7 @@
                         .then((response) => {
                             this.barning = response.data[0];
                             this.progress = response.data[1];
+                            this.time = response.data[2];
                         });
                 },
                 getCommands() {

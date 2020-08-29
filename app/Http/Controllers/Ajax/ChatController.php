@@ -79,7 +79,7 @@ class ChatController extends Controller
 		$user->save();
 
 		$money = UserStatuses::where('user_id', $user->id)->where('type', 'money')->first();
-		$money->value1 = round($money->value1 * 1.01);
+		$money->value1 = round( ( ($money->value1+100) * 1.01 ) - 100);
 		$money->save();
 
 
@@ -101,7 +101,10 @@ class ChatController extends Controller
 	}
 	public function index_bar($matter_id) {// ユーザーのコマンドを取得
 		$bars = \App\Matter::find($matter_id);
-	    return [ $bars['barning'], $bars['progress'] ];
+		return [ floor($bars['barning'] / $bars['barning_limit'] * 100),
+				floor($bars['progress'] / $bars['progress_limit'] * 100),
+				floor($bars['time'] / $bars['time_limit'] * 100),
+		];
 	}
 
 	public static function createMatter()
