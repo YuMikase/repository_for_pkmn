@@ -6,6 +6,7 @@ use App\Events\MessageCreated;
 use App\Events\MatterEnded;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Matter;
 use Illuminate\Support\Facades\Auth;
 
 class ChatController extends Controller
@@ -42,10 +43,29 @@ class ChatController extends Controller
 		//案件TBL加算処理
 		$matter = \App\Matter::find($id);
 		$rate_type = config('rate_type')[$matter['rate_type']];
-		$matter->barning = $matter->barning + ( $commands[$input_command]['barning'] * $rate_type['barning'][$commands[$input_command]['lang']] );
-		$matter->priogress = $matter->priogress + ( $commands[$input_command]['priogress'] * $rate_type['priogress'][$commands[$input_command]['lang']] );
-		$matter->time = $matter->time + ( $commands[$input_command]['time'] * $rate_type['time'][$commands[$input_command]['lang']] );
-		$matter->save();
+		self::addMatterStatus(
+			$id,
+			$commands[$input_command]['barning'] * $rate_type['barning'][$commands[$input_command]['lang']],
+			$commands[$input_command]['priogress'] * $rate_type['priogress'][$commands[$input_command]['lang']],
+			$commands[$input_command]['time'] * $rate_type['time'][$commands[$input_command]['lang']]
+		);
+
+		$attack = config('attack_type')[$matter['attack_type']]['terms'];
+		if ( ! empty( $attack[$matter->time] ) ) {
+			self::addMatterStatus(
+				$id,
+				$attack[$matter->time]['barning'],
+				$attack[$matter->time]['progress'],
+				$attack[$matter->time]['time']
+			);
+			$message = \App\Message::create([
+				'matter_id' => $id,
+				'body' => "案件からの攻撃！！",
+				'user_name' => "案件",
+				'type' => "normal"
+			]);
+			event(new MessageCreated($message));
+		}
 
 		if( $matter->time >= $matter->time_limit) {
 			$matter->end_flag = 1;
@@ -81,6 +101,7 @@ class ChatController extends Controller
 	public static function createMatter()
 	{
 		$rate_type = config('rate_type');
+		$attack_type = config('attack_type');
 		$data = [
 			'skill_count' => 0,
 			'barning' => 0,
@@ -90,8 +111,18 @@ class ChatController extends Controller
 			'progress_limit' => rand(100, 1000),
 			'time_limit' => rand(1, 10),
 			'rate_type' => array_rand($rate_type),
+			'attack_type' => array_rand($attack_type),
 		];
 
 		\App\Matter::create($data);
+	}
+
+	public static function addMatterStatus($matter_id, $barning = 0, $pregress = 0, $time = 0)
+	{
+		$matter = Matter::find($matter_id);
+		$matter->barning = $matter->barning + $barning;
+		$matter->priogress = $matter->priogress + $pregress;
+		$matter->time = $matter->time + $time;
+		$matter->save();
 	}
 }
