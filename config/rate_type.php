@@ -6,7 +6,7 @@ return [
     //PHP
     101 => [
         'id' => 101,
-        'name' => 'PHPの案件',
+        'name' => 'PHP',
         'barning' => [
             'PHP' => 1.5,
             'Python' => 0.8,
@@ -24,13 +24,17 @@ return [
             'Python' => 0.8,
             'Ruby' => 1.1,
             'Normal' => 1.0,
-        ]
+        ],
+        'reward' => [
+            'money' => 100,
+            'ex' => 10,
+        ],
     ],
 
 
     201 => [
         'id' => 201,
-        'name' => 'Pythonの案件',
+        'name' => 'Python',
         'barning' => [
             'PHP' => 0.8,
             'Python' => 1.5,
@@ -48,12 +52,16 @@ return [
             'Python' => 1.5,
             'Ruby' => 1.1,
             'Normal' => 1.0,
-        ]
+        ],
+        'reward' => [
+            'money' => 100,
+            'ex' => 10,
+        ],
     ],
 
     301 => [
         'id' => 301,
-        'name' => 'Rubyの案件',
+        'name' => 'Ruby',
         'barning' => [
             'PHP' => 0.8,
             'Python' => 0.8,
@@ -71,12 +79,16 @@ return [
             'Python' => 0.8,
             'Ruby' => 1.6,
             'Normal' => 1.0,
-        ]
+        ],
+        'reward' => [
+            'money' => 100,
+            'ex' => 10,
+        ],
     ],
     
     901 => [
         'id' => 901,
-        'name' => 'ふつうの案件',
+        'name' => 'ふつう',
         'barning' => [
             'PHP' => 1.0,
             'Python' => 1.0,
@@ -94,7 +106,11 @@ return [
             'Python' => 0.8,
             'Ruby' => 1.6,
             'Normal' => 1.0,
-        ]
+        ],
+        'reward' => [
+            'money' => 100,
+            'ex' => 10,
+        ],
     ],
 
 

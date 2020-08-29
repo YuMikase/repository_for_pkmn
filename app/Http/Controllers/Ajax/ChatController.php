@@ -78,7 +78,8 @@ class ChatController extends Controller
         $user->skill4  = $rand_commands[3];
 		$user->save();
 
-		$money = UserStatuses::where('user_id', $user->id)->where('type', 'money')->first();
+		$status = UserStatuses::where('user_id', $user->id)->get();
+		$money = $status->where('type', 'money')->first();
 		$money->value1 = round( ( ($money->value1+100) * 1.01 ) - 100);
 		$money->save();
 
@@ -95,6 +96,37 @@ class ChatController extends Controller
 			$matter->end_flag = 1;
 			$matter->save();
 			self::createMatter();
+			$money->value1 = $money->value1 + $rate_type['reward']['money'];
+			$money->save();
+			$ex_basic = $status->where('type', 'level_basic')->first();
+			switch ($rate_type['name']) {
+				case 'PHP':
+					$ex_lang = $status->where('type', 'level_php')->first();
+					break;
+				case 'Python':
+					$ex_lang = $status->where('type', 'level_python')->first();
+					break;
+				case 'Ruby':
+					$ex_lang = $status->where('type', 'level_ruby')->first();
+					break;
+				case 'ふつう':
+					$ex_lang = $status->where('type', 'level_basic')->first();
+					break;
+			}
+			$ex_basic->value2 = $ex_basic->value2 + $rate_type['reward']['ex'];
+			$ex_basic->save();
+			if ( $ex_basic->value2 >= 100 ) {
+				$ex_basic->value2 = $ex_basic->value2 - 100;
+				$ex_basic->value1 = $ex_basic->value1 + 1;
+			}
+			$ex_basic->save();
+			$ex_lang->value2 = $ex_lang->value2 + $rate_type['reward']['ex'];
+			$ex_lang->save();			
+			if ( $ex_lang->value2 >= 100 ) {
+				$ex_lang->value2 = $ex_lang->value2 - 100;
+				$ex_lang->value1 = $ex_lang->value1 + 1;
+			}
+			$ex_lang->save();
 			event(new MatterEnded($matter));
 		}
 

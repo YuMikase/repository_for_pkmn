@@ -12,7 +12,10 @@
         </div>
 
         <div v-if="matterEnded" style="background-color: white;z-index: 4000; width:100vw; height: 100vh;">
-            <span>この案件は終了しました。</span>
+            <span>この案件は終了しました。</span><br>
+            <span>報酬は以下の通りです。</span><br>
+            <span>お金：￥{{ $reward['money'] }}</span><br>
+            <span>経験値：{{ $reward['ex'] }}</span>
         </div>
 
         <div v-if="!matterEnded">

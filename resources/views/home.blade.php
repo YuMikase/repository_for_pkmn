@@ -29,7 +29,7 @@
     <div class="container overflow-auto"data-spy="scroll" data-target="#Navbar">
       @foreach ($matters as $matter)
       <div id="matter{{ $matter['id'] }}" class="border">
-          <h3>案件{{ $matter['id'] }} ( {{ config('rate_type')[$matter['rate_type']]['name'] }} ) </h3>
+          <h3>案件{{ $matter['id'] }} ( {{ config('rate_type')[$matter['rate_type']]['name'] }}の案件 ) </h3>
           <p>
             案件{{ $matter['id'] }}：
             工数【 {{ $matter['time'] }} / {{ $matter['time_limit'] }} ( {{ floor($matter['time'] / $matter['time_limit'] * 100) }} % ) 】
