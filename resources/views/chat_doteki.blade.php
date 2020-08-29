@@ -45,9 +45,10 @@
                                 </div>
                                 <div class="row h-50">
                                     <div class="col border">
-                                        <div class="progress">
+                                        <div class="progress row">
                                             <div class="progress-bar bg-info" role="progressbar" v-bind:style="'width:'+progress+'%'" v-bind:aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
+                                        <div class="row">所持金：<span class="badge badge-light" v-text="'￥'+money" v-bind:style="{ color: color}"></span></div>
                                     </div>
                                 </div>
                             </div>
@@ -167,7 +168,9 @@
                 user: @json($user->toArray()),
                 items: @json($items),
                 has_items: {},
-                onItems: false
+                onItems: false,
+                money:'',
+                color: 'black'
             },
             methods: {
                 toggleBattle() {
@@ -218,6 +221,13 @@
                             this.getItems();
                         });
                 },
+                getMoney() {
+                    axios.get("../../shop/money/"+this.user_id)
+                        .then((response) => {
+                            this.money = response.data;
+                            if ( this.money < 0 ){ this.color = 'red'; }
+                        });
+                },
                 send(type,value) {
                     const url = "/ajax/"+type+"/"+this.id;
                     switch (type) {
@@ -238,6 +248,7 @@
                                 // 成功したときの処理
                                 this.getCommands();
                                 this.getBars();
+                                this.getMoney();
                             });
                             break;
                     }
@@ -249,6 +260,7 @@
                 this.getMessages();
                 this.getBars();
                 this.getItems();
+                this.getMoney();
 
                 Echo.channel('chat')
                     .listen('MessageCreated', (e) => {
