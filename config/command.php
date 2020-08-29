@@ -9,7 +9,7 @@ return [
         'lang' => 'PHP',
         'name' => 'PHP',
         'barning' => 10,
-        'priogress' => 10,
+        'progress' => 10,
         'time' => 1,
     ],
     102 => [
@@ -17,7 +17,7 @@ return [
         'lang' => 'PHP',
         'name' => 'Symfony',
         'barning' => 20,
-        'priogress' => 20,
+        'progress' => 20,
         'time' => 1,
     ],
     103 => [
@@ -25,7 +25,7 @@ return [
         'lang' => 'PHP',
         'name' => 'Laravel',
         'barning' => 30,
-        'priogress' => 30,
+        'progress' => 30,
         'time' => 1,
     ],
     104 => [
@@ -33,7 +33,7 @@ return [
         'lang' => 'PHP',
         'name' => 'CakePHP',
         'barning' => 40,
-        'priogress' => 40,
+        'progress' => 40,
         'time' => 1,
     ],
     105 => [
@@ -41,7 +41,7 @@ return [
         'lang' => 'PHP',
         'name' => 'FuelPHP',
         'barning' => 50,
-        'priogress' => 50,
+        'progress' => 50,
         'time' => 1,
     ],
     106 => [
@@ -49,7 +49,7 @@ return [
         'lang' => 'PHP',
         'name' => 'WordPress',
         'barning' => 10,
-        'priogress' => 10,
+        'progress' => 10,
         'time' => 1,
     ],
     107 => [
@@ -57,7 +57,7 @@ return [
         'lang' => 'PHP',
         'name' => 'Ratchet',
         'barning' => 20,
-        'priogress' => 20,
+        'progress' => 20,
         'time' => 1,
     ],
     108 => [
@@ -65,7 +65,7 @@ return [
         'lang' => 'PHP',
         'name' => 'Composer',
         'barning' => 30,
-        'priogress' => 30,
+        'progress' => 30,
         'time' => 1,
     ],
     109 => [
@@ -73,7 +73,7 @@ return [
         'lang' => 'PHP',
         'name' => 'minify',
         'barning' => 40,
-        'priogress' => 40,
+        'progress' => 40,
         'time' => 1,
     ],
     110 => [
@@ -81,7 +81,7 @@ return [
         'lang' => 'PHP',
         'name' => 'Sentinel',
         'barning' => 50,
-        'priogress' => 50,
+        'progress' => 50,
         'time' => 1,
     ],
 
@@ -91,7 +91,7 @@ return [
         'lang' => 'Python',
         'name' => 'Python',
         'barning' => 10,
-        'priogress' => 10,
+        'progress' => 10,
         'time' => 1,
     ],
     202 => [
@@ -99,7 +99,7 @@ return [
         'lang' => 'Python',
         'name' => 'Django',
         'barning' => 20,
-        'priogress' => 20,
+        'progress' => 20,
         'time' => 1,
     ],
     203 => [
@@ -107,7 +107,7 @@ return [
         'lang' => 'Python',
         'name' => 'Tensorflow',
         'barning' => 30,
-        'priogress' => 30,
+        'progress' => 30,
         'time' => 1,
     ],
     204 => [
@@ -115,7 +115,7 @@ return [
         'lang' => 'Python',
         'name' => 'Flask',
         'barning' => 40,
-        'priogress' => 40,
+        'progress' => 40,
         'time' => 1,
     ],
     205 => [
@@ -123,7 +123,7 @@ return [
         'lang' => 'Python',
         'name' => 'pip',
         'barning' => 50,
-        'priogress' => 50,
+        'progress' => 50,
         'time' => 1,
     ],
     206 => [
@@ -131,7 +131,7 @@ return [
         'lang' => 'Python',
         'name' => 'six',
         'barning' => 10,
-        'priogress' => 10,
+        'progress' => 10,
         'time' => 1,
     ],
     207 => [
@@ -139,7 +139,7 @@ return [
         'lang' => 'Python',
         'name' => 'NumPy',
         'barning' => 20,
-        'priogress' => 20,
+        'progress' => 20,
         'time' => 1,
     ],
     208 => [
@@ -147,7 +147,7 @@ return [
         'lang' => 'Python',
         'name' => 'pandas',
         'barning' => 30,
-        'priogress' => 30,
+        'progress' => 30,
         'time' => 1,
     ],
     209 => [
@@ -155,7 +155,7 @@ return [
         'lang' => 'Python',
         'name' => 'Plone',
         'barning' => 40,
-        'priogress' => 40,
+        'progress' => 40,
         'time' => 1,
     ],
     210 => [
@@ -163,7 +163,7 @@ return [
         'lang' => 'Python',
         'name' => 'bottle',
         'barning' => 50,
-        'priogress' => 50,
+        'progress' => 50,
         'time' => 1,
     ],
     
@@ -173,7 +173,7 @@ return [
         'lang' => 'Ruby',
         'name' => 'Ruby',
         'barning' => 10,
-        'priogress' => 10,
+        'progress' => 10,
         'time' => 1,
     ],
     302 => [
@@ -181,7 +181,7 @@ return [
         'lang' => 'Ruby',
         'name' => 'Ruby on rails',
         'barning' => 20,
-        'priogress' => 20,
+        'progress' => 20,
         'time' => 1,
     ],
     303 => [
@@ -189,7 +189,7 @@ return [
         'lang' => 'Ruby',
         'name' => 'Gem',
         'barning' => 30,
-        'priogress' => 30,
+        'progress' => 30,
         'time' => 1,
     ],
     304 => [
@@ -197,7 +197,7 @@ return [
         'lang' => 'Ruby',
         'name' => 'bundler',
         'barning' => 40,
-        'priogress' => 40,
+        'progress' => 40,
         'time' => 1,
     ],
     305 => [
@@ -205,7 +205,7 @@ return [
         'lang' => 'Ruby',
         'name' => 'eRuby',
         'barning' => 50,
-        'priogress' => 50,
+        'progress' => 50,
         'time' => 1,
     ],
     306 => [
@@ -213,7 +213,7 @@ return [
         'lang' => 'Ruby',
         'name' => 'rspec-rails',
         'barning' => 10,
-        'priogress' => 10,
+        'progress' => 10,
         'time' => 1,
     ],
     307 => [
@@ -221,7 +221,7 @@ return [
         'lang' => 'Ruby',
         'name' => 'Awesome Print',
         'barning' => 20,
-        'priogress' => 20,
+        'progress' => 20,
         'time' => 1,
     ],
     308 => [
@@ -229,7 +229,7 @@ return [
         'lang' => 'Ruby',
         'name' => 'Kaminari',
         'barning' => 30,
-        'priogress' => 30,
+        'progress' => 30,
         'time' => 1,
     ],
     309 => [
@@ -237,7 +237,7 @@ return [
         'lang' => 'Ruby',
         'name' => 'HANAMI',
         'barning' => 40,
-        'priogress' => 40,
+        'progress' => 40,
         'time' => 1,
     ],
     310 => [
@@ -245,7 +245,7 @@ return [
         'lang' => 'Ruby',
         'name' => 'Sinatra',
         'barning' => 50,
-        'priogress' => 50,
+        'progress' => 50,
         'time' => 1,
     ],
 
@@ -255,7 +255,7 @@ return [
         'lang' => 'Normal',
         'name' => 'if',
         'barning' => 10,
-        'priogress' => 10,
+        'progress' => 10,
         'time' => 1,
     ],
     902 => [
@@ -263,7 +263,7 @@ return [
         'lang' => 'Normal',
         'name' => 'switch',
         'barning' => 20,
-        'priogress' => 20,
+        'progress' => 20,
         'time' => 1,
     ],
     903 => [
@@ -271,7 +271,7 @@ return [
         'lang' => 'Normal',
         'name' => 'while',
         'barning' => 30,
-        'priogress' => 30,
+        'progress' => 30,
         'time' => 1,
     ],
     904 => [
@@ -279,7 +279,7 @@ return [
         'lang' => 'Normal',
         'name' => 'for',
         'barning' => 40,
-        'priogress' => 40,
+        'progress' => 40,
         'time' => 1,
     ],
     905 => [
@@ -287,7 +287,7 @@ return [
         'lang' => 'Normal',
         'name' => 'foreach',
         'barning' => 50,
-        'priogress' => 50,
+        'progress' => 50,
         'time' => 1,
     ],
 

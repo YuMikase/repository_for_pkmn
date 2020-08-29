@@ -31,7 +31,10 @@
       <div id="matter{{ $matter['id'] }}" class="border">
           <h3>案件{{ $matter['id'] }}</h3>
           <p>
-            案件{{ $matter['id'] }}：詳細情報  <button type="button" class="btn btn-primary"><a href="chat/doteki/{{ $matter['id'] }}">参加</a></button>
+            案件{{ $matter['id'] }}：
+            工数【 {{ $matter['time'] }} / {{ $matter['time_limit'] }} 】
+            進捗 {{ $matter['progress'] }} / {{ $matter['progress_limit'] }} 】           
+            <button type="button" class="btn btn-primary"><a href="chat/doteki/{{ $matter['id'] }}">参加</a></button>
           </p>
         </div>
       @endforeach

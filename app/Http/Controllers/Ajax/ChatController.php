@@ -46,7 +46,7 @@ class ChatController extends Controller
 		self::addMatterStatus(
 			$id,
 			$commands[$input_command]['barning'] * $rate_type['barning'][$commands[$input_command]['lang']],
-			$commands[$input_command]['priogress'] * $rate_type['priogress'][$commands[$input_command]['lang']],
+			$commands[$input_command]['progress'] * $rate_type['progress'][$commands[$input_command]['lang']],
 			$commands[$input_command]['time'] * $rate_type['time'][$commands[$input_command]['lang']]
 		);
 
@@ -94,7 +94,7 @@ class ChatController extends Controller
 	}
 	public function index_bar($matter_id) {// ユーザーのコマンドを取得
 		$bars = \App\Matter::find($matter_id);
-	    return [ $bars['barning'], $bars['priogress'] ];
+	    return [ $bars['barning'], $bars['progress'] ];
 	}
 
 	public static function createMatter()
@@ -104,7 +104,7 @@ class ChatController extends Controller
 		$data = [
 			'skill_count' => 0,
 			'barning' => 0,
-			'priogress' => 0,
+			'progress' => 0,
 			'time' => 0,
 			'barning_limit' => rand(100, 1000),
 			'progress_limit' => rand(100, 1000),
@@ -120,7 +120,7 @@ class ChatController extends Controller
 	{
 		$matter = Matter::find($matter_id);
 		$matter->barning = $matter->barning + $barning;
-		$matter->priogress = $matter->priogress + $pregress;
+		$matter->progress = $matter->progress + $pregress;
 		$matter->time = $matter->time + $time;
 		$matter->save();
 	}

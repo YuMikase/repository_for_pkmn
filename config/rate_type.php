@@ -13,7 +13,7 @@ return [
             'Ruby' => 1.1,
             'Normal' => 1.0,
         ],
-        'priogress' => [
+        'progress' => [
             'PHP' => 1.5,
             'Python' => 0.8,
             'Ruby' => 1.1,
@@ -37,7 +37,7 @@ return [
             'Ruby' => 1.1,
             'Normal' => 1.0,
         ],
-        'priogress' => [
+        'progress' => [
             'PHP' => 0.8,
             'Python' => 1.5,
             'Ruby' => 1.1,
@@ -60,7 +60,7 @@ return [
             'Ruby' => 1.6,
             'Normal' => 1.0,
         ],
-        'priogress' => [
+        'progress' => [
             'PHP' => 0.8,
             'Python' => 0.8,
             'Ruby' => 1.6,
@@ -83,7 +83,7 @@ return [
             'Ruby' => 1.0,
             'Normal' => 1.0,
         ],
-        'priogress' => [
+        'progress' => [
             'PHP' => 0.8,
             'Python' => 0.8,
             'Ruby' => 1.6,

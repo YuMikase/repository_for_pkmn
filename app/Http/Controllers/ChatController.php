@@ -65,7 +65,7 @@ class ChatController extends Controller
 		//案件TBL加算処理
 		$matter = \App\Matter::where('id', $id)->first();
 		$matter->barning = $matter->barning + $commands[$input_command]['barning'];
-		$matter->priogress = $matter->priogress + $commands[$input_command]['priogress'];
+		$matter->progress = $matter->progress + $commands[$input_command]['progress'];
 		$matter->time = $matter->time + $commands[$input_command]['time'];
 		$matter->save();
 

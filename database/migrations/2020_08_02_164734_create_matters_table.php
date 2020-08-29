@@ -17,7 +17,7 @@ class CreateMattersTable extends Migration
             $table->increments('id');
             $table->integer('skill_count');
             $table->integer('barning');
-            $table->integer('priogress');
+            $table->integer('progress');
             $table->integer('time');
             $table->timestamps();
 
