@@ -55,12 +55,11 @@ class ChatController extends Controller
 			self::addMatterStatus(
 				$id,
 				$attack[$matter->time]['barning'],
-				$attack[$matter->time]['progress'],
-				$attack[$matter->time]['time']
+				$attack[$matter->time]['progress']
 			);
 			$message = \App\Message::create([
 				'matter_id' => $id,
-				'body' => "案件からの攻撃！！",
+				'body' => $attack[$matter->time]['message'],
 				'user_name' => "案件",
 				'type' => "normal"
 			]);
@@ -109,7 +108,7 @@ class ChatController extends Controller
 			'time' => 0,
 			'barning_limit' => rand(100, 1000),
 			'progress_limit' => rand(100, 1000),
-			'time_limit' => rand(1, 10),
+			'time_limit' => rand(10, 20),
 			'rate_type' => array_rand($rate_type),
 			'attack_type' => array_rand($attack_type),
 		];
