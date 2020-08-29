@@ -56,16 +56,51 @@
     <div class='col-6  border border-primary'>
         <div class="item h-100">
           <h3>Items</h3>
-          <button class="enter_button">
-            <a href="{{ url('shop') }}">'Go shopping'</a>
-          </button>
-          <!--
-          のちのちここにアイテムリストを表示、クリックで使用できるように
-        -->
+          <div id="shop" class="list-group">
+            <button class="list-group-item list-group-item-action" v-for="i in items">
+                <div @click='buy(i.id)' class="row">
+                    <div class="col-2"><span class="badge badge-light" v-text="i.type"></span></div>
+                    <div class="col-8"><span v-text="i.name"></span></div>
+                    <div class="col-2"><span class="badge badge-light" v-text="has_items[i.id]"></span></div>
+                </div>
+            </button>
+          </div>
         </div>
     </div>
   </div>
 </div>
 
+<script src="/js/app.js"></script>
+    <script>
+
+        new Vue({
+            el: '#shop',
+            data: {
+                user: @json($user),
+                items: @json($items),
+                has_items: {}
+            },
+            methods: {
+                buy(item_id) {
+                    var params = { item_id: item_id};
+                    axios.post("/shop", params)
+                        .then((response) => {
+                            //成功時処理
+                            this.getItems();
+                        });
+                },
+                getItems() {
+                    axios.get("shop/"+this.user['id'])
+                        .then((response) => {
+                            this.has_items = response.data;
+                        });
+                }
+            },
+            mounted() {
+                this.getItems();
+            }
+        });
+
+</script>
 
 @endsection

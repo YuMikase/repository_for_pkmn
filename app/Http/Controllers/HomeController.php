@@ -47,6 +47,9 @@ class HomeController extends Controller
         }
         $status = UserStatuses::where('user_id', $user['id'])->get();
         $matters = $matters->get()->toArray();
-        return view('home', compact('matters', 'status'));
+
+        $user = Auth::user()->with('has_item')->first();
+        $items = config('item');
+        return view('home', compact('matters', 'status', 'user', 'items'));
     }
 }
