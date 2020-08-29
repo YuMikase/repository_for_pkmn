@@ -44,16 +44,14 @@
 <div class='container'>
   <div class='row justify-content-md-center w-100'>
     <div class='col-6  border border-primary'>
-        <div class="status">
-          <h3>あなたのステータス</h3>
-            <p>Level:{{ $status->where('type', 'level_basic')->first()->value1 }}</p>
-            <p>Money:{{ $status->where('type', 'money')->first()->value1 }}</p>
-            <div class="langs">
-              <p>PHP:{{ $status->where('type', 'level_php')->first()->value1 }}</p>
-              <p>Python:{{ $status->where('type', 'level_python')->first()->value1 }}</p>
-              <p>Ruby:{{ $status->where('type', 'level_ruby')->first()->value1 }}</p>
-            </div>
-        </div>
+      <h3>あなたのステータス</h3>
+      <ul class="list-group">
+        <li class="list-group-item">Level<span class="badge badge-light">{{ $status->where('type', 'level_basic')->first()->value1 }}</span></li>
+        <li class="list-group-item">Money<span class="badge badge-light">{{ $status->where('type', 'money')->first()->value1 }}</span></li>
+        <li class="list-group-item">PHP<span class="badge badge-light">{{ $status->where('type', 'level_php')->first()->value1 }}</span></li>
+        <li class="list-group-item">Python<span class="badge badge-light">{{ $status->where('type', 'level_python')->first()->value1 }}</span></li>
+        <li class="list-group-item">Ruby<span class="badge badge-light">{{ $status->where('type', 'level_ruby')->first()->value1 }}</span></li>
+      </ul>
     </div>
     <div class='col-6  border border-primary'>
         <div class="item h-100">
