@@ -48,7 +48,8 @@
                                         <div class="progress row">
                                             <div class="progress-bar bg-info" role="progressbar" v-bind:style="'width:'+progress+'%'" v-bind:aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <div class="row">所持金：<span class="badge badge-light" v-text="'￥'+money" v-bind:style="{ color: color}"></span></div>
+                                        <div class="row"><p></p></div>
+                                        <h4 class="row">所持金：<span class="badge badge-light" v-text="'￥'+money" v-bind:style="{ color: color}"></span></h4>
                                     </div>
                                 </div>
                             </div>
