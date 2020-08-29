@@ -278,6 +278,7 @@
                     .listen('MessageCreated', (e) => {
                         
                         this.getMessages(); // 全メッセージを再読込
+                        this.getBars();
 
                     });
                 Echo.channel('chat'+this.id)
