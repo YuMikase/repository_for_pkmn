@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <div v-if="matterEnded" style="background-color: white;z-index: 4000; width:100vw; height: 100vh;">
+        <div v-if="matterEnded" style="background-color: white;">
             <span>この案件は終了しました。</span><br>
             <span>報酬は以下の通りです。</span><br>
             <span>お金：￥{{ $reward['money'] }}</span><br>
@@ -22,7 +22,7 @@
             <div class="container-fluid" style="height: 90vh;">
                 <div class="row h-100">
                     <div class="col-7">
-                        <div class="row h-75 border">
+                        <div class="row border" style="height: 50vh;">
                             <div class="col-6">
                                 <div class="row h-50">
                                     <div class="col border">
@@ -48,14 +48,14 @@
                                 </div>
                                 <div class="row h-50">
                                     <div class="col border">
-                                        <img class="img-fluid" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
+                                        <img class="img-fluid" style="height:20vh; width:20vh;" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="row h-50">
                                     <div class="col border">
-                                        <img class="img-fluid" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
+                                        <img class="img-fluid" style="height:20vh; width:20vh;" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
                                     </div>
                                 </div>
                                 <div class="row h-50">
@@ -66,23 +66,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row h-25 border">
+                        <div class="row border" style="height: 40vh">
                             <div class="col h-100">
-                                <div class="row overflow-auto" style="height:7em">
+                                <div class="row overflow-auto m-1 border" style="height:32vh">
                                     <div class="col">
                                         <div class="row border mt-1" v-for="m in messages">
                                             <div class="col">
                                                 <!-- 登録された日時 -->
-                                                <span class="row" v-text="m.created_at+' : user_name : '+m.user_name"></span>
-                                                <!-- メッセージ内容 -->
-                                                <span class="row" v-text=""></span> 
+                                                <span class="row" style="font-size: 4px" v-text="m.created_at+' : user_name : '+m.user_name"></span>
                                                 <!-- メッセージ内容 -->
                                                 <span class="row" v-text="m.body"></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row" style="height:1em">
+                                <div class="row" style="height:6vh;">
                                     <div class="col input-group">
                                         <input type="text" class="form-control" placeholder="Your message" aria-describedby="button-addon2" v-model="message">
                                         <div class="input-group-append">
@@ -97,7 +95,7 @@
                     <div class="col-5">
                         <div class="row h-25 border">
                             <div class="col-4 border h-100">
-                                <img class="img-fluid" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
+                                <img class="img-fluid" style="height:10vh; width:10vh;" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
                             </div>
                             <div class="col-8 ">
                                 <div class="row h-25 border">INFO_TITLE</div>
