@@ -13,8 +13,12 @@ class ShopController extends Controller
 {
     public function buy(Request $re) {
         $user = Auth::user();
+        
+        $has = UserHasItem::where('user_id', $user['id'])->where('item_id', $re->item_id)->first();
+        $has->has = $has->has + 1;
+        $has->save();
+        
         $items = config('item');
-        UserHasItem::create([ 'item_id' => $re->item_id, 'user_id' => $user['id'] ]);
         $money = UserStatuses::where('user_id', $user['id'])->where('type', 'money')->first();
         $money->value1 = $money->value1 - $items[$re->item_id]['money'];
         $money->save();
@@ -22,7 +26,10 @@ class ShopController extends Controller
 
     public function use(Request $re) {
         $user = Auth::user();
-        UserHasItem::where('item_id', $re->item_id)->where('user_id', $user['id'])->first()->delete();
+
+        $has = UserHasItem::where('user_id', $user['id'])->where('item_id', $re->item_id)->first();
+        $has->has = $has->has - 1;
+        $has->save(); 
     }
 
     public function getHasItems() {
@@ -31,7 +38,7 @@ class ShopController extends Controller
         $items = config('item');
         $res = [];
         foreach ($items as $id => $item) {
-            $res[$id] = $has_items->where('item_id', $id)->count();
+            $res[$id] = $has_items->where('item_id', $id)->first()->has;
         }
         return $res;
     }

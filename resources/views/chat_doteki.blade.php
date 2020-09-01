@@ -220,10 +220,17 @@
                             this.toggleBattle();
                         });
                 },
-                getItems() {
-                    axios.get("../../shop/"+this.user['id'])
+                getHasItems() {
+                    axios.get("../../getHasItems")
                         .then((response) => {
                             this.has_items = response.data;
+                        });
+                },
+                getHasMoney() {
+                    axios.get("../../getHasMoney")
+                        .then((response) => {
+                            this.money = response.data;
+                            if ( this.money < 0 ){ this.color = 'red'; }
                         });
                 },
                 useItem(item_id) {
@@ -231,14 +238,7 @@
                     axios.post("/shop/use", params)
                         .then((response) => {
                             //成功時処理
-                            this.getItems();
-                        });
-                },
-                getMoney() {
-                    axios.get("../../shop/money/"+this.user_id)
-                        .then((response) => {
-                            this.money = response.data;
-                            if ( this.money < 0 ){ this.color = 'red'; }
+                            this.getHasItems();
                         });
                 },
                 send(type,value) {
@@ -261,7 +261,7 @@
                                 // 成功したときの処理
                                 this.getCommands();
                                 this.getBars();
-                                this.getMoney();
+                                this.getHasMoney();
                             });
                             break;
                     }
@@ -272,8 +272,8 @@
 
                 this.getMessages();
                 this.getBars();
-                this.getItems();
-                this.getMoney();
+                this.getHasItems();
+                this.getHasMoney();
 
                 Echo.channel('chat')
                     .listen('MessageCreated', (e) => {
