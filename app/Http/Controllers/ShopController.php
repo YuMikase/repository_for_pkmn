@@ -11,14 +11,8 @@ use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class ShopController extends Controller
 {
-    public function index() {
-        $user = Auth::user()->with('has_item')->first();
-        $items = config('item');
-        return view('shop',compact('user', 'items'));
-    }
-    
     public function buy(Request $re) {
-        $user = Auth::user()->with('has_item')->first();
+        $user = Auth::user();
         $items = config('item');
         UserHasItem::create([ 'item_id' => $re->item_id, 'user_id' => $user['id'] ]);
         $money = UserStatuses::where('user_id', $user['id'])->where('type', 'money')->first();
@@ -27,13 +21,13 @@ class ShopController extends Controller
     }
 
     public function use(Request $re) {
-        $user = Auth::user()->with('has_item')->first();
-        $items = config('item');
+        $user = Auth::user();
         UserHasItem::where('item_id', $re->item_id)->where('user_id', $user['id'])->first()->delete();
     }
 
-    public function getHasItems($user_id) {
-        $has_items = Auth::user()->has_item;
+    public function getHasItems() {
+        $user = Auth::user();
+        $has_items = UserHasItem::where('user_id', $user['id'])->get();
         $items = config('item');
         $res = [];
         foreach ($items as $id => $item) {
@@ -42,7 +36,8 @@ class ShopController extends Controller
         return $res;
     }
     
-    public function getMoney($user_id) {
-        return UserStatuses::where('user_id', $user_id)->where('type', 'money')->first()->value1;
+    public function getHasMoney() {
+        $user = Auth::user();
+        return UserStatuses::where('user_id', $user['id'])->where('type', 'money')->first()->value1;
 	}
 }

@@ -29,10 +29,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::user()->toArray();
-        $matters = Matter::where('end_flag',false);
+        $user = Auth::user();
 
-        if ( ! $matters->exists() || $matters->count() < 5 ) {
+        //不足分を作成
+        if ( Matter::where('end_flag',false)->count() < 5 ) {
             ChatController::createMatter();
         }
         if ( ! UserHasItem::where('user_id', $user['id'])->exists() ) {
@@ -45,11 +45,11 @@ class HomeController extends Controller
             UserStatuses::create([ 'type' => 'level_python', 'user_id' => $user['id'] ]);
             UserStatuses::create([ 'type' => 'level_ruby', 'user_id' => $user['id'] ]);
         }
-        $status = UserStatuses::where('user_id', $user['id'])->get();
-        $matters = $matters->get()->toArray();
 
-        $user = Auth::user()->with('has_item')->first();
+        //補充後改めて取得
+        $matters = Matter::withCount('users')->where('end_flag',false)->get();
+        $status = UserStatuses::where('user_id', $user['id'])->get();
         $items = config('item');
-        return view('home', compact('matters', 'status', 'user', 'items'));
+        return view('home', compact('user', 'matters', 'status', 'items'));
     }
 }

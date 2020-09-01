@@ -28,9 +28,9 @@ Route::get('ajax/bar/{id}', 'Ajax\ChatController@index_bar'); // 炎上、進捗
 
 //認証が必要なグループ
 Route::middleware('auth')->group(function () {
-    Route::get('shop', 'ShopController@index');
     Route::post('shop', 'ShopController@buy');
-    Route::get('shop/{user_id}', 'ShopController@getHasItems');
+    Route::get('getHasItems', 'ShopController@getHasItems');
+    Route::get('getHasMoney', 'ShopController@getHasMoney');
     Route::post('shop/use', 'ShopController@use');
     Route::get('shop/money/{user_id}', 'ShopController@getMoney');
 });

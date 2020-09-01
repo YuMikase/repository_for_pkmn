@@ -28,7 +28,7 @@
     </nav>
     <div class="container overflow-auto"data-spy="scroll" data-target="#Navbar">
       @foreach ($matters as $matter)
-      <div id="matter{{ $matter['id'] }}" class="border">
+        <div id="matter{{ $matter['id'] }}" class="border">
           <h3>案件{{ $matter['id'] }} ( {{ config('rate_type')[$matter['rate_type']]['name'] }}の案件 ) </h3>
           <p>
             案件{{ $matter['id'] }}：
@@ -88,24 +88,24 @@
             },
             methods: {
                 buy(item_id) {
-                    this.onBuy = !this.onBuy;
+                    this.onBuy = true;
                     var params = { item_id: item_id};
                     axios.post("/shop", params)
                         .then((response) => {
                             //成功時処理
-                            this.getItems();
-                            this.getMoney();
-                            this.onBuy = !this.onBuy;
+                            this.getHasItems();
+                            this.getHasMoney();
+                            this.onBuy = false;
                         });
                 },
-                getItems() {
-                    axios.get("shop/"+this.user['id'])
+                getHasItems() {
+                    axios.get("getHasItems")
                         .then((response) => {
                             this.has_items = response.data;
                         });
                 },
-                getMoney() {
-                    axios.get("shop/money/"+this.user['id'])
+                getHasMoney() {
+                    axios.get("getHasMoney")
                         .then((response) => {
                             this.money = response.data;
                             if ( this.money < 0 ){ this.color = 'red'; }
@@ -113,8 +113,8 @@
                 }
             },
             mounted() {
-                this.getItems();
-                this.getMoney();
+                this.getHasItems();
+                this.getHasMoney();
             }
         });
 
