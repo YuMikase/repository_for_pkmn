@@ -33,7 +33,7 @@
           <p>
             案件{{ $matter['id'] }}：
             工数【 {{ $matter['time'] }} / {{ $matter['time_limit'] }} ( {{ floor($matter['time'] / $matter['time_limit'] * 100) }} % ) 】
-            進捗【{{ $matter['progress'] }} / {{ $matter['progress_limit'] }} ( {{ floor($matter['progress'] / $matter['progress_limit'] * 100) }} % ) 】           
+            進捗【{{ $matter['progress'] }} / {{ $matter['progress_limit'] }} ( {{ floor($matter['progress'] / $matter['progress_limit'] * 100) }} % ) 】
             <button type="button" class="btn btn-primary"><a href="chat/doteki/{{ $matter['id'] }}">参加</a></button>
           </p>
         </div>
@@ -43,6 +43,64 @@
     </div>
   </div>
 </div>
+
+<!--カルーセル仮設置-->
+<div class="container">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+          @foreach ($matters as $matter)
+            <li data-target="#carouselExampleIndicators" data-slide-to= $matter['id'] class="active"></li>
+          @endforeach
+      </ol>
+        <div class="carousel-inner">
+          <!--foreachでmatterごとにカルーセルを出したい-->
+          @foreach ($matters as $matter)
+            @if ($matter['id']==1)
+                <div class="carousel-item active bg-info">
+                  <div class="col-10 mx-auto">
+                    <img src="{{ asset('img/photo0000-5281.jpg')}}" alt="NO_IMAGE">
+                  </div>
+                    <div class="carousel-caption d-none d-md-block">
+                      <div class="row">
+                        <div class="col-8" id="matter-info">
+                          <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                          <div class="progress">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                        <div class="col-2">参加人数:</div>
+                        <div class="col-2">  <button type="button" class="btn btn-outline-primary"><a href="chat/doteki/{{ $matter['id'] }}">参加</a></button> </div>
+                      </div>
+                    </div>
+                </div>
+            @else
+              <div class="carousel-item">
+                <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Second slide"><title>Placeholder</title><rect width="100%" height="100%" fill="#666"/><text x="50%" y="50%" fill="#444" dy=".3em">Second slide</text></svg>
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>NotAcive</h5>
+                  <p>きゃぷしよん</p>
+                </div>
+              </div>
+            @endif
+          @endforeach
+            <!--<div class="carousel-item">
+              <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Third slide"><title>Placeholder</title><rect width="100%" height="100%" fill="#555"/><text x="50%" y="50%" fill="#333" dy=".3em">Third slide</text></svg>
+            </div>-->
+
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+  </div>
+  <!--仮設置終わり-->
 
 <div class='container'>
   <div class='row justify-content-md-center w-100'>
@@ -56,6 +114,8 @@
       </ul>
     </div>
     <div class='col-6  border border-primary'>
+<!--overflow-->
+      <div class="overflow-auto" style=" height:300px;">
         <div id="shop" class="item h-100">
           <h3>アイテム　所持金：<span class="badge badge-light" v-text="'￥'+money" v-bind:style="{ color: color}"></span></h3>
           <div class="list-group">
@@ -69,6 +129,7 @@
             </button>
           </div>
         </div>
+      </div>
     </div>
   </div>
 </div>
