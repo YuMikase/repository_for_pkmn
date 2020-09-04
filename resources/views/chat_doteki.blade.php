@@ -16,6 +16,8 @@
             <span>報酬は以下の通りです。</span><br>
             <span>お金：￥{{ $reward['money'] }}</span><br>
             <span>経験値：{{ $reward['ex'] }}</span>
+            <br>
+            <span><input type="button" onclick="history.back()" value="ホームに戻る" class="btn btn-primary"></span>
         </div>
 
         <div v-if="!matterEnded">
