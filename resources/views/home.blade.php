@@ -64,7 +64,7 @@
                       <div class="row">
                         <div class="col-8" id="matter-info">
                           <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: {{ $matter['progress'] }}" aria-valuenow= "{{ $matter['progress'] }}", aria-valuemin="0" aria-valuemax=></div>
                           </div>
                           <div class="progress">
                             <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -77,7 +77,9 @@
                 </div>
             @else
               <div class="carousel-item">
-                <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Second slide"><title>Placeholder</title><rect width="100%" height="100%" fill="#666"/><text x="50%" y="50%" fill="#444" dy=".3em">Second slide</text></svg>
+                <div class="col-10 mx-auto">
+                  <img src="{{ asset('img/photo0000-5281.jpg')}}" alt="NO_IMAGE">
+                </div>
                 <div class="carousel-caption d-none d-md-block">
                   <h5>NotAcive</h5>
                   <p>きゃぷしよん</p>
