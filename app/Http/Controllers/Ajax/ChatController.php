@@ -49,7 +49,7 @@ class ChatController extends Controller
 			$id,
 			$commands[$input_command]['barning'] * $rate_type['barning'][$commands[$input_command]['lang']],
 			$commands[$input_command]['progress'] * $rate_type['progress'][$commands[$input_command]['lang']],
-			$commands[$input_command]['time'] * $rate_type['time'][$commands[$input_command]['lang']]
+			1
 		);
 
 		$attack = config('attack_type')[$matter['attack_type']]['terms'];
