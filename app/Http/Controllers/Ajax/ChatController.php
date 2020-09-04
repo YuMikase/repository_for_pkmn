@@ -9,7 +9,9 @@ use App\Http\Controllers\Controller;
 use App\Matter;
 use App\UserStatuses;
 use App\MatterHasUser;
+use App\User;
 use Illuminate\Support\Facades\Auth;
+use Log;
 
 class ChatController extends Controller
 {
@@ -99,9 +101,19 @@ class ChatController extends Controller
 			$matter->end_flag = 1;
 			$matter->save();
 			self::createMatter();
-			$users = MatterHasUser::where('matter_id', $id)->get();
-			foreach ($users as $key => $value) {
-				self::addUserStatus($value['user_id'], 'money', $rate_type['reward']['money']);
+			//参加ユーザー全取得
+			$matter_has_users = MatterHasUser::where('matter_id', $id)->get();
+			foreach ($matter_has_users as $key => $value) {
+				$user = User::find($value['user_id']);
+
+				//報酬処理
+				$result = ($value['command_count'] * 1000) + (($matter->time_limit - $matter->time) * 2000) + ($matter->barning * -2000) + ($matter->progress * 2000);
+				if($result > 0){
+					$user->money = $result;
+				}
+
+				$user->save();
+
 				self::addUserStatus($value['user_id'], 'ふつう', $rate_type['reward']['ex']);
 				self::addUserStatus($value['user_id'], $rate_type['name'], $rate_type['reward']['ex']);
 			}
