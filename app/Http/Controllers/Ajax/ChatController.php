@@ -65,7 +65,6 @@ class ChatController extends Controller
 				'user_name' => "案件",
 				'type' => "normal"
 			]);
-			event(new MessageCreated($message));
 		}
 
 
