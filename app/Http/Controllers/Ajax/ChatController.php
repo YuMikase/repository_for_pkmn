@@ -92,6 +92,8 @@ class ChatController extends Controller
 	        'type' => "normal"
 	    ]);
 		event(new MessageCreated($message));
+
+		MatterHasUser::where('matter_id', $id)->where('user_id', $user->id)->increment('command_count');
 		
 		// 案件終了時処理
 		if( $matter->time >= $matter->time_limit) {
