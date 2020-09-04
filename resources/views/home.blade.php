@@ -45,32 +45,48 @@
 </div>
 
 <!--カルーセル仮設置-->
-<div class="container">
+<div class="container mb-5">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
           @foreach ($matters as $matter)
             <li data-target="#carouselExampleIndicators" data-slide-to= $matter['id'] class="active"></li>
           @endforeach
       </ol>
-        <div class="carousel-inner">
+        <div class="carousel-inner bg-secondary">
           <!--foreachでmatterごとにカルーセルを出したい-->
           @foreach ($matters as $matter)
             @if ($matter['id']==1)
-                <div class="carousel-item active bg-info">
+                <div class="carousel-item active ">
                   <div class="col-10 mx-auto">
-                    <img src="{{ asset('img/photo0000-5281.jpg')}}" alt="NO_IMAGE">
+                    <img src="{{ asset('img/photo0000-5281.jpg')}}" alt="NO_IMAGE" style="max-width: 100%; , height: auto;">
                   </div>
-                    <div class="carousel-caption d-none d-md-block">
+
+                    <div class="carousel-caption bg-light border border-primary rounded d-none d-md-block">
+                      <div ><font color="orange" size="5" face="Comic Sans MS">{{ config('rate_type')[$matter['rate_type']]['name'] }}の案件</font></div>
                       <div class="row">
                         <div class="col-8" id="matter-info">
-                          <div class="progress">
+                          <!--進捗バー-->
+                          <div class="row">
+                            <div class="col-2 text-dark">進捗:</div>
+                            <div class="col-10">
+                              <div class="progress">
                             <div class="progress-bar" role="progressbar" style="width: {{ $matter['progress'] }}" aria-valuenow= "{{ $matter['progress'] }}", aria-valuemin="0" aria-valuemax=></div>
                           </div>
-                          <div class="progress">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-2 text-dark">工数:</div>
+                            <div class="col-10">
+                            <div>
+                              <div class="progress">
+                              <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            </div>
                           </div>
                         </div>
-                        <div class="col-2">参加人数:</div>
+                        </div>
+                        <div class="col-2 text-dark">参加人数:</div>
                         <div class="col-2">  <button type="button" class="btn btn-outline-primary"><a href="chat/doteki/{{ $matter['id'] }}">参加</a></button> </div>
                       </div>
                     </div>
@@ -80,9 +96,33 @@
                 <div class="col-10 mx-auto">
                   <img src="{{ asset('img/photo0000-5281.jpg')}}" alt="NO_IMAGE">
                 </div>
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>NotAcive</h5>
-                  <p>きゃぷしよん</p>
+                <div class="carousel-caption bg-light border border-primary rounded d-none d-md-block">
+                  <div ><font color="orange" size="5" face="Comic Sans MS">{{ config('rate_type')[$matter['rate_type']]['name'] }}の案件</font></div>
+                  <div class="row">
+                    <div class="col-8" id="matter-info">
+                      <!--進捗バー-->
+                      <div class="row">
+                        <div class="col-2 text-dark">工数:</div>
+                        <div class="col-10">
+                          <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: {{ floor($matter['time'] / $matter['time_limit'] * 100) }}" aria-valuenow= "{{ floor($matter['time'] / $matter['time_limit'] * 100) }}", aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-2 text-dark">進捗:</div>
+                        <div class="col-10">
+                          <div class="progress">
+                          <div class="progress-bar bg-danger" role="progressbar" style="width: {{ floor($matter['progress'] / $matter['progress_limit'] * 100) }}" aria-valuenow="{{ floor($matter['progress'] / $matter['progress_limit'] * 100) }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-2 text-dark">参加人数:</div>
+                    <div class="col-2">  <button type="button" class="btn btn-outline-primary"><a href="chat/doteki/{{ $matter['id'] }}">参加</a></button> </div>
+                  </div>
                 </div>
               </div>
             @endif
@@ -106,7 +146,7 @@
 
 <div class='container'>
   <div class='row justify-content-md-center w-100'>
-    <div class='col-6  border border-primary'>
+    <div class='col-6 bg-gradient-primary border border-primary'>
       <h3>あなたのステータス</h3>
       <ul class="list-group">
         <li class="list-group-item">Level<span class="badge badge-light">{{ $status->where('type', 'level_basic')->first()->value1 }}</span></li>
