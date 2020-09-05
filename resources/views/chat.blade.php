@@ -37,10 +37,7 @@
             <span v-text="m.body"></span>
 
             <hr style="border:0;border-top:1px solid blue;">
-
-
         </div>
-
     </div>
 
     <script src="/js/app.js"></script>
