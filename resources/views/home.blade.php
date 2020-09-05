@@ -105,7 +105,7 @@
                         <div class="col-2 text-dark">工数:</div>
                         <div class="col-10">
                           <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: {{ floor($matter['time'] / $matter['time_limit'] * 100) }}" aria-valuenow= "{{ floor($matter['time'] / $matter['time_limit'] * 100) }}", aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar" role="progressbar" style="width: {{$matter['time']}}%" aria-valuenow= "{{ $matter['time'] }}", aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                         </div>
                       </div>
@@ -114,7 +114,7 @@
                         <div class="col-2 text-dark">進捗:</div>
                         <div class="col-10">
                           <div class="progress">
-                          <div class="progress-bar bg-danger" role="progressbar" style="width: {{ floor($matter['progress'] / $matter['progress_limit'] * 100) }}" aria-valuenow="{{ floor($matter['progress'] / $matter['progress_limit'] * 100) }}" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div class="progress-bar bg-danger" role="progressbar" style="width: {{ floor($matter['progress'] / $matter['progress_limit'] * 100) }}%" aria-valuenow="{{ floor($matter['progress'] / $matter['progress_limit'] * 100) }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
 
                       </div>
