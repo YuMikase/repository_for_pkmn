@@ -46,18 +46,12 @@ class HomeController extends Controller
                 }
             }
         }
-        if ( ! UserStatuses::where('user_id', $user['id'])->exists() ) {
-            UserStatuses::create([ 'type' => 'money', 'user_id' => $user['id'] ]);
-            UserStatuses::create([ 'type' => 'level_basic', 'user_id' => $user['id'] ]);
-            UserStatuses::create([ 'type' => 'level_php', 'user_id' => $user['id'] ]);
-            UserStatuses::create([ 'type' => 'level_python', 'user_id' => $user['id'] ]);
-            UserStatuses::create([ 'type' => 'level_ruby', 'user_id' => $user['id'] ]);
-        }
 
         //補充後改めて取得
         $matters = Matter::withCount('users')->where('end_flag',false)->get();
-        $status = UserStatuses::where('user_id', $user['id'])->get();
+
+        $langSkills = UserLangSkill::where('user_id', Auth::user()->id)->get()->toArray();
         
-        return view('home', compact('user', 'matters', 'status', 'items'));
+        return view('home', compact('user', 'matters', 'langSkills', 'items'));
     }
 }

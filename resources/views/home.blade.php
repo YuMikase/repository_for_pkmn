@@ -49,10 +49,9 @@
     <div class='col-6  border border-primary'>
       <h3>あなたのステータス</h3>
       <ul class="list-group">
-        <li class="list-group-item">Level<span class="badge badge-light">{{ $status->where('type', 'level_basic')->first()->value1 }}</span></li>
-        <li class="list-group-item">PHP<span class="badge badge-light">{{ $status->where('type', 'level_php')->first()->value1 }}</span></li>
-        <li class="list-group-item">Python<span class="badge badge-light">{{ $status->where('type', 'level_python')->first()->value1 }}</span></li>
-        <li class="list-group-item">Ruby<span class="badge badge-light">{{ $status->where('type', 'level_ruby')->first()->value1 }}</span></li>
+        @foreach ($langSkills as $langSkill)
+          <li class="list-group-item">{{$langSkill['skill']}}<span class="badge badge-light">{{$langSkill['level']}}</span></li>
+        @endforeach
       </ul>
     </div>
     <div class='col-6  border border-primary'>
