@@ -80,10 +80,10 @@ class ChatController extends Controller
         $user->skill4  = $rand_commands[3];
 		$user->save();
 
-		$status = UserStatuses::where('user_id', $user->id)->get();
-		$money = $status->where('type', 'money')->first();
-		$money->value1 = round( ( ($money->value1+100) * 1.01 ) - 100);
-		$money->save();
+		// $status = UserStatuses::where('user_id', $user->id)->get();
+		// $money = $status->where('type', 'money')->first();
+		// $money->value1 = round( ( ($money->value1+100) * 1.01 ) - 100);
+		// $money->save();
 
 
 	    $message = \App\Message::create([
@@ -111,11 +111,8 @@ class ChatController extends Controller
 				if($result > 0){
 					$user->money = $result;
 				}
-
 				$user->save();
 
-				self::addUserStatus($value['user_id'], 'ふつう', $rate_type['reward']['ex']);
-				self::addUserStatus($value['user_id'], $rate_type['name'], $rate_type['reward']['ex']);
 			}
 			event(new MatterEnded($matter));
 		}

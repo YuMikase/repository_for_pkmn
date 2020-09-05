@@ -93,7 +93,6 @@
                             </div>
                         </div>
                     </div> 
-    
                     <div class="col-5">
                         <div class="row h-25 border">
                             <div class="col-4 border h-100">
