@@ -8,6 +8,7 @@ use Auth;
 use App\Matter;
 use App\UserHasItem;
 use App\UserStatuses;
+use App\UserLangSkill;
 use App\Http\Controllers\Ajax\ChatController;
 
 class HomeController extends Controller
