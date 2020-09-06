@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Events\MessageCreated;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use App\Matter;
 use App\MatterHasUser;
@@ -93,8 +94,9 @@ class ChatController extends Controller
 			MatterHistory::create(['matter_id' => $matter->id, 'user_id' => $user->id,'lang'=>$commands[$input_command]['lang']]);
 		}
 
-		if($matter->time = $matter->time_limit){
-			//終了処理記述
+		if($matter->time == $matter->time_limit){
+			$matters_histories = MatterHistory::groupBy('user_id')->select('user_id', DB::raw('count(*) as user_count'))->where('lang','PHP')->get();
+			dd($matters_histories->toArray());
 		}
 
 		

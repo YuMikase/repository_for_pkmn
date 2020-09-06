@@ -15,7 +15,7 @@ class CreateMattersHistoryTable extends Migration
     {
         Schema::create('matters_history', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('lang')->unsigned();
+            $table->string('lang');
             $table->timestamps();
         });
     }
