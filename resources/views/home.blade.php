@@ -145,7 +145,7 @@
 <!--overflow-->
       <div class="overflow-auto" style=" height:300px;">
         <div id="shop" class="item h-100">
-          <h3>アイテム　所持金：<span class="badge badge-light" v-text="'￥'+money" v-bind:style="{ color: color}"></span></h3>
+          <h3>アイテム　所持金：<span>${{$user['money']}}</span></h3>
           <div class="list-group">
             <button class="list-group-item list-group-item-action" v-for="i in items" v-bind:disabled="onBuy">
                 <div @click='buy(i.id)' class="row">

@@ -17,8 +17,7 @@ class ChatController extends Controller
 	}
 
 	public function create(Request $request) {
-
-	    $message = \App\Messages::create([
+	    $message = Messages::create([
 	    	'matter_id' => $request->id,
 	        'body' => $request->message,
 	        'user_name' => $request->user_name,

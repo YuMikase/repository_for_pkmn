@@ -72,9 +72,9 @@
 
           <div class="row d-flex align-items-end" style="height:6vh;">
               <div class="col input-group">
-                  <input type="text" class="form-control" placeholder="Your message" aria-describedby="button-addon2" v-model="message">
+                  <input type="text" class="form-control" placeholder="Your message" v-model="message">
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="send('chat', 'chat')">送信</button>
+                    <button type="button" @click="send()">送信</button>
                   </div>
               </div>
           </div>
@@ -96,7 +96,6 @@
       <div class="col border border-dark" id="command" style="height:300px">
         <div class="col h-100" v-if="onCommands">
             <div class="row h-75">
-               
                   <div class="col">
                     @php
                         $c1 = config('command')[Auth::user()->skill1];
@@ -105,6 +104,13 @@
                         $c4 = config('command')[Auth::user()->skill4];
                     @endphp
                     <form  name="input_form"  method="post"  action="/chat/{{$id}}">
+                          @csrf
+                          <button class="btn btn-primary w-100" type="submit" name="button" value=" {{ $c1['id'] }} "> {{ $c1['name'] }}</span></button>
+                          <button class="btn btn-success w-100" type="submit" name="button" value=" {{ $c2['id'] }} "> {{ $c2['name'] }}</span></button>
+                          <button class="btn btn-danger w-100" type="submit" name="button"  value=" {{ $c3['id'] }} "> {{ $c3['name'] }} </span></button>
+                          <button class="btn btn-warning w-100" type="submit" name="button" value=" {{ $c4['id'] }} "> {{ $c4['name'] }}</span></button>
+                    </form>
+                    <form  name="input_form"  method="post"  action="ajax/chat/{{$id}}">
                           @csrf
                           <button class="btn btn-primary w-100" type="submit" name="button" value=" {{ $c1['id'] }} "> {{ $c1['name'] }}</span></button>
                           <button class="btn btn-success w-100" type="submit" name="button" value=" {{ $c2['id'] }} "> {{ $c2['name'] }}</span></button>
@@ -126,7 +132,6 @@
 <!--画面コンテナの枠組みおわりん-->
     <script src="/js/app.js"></script>
     <script>
-
         new Vue({
             el: '#chat',
             data: {
@@ -143,6 +148,16 @@
                             this.messages = response.data
                         });
                 },
+                send() {
+                    const url = "/ajax/chat/"+this.id;
+                    const params = { message: this.message };
+                    axios.post(url, params)
+                        .then((response) => {
+                            // 成功したらメッセージをクリア
+                            this.message = '';
+                        });
+
+                }
             },
             mounted() {
 

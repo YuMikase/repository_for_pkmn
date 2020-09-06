@@ -52,7 +52,6 @@ class HomeController extends Controller
             UserHasItem::create([ 'item_id' => 101, 'user_id' => $user['id'] ]);
         }
 
-        $user = Auth::user()->with('has_item')->first();
         $items = config('item');
         $langSkills = UserLangSkill::where('user_id', Auth::user()->id)->get()->toArray();
         return view('home', compact('matters', 'langSkills', 'user', 'items'));
