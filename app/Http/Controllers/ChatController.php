@@ -11,6 +11,8 @@ use App\Matter;
 use App\MatterHasUser;
 use App\MatterHistory;
 use App\Messages;
+use App\User;
+use App\UserLangSkill;
 
 class ChatController extends Controller
 {
@@ -20,6 +22,11 @@ class ChatController extends Controller
 		$user_name = $user->name;
 	    return view('chat',compact('image','user_name','id'));
 
+	}
+
+	public function result($id) {
+		$messages = Messages::where('matter_id',$id)->orderBy('id', 'desc')->get()->toArray();
+	    return view('result',compact('id','messages'));
 	}
 
 	public function index_doteki($id) {
@@ -71,35 +78,6 @@ class ChatController extends Controller
 		$user_name = $user->name;
 
 		$input_command = $re->input('button');
-		
-		//案件取得
-		$matter = Matter::find($id);
-
-		if($matter->time < $matter->time_limit){
-			if(strcmp($matter->matter_lang, $commands[$input_command]['lang'])){
-				//案件TBL加算処理
-				$matter->barning += $commands[$input_command]['barning'];
-				$matter->progress += $matter->progress + $commands[$input_command]['progress'];
-				$matter->time += $commands[$input_command]['time'];
-				$matter->save();
-			}else{
-				//案件TBL引き算処理
-				$matter->barning -= $commands[$input_command]['barning'];
-				$matter->progress -= $matter->progress + $commands[$input_command]['progress'];
-				$matter->time += $commands[$input_command]['time'];
-				$matter->save();
-			}
-
-			//履歴作成
-			MatterHistory::create(['matter_id' => $matter->id, 'user_id' => $user->id,'lang'=>$commands[$input_command]['lang']]);
-		}
-
-		if($matter->time == $matter->time_limit){
-			$matters_histories = MatterHistory::groupBy('user_id')->select('user_id', DB::raw('count(*) as user_count'))->where('lang','PHP')->get();
-			dd($matters_histories->toArray());
-		}
-
-		
 
 		//コマンドをランダムに入れなおし
         $user->skill1  = array_rand($commands);
@@ -118,6 +96,94 @@ class ChatController extends Controller
 	    ]);
 
 	    event(new MessageCreated($message));
-	    return view('chat',compact('image','user_name','id'));
+		
+		//案件取得
+		$matter = Matter::find($id);
+
+		if($matter->time < $matter->time_limit){
+			//言語属性が一致していた場合
+			if(strcmp($matter->matter_lang, $commands[$input_command]['lang'])){
+				//案件TBL加算処理
+				$matter->barning -= $commands[$input_command]['barning'] * 2;
+				$matter->progress += $matter->progress + $commands[$input_command]['progress'] * 2;
+			//ノーマル属性の場合
+			}elseif(strcmp('Normal', $commands[$input_command]['lang'])){
+				$matter->barning -= $commands[$input_command]['barning'];
+				$matter->progress += $matter->progress + $commands[$input_command]['progress'];
+			//属性が一致しない場合
+			}else{
+				//案件TBL引き算処理
+				$matter->barning += $commands[$input_command]['barning'];
+				$matter->progress -= $matter->progress + $commands[$input_command]['progress'];
+			}
+			$matter->time += $commands[$input_command]['time'];
+			$matter->save();
+
+			//履歴作成
+			MatterHistory::create(['matter_id' => $matter->id, 'user_id' => $user->id,'lang'=>$commands[$input_command]['lang']]);
+		}
+
+		//戦闘が終了する場合
+		if($matter->time == $matter->time_limit){
+
+			$matter->time++;
+
+			//戦闘終了
+		    $message = Messages::create([
+		    	'matter_id' => $id,
+		        'body' => "戦闘が終了しました。",
+		        'user_name' => "システムメッセージ",
+		        'type' => "button"
+		    ]);
+
+			$matters_histories = MatterHistory::groupBy('user_id')->select('user_id', DB::raw('count(*) as user_count'))->where('lang',$matter->matter_lang)->get();
+
+			foreach ($matters_histories as $matters_history ) {
+				//スキルアップ
+				$skill_up = floor($matters_history['user_count'] / 3);
+
+				//報酬計算
+				$reward = floor($matters_history['user_count'] * 1000);
+
+
+				//スキルレベル合算処理
+				$skill_level =  UserLangSkill::where('user_id',$matters_history->user->id)->where('skill','PHP')->first();
+				$skill_level->level += $skill_up;
+
+				$skill_level->save();
+				$matter->save();
+
+				//報酬合算処理
+				$matters_history->user->money += $reward;
+
+				$matters_history->user->save();
+
+				//スキルに関してメッセージ作成
+			    $message = Messages::create([
+			    	'matter_id' => $id,
+			        'body' => $matters_history->user->name.'の'.$skill_level->skill.'が'.$skill_up.'上がった！',
+			        'user_name' => "システムメッセージ" ,
+			        'type' => "info"
+			    ]);
+
+			    //報酬に関してメッセージ作成
+			    $message = Messages::create([
+			    	'matter_id' => $id,
+			        'body' => $matters_history->user->name.'は'.$matters_history->user->money.'を手に入れた！',
+			        'user_name' => "システムメッセージ" ,
+			        'type' => "info"
+			    ]);
+
+			}
+			//$langSkills = UserLangSkill::where('user_id', Auth::user()->id)->get()->toArray();
+		}
+
+		if($matter->time > $matter->time_limit){
+			return redirect('/result/'.$id)->with('flash_message', '案件は終了しました。');
+		}
+
+		event(new MessageCreated($message));
+
+	    return view('chat',compact('image','user_name','id','user'));
 	}
 }
