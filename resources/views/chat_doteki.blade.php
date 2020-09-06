@@ -90,8 +90,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
-    
+                    </div>
+
                     <div class="col-5">
                         <div class="row h-25 border">
                             <div class="col-4 border h-100">
@@ -124,7 +124,7 @@
                                         </div>
                                         <div class="row h-50">
                                             <button class="col m-1 btn  btn-danger" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[2] )" ><span v-text="commands[2]['lang']+' : '+commands[2]['name']"></span></button>
-                                            <button class="col m-1 btn  btn-warning" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[3] )" ><span v-text="commands[3]['lang']+' : '+commands[3]['name']"></span></button>    
+                                            <button class="col m-1 btn  btn-warning" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[3] )" ><span v-text="commands[3]['lang']+' : '+commands[3]['name']"></span></button>
                                         </div>
                                     </div>
                                 </div>
@@ -155,7 +155,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 
     <script src="/js/app.js"></script>
@@ -252,7 +252,7 @@
                                 this.message = '';
                             });
                             break;
-                    
+
                         case "command":
                             this.isProcessing = true;
                             var params = { message: value.lang+" : "+value.name+'のコマンドを発動',user_name:this.user_name,command: value.id };
@@ -265,7 +265,7 @@
                             });
                             break;
                     }
-                    
+
                 }
             },
             mounted() {
@@ -277,7 +277,7 @@
 
                 Echo.channel('chat')
                     .listen('MessageCreated', (e) => {
-                        
+
                         this.getMessages(); // 全メッセージを再読込
                         this.getBars();
 
@@ -286,7 +286,7 @@
                     .listen('MatterEnded', (e) => {
                         this.matterEnded = true;
                     });
-                
+
                 this.onLoading = false;
             }
         });
