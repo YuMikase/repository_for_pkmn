@@ -5,7 +5,7 @@
 <!---->
 
 <!--がめんのコンテナのわくぐみです-->
-<div　class="container">
+<div class="container">
   <div class="row">
     <div class="col-8 pr-0">
       <div class="col-12 border border-dark" id="battle" style="height:350px">
@@ -56,7 +56,6 @@
       </div>
 
       <div class="col-12 border border-dark" id="chat" style="height:400px">
-
         <!--チャットテキスト-->
         <div class="col-12 overflow-auto" style="height:320px" >
             <div  v-for="m in messages">
@@ -73,9 +72,9 @@
           <div class="row d-flex align-items-end" style="height:6vh;">
               <div class="col input-group">
                   <input type="text" class="form-control" placeholder="Your message" v-model="message">
-                  <div class="input-group-append">
+<!--                   <div class="input-group-append"> -->
                     <button type="button" @click="send()">送信</button>
-                  </div>
+<!--                   </div> -->
               </div>
           </div>
       </div>
@@ -110,17 +109,7 @@
                           <button class="btn btn-danger w-100" type="submit" name="button"  value=" {{ $c3['id'] }} "> {{ $c3['name'] }} </span></button>
                           <button class="btn btn-warning w-100" type="submit" name="button" value=" {{ $c4['id'] }} "> {{ $c4['name'] }}</span></button>
                     </form>
-                    <form  name="input_form"  method="post"  action="ajax/chat/{{$id}}">
-                          @csrf
-                          <button class="btn btn-primary w-100" type="submit" name="button" value=" {{ $c1['id'] }} "> {{ $c1['name'] }}</span></button>
-                          <button class="btn btn-success w-100" type="submit" name="button" value=" {{ $c2['id'] }} "> {{ $c2['name'] }}</span></button>
-                          <button class="btn btn-danger w-100" type="submit" name="button"  value=" {{ $c3['id'] }} "> {{ $c3['name'] }} </span></button>
-                          <button class="btn btn-warning w-100" type="submit" name="button" value=" {{ $c4['id'] }} "> {{ $c4['name'] }}</span></button>
-                    </form>
                   </div>
-            </div>
-            <div class="row h-25">
-              <button class="col m-1 btn  btn-secondary" type="button" name="button" onclick="location.href='/'">RETURN</button>
             </div>
         </div>
       </div>
@@ -150,7 +139,7 @@
                 },
                 send() {
                     const url = "/ajax/chat/"+this.id;
-                    const params = { message: this.message };
+                    const params = { message: this.message ,user_name: this.user_name };
                     axios.post(url, params)
                         .then((response) => {
                             // 成功したらメッセージをクリア

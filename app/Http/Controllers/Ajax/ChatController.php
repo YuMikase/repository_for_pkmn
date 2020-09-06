@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Messages;
 use Illuminate\Support\Facades\Auth;
+use Log;
 
 class ChatController extends Controller
 {
@@ -17,6 +18,7 @@ class ChatController extends Controller
 	}
 
 	public function create(Request $request) {
+		Log::debug($request);
 	    $message = Messages::create([
 	    	'matter_id' => $request->id,
 	        'body' => $request->message,
