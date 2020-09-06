@@ -70,9 +70,17 @@ body {
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
-  color: #212529;
   text-align: left;
+  /*デフォルトです
+  color: #212529;
   background-color: #f8fafc;
+  */
+
+/*変えてみました0906*/
+  color: #212529;
+  background-color: #fffacd;
+
+
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -10932,4 +10940,3 @@ a.text-dark:focus {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
-

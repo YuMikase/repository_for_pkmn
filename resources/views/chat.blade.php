@@ -95,16 +95,16 @@
         </div>
       </div>
       <div class="col border border-dark" id="command" style="height:300px">
-        <div class="col h-100" v-if="onCommands">
+        <div class="col h-100">
             <div class="row h-75">
                 <div class="col">
                     <div class="row h-50">
-                        <button class="col m-1 btn  btn-primary" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[0] )" >ここにもらってきたコマンド名が入ります</span></button>
-                        <button class="col m-1 btn  btn-success" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[1] )" >ここにもらってきたコマンド名が入ります</span></button>
+                        <button class="col m-1 btn  btn-primary" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[0] )" ><a href="chat/{{ $matter['id'] }}">ここにもらってきたコマンド名が入ります</a></span></button>
+                        <button class="col m-1 btn  btn-success" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[1] )" ><a href="chat/{{ $matter['id'] }}">ここにもらってきたコマンド名が入ります</a></span></button>
                     </div>
                     <div class="row h-50">
-                        <button class="col m-1 btn  btn-danger" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[2] )" >ここにもらってきたコマンド名が入ります</span></button>
-                        <button class="col m-1 btn  btn-warning" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[3] )" >ここにもらってきたコマンド名が入ります</span></button>
+                        <button class="col m-1 btn  btn-danger" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[2] )" ><a href="chat/{{ $matter['id'] }}">ここにもらってきたコマンド名が入ります</a></span></button>
+                        <button class="col m-1 btn  btn-warning" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[3] )" ><a href="chat/{{ $matter['id'] }}">ここにもらってきたコマンド名が入ります</a></span></button>
                     </div>
                 </div>
             </div>

@@ -11,20 +11,6 @@
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navbar" aria-controls="Navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="Navbar">
-        <ul class="nav nav-pills flex-column flex-lg-row ml-auto">
-          <li class="nav-item"><a class="nav-link active" href="#matter1">案件１</a></li>
-          <li class="nav-item"><a class="nav-link" href="#matter2">案健２</a></li>
-          <li class="nav-item dropdown">
-    <!--      <li class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ドロップダウン</a>
-            <div class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" href="#menu1">メニュー1</a>
-              ...
-            </div></li>-->
-          <li class="nav-item"><a class="nav-link" href="#matter3">案件3</a></li>
-          <li class="nav-item"><a class="nav-link" href="#matter3">案件4</a></li>
-        </ul>
-      </div>
     </nav>
     <div class="container overflow-auto"data-spy="scroll" data-target="#Navbar">
       @foreach ($matters as $matter)
