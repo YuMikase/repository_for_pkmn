@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\UserLangSkill;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -63,17 +64,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-		$rand_commands = array_rand(config('command'), 4);
-		shuffle($rand_commands);
-
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'skill1' => $rand_commands[0],
-            'skill2' => $rand_commands[1],
-            'skill3' => $rand_commands[2],
-            'skill4' => $rand_commands[3],
+            'skill1' => array_rand(config('command')),
+            'skill2' => array_rand(config('command')),
+            'skill3' => array_rand(config('command')),
+            'skill4' => array_rand(config('command')),
         ]);
+
+        $skills = config('lang');
+
+        foreach ($skills as &$skill) {
+            UserLangSkill::create([
+                'skill' => $skill,
+                'user_id' => $user->id,
+                'level' => '0',
+            ]);
+
+        }
+
+        return $user;
     }
 }

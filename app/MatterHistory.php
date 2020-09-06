@@ -12,9 +12,9 @@ class MatterHistory extends Model
     /**
      * 戦闘履歴に所属するユーザーを取得
      */
-    public function users()
+    public function user()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsTo('App\User');
     }
 
 }

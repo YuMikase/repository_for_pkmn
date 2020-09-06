@@ -12,18 +12,6 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="Navbar">
-        <ul class="nav nav-pills flex-column flex-lg-row ml-auto">
-          <li class="nav-item"><a class="nav-link active" href="#matter1">案件１</a></li>
-          <li class="nav-item"><a class="nav-link" href="#matter2">案健２</a></li>
-          <li class="nav-item dropdown">
-    <!--      <li class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ドロップダウン</a>
-            <div class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" href="#menu1">メニュー1</a>
-              ...
-            </div></li>-->
-          <li class="nav-item"><a class="nav-link" href="#matter3">案件3</a></li>
-          <li class="nav-item"><a class="nav-link" href="#matter3">案件4</a></li>
-        </ul>
       </div>
     </nav>
     <div class="container overflow-auto"data-spy="scroll" data-target="#Navbar">
@@ -31,10 +19,9 @@
       <div id="matter{{ $matter['id'] }}" class="border">
           <h3>{{$matter['matter_lang'] }}の案件</h3>
           <p>
-            案件{{ $matter['id'] }}：
             工数【 {{ $matter['time'] }} / {{ $matter['time_limit'] }} ( {{ floor($matter['time'] / $matter['time_limit'] * 100) }} % ) 】
             進捗【{{ $matter['progress'] }} / {{ $matter['progress_limit'] }} ( {{ floor($matter['progress'] / $matter['progress_limit'] * 100) }} % ) 】
-            <button type="button" class="btn btn-primary"><a href="chat/doteki/{{ $matter['id'] }}">参加</a></button>
+            <button type="button" class="btn btn-primary"><a href="chat/{{ $matter['id'] }}">参加</a></button>
           </p>
         </div>
       @endforeach
@@ -148,10 +135,10 @@
     <div class='col-6 bg-gradient-primary border border-primary'>
       <h3>あなたのステータス</h3>
       <ul class="list-group">
-        <li class="list-group-item">Level<span class="badge badge-light">{{ $status->where('type', 'level_basic')->first()->value1 }}</span></li>
-        <li class="list-group-item">PHP<span class="badge badge-light">{{ $status->where('type', 'level_php')->first()->value1 }}</span></li>
-        <li class="list-group-item">Python<span class="badge badge-light">{{ $status->where('type', 'level_python')->first()->value1 }}</span></li>
-        <li class="list-group-item">Ruby<span class="badge badge-light">{{ $status->where('type', 'level_ruby')->first()->value1 }}</span></li>
+        @foreach ($langSkills as $langSkill)
+         <li class="list-group-item">{{$langSkill['skill']}}<span class="badge badge-light">{{ $langSkill['level'] }}</span></li>
+        @endforeach
+
       </ul>
     </div>
     <div class='col-6  border border-primary'>

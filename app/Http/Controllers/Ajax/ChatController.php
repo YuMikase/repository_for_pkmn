@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class ChatController extends Controller
 {
 	public function index($id) {// 新着順にメッセージ一覧を取得
-	    return \App\Messages::where('matter_id',$id)->orderBy('id', 'desc')->get();
+	    return Messages::where('matter_id',$id)->orderBy('id', 'desc')->get();
 
 	}
 
