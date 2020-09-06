@@ -54,24 +54,23 @@ class ChatController extends Controller
 	}
 
 	public function progress(Request $re,$id) {
-        $image = "one";
 
         $commands = config('command');
 
-		switch ($re->input('button')){
-			case '1':
-				$image = "one";
-				break;
-			case '2':
-				$image = "two";
-				break;
-			case '3':
-				$image = "three";
-				break;
-			case '4':
-				$image = "four";
-				break;
-		}
+		// switch ($re->input('button')){
+		// 	case '1':
+		// 		$image = "one";
+		// 		break;
+		// 	case '2':
+		// 		$image = "two";
+		// 		break;
+		// 	case '3':
+		// 		$image = "three";
+		// 		break;
+		// 	case '4':
+		// 		$image = "four";
+		// 		break;
+		// }
 
 		$user = Auth::user();
 
@@ -95,8 +94,6 @@ class ChatController extends Controller
 	        'type' => "button"
 	    ]);
 
-	    event(new MessageCreated($message));
-		
 		//案件取得
 		$matter = Matter::find($id);
 
@@ -104,16 +101,14 @@ class ChatController extends Controller
 			//言語属性が一致していた場合
 			if(strcmp($matter->matter_lang, $commands[$input_command]['lang'])){
 				//案件TBL加算処理
-				$matter->barning -= $commands[$input_command]['barning'] * 2;
 				$matter->progress += $matter->progress + $commands[$input_command]['progress'] * 2;
 			//ノーマル属性の場合
 			}elseif(strcmp('Normal', $commands[$input_command]['lang'])){
-				$matter->barning -= $commands[$input_command]['barning'];
+				$matter->barning += $commands[$input_command]['barning'];
 				$matter->progress += $matter->progress + $commands[$input_command]['progress'];
 			//属性が一致しない場合
 			}else{
-				//案件TBL引き算処理
-				$matter->barning += $commands[$input_command]['barning'];
+				$matter->barning += $commands[$input_command]['barning'] * 3;
 				$matter->progress -= $matter->progress + $commands[$input_command]['progress'];
 			}
 			$matter->time += $commands[$input_command]['time'];
@@ -121,6 +116,14 @@ class ChatController extends Controller
 
 			//履歴作成
 			MatterHistory::create(['matter_id' => $matter->id, 'user_id' => $user->id,'lang'=>$commands[$input_command]['lang']]);
+		}
+
+		if($matter->barning == 0){
+			$image = "normal";
+		}elseif(($matter->barning_limit / $matter->barning) > 1){
+			$image = "one";
+		}else{
+			$image = "two";
 		}
 
 		//戦闘が終了する場合

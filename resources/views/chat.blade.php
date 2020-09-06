@@ -111,6 +111,9 @@
                     </form>
                   </div>
             </div>
+            <div class="d-flex align-items-end">
+                <button class="btn btn-secondary w-100" onclick="location.href='/home'">逃げる</span></button>
+            </div>
         </div>
       </div>
     </div>

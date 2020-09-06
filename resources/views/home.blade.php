@@ -21,7 +21,7 @@
           <p>
             工数【 {{ $matter['time'] }} / {{ $matter['time_limit'] }} ( {{ floor($matter['time'] / $matter['time_limit'] * 100) }} % ) 】
             進捗【{{ $matter['progress'] }} / {{ $matter['progress_limit'] }} ( {{ floor($matter['progress'] / $matter['progress_limit'] * 100) }} % ) 】
-            <button type="button" class="btn btn-primary"><a href="chat/{{ $matter['id'] }}">参加</a></button>
+            <button type="button" class="btn btn-success" onclick="location.href='chat/{{ $matter['id'] }}'">参加</button>
           </p>
         </div>
       @endforeach
