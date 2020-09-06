@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Matter;
 use App\MatterHasUser;
+use App\MatterHistory;
 use App\Messages;
 
 class ChatController extends Controller
@@ -45,7 +46,7 @@ class ChatController extends Controller
 	}
 
 	public function progress(Request $re,$id) {
-        $image = "normal";
+        $image = "one";
 
         $commands = config('command');
 
@@ -70,22 +71,43 @@ class ChatController extends Controller
 
 		$input_command = $re->input('button');
 		
-		//案件TBL加算処理
+		//案件取得
 		$matter = Matter::find($id);
 
-		$matter->barning = $matter->barning + $commands[$input_command]['barning'];
-		$matter->progress = $matter->progress + $commands[$input_command]['progress'];
-		$matter->time = $matter->time + $commands[$input_command]['time'];
-		$matter->save();
+		if($matter->time < $matter->time_limit){
+			if(strcmp($matter->matter_lang, $commands[$input_command]['lang'])){
+				//案件TBL加算処理
+				$matter->barning += $commands[$input_command]['barning'];
+				$matter->progress += $matter->progress + $commands[$input_command]['progress'];
+				$matter->time += $commands[$input_command]['time'];
+				$matter->save();
+			}else{
+				//案件TBL引き算処理
+				$matter->barning -= $commands[$input_command]['barning'];
+				$matter->progress -= $matter->progress + $commands[$input_command]['progress'];
+				$matter->time += $commands[$input_command]['time'];
+				$matter->save();
+			}
 
-		//コマンドをランダムに入れなおし（選定１回）
-		$rand_commands = array_rand($commands, 4);
-        $user->skill1  = $rand_commands[0];
-        $user->skill2  = $rand_commands[1];
-        $user->skill3  = $rand_commands[2];
-        $user->skill4  = $rand_commands[3];
+			//履歴作成
+			MatterHistory::create(['matter_id' => $matter->id, 'user_id' => $user->id,'lang'=>$commands[$input_command]['lang']]);
+		}
+
+		if($matter->time = $matter->time_limit){
+			//終了処理記述
+		}
+
+		
+
+		//コマンドをランダムに入れなおし
+        $user->skill1  = array_rand($commands);
+        $user->skill2  = array_rand($commands);
+        $user->skill3  = array_rand($commands);
+        $user->skill4  = array_rand($commands);
 
 		$user->save();
+
+		//メッセージ作成
 	    $message = Messages::create([
 	    	'matter_id' => $id,
 	        'body' => $commands[$input_command]['name']."を押しました。",

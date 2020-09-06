@@ -253,7 +253,7 @@ return [
     901 => [
         'id' => 901,
         'lang' => 'Normal',
-        'name' => 'if',
+        'name' => 'karnel',
         'barning' => 10,
         'progress' => 10,
         'time' => 1,
@@ -261,7 +261,7 @@ return [
     902 => [
         'id' => 902,
         'lang' => 'Normal',
-        'name' => 'switch',
+        'name' => 'virtual',
         'barning' => 20,
         'progress' => 20,
         'time' => 1,
@@ -269,7 +269,7 @@ return [
     903 => [
         'id' => 903,
         'lang' => 'Normal',
-        'name' => 'while',
+        'name' => 'container',
         'barning' => 30,
         'progress' => 30,
         'time' => 1,
@@ -277,7 +277,7 @@ return [
     904 => [
         'id' => 904,
         'lang' => 'Normal',
-        'name' => 'for',
+        'name' => 'segment',
         'barning' => 40,
         'progress' => 40,
         'time' => 1,
@@ -285,12 +285,51 @@ return [
     905 => [
         'id' => 905,
         'lang' => 'Normal',
-        'name' => 'foreach',
+        'name' => 'schema',
         'barning' => 50,
         'progress' => 50,
         'time' => 1,
     ],
-
+    906 => [
+        'id' => 906,
+        'lang' => 'Normal',
+        'name' => 'proxy',
+        'barning' => 50,
+        'progress' => 50,
+        'time' => 1,
+    ],
+    907 => [
+        'id' => 907,
+        'lang' => 'Normal',
+        'name' => 'proxy',
+        'barning' => 50,
+        'progress' => 50,
+        'time' => 1,
+    ],
+    908 => [
+        'id' => 908,
+        'lang' => 'Normal',
+        'name' => 'Usability',
+        'barning' => 50,
+        'progress' => 50,
+        'time' => 1,
+    ],
+    909 => [
+        'id' => 909,
+        'lang' => 'Normal',
+        'name' => 'Hosting',
+        'barning' => 50,
+        'progress' => 50,
+        'time' => 1,
+    ],
+    910 => [
+        'id' => 910,
+        'lang' => 'Normal',
+        'name' => 'Pixel',
+        'barning' => 50,
+        'progress' => 50,
+        'time' => 1,
+    ],
     // // PHP
     // 'php' => [
     //     '1-php' => '1-php',
