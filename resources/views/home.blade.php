@@ -29,7 +29,7 @@
     <div class="container overflow-auto"data-spy="scroll" data-target="#Navbar">
       @foreach ($matters as $matter)
       <div id="matter{{ $matter['id'] }}" class="border">
-          <h3>案件{{ $matter['id'] }} ( {{ config('rate_type')[$matter['rate_type']]['name'] }}の案件 ) </h3>
+          <h3>{{$matter['matter_lang'] }}の案件</h3>
           <p>
             案件{{ $matter['id'] }}：
             工数【 {{ $matter['time'] }} / {{ $matter['time_limit'] }} ( {{ floor($matter['time'] / $matter['time_limit'] * 100) }} % ) 】
@@ -62,7 +62,7 @@
                   </div>
 
                     <div class="carousel-caption bg-light border border-primary rounded d-none d-md-block">
-                      <div ><font color="orange" size="5" face="Comic Sans MS">{{ config('rate_type')[$matter['rate_type']]['name'] }}の案件</font></div>
+
                       <div class="row">
                         <div class="col-8" id="matter-info">
                           <!--進捗バー-->
@@ -97,7 +97,6 @@
                   <img src="{{ asset('img/photo0000-5281.jpg')}}" alt="NO_IMAGE">
                 </div>
                 <div class="carousel-caption bg-light border border-primary rounded d-none d-md-block">
-                  <div ><font color="orange" size="5" face="Comic Sans MS">{{ config('rate_type')[$matter['rate_type']]['name'] }}の案件</font></div>
                   <div class="row">
                     <div class="col-8" id="matter-info">
                       <!--進捗バー-->

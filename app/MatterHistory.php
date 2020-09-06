@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Messages extends Model
+class MatterHistory extends Model
 {
     protected $guarded = ['id'];
-    protected $table = 'messages';
+    protected $table = 'matters_history';
 }
