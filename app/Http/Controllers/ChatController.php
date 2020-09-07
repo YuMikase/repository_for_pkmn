@@ -110,16 +110,16 @@ class ChatController extends Controller
 			//ノーマル属性の案件の場合
 			if(strcmp('Normal', $commands[$input_command]['lang']) == 0 or strcmp('Normal', $matter->matter_lang)){
 				$matter->barning += $commands[$input_command]['barning'];
-				$matter->progress += $matter->progress + $commands[$input_command]['progress'];
+				$matter->progress += $commands[$input_command]['progress'];
 			}
 			//言語属性が一致していた場合
 			elseif(strcmp($matter->matter_lang, $commands[$input_command]['lang']) == 0){
 				//案件TBL加算処理
-				$matter->progress += $matter->progress + $commands[$input_command]['progress'] * 2;
+				$matter->progress +=  $commands[$input_command]['progress'] * 2;
 			//属性が一致しない場合
 			}else{
 				$matter->barning += $commands[$input_command]['barning'] * 3;
-				$matter->progress -= $matter->progress + $commands[$input_command]['progress'];
+				$matter->progress -= $commands[$input_command]['progress'];
 			}
 			$matter->time += $commands[$input_command]['time'];
 			$matter->save();
@@ -163,8 +163,8 @@ class ChatController extends Controller
 		    ]);
 
 		    
-		    //履歴から言語情報が一致しているものだけを取得
-			$matters_histories = MatterHistory::groupBy('user_id')->select('user_id', DB::raw('count(*) as user_count'))->where('lang',$matter->matter_lang)->get();
+		    //履歴から言語情報と案件情報が一致しているものだけを取得
+			$matters_histories = MatterHistory::groupBy('user_id')->select('user_id', DB::raw('count(*) as user_count'))->where('matter_id',$id)->where('lang',$matter->matter_lang)->get();
 
 			foreach ($matters_histories as $matters_history ) {
 				//スキルアップ
