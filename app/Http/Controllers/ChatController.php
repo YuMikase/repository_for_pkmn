@@ -195,7 +195,7 @@ class ChatController extends Controller
 			    //報酬に関してメッセージ作成
 			    $message = Messages::create([
 			    	'matter_id' => $id,
-			        'body' => $matters_history->user->name.'は'.$matters_history->user->money.'を手に入れた！',
+			        'body' => $matters_history->user->name.'は'.$reward.'を手に入れた！',
 			        'user_name' => "システムメッセージ" ,
 			        'type' => "info"
 			    ]);
