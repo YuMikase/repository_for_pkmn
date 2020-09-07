@@ -35,14 +35,15 @@ class HomeController extends Controller
         $lang = config('lang');
 
         for ($i = count($matters); $i <= 5; $i++) {
+            $hour = rand(10, 20);
             Matter::create([ 
                 'skill_count' => 0,
                 'barning' => 0,
                 'progress' => 0,
                 'time' => 0,
-                'barning_limit' => rand(100, 1000),
-                'progress_limit' => rand(100, 1000),
-                'time_limit' => rand(10, 20),
+                'barning_limit' => $hour * 5,
+                'progress_limit' => $hour * 5,
+                'time_limit' => $hour,
                 'rate_type' => 0,
                 'attack_type' => 0,
                 'matter_lang' => $lang[array_rand($lang)],

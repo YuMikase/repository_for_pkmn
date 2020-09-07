@@ -16,15 +16,28 @@ use App\UserLangSkill;
 
 class ChatController extends Controller
 {
-	public function index($id) {
+	public function index(Request $request,$id) {
 		$user = Auth::user();
 		$image = "normal";
 		$user_name = $user->name;
+
+		//案件終了時一覧画面に遷移
+		$matter = Matter::find($id);
+		if($matter->time > $matter->time_limit){
+			//flash_message保存
+			$request->session()->flash('flash_message', '案件は終了しました。');
+			$request->session()->reflash();
+			return redirect('/result/'.$id);
+		}
 	    return view('chat',compact('image','user_name','id'));
 
 	}
 
-	public function result($id) {
+	public function result(Request $request,$id) {
+		if ($request->session()->has('flash_message')) {
+		    $request->session()->flash('flash_message', '案件は終了しました。');
+			$request->session()->reflash();
+		}
 		$messages = Messages::where('matter_id',$id)->orderBy('id', 'desc')->get()->toArray();
 	    return view('result',compact('id','messages'));
 	}
@@ -53,30 +66,25 @@ class ChatController extends Controller
 
 	}
 
-	public function progress(Request $re,$id) {
+	public function progress(Request $request,$id) {
 
         $commands = config('command');
 
-		// switch ($re->input('button')){
-		// 	case '1':
-		// 		$image = "one";
-		// 		break;
-		// 	case '2':
-		// 		$image = "two";
-		// 		break;
-		// 	case '3':
-		// 		$image = "three";
-		// 		break;
-		// 	case '4':
-		// 		$image = "four";
-		// 		break;
-		// }
+        //案件取得
+		$matter = Matter::find($id);
+
+        //案件終了時
+        if($matter->time > $matter->time_limit){
+			$request->session()->flash('flash_message', '案件は終了しました。');
+			$request->session()->reflash();
+			return redirect('/result/'.$id);
+		}
 
 		$user = Auth::user();
 
 		$user_name = $user->name;
 
-		$input_command = $re->input('button');
+		$input_command = $request->input('button');
 
 		//コマンドをランダムに入れなおし
         $user->skill1  = array_rand($commands);
@@ -93,9 +101,6 @@ class ChatController extends Controller
 	        'user_name' => $user_name ,
 	        'type' => "button"
 	    ]);
-
-		//案件取得
-		$matter = Matter::find($id);
 
 		if($matter->time < $matter->time_limit){
 			//言語属性が一致していた場合
@@ -139,6 +144,20 @@ class ChatController extends Controller
 		        'type' => "button"
 		    ]);
 
+		    $message = Messages::create([
+		    	'matter_id' => $id,
+		        'body' => "炎上は".$matter->barning."でした。",
+		        'user_name' => "システムメッセージ",
+		        'type' => "button"
+		    ]);
+
+		    $message = Messages::create([
+		    	'matter_id' => $id,
+		        'body' => "進捗は".$matter->progress."でした。",
+		        'user_name' => "システムメッセージ",
+		        'type' => "button"
+		    ]);
+
 			$matters_histories = MatterHistory::groupBy('user_id')->select('user_id', DB::raw('count(*) as user_count'))->where('lang',$matter->matter_lang)->get();
 
 			foreach ($matters_histories as $matters_history ) {
@@ -178,7 +197,9 @@ class ChatController extends Controller
 			    ]);
 
 			}
-			//$langSkills = UserLangSkill::where('user_id', Auth::user()->id)->get()->toArray();
+			$request->session()->flash('flash_message', '案件は終了しました。');
+			$request->session()->reflash();
+			return redirect('/result/'.$id);
 		}
 
 		if($matter->time > $matter->time_limit){
