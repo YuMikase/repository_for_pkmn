@@ -15,8 +15,10 @@
     <hr style="border:0;border-top:1px solid blue;">
   @endforeach
 </div>
-<footer>
-	<button class="col m-1 btn  btn-info" type="button" name="button" onclick="location.href='/'">案件を終了する。</button>
+<footer class="footer">
+  <div class="container">
+    <button class="col m-1 btn  btn-info" type="button" name="button" onclick="location.href='/'">案件を終了する。</button>
+  </div>
 </footer>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
