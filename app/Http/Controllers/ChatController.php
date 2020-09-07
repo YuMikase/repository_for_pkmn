@@ -106,8 +106,11 @@ class ChatController extends Controller
 	    ]);
 
 		if($matter->time < $matter->time_limit){
+			//ノーマル属性の案件の場合
+			if(strcmp('Normal', $commands[$input_command]['lang']) == 0){
+			}
 			//言語属性が一致していた場合
-			if(strcmp($matter->matter_lang, $commands[$input_command]['lang']) == 0){
+			elseif(strcmp($matter->matter_lang, $commands[$input_command]['lang']) == 0){
 				//案件TBL加算処理
 				$matter->progress += $matter->progress + $commands[$input_command]['progress'] * 2;
 			//ノーマル属性の場合
@@ -172,7 +175,7 @@ class ChatController extends Controller
 
 
 				//スキルレベル合算処理
-				$skill_level =  UserLangSkill::where('user_id',$matters_history->user->id)->where('skill','PHP')->first();
+				$skill_level =  UserLangSkill::where('user_id',$matters_history->user->id)->where('skill',$matter->matter_lang)->first();
 				$skill_level->level += $skill_up;
 
 				$skill_level->save();
