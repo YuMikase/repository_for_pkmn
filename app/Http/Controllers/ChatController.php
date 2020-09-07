@@ -73,6 +73,8 @@ class ChatController extends Controller
 
         //案件取得
 		$matter = Matter::find($id);
+		//言語情報取得
+		$lang = $matter->matter_lang;
 
         //案件終了時
         if($matter->time > $matter->time_limit){
@@ -209,6 +211,6 @@ class ChatController extends Controller
 
 		event(new MessageCreated($message));
 
-	    return view('chat',compact('image','user_name','id','user'));
+	    return view('chat',compact('image','user_name','id','user','lang'));
 	}
 }
