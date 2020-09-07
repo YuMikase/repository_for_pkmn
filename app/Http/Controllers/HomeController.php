@@ -44,8 +44,8 @@ class HomeController extends Controller
                 'barning_limit' => $hour * 5,
                 'progress_limit' => $hour * 10,
                 'time_limit' => $hour,
-                'rate_type' => 0,
-                'attack_type' => 0,
+                'rate_type' => 101,
+                'attack_type' => 101,
                 'matter_lang' => $lang[array_rand($lang)],
             ]);
         }

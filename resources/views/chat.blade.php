@@ -15,12 +15,10 @@
           <div class="col-8 align-item-ends">
                 <!--進捗バー-->
                 <div class="row">
-                  <div class="col-2 text-dark">進捗:</div>
-                  <div class="col-10">
-                    <div class="progress">
-                      <div class="progress-bar bg-info" role="progressbar" v-bind:style="'width:'+progress+'%'" v-bind:aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"></div>
+                    <span class="col-2 m-1 badge badge-light">工数</span>
+                    <div class="col-8 p-0 m-1 progress">
+                        <div class="progress-bar bg-success" role="progressbar" v-bind:style="'width:50%'" v-bind:aria-valuenow="time" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                  </div>
                 </div>
 
                 <div class="row">
@@ -28,7 +26,7 @@
                   <div class="col-10">
                   <div>
                     <div class="progress">
-                    <div class="progress-bar bg-danger" role="progressbar" v-bind:style="'width:'+time+'%'" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-success" role="progressbar" v-bind:style="'width:'+time+'%'" v-bind:aria-valuenow="time" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
                   </div>
                 </div>
@@ -136,8 +134,8 @@
                 text: "a",
                 matter: {},
                 barning: 0,
-                progress: 0,
-                time: 0,
+                progress: 30,
+                time: 30,
             },
             methods: {
 
@@ -154,7 +152,7 @@
                     const url = "/ajax/matter/"+this.id;
                     axios.get(url)
                         .then((response) => {
-                            this.barning = 30;
+                            this.barning = response.data[0];
                             this.progress = response.data[1];
                             this.time = response.data[2];
                         });
@@ -174,12 +172,13 @@
                 this.getMessages();
                 this.getMatter();
 
+                console.log(this.barning);
+
                 Echo.channel('chat')
                     .listen('MessageCreated', (e) => {
 
                         this.getMessages(); // 全メッセージを再読込
                         this.getMatter(); //案件情報を再読み込み
-
                     });
 
             }

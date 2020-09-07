@@ -48,7 +48,10 @@ class ChatController extends Controller
 		if ( empty($matter) || $matter->end_flag ) {
 			return redirect('/home');
 		}
-		$reward = config('rate_type')[$matter->rate_type]['reward'];
+		$reward = [
+            'money' => 100,
+            'ex' => 10,
+        ];
 		$items = config('item');
 		$user = Auth::user();
 		$image = "normal";
