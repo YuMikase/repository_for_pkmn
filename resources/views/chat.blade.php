@@ -6,7 +6,8 @@
 
 <!--がめんのコンテナのわくぐみです-->
 <div class="container">
-  <h3>{{$lang}}の案件</h3>
+  <h4 class="row m-1">所持金：</h4>
+  <h3>{{$lang}}の案件<span v-text="matter.lang"></span></h3>
   <div class="row">
     <div class="col-8 pr-0">
       <div class="col-12 border border-dark" id="battle" style="height:350px">
@@ -17,8 +18,8 @@
                   <div class="col-2 text-dark">進捗:</div>
                   <div class="col-10">
                     <div class="progress">
-                  <div class="progress-bar" role="progressbar" style="width: 40" aria-valuenow= "40", aria-valuemin="0" aria-valuemax=100></div>
-                </div>
+                      <div class="progress-bar bg-info" role="progressbar" v-bind:style="'width:'+progress+'%'" v-bind:aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                   </div>
                 </div>
 
@@ -27,7 +28,7 @@
                   <div class="col-10">
                   <div>
                     <div class="progress">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-danger" role="progressbar" v-bind:style="'width:'+time+'%'" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
                   </div>
                 </div>
@@ -131,9 +132,16 @@
                 message: '',
                 user_name: "{{$user_name}}",
                 id: "{{$id}}",
-                messages: []
+                messages: [],
+                text: "a",
+                matter: {},
+                barning: 0,
+                progress: 0,
+                time: 0,
             },
             methods: {
+
+              //メッセージ一覧取得
                 getMessages() {
                     const url = "/ajax/chat/"+this.id;
                     axios.get(url)
@@ -141,6 +149,16 @@
                             this.messages = response.data
                         });
                 },
+              //案件取得
+                getMatter() {
+                    const url = "/ajax/matter/"+this.id;
+                    axios.get(url)
+                        .then((response) => {
+                            this.barning = 30;
+                            this.progress = response.data[1];
+                            this.time = response.data[2];
+                        });
+                      },
                 send() {
                     const url = "/ajax/chat/"+this.id;
                     const params = { message: this.message ,user_name: this.user_name };
@@ -153,13 +171,14 @@
                 }
             },
             mounted() {
-
                 this.getMessages();
+                this.getMatter();
 
                 Echo.channel('chat')
                     .listen('MessageCreated', (e) => {
 
                         this.getMessages(); // 全メッセージを再読込
+                        this.getMatter(); //案件情報を再読み込み
 
                     });
 

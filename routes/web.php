@@ -22,6 +22,7 @@ Route::post('/sendmessage', 'MessageController@send');
 Route::post('/test2','MainController@write2');
 
 Route::get('ajax/chat/{id}', 'Ajax\ChatController@index'); // メッセージ一覧を取得
+Route::get('ajax/matter/{id}', 'Ajax\ChatController@matter'); // 案件情報を取得
 Route::post('ajax/chat/{id}', 'Ajax\ChatController@create'); // チャット登録
 
 //認証が必要なグループ

@@ -73,6 +73,7 @@ class ChatController extends Controller
 
         //案件取得
 		$matter = Matter::find($id);
+
 		//言語情報取得
 		$lang = $matter->matter_lang;
 
@@ -161,6 +162,7 @@ class ChatController extends Controller
 		        'type' => "system"
 		    ]);
 
+		    
 		    //履歴から言語情報が一致しているものだけを取得
 			$matters_histories = MatterHistory::groupBy('user_id')->select('user_id', DB::raw('count(*) as user_count'))->where('lang',$matter->matter_lang)->get();
 
