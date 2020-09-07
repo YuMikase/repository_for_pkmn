@@ -293,7 +293,7 @@ return [
     906 => [
         'id' => 906,
         'lang' => 'Normal',
-        'name' => 'proxy',
+        'name' => 'script',
         'barning' => 3,
         'progress' => 3,
         'time' => 1,
