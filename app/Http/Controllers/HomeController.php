@@ -42,7 +42,7 @@ class HomeController extends Controller
                 'progress' => 0,
                 'time' => 0,
                 'barning_limit' => $hour * 5,
-                'progress_limit' => $hour * 5,
+                'progress_limit' => $hour * 10,
                 'time_limit' => $hour,
                 'rate_type' => 0,
                 'attack_type' => 0,

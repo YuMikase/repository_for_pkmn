@@ -5,7 +5,7 @@
 <div class="contaienr py-3">
   <div class="row justify-content-center">
     <div class="col-10 border border-primary">
-      <div style="height:300px;" class="overflow-auto" >
+      <div style="height:400px;" class="overflow-auto" >
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#">案件</a>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navbar" aria-controls="Navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
@@ -21,7 +21,13 @@
           <p>
             工数【 {{ $matter['time'] }} / {{ $matter['time_limit'] }} ( {{ floor($matter['time'] / $matter['time_limit'] * 100) }} % ) 】
             進捗【{{ $matter['progress'] }} / {{ $matter['progress_limit'] }} ( {{ floor($matter['progress'] / $matter['progress_limit'] * 100) }} % ) 】
+            炎上【{{ $matter['barning'] }} / {{ $matter['barning_limit'] }} ( {{ floor($matter['barning'] / $matter['barning_limit'] * 100) }} %) 】
+
+            @if(floor($matter['barning'] / $matter['barning_limit'] * 100) < 50)
             <button type="button" class="btn btn-success" onclick="location.href='chat/{{ $matter['id'] }}'">参加</button>
+            @else
+            <button type="button" class="btn btn-danger" onclick="location.href='chat/{{ $matter['id'] }}'">参加</button>
+            @endif
           </p>
         </div>
       @endforeach

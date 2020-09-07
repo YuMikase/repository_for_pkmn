@@ -104,11 +104,11 @@ class ChatController extends Controller
 
 		if($matter->time < $matter->time_limit){
 			//言語属性が一致していた場合
-			if(strcmp($matter->matter_lang, $commands[$input_command]['lang'])){
+			if(strcmp($matter->matter_lang, $commands[$input_command]['lang']) == 0){
 				//案件TBL加算処理
 				$matter->progress += $matter->progress + $commands[$input_command]['progress'] * 2;
 			//ノーマル属性の場合
-			}elseif(strcmp('Normal', $commands[$input_command]['lang'])){
+			}elseif(strcmp('Normal', $commands[$input_command]['lang']) == 0){
 				$matter->barning += $commands[$input_command]['barning'];
 				$matter->progress += $matter->progress + $commands[$input_command]['progress'];
 			//属性が一致しない場合
@@ -122,7 +122,6 @@ class ChatController extends Controller
 			//履歴作成
 			MatterHistory::create(['matter_id' => $matter->id, 'user_id' => $user->id,'lang'=>$commands[$input_command]['lang']]);
 		}
-
 		if($matter->barning == 0){
 			$image = "normal";
 		}elseif(($matter->barning_limit / $matter->barning) > 1){
