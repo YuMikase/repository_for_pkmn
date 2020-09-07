@@ -6,6 +6,7 @@
 
 <!--がめんのコンテナのわくぐみです-->
 <div class="container">
+  <h3>{{$lang}}の案件</h3>
   <div class="row">
     <div class="col-8 pr-0">
       <div class="col-12 border border-dark" id="battle" style="height:350px">

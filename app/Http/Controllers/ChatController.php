@@ -23,13 +23,14 @@ class ChatController extends Controller
 
 		//案件終了時一覧画面に遷移
 		$matter = Matter::find($id);
+		$lang = $matter->matter_lang;
 		if($matter->time > $matter->time_limit){
 			//flash_message保存
 			$request->session()->flash('flash_message', '案件は終了しました。');
 			$request->session()->reflash();
 			return redirect('/result/'.$id);
 		}
-	    return view('chat',compact('image','user_name','id'));
+	    return view('chat',compact('image','user_name','id','lang'));
 
 	}
 
@@ -157,6 +158,7 @@ class ChatController extends Controller
 		        'type' => "button"
 		    ]);
 
+		    //履歴から言語情報が一致しているものだけを取得
 			$matters_histories = MatterHistory::groupBy('user_id')->select('user_id', DB::raw('count(*) as user_count'))->where('lang',$matter->matter_lang)->get();
 
 			foreach ($matters_histories as $matters_history ) {
