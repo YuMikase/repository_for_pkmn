@@ -13,23 +13,18 @@
       <div class="col-12 border border-dark" id="battle" style="height:350px">
         <div class="row align-items-start h-50" >
           <div class="col-8 align-item-ends">
-                <!--進捗バー-->
-                <div class="row">
-                    <span class="col-2 m-1 badge badge-light">工数</span>
-                    <div class="col-8 p-0 m-1 progress">
-                        <div class="progress-bar bg-success" role="progressbar" v-bind:style="'width:50%'" v-bind:aria-valuenow="time" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
 
                 <div class="row">
-                  <div class="col-2 text-dark">工数:</div>
-                  <div class="col-10">
-                  <div>
-                    <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" v-bind:style="'width:'+time+'%'" v-bind:aria-valuenow="time" aria-valuemin="0" aria-valuemax="100"></div>
+                  <span class="col-2 m-1 badge badge-light">工数</span>
+                  <div class="col-8 p-0 m-1 progress">
+                      <div class="progress-bar bg-success" role="progressbar" v-bind:style="'width:'+time+'%'" v-bind:aria-valuenow="time" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
+              </div>
+              <div class="row">
+                  <span class="col-2 m-1 badge badge-light">進捗</span>
+                  <div class="col-8 p-0 m-1 progress">
+                      <div class="progress-bar bg-info" role="progressbar" v-bind:style="'width:'+progress+'%'" v-bind:aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
-                </div>
               </div>
             </div>
 
@@ -43,13 +38,11 @@
           </div>
           <div class="col-8">
             <div class="row">
-              <div class="col-2 text-dark">残り時間:</div>
-              <div class="col-10">
-                <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: 40" aria-valuenow= "40", aria-valuemin="0" aria-valuemax=100></div>
-            </div>
+                  <span class="col-2 m-1">時間</span>
+                  <div class="col-8 p-0 m-1 progress">
+                      <div class="progress-bar bg-info" role="progressbar" v-bind:style="'width:'+time+'%'" v-bind:aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
               </div>
-            </div>
 
           </div>
         </div>
@@ -137,6 +130,11 @@
                 progress: 30,
                 time: 30,
             },
+            computed: {
+                  progressWidth: function(){
+                       return "width:" + this.progress + "%";
+                  }
+            },
             methods: {
 
               //メッセージ一覧取得
@@ -171,8 +169,6 @@
             mounted() {
                 this.getMessages();
                 this.getMatter();
-
-                console.log(this.barning);
 
                 Echo.channel('chat')
                     .listen('MessageCreated', (e) => {
