@@ -4,9 +4,9 @@
 <!--酢黒る-->
 <div class="contaienr py-3">
   <div class="row justify-content-center">
-    <div class="col-10 border border-primary">
-      <div style="height:300px;" class="overflow-auto" >
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="col-10 border" style="background-color:#f3c35c;">
+      <div style="height:300px;" class="overflow-auto" style="background-color:#e76133;">
+    <nav class="navbar navbar-expand-lg" style="background-color:#e76133;">
       <a class="navbar-brand" href="#">案件</a>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navbar" aria-controls="Navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
         <span class="navbar-toggler-icon"></span>
@@ -26,7 +26,7 @@
         </ul>
       </div>
     </nav>
-    <div class="container overflow-auto"data-spy="scroll" data-target="#Navbar">
+    <div class="container overflow-auto"data-spy="scroll" data-target="#Navbar" >
       @foreach ($matters as $matter)
       <div id="matter{{ $matter['id'] }}" class="border">
           <h3>案件{{ $matter['id'] }} ( {{ config('rate_type')[$matter['rate_type']]['name'] }}の案件 ) </h3>
@@ -96,7 +96,7 @@
                 <div class="col-10 mx-auto">
                   <img src="{{ asset('img/photo0000-5281.jpg')}}" alt="NO_IMAGE">
                 </div>
-                <div class="carousel-caption bg-light border border-primary rounded d-none d-md-block">
+                <div class="carousel-caption rounded d-none d-md-block" style="background-color:#f3c35c;">
                   <div ><font color="orange" size="5" face="Comic Sans MS">{{ config('rate_type')[$matter['rate_type']]['name'] }}の案件</font></div>
                   <div class="row">
                     <div class="col-8" id="matter-info">

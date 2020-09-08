@@ -5,7 +5,7 @@
 <!--タイトルロゴどーーん-->
 <div id="logo"　class="container">
   <div class="row justify-content-center">
-      <img src="{{ asset('img/pokomon_logo.png')}}">
+      <img src="{{ asset('img/pokomon_logo2.png')}}">
     </div>
 </div>
 

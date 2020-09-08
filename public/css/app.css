@@ -29,6 +29,11 @@
   --danger: #e3342f;
   --light: #f8f9fa;
   --dark: #343a40;
+/*色追加0908*/
+  --base: #faef9a;
+  --point: #f3c35c;
+  --accent: #e76133;
+
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
@@ -72,7 +77,7 @@ body {
   line-height: 1.6;
   color: #212529;
   text-align: left;
-  background-color: #f8fafc;
+  background-color: #fffacd;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -10932,4 +10937,3 @@ a.text-dark:focus {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
-
