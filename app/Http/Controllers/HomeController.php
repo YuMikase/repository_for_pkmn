@@ -39,11 +39,7 @@ class HomeController extends Controller
         $items = config('item');
         foreach($items as $id => $item) {
             if ( UserHasItem::where('user_id', $user['id'])->where('item_id', $id)->doesntExist() ) {
-                if ( $id === 101 ) {
-                    UserHasItem::create([ 'item_id' => $id, 'user_id' => $user['id'], 'has' => 1 ]);
-                } else {
                     UserHasItem::create([ 'item_id' => $id, 'user_id' => $user['id'] ]);
-                }
             }
         }
 
