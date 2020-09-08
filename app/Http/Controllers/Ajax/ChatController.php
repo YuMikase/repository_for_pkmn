@@ -114,6 +114,13 @@ class ChatController extends Controller
 				}
 				$user->save();
 
+				Message::create([
+			    	'matter_id' => $id,
+			        'body' => $user->name.'は'.$result.'を手に入れた。',
+			        'user_name' => "システムメッセージ",
+			        'type' => "system"
+			    ]);
+
 			}
 			event(new MatterEnded($matter));
 		}

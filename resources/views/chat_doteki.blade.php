@@ -60,7 +60,8 @@
                                 <div class="row h-50">
                                     <div class="col border">
                                         <div class="row"><p></p></div>
-                                        <h4 class="row m-1">所持金：<span class="badge badge-light" v-text="'￥'+money" v-bind:style="{ color: color}"></span></h4>
+                                        <h4 class="row m-1">所持金：$
+                                            {{Auth::user()->money}}<span class="badge badge-light" v-bind:style="{ color: color}"></span></h4>
                                     </div>
                                 </div>
                             </div>
