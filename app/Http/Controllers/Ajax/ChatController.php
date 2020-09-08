@@ -11,20 +11,20 @@ use App\UserStatuses;
 use App\UserLangSkill;
 use App\MatterHasUser;
 use App\User;
-use App\Message;
+use App\Messages;
 use Illuminate\Support\Facades\Auth;
 use Log;
 
 class ChatController extends Controller
 {
 	public function index($id) {// 新着順にメッセージ一覧を取得
-	    return Message::where('matter_id',$id)->orderBy('id', 'desc')->get()->toArray();
+	    return Messages::where('matter_id',$id)->orderBy('id', 'desc')->get()->toArray();
 
 	}
 
 	public function create(Request $request) {
 
-	    $message = Message::create([
+	    $message = Messages::create([
 	    	'matter_id' => $request->id,
 	        'body' => $request->message,
 	        'user_name' => $request->user_name,
@@ -63,7 +63,7 @@ class ChatController extends Controller
 				$attack[$matter->time]['barning'],
 				$attack[$matter->time]['progress']
 			);
-			$message = Message::create([
+			$message = Messages::create([
 				'matter_id' => $id,
 				'body' => $attack[$matter->time]['message'],
 				'user_name' => "案件",
@@ -82,7 +82,7 @@ class ChatController extends Controller
         $user->skill4  = $rand_commands[3];
 		$user->save();
 
-	    $message = Message::create([
+	    $message = Messages::create([
 	    	'matter_id' => $id,
 	        'body' => $request->message,
 	        'user_name' => $request->user_name,
@@ -111,7 +111,7 @@ class ChatController extends Controller
 				
 				if($result > 0){
 					$user->money += $result;
-					Message::create([
+					Messages::create([
 				    	'matter_id' => $id,
 				        'body' => $user->name.'は'.$result.'を手に入れた。',
 				        'user_name' => "システムメッセージ",
