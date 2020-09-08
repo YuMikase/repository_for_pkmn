@@ -16,7 +16,7 @@ class CreateUserLangSkillTable extends Migration
         Schema::create('user_lang_skill', function (Blueprint $table) {
             $table->increments('id');
             $table->string('skill');
-            $table->string('level');
+            $table->integer('level');
             $table->timestamps();
         });
     }

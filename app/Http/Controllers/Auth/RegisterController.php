@@ -77,7 +77,7 @@ class RegisterController extends Controller
             'skill4' => $rand_commands[3],
         ]);
 
-        $skills = array('php','python','ruby','normal');
+        $skills = array('PHP','Python','Ruby','Normal');
 
         foreach ($skills as &$skill) {
             UserLangSkill::create([

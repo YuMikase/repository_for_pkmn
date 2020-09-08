@@ -113,24 +113,27 @@ class ChatController extends Controller
 
 				//報酬処理
 				$result = ($value['command_count'] * 1000) + (($matter->time_limit - $matter->time) * 2000) + ($matter->barning * -2000) + ($matter->progress * 2000);
+
+				
 				if($result > 0){
 					$user->money += $result;
+					Message::create([
+				    	'matter_id' => $id,
+				        'body' => $user->name.'は'.$result.'を手に入れた。',
+				        'user_name' => "システムメッセージ",
+				        'type' => "system"
+			    	]);
 				}
 
 				//言語スキル処理
-				$user_lang_skill = UserLangSkill::where('user_id', $value['user_id'])->get();
+				$user_lang_skill = UserLangSkill::where('user_id', $value['user_id'])->where('skill', $commands[$input_command]['lang'])->first();
 
-				Log::debug($user_lang_skill);
+				$user_lang_skill['level'] += $value['command_count']/3;
+
+				Log::debug($user_lang_skill['level']);
 
 				$user_lang_skill->save();
 				$user->save();
-
-				Message::create([
-			    	'matter_id' => $id,
-			        'body' => $user->name.'は'.$result.'を手に入れた。',
-			        'user_name' => "システムメッセージ",
-			        'type' => "system"
-			    ]);
 
 			}
 			event(new MatterEnded($matter));

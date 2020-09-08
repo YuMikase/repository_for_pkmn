@@ -9,6 +9,7 @@ use App\UserHasItem;
 use App\UserStatuses;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 
+use Log;
 class ShopController extends Controller
 {
     public function buy(Request $re) {
@@ -44,6 +45,7 @@ class ShopController extends Controller
     }
     
     public function getHasMoney() {
+        Log::debug(Auth::user()->money);
         return Auth::user()->money;
 	}
 }
