@@ -21,15 +21,15 @@ class ChatController extends Controller
 	}
 
 	public function result($id) {
-		$message = Message::where('matter_id',$id)->orderBy('id', 'desc')->get()->toArray();
-	    return view('result',compact('message'));
+		$messages = Message::where('matter_id',$id)->orderBy('id', 'desc')->get()->toArray();
+	    return view('result',compact('messages'));
 
 	}
 
 	public function index_doteki($id) {
 		$matter = Matter::find($id);
 		if ( empty($matter) || $matter->end_flag ) {
-			return redirect('/home');
+			return redirect('/result/'.$id);
 		}
 		$reward = config('rate_type')[$matter->rate_type]['reward'];
 		$items = config('item');
