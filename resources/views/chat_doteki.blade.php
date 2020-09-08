@@ -13,11 +13,8 @@
 
         <div v-if="matterEnded" style="background-color: white;">
             <span>この案件は終了しました。</span><br>
-            <span>報酬は以下の通りです。</span><br>
-            <span>お金：￥{{ $reward['money'] }}</span><br>
-            <span>経験値：{{ $reward['ex'] }}</span>
             <br>
-            <span><input type="button" onclick="history.back()" value="ホームに戻る" class="btn btn-primary"></span>
+            <span><input type="button" onClick="kakunin()" value="リザルト画面に飛ぶ" class="btn btn-primary"></span>
         </div>
 
         <div v-if="!matterEnded">
@@ -120,12 +117,12 @@
                                 <div class="row h-75">
                                     <div class="col">
                                         <div class="row h-50">
-                                            <button class="col m-1 btn  btn-primary" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[0] )" ><span v-text="commands[0]['lang']+' : '+commands[0]['name']"></span></button>
-                                            <button class="col m-1 btn  btn-success" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[1] )" ><span v-text="commands[1]['lang']+' : '+commands[1]['name']"></span></button>
+                                            <button class="col m-1 btn  btn-primary" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[0] )" ><span v-text="commands[0]['name']"></span></button>
+                                            <button class="col m-1 btn  btn-success" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[1] )" ><span v-text="commands[1]['name']"></span></button>
                                         </div>
                                         <div class="row h-50">
-                                            <button class="col m-1 btn  btn-danger" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[2] )" ><span v-text="commands[2]['lang']+' : '+commands[2]['name']"></span></button>
-                                            <button class="col m-1 btn  btn-warning" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[3] )" ><span v-text="commands[3]['lang']+' : '+commands[3]['name']"></span></button>    
+                                            <button class="col m-1 btn  btn-danger" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[2] )" ><span v-text="commands[2]['name']"></span></button>
+                                            <button class="col m-1 btn  btn-warning" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[3] )" ><span v-text="commands[3]['name']"></span></button>    
                                         </div>
                                     </div>
                                 </div>
@@ -242,6 +239,14 @@
                             this.getHasItems();
                         });
                 },
+                result(item_id) {
+                    var params = { item_id: item_id};
+                    axios.post("/shop/use", params)
+                        .then((response) => {
+                            //成功時処理
+                            this.getHasItems();
+                        });
+                },
                 send(type,value) {
                     const url = "/ajax/"+type+"/"+this.id;
                     switch (type) {
@@ -292,5 +297,8 @@
             }
         });
 
+        function kakunin(){
+            location.href = "../../result/{{$id}}";
+        }
     </script>
 @endsection

@@ -10,19 +10,20 @@ use App\Matter;
 use App\UserStatuses;
 use App\MatterHasUser;
 use App\User;
+use App\Message;
 use Illuminate\Support\Facades\Auth;
 use Log;
 
 class ChatController extends Controller
 {
 	public function index($id) {// 新着順にメッセージ一覧を取得
-	    return \App\Message::where('matter_id',$id)->orderBy('id', 'desc')->get();
+	    return Message::where('matter_id',$id)->orderBy('id', 'desc')->get()->toArray();
 
 	}
 
 	public function create(Request $request) {
 
-	    $message = \App\Message::create([
+	    $message = Message::create([
 	    	'matter_id' => $request->id,
 	        'body' => $request->message,
 	        'user_name' => $request->user_name,
@@ -61,7 +62,7 @@ class ChatController extends Controller
 				$attack[$matter->time]['barning'],
 				$attack[$matter->time]['progress']
 			);
-			$message = \App\Message::create([
+			$message = Message::create([
 				'matter_id' => $id,
 				'body' => $attack[$matter->time]['message'],
 				'user_name' => "案件",
@@ -86,7 +87,7 @@ class ChatController extends Controller
 		// $money->save();
 
 
-	    $message = \App\Message::create([
+	    $message = Message::create([
 	    	'matter_id' => $id,
 	        'body' => $request->message,
 	        'user_name' => $request->user_name,
