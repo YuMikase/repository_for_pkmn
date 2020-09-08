@@ -82,12 +82,6 @@ class ChatController extends Controller
         $user->skill4  = $rand_commands[3];
 		$user->save();
 
-		// $status = UserStatuses::where('user_id', $user->id)->get();
-		// $money = $status->where('type', 'money')->first();
-		// $money->value1 = round( ( ($money->value1+100) * 1.01 ) - 100);
-		// $money->save();
-
-
 	    $message = Message::create([
 	    	'matter_id' => $id,
 	        'body' => $request->message,

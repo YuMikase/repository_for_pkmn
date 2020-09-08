@@ -14,7 +14,7 @@
         <div v-if="matterEnded" style="background-color: white;">
             <span>この案件は終了しました。</span><br>
             <br>
-            <span><input type="button" onClick="kakunin()" value="リザルト画面に飛ぶ" class="btn btn-primary"></span>
+            <span><input type="button" onClick="result()" value="リザルト画面に飛ぶ" class="btn btn-primary"></span>
         </div>
 
         <div v-if="!matterEnded">
@@ -108,7 +108,7 @@
                                 </div>
                                 <div class="row h-50">
                                     <button class="col m-1 btn  btn-primary" type="button" name="button" @click="toggleItem()">ITEM</button>
-                                    <button class="col m-1 btn  btn-primary" type="button" name="button">RUN</button>
+                                    <button class="col m-1 btn  btn-primary" type="button" name="button" onClick="home()" >RUN</button>
                                 </div>
                             </div>
 
@@ -297,8 +297,11 @@
             }
         });
 
-        function kakunin(){
+        function result(){
             location.href = "../../result/{{$id}}";
-        }
+        };
+        function home(){
+            location.href = "../../home";
+        };
     </script>
 @endsection

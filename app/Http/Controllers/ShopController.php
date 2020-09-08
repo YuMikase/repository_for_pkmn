@@ -20,9 +20,8 @@ class ShopController extends Controller
         $has->save();
         
         $items = config('item');
-        $money = UserStatuses::where('user_id', $user['id'])->where('type', 'money')->first();
-        $money->value1 = $money->value1 - $items[$re->item_id]['money'];
-        $money->save();
+        $user->money -= $items[$re->item_id]['money'];
+        $user->save();
     }
 
     public function use(Request $re) {
