@@ -48,7 +48,6 @@
   <div class='row justify-content-md-center w-100'>
     <div class='col-6  border border-primary'>
       <h3>あなたのステータス</h3>
-      <h4>所持金：¥{{$user->money}}</h4>
       <ul class="list-group">
         @foreach ($langSkills as $langSkill)
           <li class="list-group-item">{{$langSkill['skill']}}<span class="badge badge-light">{{$langSkill['level']}}</span></li>
@@ -57,7 +56,7 @@
     </div>
     <div class='col-6  border border-primary'>
         <div id="shop" class="item h-100">
-          <h3>アイテム</h3>
+          <h3>アイテム　所持金：<span class="badge badge-light" v-text="'￥'+money" v-bind:style="{ color: color}"></span></h3>
           <div class="list-group">
             <button class="list-group-item list-group-item-action" v-for="i in items" v-bind:disabled="onBuy">
                 <div @click='buy(i.id)' class="row">

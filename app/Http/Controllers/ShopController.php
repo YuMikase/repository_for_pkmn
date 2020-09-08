@@ -44,7 +44,6 @@ class ShopController extends Controller
     }
     
     public function getHasMoney() {
-        $user = Auth::user();
-        return UserStatuses::where('user_id', $user['id'])->where('type', 'money')->first()->value1;
+        return Auth::user()->money;
 	}
 }

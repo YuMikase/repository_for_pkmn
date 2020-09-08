@@ -10,7 +10,7 @@ class MatterHasUser extends Model
     protected $guarded = ['id'];
 
      /**
-     * ユーザーに関連する電話レコードを取得
+     * 案件に関連するユーザーレコードを取得
      */
     public function user()
     {

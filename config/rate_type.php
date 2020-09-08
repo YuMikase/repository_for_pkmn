@@ -88,7 +88,7 @@ return [
     
     901 => [
         'id' => 901,
-        'name' => 'ふつう',
+        'name' => 'Normal',
         'barning' => [
             'PHP' => 1.0,
             'Python' => 1.0,
