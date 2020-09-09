@@ -9,40 +9,42 @@ use App\UserHasItem;
 use App\UserStatuses;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 
+use Log;
 class ShopController extends Controller
 {
-    public function index() {
-        $user = Auth::user()->with('has_item')->first();
-        $items = config('item');
-        return view('shop',compact('user', 'items'));
-    }
-    
     public function buy(Request $re) {
-        $user = Auth::user()->with('has_item')->first();
+        $user = Auth::user();
+        
+        $has = UserHasItem::where('user_id', $user['id'])->where('item_id', $re->item_id)->first();
+        $has->has = $has->has + 1;
+        $has->save();
+        
         $items = config('item');
-        UserHasItem::create([ 'item_id' => $re->item_id, 'user_id' => $user['id'] ]);
-        $money = UserStatuses::where('user_id', $user['id'])->where('type', 'money')->first();
-        $money->value1 = $money->value1 - $items[$re->item_id]['money'];
-        $money->save();
+        $user->money -= $items[$re->item_id]['money'];
+        $user->save();
     }
 
     public function use(Request $re) {
-        $user = Auth::user()->with('has_item')->first();
-        $items = config('item');
-        UserHasItem::where('item_id', $re->item_id)->where('user_id', $user['id'])->first()->delete();
+        $user = Auth::user();
+
+        $has = UserHasItem::where('user_id', $user['id'])->where('item_id', $re->item_id)->first();
+        $has->has = $has->has - 1;
+        $has->save(); 
     }
 
-    public function getHasItems($user_id) {
-        $has_items = Auth::user()->has_item;
+    public function getHasItems() {
+        $user = Auth::user();
+        $has_items = UserHasItem::where('user_id', $user['id'])->get();
         $items = config('item');
         $res = [];
         foreach ($items as $id => $item) {
-            $res[$id] = $has_items->where('item_id', $id)->count();
+            $res[$id] = $has_items->where('item_id', $id)->first()->has;
         }
         return $res;
     }
     
-    public function getMoney($user_id) {
-        return UserStatuses::where('user_id', $user_id)->where('type', 'money')->first()->value1;
+    public function getHasMoney() {
+        Log::debug(Auth::user()->money);
+        return Auth::user()->money;
 	}
 }

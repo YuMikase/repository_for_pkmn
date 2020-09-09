@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Message extends Model
+class Messages extends Model
 {
     protected $guarded = ['id'];
     protected $table = 'messages';

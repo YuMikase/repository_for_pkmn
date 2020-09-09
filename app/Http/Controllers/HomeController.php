@@ -8,6 +8,7 @@ use Auth;
 use App\Matter;
 use App\UserHasItem;
 use App\UserStatuses;
+use App\UserLangSkill;
 use App\Http\Controllers\Ajax\ChatController;
 
 class HomeController extends Controller
@@ -29,27 +30,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::user()->toArray();
-        $matters = Matter::where('end_flag',false);
+        $user = Auth::user();
 
-        if ( ! $matters->exists() || $matters->count() < 5 ) {
+        //不足分を作成
+        if ( Matter::where('end_flag',false)->count() < 5 ) {
             ChatController::createMatter();
         }
-        if ( ! UserHasItem::where('user_id', $user['id'])->exists() ) {
-            UserHasItem::create([ 'item_id' => 101, 'user_id' => $user['id'] ]);
-        }
-        if ( ! UserStatuses::where('user_id', $user['id'])->exists() ) {
-            UserStatuses::create([ 'type' => 'money', 'user_id' => $user['id'] ]);
-            UserStatuses::create([ 'type' => 'level_basic', 'user_id' => $user['id'] ]);
-            UserStatuses::create([ 'type' => 'level_php', 'user_id' => $user['id'] ]);
-            UserStatuses::create([ 'type' => 'level_python', 'user_id' => $user['id'] ]);
-            UserStatuses::create([ 'type' => 'level_ruby', 'user_id' => $user['id'] ]);
-        }
-        $status = UserStatuses::where('user_id', $user['id'])->get();
-        $matters = $matters->get()->toArray();
-
-        $user = Auth::user()->with('has_item')->first();
         $items = config('item');
-        return view('home', compact('matters', 'status', 'user', 'items'));
+        foreach($items as $id => $item) {
+            if ( UserHasItem::where('user_id', $user['id'])->where('item_id', $id)->doesntExist() ) {
+                    UserHasItem::create([ 'item_id' => $id, 'user_id' => $user['id'] ]);
+            }
+        }
+
+        //補充後改めて取得
+        $matters = Matter::withCount('users')->where('end_flag',false)->get();
+
+        $langSkills = UserLangSkill::where('user_id', Auth::user()->id)->get()->toArray();
+        
+        return view('home', compact('user', 'matters', 'langSkills', 'items'));
     }
 }

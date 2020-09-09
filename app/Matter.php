@@ -8,7 +8,12 @@ class Matter extends Model
 {
     protected $table = 'matters';
 
-        protected $guarded = [
+    protected $guarded = [
         'id',
     ];
+
+    public function users()
+    {
+        return $this->hasMany('App\MatterHasUser', 'matter_id', 'id');
+    }
 }

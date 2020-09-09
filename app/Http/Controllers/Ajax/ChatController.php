@@ -8,19 +8,23 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Matter;
 use App\UserStatuses;
+use App\UserLangSkill;
 use App\MatterHasUser;
+use App\User;
+use App\Messages;
 use Illuminate\Support\Facades\Auth;
+use Log;
 
 class ChatController extends Controller
 {
 	public function index($id) {// 新着順にメッセージ一覧を取得
-	    return \App\Message::where('matter_id',$id)->orderBy('id', 'desc')->get();
+	    return Messages::where('matter_id',$id)->orderBy('id', 'desc')->get()->toArray();
 
 	}
 
 	public function create(Request $request) {
 
-	    $message = \App\Message::create([
+	    $message = Messages::create([
 	    	'matter_id' => $request->id,
 	        'body' => $request->message,
 	        'user_name' => $request->user_name,
@@ -49,7 +53,7 @@ class ChatController extends Controller
 			$id,
 			$commands[$input_command]['barning'] * $rate_type['barning'][$commands[$input_command]['lang']],
 			$commands[$input_command]['progress'] * $rate_type['progress'][$commands[$input_command]['lang']],
-			$commands[$input_command]['time'] * $rate_type['time'][$commands[$input_command]['lang']]
+			1
 		);
 
 		$attack = config('attack_type')[$matter['attack_type']]['terms'];
@@ -59,13 +63,12 @@ class ChatController extends Controller
 				$attack[$matter->time]['barning'],
 				$attack[$matter->time]['progress']
 			);
-			$message = \App\Message::create([
+			$message = Messages::create([
 				'matter_id' => $id,
 				'body' => $attack[$matter->time]['message'],
 				'user_name' => "案件",
 				'type' => "normal"
 			]);
-			event(new MessageCreated($message));
 		}
 
 
@@ -79,30 +82,53 @@ class ChatController extends Controller
         $user->skill4  = $rand_commands[3];
 		$user->save();
 
-		$status = UserStatuses::where('user_id', $user->id)->get();
-		$money = $status->where('type', 'money')->first();
-		$money->value1 = round( ( ($money->value1+100) * 1.01 ) - 100);
-		$money->save();
-
-
-	    $message = \App\Message::create([
+	    $message = Messages::create([
 	    	'matter_id' => $id,
 	        'body' => $request->message,
 	        'user_name' => $request->user_name,
 	        'type' => "normal"
 	    ]);
 		event(new MessageCreated($message));
+
+		//言語情報が一致していた場合のみ加算
+		if (strcmp($rate_type['name'], $commands[$input_command]['lang']) == 0 ) {
+			MatterHasUser::where('matter_id', $id)->where('user_id', $user->id)->increment('command_count');
+		};
 		
 		// 案件終了時処理
 		if( $matter->time >= $matter->time_limit) {
 			$matter->end_flag = 1;
 			$matter->save();
 			self::createMatter();
-			$users = MatterHasUser::where('matter_id', $id)->get();
-			foreach ($users as $key => $value) {
-				self::addUserStatus($value['user_id'], 'money', $rate_type['reward']['money']);
-				self::addUserStatus($value['user_id'], 'ふつう', $rate_type['reward']['ex']);
-				self::addUserStatus($value['user_id'], $rate_type['name'], $rate_type['reward']['ex']);
+			//参加ユーザー全取得
+			$matter_has_users = MatterHasUser::where('matter_id', $id)->get();
+			foreach ($matter_has_users as $key => $value) {
+				$user = User::find($value['user_id']);
+
+				//報酬処理
+				$result = ($value['command_count'] * 1000) + (($matter->time_limit - $matter->time) * 2000) + ($matter->barning * -2000) + ($matter->progress * 2000);
+
+				
+				if($result > 0){
+					$user->money += $result;
+					Messages::create([
+				    	'matter_id' => $id,
+				        'body' => $user->name.'は'.$result.'を手に入れた。',
+				        'user_name' => "システムメッセージ",
+				        'type' => "system"
+			    	]);
+				}
+
+				//言語スキル処理
+				$user_lang_skill = UserLangSkill::where('user_id', $value['user_id'])->where('skill', $commands[$input_command]['lang'])->first();
+
+				$user_lang_skill['level'] += $value['command_count']/3;
+
+				Log::debug($user_lang_skill['level']);
+
+				$user_lang_skill->save();
+				$user->save();
+
 			}
 			event(new MatterEnded($matter));
 		}

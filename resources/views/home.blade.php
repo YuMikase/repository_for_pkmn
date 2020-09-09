@@ -28,7 +28,7 @@
     </nav>
     <div class="container overflow-auto"data-spy="scroll" data-target="#Navbar" >
       @foreach ($matters as $matter)
-      <div id="matter{{ $matter['id'] }}" class="border">
+        <div id="matter{{ $matter['id'] }}" class="border">
           <h3>案件{{ $matter['id'] }} ( {{ config('rate_type')[$matter['rate_type']]['name'] }}の案件 ) </h3>
           <p>
             案件{{ $matter['id'] }}：
@@ -149,10 +149,9 @@
     <div class='col-6 bg-gradient-primary border border-primary'>
       <h3>あなたのステータス</h3>
       <ul class="list-group">
-        <li class="list-group-item">Level<span class="badge badge-light">{{ $status->where('type', 'level_basic')->first()->value1 }}</span></li>
-        <li class="list-group-item">PHP<span class="badge badge-light">{{ $status->where('type', 'level_php')->first()->value1 }}</span></li>
-        <li class="list-group-item">Python<span class="badge badge-light">{{ $status->where('type', 'level_python')->first()->value1 }}</span></li>
-        <li class="list-group-item">Ruby<span class="badge badge-light">{{ $status->where('type', 'level_ruby')->first()->value1 }}</span></li>
+        @foreach ($langSkills as $langSkill)
+          <li class="list-group-item">{{$langSkill['skill']}}<span class="badge badge-light">{{$langSkill['level']}}</span></li>
+        @endforeach
       </ul>
     </div>
     <div class='col-6  border border-primary'>
@@ -191,24 +190,24 @@
             },
             methods: {
                 buy(item_id) {
-                    this.onBuy = !this.onBuy;
+                    this.onBuy = true;
                     var params = { item_id: item_id};
                     axios.post("/shop", params)
                         .then((response) => {
                             //成功時処理
-                            this.getItems();
-                            this.getMoney();
-                            this.onBuy = !this.onBuy;
+                            this.getHasItems();
+                            this.getHasMoney();
+                            this.onBuy = false;
                         });
                 },
-                getItems() {
-                    axios.get("shop/"+this.user['id'])
+                getHasItems() {
+                    axios.get("getHasItems")
                         .then((response) => {
                             this.has_items = response.data;
                         });
                 },
-                getMoney() {
-                    axios.get("shop/money/"+this.user['id'])
+                getHasMoney() {
+                    axios.get("getHasMoney")
                         .then((response) => {
                             this.money = response.data;
                             if ( this.money < 0 ){ this.color = 'red'; }
@@ -216,8 +215,8 @@
                 }
             },
             mounted() {
-                this.getItems();
-                this.getMoney();
+                this.getHasItems();
+                this.getHasMoney();
             }
         });
 

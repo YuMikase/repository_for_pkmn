@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MatterHasUser extends Model
+class UserLangSkill extends Model
 {
-    protected $table = 'matter_has_user';
+    protected $table = 'user_lang_skill';
     protected $guarded = ['id'];
 
-     /**
-     * 案件に関連するユーザーレコードを取得
+    /**
+     * 言語レベル更新
      */
     public function user()
     {

@@ -13,9 +13,8 @@
 
         <div v-if="matterEnded" style="background-color: white;">
             <span>この案件は終了しました。</span><br>
-            <span>報酬は以下の通りです。</span><br>
-            <span>お金：￥{{ $reward['money'] }}</span><br>
-            <span>経験値：{{ $reward['ex'] }}</span>
+            <br>
+            <span><input type="button" onClick="result()" value="リザルト画面に飛ぶ" class="btn btn-primary"></span>
         </div>
 
         <div v-if="!matterEnded">
@@ -91,7 +90,6 @@
                             </div>
                         </div>
                     </div> 
-    
                     <div class="col-5">
                         <div class="row h-25 border">
                             <div class="col-4 border h-100">
@@ -110,7 +108,7 @@
                                 </div>
                                 <div class="row h-50">
                                     <button class="col m-1 btn  btn-primary" type="button" name="button" @click="toggleItem()">ITEM</button>
-                                    <button class="col m-1 btn  btn-primary" type="button" name="button">RUN</button>
+                                    <button class="col m-1 btn  btn-primary" type="button" name="button" onClick="home()" >RUN</button>
                                 </div>
                             </div>
 
@@ -119,12 +117,12 @@
                                 <div class="row h-75">
                                     <div class="col">
                                         <div class="row h-50">
-                                            <button class="col m-1 btn  btn-primary" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[0] )" ><span v-text="commands[0]['lang']+' : '+commands[0]['name']"></span></button>
-                                            <button class="col m-1 btn  btn-success" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[1] )" ><span v-text="commands[1]['lang']+' : '+commands[1]['name']"></span></button>
+                                            <button class="col m-1 btn  btn-primary" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[0] )" ><span v-text="commands[0]['name']"></span></button>
+                                            <button class="col m-1 btn  btn-success" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[1] )" ><span v-text="commands[1]['name']"></span></button>
                                         </div>
                                         <div class="row h-50">
-                                            <button class="col m-1 btn  btn-danger" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[2] )" ><span v-text="commands[2]['lang']+' : '+commands[2]['name']"></span></button>
-                                            <button class="col m-1 btn  btn-warning" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[3] )" ><span v-text="commands[3]['lang']+' : '+commands[3]['name']"></span></button>    
+                                            <button class="col m-1 btn  btn-danger" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[2] )" ><span v-text="commands[2]['name']"></span></button>
+                                            <button class="col m-1 btn  btn-warning" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[3] )" ><span v-text="commands[3]['name']"></span></button>    
                                         </div>
                                     </div>
                                 </div>
@@ -163,7 +161,6 @@
         new Vue({
             el: '#chat',
             data: {
-                onLoading: true,
                 message: '',
                 user_name: "{{$user_name}}",
                 id: "{{$id}}",
@@ -171,16 +168,17 @@
                 user_id: "{{Auth::user()->id}}",
                 commands: @json($cmds_now),
                 isProcessing: false,
-                barning: 0,
-                progress: 0,
-                time: 0,
+                onLoading: true,
                 onCommands: false,
                 onDebug: false,
                 matterEnded: false,
+                onItems: false,
+                barning: 0,
+                progress: 0,
+                time: 0,
                 user: @json($user->toArray()),
                 items: @json($items),
                 has_items: {},
-                onItems: false,
                 money:'',
                 color: 'black'
             },
@@ -220,10 +218,17 @@
                             this.toggleBattle();
                         });
                 },
-                getItems() {
-                    axios.get("../../shop/"+this.user['id'])
+                getHasItems() {
+                    axios.get("../../getHasItems")
                         .then((response) => {
                             this.has_items = response.data;
+                        });
+                },
+                getHasMoney() {
+                    axios.get("../../getHasMoney")
+                        .then((response) => {
+                            this.money = response.data;
+                            if ( this.money < 0 ){ this.color = 'red'; }
                         });
                 },
                 useItem(item_id) {
@@ -231,14 +236,15 @@
                     axios.post("/shop/use", params)
                         .then((response) => {
                             //成功時処理
-                            this.getItems();
+                            this.getHasItems();
                         });
                 },
-                getMoney() {
-                    axios.get("../../shop/money/"+this.user_id)
+                result(item_id) {
+                    var params = { item_id: item_id};
+                    axios.post("/shop/use", params)
                         .then((response) => {
-                            this.money = response.data;
-                            if ( this.money < 0 ){ this.color = 'red'; }
+                            //成功時処理
+                            this.getHasItems();
                         });
                 },
                 send(type,value) {
@@ -261,7 +267,7 @@
                                 // 成功したときの処理
                                 this.getCommands();
                                 this.getBars();
-                                this.getMoney();
+                                this.getHasMoney();
                             });
                             break;
                     }
@@ -272,8 +278,8 @@
 
                 this.getMessages();
                 this.getBars();
-                this.getItems();
-                this.getMoney();
+                this.getHasItems();
+                this.getHasMoney();
 
                 Echo.channel('chat')
                     .listen('MessageCreated', (e) => {
@@ -291,5 +297,11 @@
             }
         });
 
+        function result(){
+            location.href = "../../result/{{$id}}";
+        };
+        function home(){
+            location.href = "../../home";
+        };
     </script>
 @endsection

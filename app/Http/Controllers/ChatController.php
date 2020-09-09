@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Events\MessageCreated;
 use Illuminate\Support\Facades\Auth;
+use App\Matter;
+use App\Message;
 
 use App\MatterHasUser;
 
@@ -18,10 +20,16 @@ class ChatController extends Controller
 
 	}
 
+	public function result($id) {
+		$messages = Message::where('matter_id',$id)->orderBy('id', 'desc')->get()->toArray();
+	    return view('result',compact('messages'));
+
+	}
+
 	public function index_doteki($id) {
-		$matter = \App\Matter::find($id);
+		$matter = Matter::find($id);
 		if ( empty($matter) || $matter->end_flag ) {
-			return redirect('/home');
+			return redirect('/result/'.$id);
 		}
 		$reward = config('rate_type')[$matter->rate_type]['reward'];
 		$items = config('item');
@@ -69,7 +77,7 @@ class ChatController extends Controller
 		$input_command = $re->input('button');
 		
 		//案件TBL加算処理
-		$matter = \App\Matter::where('id', $id)->first();
+		$matter = Matter::where('id', $id)->first();
 		$matter->barning = $matter->barning + $commands[$input_command]['barning'];
 		$matter->progress = $matter->progress + $commands[$input_command]['progress'];
 		$matter->time = $matter->time + $commands[$input_command]['time'];
