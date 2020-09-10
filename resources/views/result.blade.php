@@ -17,7 +17,7 @@
 </div>
 <footer class="footer">
   <div class="container">
-    <button class="col m-1 btn  btn-primary" type="button" name="button" onclick="location.href='/'">案件を終了する。</button>
+    <button class="col m-1 btn  btn-primary" type="button" name="button" onclick="location.href='/'">案件を退出する。</button>
   </div>
 </footer>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
