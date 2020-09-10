@@ -234,7 +234,7 @@
                         });
                 },
                 useItem(item_id) {
-                    var params = { item_id: item_id};
+                    var params = { item_id: item_id,matter_id:this.id};
                     axios.post("/shop/use", params)
                         .then((response) => {
                             //成功時処理
@@ -244,14 +244,6 @@
                 infoLoad(title, text) {
                     this.infoTitle = title;
                     this.infoText = text;
-                },
-                result(item_id) {
-                    var params = { item_id: item_id};
-                    axios.post("/shop/use", params)
-                        .then((response) => {
-                            //成功時処理
-                            this.getHasItems();
-                        });
                 },
                 send(type,value) {
                     const url = "/ajax/"+type+"/"+this.id;
