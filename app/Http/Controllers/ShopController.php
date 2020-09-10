@@ -38,6 +38,7 @@ class ShopController extends Controller
         $has->has = $has->has - 1;
         $has->save(); 
 
+        //アイテム仕様処理
         $matter->progress += $item['progress'];
         $matter->barning += $item['barning'];
 
@@ -50,6 +51,13 @@ class ShopController extends Controller
             'body' => $user_name."は".$item['name'].'を使った。',
             'user_name' => $user_name,
             'type' => "item"
+        ]);
+
+        $message = Messages::create([
+            'matter_id' => $re->matter_id,
+            'body' => $user_name.$item['message'],
+            'user_name' => $user_name,
+            'type' => "effect"
         ]);
 
         event(new MessageCreated($message));
