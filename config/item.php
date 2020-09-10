@@ -12,6 +12,7 @@ return [
         'barning' => 10,
         'progress' => -10,
         'time' => 1,
+        'explain' => '8年前のPC。もさもさの動作でもまだ使える。',
     ],
     102 => [
         'id' => 102,
@@ -21,6 +22,7 @@ return [
         'barning' => -10,
         'progress' => 10,
         'time' => 1,
+        'explain' => '6年前のPC。なかなかに冷却ファンがうるさい。',
     ],
     103 => [
         'id' => 103,
@@ -30,6 +32,7 @@ return [
         'barning' => -20,
         'progress' => 20,
         'time' => 1,
+        'explain' => '去年のPC。なかなか働いてくれる。',
     ],
 
     //Drink
@@ -41,6 +44,7 @@ return [
         'barning' => -10,
         'progress' => 10,
         'time' => 1,
+        'explain' => 'これがなければ始まらない。',
     ],
     202 => [
         'id' => 202,
@@ -50,6 +54,7 @@ return [
         'barning' => -20,
         'progress' => 20,
         'time' => 1,
+        'explain' => '窮地に立ったとき、これに手が伸びる。',
     ],
     203 => [
         'id' => 203,
@@ -59,6 +64,7 @@ return [
         'barning' => -30,
         'progress' => 30,
         'time' => 1,
+        'explain' => '最終兵器モンスター',
     ],
 
     301 => [
@@ -69,6 +75,7 @@ return [
         'barning' => -10,
         'progress' => 10,
         'time' => 1,
+        'explain' => 'コーヒーとよく合う。',
     ],
     
     302 => [
@@ -79,6 +86,7 @@ return [
         'barning' => -20,
         'progress' => 20,
         'time' => 1,
+        'explain' => 'コーヒーととてもよく合う。',
     ],
 
     303 => [
@@ -89,6 +97,7 @@ return [
         'barning' => -30,
         'progress' => 30,
         'time' => 1,
+        'explain' => 'ご褒美。食べすぎに注意。',
     ],
     
 ];

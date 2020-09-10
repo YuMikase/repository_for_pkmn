@@ -96,8 +96,8 @@
                                 <img class="img-fluid" style="height:10vh; width:10vh;" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
                             </div>
                             <div class="col-8 ">
-                                <div class="row h-25 border">INFO_TITLE</div>
-                                <div class="row h-75 border">INFO_TEXT</div>
+                                <div class="row h-25 border"><span v-text='infoTitle'></span></div>
+                                <div class="row h-75 border"><span v-text='infoText'></span></div>
                             </div>
                         </div>
                         <div class="row h-75 border">
@@ -136,7 +136,7 @@
                                 <div class="row" style="height: 320px; overflow: scroll;">
                                     <div class="list-group m-1 w-100">
                                         <button class="list-group-item list-group-item-action" v-for="i in items">
-                                            <div @click='useItem(i.id)' class="row">
+                                            <div @click='useItem(i.id)' class="row" v-on:mouseover="infoLoad(i.name, i.explain)">
                                                 <div class="col-2"><span class="badge badge-light" v-text="i.type"></span></div>
                                                 <div class="col-8"><span v-text="i.name"></span></div>
                                                 <div class="col-2"><span class="badge badge-light" v-text="has_items[i.id]"></span></div>
@@ -180,7 +180,9 @@
                 items: @json($items),
                 has_items: {},
                 money:'',
-                color: 'black'
+                color: 'black',
+                infoTitle: '',
+                infoText: ''
             },
             methods: {
                 toggleBattle() {
@@ -238,6 +240,10 @@
                             //成功時処理
                             this.getHasItems();
                         });
+                },
+                infoLoad(title, text) {
+                    this.infoTitle = title;
+                    this.infoText = text;
                 },
                 result(item_id) {
                     var params = { item_id: item_id};
