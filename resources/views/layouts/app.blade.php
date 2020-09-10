@@ -74,7 +74,7 @@
         $(function () {
               toastr.options = {
                     "positionClass": "toast-top-center",
-                    "timeOut": "1000",
+                    "timeOut": "3000",
                   };
                toastr.success('{{ session('flash_message') }}');
                

@@ -96,10 +96,10 @@ class ChatController extends Controller
 		};
 		
 		// 案件終了時処理
-		if( $matter->time >= $matter->time_limit) {
+		if( $matter->time == $matter->time_limit) {
+			$matter->time += 1;
 			$matter->end_flag = 1;
 			$matter->save();
-			self::createMatter();
 			//参加ユーザー全取得
 			$matter_has_users = MatterHasUser::where('matter_id', $id)->get();
 			foreach ($matter_has_users as $key => $value) {

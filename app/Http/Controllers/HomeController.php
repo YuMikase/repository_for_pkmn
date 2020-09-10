@@ -34,7 +34,21 @@ class HomeController extends Controller
 
         //不足分を作成
         if ( Matter::where('end_flag',false)->count() < 5 ) {
-            ChatController::createMatter();
+            $rate_type = config('rate_type');
+            $attack_type = config('attack_type');
+            $data = [
+                'skill_count' => 0,
+                'barning' => 0,
+                'progress' => 0,
+                'time' => 0,
+                'barning_limit' => rand(100, 1000),
+                'progress_limit' => rand(100, 1000),
+                'time_limit' => rand(10, 20),
+                'rate_type' => array_rand($rate_type),
+                'attack_type' => array_rand($attack_type),
+            ];
+
+            Matter::create($data);
         }
         $items = config('item');
         foreach($items as $id => $item) {
