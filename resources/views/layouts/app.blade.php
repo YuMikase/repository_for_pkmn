@@ -19,7 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body style="color:#191970; background-color:#fffacd;">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color:#e76133;">
             <div class="container">

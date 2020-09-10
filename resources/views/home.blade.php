@@ -56,13 +56,13 @@
           <!--foreachでmatterごとにカルーセルを出したい-->
           @foreach ($matters as $matter)
             @if ($matter['id']==1)
-                <div class="carousel-item active ">
+                <div class="carousel-item active " >
                   <div class="col-10 mx-auto">
                     <img src="{{ asset('img/photo0000-5281.jpg')}}" alt="NO_IMAGE" style="max-width: 100%; , height: auto;">
                   </div>
 
-                    <div class="carousel-caption bg-light border border-primary rounded d-none d-md-block">
-                      <div ><font color="orange" size="5" face="Comic Sans MS">{{ config('rate_type')[$matter['rate_type']]['name'] }}の案件</font></div>
+                    <div class="carousel-caption border border-primary rounded d-none d-md-block" style="background-color:#f3c35c;">
+                      <div ><font color="#191970"; size="5" face="Comic Sans MS">{{ config('rate_type')[$matter['rate_type']]['name'] }}の案件</font></div>
                       <div class="row">
                         <div class="col-8" id="matter-info">
                           <!--進捗バー-->
@@ -97,7 +97,7 @@
                   <img src="{{ asset('img/photo0000-5281.jpg')}}" alt="NO_IMAGE">
                 </div>
                 <div class="carousel-caption rounded d-none d-md-block" style="background-color:#f3c35c;">
-                  <div ><font color="orange" size="5" face="Comic Sans MS">{{ config('rate_type')[$matter['rate_type']]['name'] }}の案件</font></div>
+                  <div ><font color="#191970" size="5" face="Comic Sans MS">{{ config('rate_type')[$matter['rate_type']]['name'] }}の案件</font></div>
                   <div class="row">
                     <div class="col-8" id="matter-info">
                       <!--進捗バー-->
