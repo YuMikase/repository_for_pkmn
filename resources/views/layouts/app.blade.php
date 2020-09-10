@@ -69,4 +69,16 @@
     </div>
     @yield('content')
 </body>
+<script>
+    @if (session('flash_message'))
+        $(function () {
+              toastr.options = {
+                    "positionClass": "toast-top-center",
+                    "timeOut": "1000",
+                  };
+               toastr.success('{{ session('flash_message') }}');
+               
+        });
+    @endif
+</script>
 </html>
