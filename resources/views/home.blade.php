@@ -143,6 +143,18 @@
       </div>
   </div>
   <!--仮設置終わり-->
+  <!--色追加テスト-->
+<div class="bg-primary">
+  <h2>primary</h2>
+</div>
+<div class="bg-test2">
+  <h2>色変更テスト</h2>
+</div>
+<div class="bg-test3">
+  <h2>色変更テスト</h2>
+</div>
+
+  <!--色追加テスト-->
 
 <div class='container'>
   <div class='row justify-content-md-center w-100'>
