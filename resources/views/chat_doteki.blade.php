@@ -296,6 +296,7 @@
                         
                         this.getMessages(); // 全メッセージを再読込
                         this.getBars();
+                        this.getImg();
 
                     });
                 Echo.channel('chat'+this.id)
