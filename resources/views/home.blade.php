@@ -144,15 +144,28 @@
   </div>
   <!--仮設置終わり-->
   <!--色追加テスト-->
-<div class="bg-primary">
-  <h2>primary</h2>
+<div class="bg-primary" style="font-family:Courier,Times,serif;">
+  <h2>Courierあいうえお1234</h2>
 </div>
-<div class="bg-test2">
-  <h2>色変更テスト</h2>
+<div class="bg-test2" style="font-family:Times,serif;">
+  <h2>Timesあいうえお1234</h2>
 </div>
-<div class="bg-test3">
-  <h2>色変更テスト</h2>
+<div class="bg-test2" style="font-family:'メイリオ',serif;">
+  <h2>メイリオaiueo1234</h2>
 </div>
+<div class="bg-test2" style="font-family:'ヒラギノ角ゴ',serif;">
+  <h2>ヒラギノ角ゴaiueo1234</h2>
+</div>
+<div class="bg-test2" style="font-family:'Grandstander',cursive;">
+  <h2>Grandstanderあいうえお1234</h2>
+</div>
+<div class="bg-test2" style="font-family: 'Press Start 2P', cursive;">
+  <h2>Pressstartあいうえお1234なんかうまくはんえいされてないな？</h2>
+</div>
+<div class="bg-test2" style="font-family: 'Sigmar One', cursive;">
+  <h2>SigmarOneあいうえお1234</h2>
+</div>
+
 
   <!--色追加テスト-->
 

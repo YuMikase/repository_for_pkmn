@@ -15,9 +15,11 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
+    <!--　Webフォントのテスト　-->
+    <link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&display=swap" rel="stylesheet">
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!--scssが反映されない問題、試行錯誤としてasset->mixにしてみる？-->
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body style="color:#191970; background-color:#fffacd;">
     <div id="app">
