@@ -122,9 +122,19 @@ class ChatController extends Controller
 				$request->session()->flash('flash_message','案件は終了しました。');
 				$request->session()->reflash();
 				//言語スキル処理
-				$user_lang_skill = UserLangSkill::where('user_id', $value['user_id'])->where('skill', $commands[$input_command]['lang'])->first();
+				$user_lang_skill = UserLangSkill::where('user_id', $value['user_id'])->where('skill', $rate_type['name'])->first();
 
-				$user_lang_skill['level'] += $value['command_count']/3;
+				//上昇するレベルの値
+				$up_level = $value['command_count']/3;
+
+				$user_lang_skill['level'] += $up_level;
+
+				Messages::create([
+				    	'matter_id' => $id,
+				        'body' => $user->name.'は'.$rate_type['name'].'のレベルが'.$up_level.'上がった！',
+				        'user_name' => "システムメッセージ",
+				        'type' => "system"
+			    ]);
 
 				Log::debug($user_lang_skill['level']);
 
