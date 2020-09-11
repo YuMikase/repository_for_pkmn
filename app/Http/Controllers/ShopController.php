@@ -38,7 +38,7 @@ class ShopController extends Controller
         $has->has = $has->has - 1;
         $has->save(); 
 
-        //アイテム仕様処理
+        //アイテム使用処理
         $matter->progress += $item['progress'];
         $matter->barning += $item['barning'];
 
