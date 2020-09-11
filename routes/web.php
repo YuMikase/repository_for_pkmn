@@ -26,6 +26,7 @@ Route::post('ajax/chat/{id}', 'Ajax\ChatController@create'); // チャット登�
 Route::get('ajax/command/{user_id}', 'Ajax\ChatController@index_command'); // ユーザーテーブルからコマンドを取得
 Route::post('ajax/command/{id}', 'Ajax\ChatController@create_command'); // コマンド
 Route::get('ajax/bar/{id}', 'Ajax\ChatController@index_bar'); // 炎上、進捗を取得
+Route::get('ajax/img/{id}', 'Ajax\ChatController@index_img'); // 炎上、進捗によっての画像を取得
 
 //認証が必要なグループ
 Route::middleware('auth')->group(function () {

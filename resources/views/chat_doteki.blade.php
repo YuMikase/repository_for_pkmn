@@ -47,14 +47,14 @@
                                 </div>
                                 <div class="row h-50">
                                     <div class="col border">
-                                        <img class="img-fluid" style="height:20vh; width:20vh;" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
+                                        <img class="img-fluid" style="height:20vh; width:20vh;" alt="ロゴ" v-bind:src="meImg">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="row h-50">
                                     <div class="col border">
-                                        <img class="img-fluid" style="height:20vh; width:20vh;" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
+                                        <img class="img-fluid" style="height:20vh; width:20vh;" alt="ロゴ" v-bind:src="enemyImg">
                                     </div>
                                 </div>
                                 <div class="row h-50">
@@ -182,7 +182,9 @@
                 money:'',
                 color: 'black',
                 infoTitle: '',
-                infoText: ''
+                infoText: '',
+                enemyImg: '/img/normal.png',
+                meImg: '/img/normal.png',
             },
             methods: {
                 toggleBattle() {
@@ -209,6 +211,14 @@
                             this.barning = response.data[0];
                             this.progress = response.data[1];
                             this.time = response.data[2];
+                        });
+                },
+                getImg() {
+                    const url = "/ajax/img/"+this.id;
+                    axios.get(url)
+                        .then((response) => {
+                            this.enemyImg = response.data[0];
+                            this.meImg = response.data[1];
                         });
                 },
                 getCommands() {
@@ -266,6 +276,7 @@
                                 this.getCommands();
                                 this.getBars();
                                 this.getHasMoney();
+                                this.getImg();
                             });
                             break;
                     }
@@ -278,6 +289,7 @@
                 this.getBars();
                 this.getHasItems();
                 this.getHasMoney();
+                this.getImg();
 
                 Echo.channel('chat')
                     .listen('MessageCreated', (e) => {

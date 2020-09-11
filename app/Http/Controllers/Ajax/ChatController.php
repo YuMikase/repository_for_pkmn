@@ -143,6 +143,32 @@ class ChatController extends Controller
 				floor($bars['time'] / $bars['time_limit'] * 100),
 		];
 	}
+	
+	public function index_img($matter_id) {// ユーザーのコマンドを取得
+		$matter = \App\Matter::find($matter_id);
+		
+		// とりあえず3段階で評価
+		// 炎上
+		$barning_par = $matter['barning'] / $matter['barning_limit'];
+		if ( $barning_par >= 0.66 ) {
+			$enemyImg = '/img/three.png';
+		} elseif ( $barning_par >= 0.33 ) {
+			$enemyImg = '/img/two.png';
+		} else {
+			$enemyImg = '/img/normal.png';
+		}
+		// 進捗
+		$progress_par = $matter['progress'] / $matter['progress_limit'];
+		if ( $progress_par >= 0.66 ) {
+			$meImg = '/img/four.png';
+		} elseif ( $progress_par >= 0.33 ) {
+			$meImg = '/img/two.png';
+		} else {
+			$meImg = '/img/normal.png';
+		}
+
+		return [ $enemyImg, $meImg ];
+	}
 
 	public static function createMatter()
 	{
