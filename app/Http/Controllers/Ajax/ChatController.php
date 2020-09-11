@@ -108,7 +108,6 @@ class ChatController extends Controller
 				//報酬処理
 				$result = ($value['command_count'] * 1000) + (($matter->time_limit - $matter->time) * 2000) + ($matter->barning * -2000) + ($matter->progress * 2000);
 
-				
 				if($result > 0){
 					$user->money += $result;
 					Messages::create([
@@ -125,7 +124,7 @@ class ChatController extends Controller
 				$user_lang_skill = UserLangSkill::where('user_id', $value['user_id'])->where('skill', $rate_type['name'])->first();
 
 				//上昇するレベルの値
-				$up_level = $value['command_count']/3;
+				$up_level = fllor($value['command_count']/3);
 
 				$user_lang_skill['level'] += $up_level;
 
