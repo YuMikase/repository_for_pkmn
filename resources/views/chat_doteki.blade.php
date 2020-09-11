@@ -92,9 +92,6 @@
                     </div> 
                     <div class="col-5">
                         <div class="row h-25 border">
-                            <div class="col-4 border h-100">
-                                <img class="img-fluid" style="height:10vh; width:10vh;" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
-                            </div>
                             <div class="col-8 ">
                                 <div class="row h-25 border"><span v-text='infoTitle'></span></div>
                                 <div class="row h-75 border"><span v-text='infoText'></span></div>
