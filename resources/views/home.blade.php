@@ -171,7 +171,7 @@
 
 <div class='container'>
   <div class='row justify-content-md-center w-100'>
-    <div class='col-6 bg-gradient-primary border border-primary'>
+    <div class='col-6 mx-auto' style="background-color:#f3c35c;">
       <h3>あなたのステータス</h3>
       <ul class="list-group">
         @foreach ($langSkills as $langSkill)
@@ -179,13 +179,13 @@
         @endforeach
       </ul>
     </div>
-    <div class='col-6  border border-primary'>
+    <div class='col-6'>
 <!--overflow-->
-      <div class="overflow-auto" style=" height:300px;">
+      <div class="overflow-auto" style=" height:300px; background-color:#f3c35c;" >
         <div id="shop" class="item h-100">
           <h3>アイテム　所持金：<span class="badge badge-light" v-text="'￥'+money" v-bind:style="{ color: color}"></span></h3>
           <div class="list-group">
-            <button class="list-group-item list-group-item-action" v-for="i in items" v-bind:disabled="onBuy">
+            <button class="list-group-item list-group-item-action" v-for="i in items" v-bind:disabled="onBuy" >
                 <div @click='buy(i.id)' class="row">
                     <div class="col-2"><span class="badge badge-light" v-text="i.type"></span></div>
                     <div class="col-6"><span v-text="i.name"></span></div>

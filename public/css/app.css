@@ -21,7 +21,7 @@
   --white: #fff;
   --gray: #6c757d;
   --gray-dark: #343a40;
-  --primary: #3490dc;
+  --primary: #00008B;
   --secondary: #6c757d;
   --success: #38c172;
   --info: #6cb2eb;
@@ -36,6 +36,9 @@
   --breakpoint-xl: 1200px;
   --font-family-sans-serif: "Nunito", sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-family-cursive: "Nunito", sans-serif;
+/*primaryの色をへんおこうしました。ほんとは #3490dc;*/
+
 }
 
 *,
@@ -45,7 +48,7 @@
 }
 
 html {
-  font-family: sans-serif;
+  font-family: Courier, sans-serif;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -10932,4 +10935,3 @@ a.text-dark:focus {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
-
