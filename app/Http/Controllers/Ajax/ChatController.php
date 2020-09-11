@@ -170,6 +170,28 @@ class ChatController extends Controller
 		return [ $enemyImg, $meImg ];
 	}
 
+	public function onDebug(Request $req)
+	{
+		// 各種情報取得
+		$user_name = Auth::user()->name;
+		$matter_id = $req->matter_id;
+		
+		// timeを進める
+		$matter = Matter::find($matter_id);
+		$matter->time += 1;
+		$matter->save();
+
+		// メッセージ作成
+		$message = Messages::create([
+            'matter_id' => $matter_id,
+            'body' => $user_name.'はデバッグを行い炎上度を確かめた。',
+            'user_name' => $user_name,
+            'type' => "debug"
+		]);
+		event(new MessageCreated($message));
+
+	}
+
 	public static function createMatter()
 	{
 		$rate_type = config('rate_type');

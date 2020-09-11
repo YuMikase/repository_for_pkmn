@@ -195,7 +195,12 @@
                 },
                 onDebugButon() {
                     this.onDebug = !this.onDebug;
-                    setTimeout(() => {this.onDebug = !this.onDebug;}, 5000);
+                    var params = { matter_id:this.id };
+                    axios.post("/ajax/debug", params)
+                        .then((response) => {
+                            //成功時処理
+                            setTimeout(() => {this.onDebug = !this.onDebug;}, 5000);
+                        });
                 },
                 getMessages() {
                     const url = "/ajax/chat/"+this.id;
