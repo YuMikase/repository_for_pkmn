@@ -32,8 +32,6 @@ class ChatController extends Controller
 	public function index_doteki(Request $request,$id) {
 		$matter = Matter::find($id);
 		if ( $matter->end_flag ) {
-			$request->session()->flash('flash_message','案件は終了しました。');
-			$request->session()->reflash();
 			return redirect('/result/'.$id);
 		}
 		$reward = config('rate_type')[$matter->rate_type]['reward'];
