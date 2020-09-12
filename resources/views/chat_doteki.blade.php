@@ -81,9 +81,9 @@
                                 </div>
                                 <div class="row" style="height:6vh;">
                                     <div class="col input-group">
-                                        <input type="text" class="form-control" placeholder="Your message" aria-describedby="button-addon2" v-model="message">
+                                        <input type="text" class="form-control" placeholder="Your message" aria-describedby="button-addon2" v-model="message" v-on:mouseover="infoLoad('メッセージ', 'メッセージを入力。同じ案件にアサインされているメンバーがそのメッセージを見ることができる。')" v-on:mouseleave="infoLoad()">
                                         <div class="input-group-append">
-                                          <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="send('chat', 'chat')">送信</button>
+                                          <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="send('chat', 'chat')" v-on:mouseover="infoLoad('送信', '入力されたメッセージを送信する。')" v-on:mouseleave="infoLoad()">送信</button>
                                         </div>
                                     </div>
                                 </div>
@@ -100,12 +100,12 @@
                         <div class="row h-75 border">
                             <div class="col" v-if="!onCommands && !onItems">
                                 <div class="row h-50">
-                                    <button class="col m-1 btn  btn-primary" type="button" name="button" @click="toggleBattle()">BATTLE</button>
-                                    <button class="col m-1 btn  btn-primary" type="button" name="button" @click="onDebugButon()" v-bind:disabled="onDebug">DEBUG</button>
+                                    <button class="col m-1 btn  btn-primary" type="button" name="button" @click="toggleBattle()" v-on:mouseover="infoLoad('BATTLE', 'バトルアクション。コマンド選択へ進む。')" v-on:mouseleave="infoLoad()">BATTLE</button>
+                                <button class="col m-1 btn  btn-primary" type="button" name="button" @click="onDebugButon()" v-bind:disabled="onDebug" v-on:mouseover="infoLoad('DEBUG', 'デバッグアクション。炎上度を 5 秒間確認することができる。また、工数が 1 進む。')" v-on:mouseleave="infoLoad()">DEBUG</button>
                                 </div>
                                 <div class="row h-50">
-                                    <button class="col m-1 btn  btn-primary" type="button" name="button" @click="toggleItem()">ITEM</button>
-                                    <button class="col m-1 btn  btn-primary" type="button" name="button" onClick="home()" >RUN</button>
+                                    <button class="col m-1 btn  btn-primary" type="button" name="button" @click="toggleItem()" v-on:mouseover="infoLoad('ITEM', 'アイテムアクション。アイテム選択へ進む。')" v-on:mouseleave="infoLoad()">ITEM</button>
+                                    <button class="col m-1 btn  btn-primary" type="button" name="button" onClick="home()" v-on:mouseover="infoLoad('RUN', 'ランアクション。ホーム画面へ戻る。')" v-on:mouseleave="infoLoad()">RUN</button>
                                 </div>
                             </div>
 
@@ -114,17 +114,17 @@
                                 <div class="row h-75">
                                     <div class="col">
                                         <div class="row h-50">
-                                            <button class="col m-1 btn  btn-primary" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[0] )" ><span v-text="commands[0]['name']"></span></button>
-                                            <button class="col m-1 btn  btn-success" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[1] )" ><span v-text="commands[1]['name']"></span></button>
+                                            <button class="col m-1 btn  btn-primary" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[0] )" v-on:mouseover="infoLoad(commands[0]['name'], '工数を' + commands[0]['time'] + '進めて進捗度を ' + commands[0]['progress'] + ' 進める。また、炎上度を ' + commands[0]['barning'] + ' 進める。')" v-on:mouseleave="infoLoad()"><span v-text="commands[0]['name']"></span></button>
+                                            <button class="col m-1 btn  btn-success" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[1] )" v-on:mouseover="infoLoad(commands[1]['name'], '工数を' + commands[1]['time'] + '進めて進捗度を ' + commands[1]['progress'] + ' 進める。また、炎上度を ' + commands[1]['barning'] + ' 進める。')" v-on:mouseleave="infoLoad()"><span v-text="commands[1]['name']"></span></button>
                                         </div>
                                         <div class="row h-50">
-                                            <button class="col m-1 btn  btn-danger" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[2] )" ><span v-text="commands[2]['name']"></span></button>
-                                            <button class="col m-1 btn  btn-warning" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[3] )" ><span v-text="commands[3]['name']"></span></button>    
+                                            <button class="col m-1 btn  btn-danger" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[2] )" v-on:mouseover="infoLoad(commands[2]['name'], '工数を' + commands[2]['time'] + '進めて進捗度を ' + commands[2]['progress'] + ' 進める。また、炎上度を ' + commands[2]['barning'] + ' 進める。')" v-on:mouseleave="infoLoad()"><span v-text="commands[2]['name']"></span></button>
+                                            <button class="col m-1 btn  btn-warning" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[3] )" v-on:mouseover="infoLoad(commands[3]['name'], '工数を' + commands[3]['time'] + '進めて進捗度を ' + commands[3]['progress'] + ' 進める。また、炎上度を ' + commands[3]['barning'] + ' 進める。')" v-on:mouseleave="infoLoad()"><span v-text="commands[3]['name']"></span></button>    
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row h-25">
-                                    <button class="col m-1 btn  btn-secondary" type="button" name="button" v-bind:disabled="isProcessing" @click="toggleBattle()">RETURN</button>
+                                    <button class="col m-1 btn  btn-secondary" type="button" name="button" v-bind:disabled="isProcessing" @click="toggleBattle()" v-on:mouseover="infoLoad('RETURN', 'アクション選択へ戻る。')" v-on:mouseleave="infoLoad()">RETURN</button>
                                 </div>
                             </div>
 
@@ -133,7 +133,7 @@
                                 <div class="row" style="height: 320px; overflow: scroll;">
                                     <div class="list-group m-1 w-100">
                                         <button class="list-group-item list-group-item-action" v-for="i in items">
-                                            <div @click='useItem(i.id)' class="row" v-on:mouseover="infoLoad(i.name, i.explain)">
+                                            <div @click='useItem(i.id)' class="row" v-on:mouseover="infoLoad(i.name, i.explain)" v-on:mouseleave="infoLoad()">
                                                 <div class="col-2"><span class="badge badge-light" v-text="i.type"></span></div>
                                                 <div class="col-8"><span v-text="i.name"></span></div>
                                                 <div class="col-2"><span class="badge badge-light" v-text="has_items[i.id]"></span></div>
@@ -142,7 +142,7 @@
                                     </div>
                                 </div>
                                 <div class="row h-25">
-                                    <button class="col m-1 btn  btn-secondary" type="button" name="button" v-bind:disabled="isProcessing" @click="toggleItem()">RETURN</button>
+                                    <button class="col m-1 btn  btn-secondary" type="button" name="button" v-bind:disabled="isProcessing" @click="toggleItem()" v-on:mouseover="infoLoad('RETURN', 'アクション選択へ戻る。')" v-on:mouseleave="infoLoad()">RETURN</button>
                                 </div>
                             </div>
                         </div>
