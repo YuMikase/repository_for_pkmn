@@ -252,6 +252,11 @@
                             //成功時処理
                             this.getHasItems();
                         });
+                    const url = "/ajax/command/"+this.user_id;
+                    axios.get(url)
+                        .then((response) => {
+                            this.commands = response.data;
+                        });
                 },
                 infoLoad(title, text) {
                     this.infoTitle = title;
