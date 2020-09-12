@@ -124,7 +124,7 @@ class ChatController extends Controller
 				$user_lang_skill = UserLangSkill::where('user_id', $value['user_id'])->where('skill', $rate_type['name'])->first();
 
 				//上昇するレベルの値
-				$up_level = fllor($value['command_count']/3);
+				$up_level = floor($value['command_count']/3);
 
 				$user_lang_skill['level'] += $up_level;
 
