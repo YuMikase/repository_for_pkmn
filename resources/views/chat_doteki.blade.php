@@ -54,20 +54,22 @@
                                 </div>
                                 <div class="row h-50">
                                     <div class="col border">
-                                        <img class="img-fluid" style="height:20vh; width:20vh;" alt="ロゴ" v-bind:src="meImg">
+                                        <img class="img-fluid" style="height:20vh; width:20vh; z-index:1; position:absolute;" alt="ロゴ" v-bind:src="meImg">
+                                        <div  class="text-center" style="color:lightgray; font-size: 60px;">YOU</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="row h-50">
                                     <div class="col border">
-                                        <img class="img-fluid" style="height:20vh; width:20vh;" alt="ロゴ" v-bind:src="enemyImg">
+                                        <img class="img-fluid" style="height:20vh; width:20vh; z-index:1; position:absolute;" alt="ロゴ" v-bind:src="enemyImg">
+                                        <div  class="text-center" style="color:lightgray; font-size: 60px;">MATTER</div>
                                     </div>
                                 </div>
                                 <div class="row h-50">
                                     <div class="col border">
                                         <div class="row"><p></p></div>
-                                        <h4 class="row m-1">所持金：<span class="badge badge-light" v-text="'￥'+money" v-bind:style="{ color: color}"></span></h4>
+                                        <h4 class="row m-1">あなた：{{ $user_name }}</h4>
                                     </div>
                                 </div>
                             </div>
