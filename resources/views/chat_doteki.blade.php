@@ -32,19 +32,20 @@
                             <div class="col-6">
                                 <div class="row h-50">
                                     <div class="col border">
-                                        <div class="row">
+                                        <img class="img-fluid mt-2" style="position:absolute; height:10vh; width:40vh;" alt="ロゴ" src="{{ asset('/img/arrowL.png') }}">
+                                        <div class="row ml-3">
                                             <span class="col-2 m-1 badge badge-light">工数</span>
                                             <div class="col-8 p-0 m-1 progress">
                                                 <div class="progress-bar bg-success" role="progressbar" v-bind:style="'width:'+time+'%'" v-bind:aria-valuenow="time" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row ml-3">
                                             <span class="col-2 m-1 badge badge-light">進捗</span>
                                             <div class="col-8 p-0 m-1 progress">
                                                 <div class="progress-bar bg-info" role="progressbar" v-bind:style="'width:'+progress+'%'" v-bind:aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
-                                        <div class="row" v-if="onDebug">
+                                        <div class="row ml-3" v-if="onDebug">
                                             <span class="col-2 m-1 badge badge-light">炎上</span>
                                             <div class="col-8 p-0 m-1 progress">
                                                 <div class="progress-bar bg-danger" role="progressbar" v-bind:style="'width:'+barning+'%'" v-bind:aria-valuenow="barning" aria-valuemin="0" aria-valuemax="100"></div>
@@ -68,8 +69,8 @@
                                 </div>
                                 <div class="row h-50">
                                     <div class="col border">
-                                        <div class="row"><p></p></div>
-                                        <h4 class="row m-1">あなた：{{ $user_name }}</h4>
+                                        <h4 class="row" style="margin-top:35%; margin-left:35%;">あなた：{{ $user_name }}</h4>
+                                        <img class="img-fluid mt-2" style="position:absolute; height:10vh; width:40vh; top:45%; left:5%;" alt="ロゴ" src="{{ asset('/img/arrowLr.png') }}">
                                     </div>
                                 </div>
                             </div>
