@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+<style>
+    .noMoney {
+        text-decoration: line-through;
+        color: red;
+    }
+</style>
+
 @section('content')
     <div id="chat">
 
@@ -132,8 +139,8 @@
                             <div class="col" v-if="onItems">
                                 <div class="row" style="height: 320px; overflow: scroll;">
                                     <div class="list-group m-1 w-100">
-                                        <button class="list-group-item list-group-item-action" v-for="i in items">
-                                            <div @click='useItem(i.id)' class="row" v-on:mouseover="infoLoad(i.name, i.explain)" v-on:mouseleave="infoLoad()">
+                                        <button class="list-group-item list-group-item-action" v-for="i in items" v-bind:disabled="onUse || ( has_items[i.id] <= 0 )">
+                                            <div @click='useItem(i.id)' class="row" v-on:mouseover="infoLoad(i.name, i.explain)" v-on:mouseleave="infoLoad()" v-bind:class="{ noMoney: (has_items[i.id] <= 0) }">
                                                 <div class="col-2"><span class="badge badge-light" v-text="i.type"></span></div>
                                                 <div class="col-8"><span v-text="i.name"></span></div>
                                                 <div class="col-2"><span class="badge badge-light" v-text="has_items[i.id]"></span></div>
@@ -170,6 +177,7 @@
                 onDebug: false,
                 matterEnded: false,
                 onItems: false,
+                onUse: false,
                 barning: 0,
                 progress: 0,
                 time: 0,
@@ -236,6 +244,7 @@
                     axios.get("../../getHasItems")
                         .then((response) => {
                             this.has_items = response.data;
+                            this.onUse = false;
                         });
                 },
                 getHasMoney() {
@@ -246,6 +255,7 @@
                         });
                 },
                 useItem(item_id) {
+                    this.onUse = true;
                     var params = { item_id: item_id,matter_id:this.id};
                     axios.post("/shop/use", params)
                         .then((response) => {

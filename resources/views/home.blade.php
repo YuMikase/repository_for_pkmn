@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+<style>
+  .noMoney {
+    text-decoration: line-through;
+    color: red;
+  }
+</style>
+
 @section('content')
 <!--酢黒る-->
 <div class="contaienr py-3">
@@ -58,8 +65,8 @@
         <div id="shop" class="item h-100">
           <h3>アイテム　所持金：<span class="badge badge-light" v-text="'￥'+money" v-bind:style="{ color: color}"></span></h3>
           <div class="list-group">
-            <button class="list-group-item list-group-item-action" v-for="i in items" v-bind:disabled="onBuy">
-                <div @click='buy(i.id)' class="row">
+            <button class="list-group-item list-group-item-action" v-for="i in items" v-bind:disabled="onBuy || ( money < i.money )">
+                <div @click='buy(i.id)' class="row" v-bind:class="{ noMoney: (money < i.money) }">
                     <div class="col-2"><span class="badge badge-light" v-text="i.type"></span></div>
                     <div class="col-6"><span v-text="i.name"></span></div>
                     <div class="col-2"><span class="badge badge-light" v-text="'￥'+i.money"></span></div>
@@ -94,7 +101,6 @@
                             //成功時処理
                             this.getHasItems();
                             this.getHasMoney();
-                            this.onBuy = false;
                         });
                 },
                 getHasItems() {
@@ -108,6 +114,7 @@
                         .then((response) => {
                             this.money = response.data;
                             if ( this.money < 0 ){ this.color = 'red'; }
+                            this.onBuy = false;
                         });
                 }
             },
