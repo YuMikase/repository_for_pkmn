@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="css.css">
+</head>
+
+<body>
+
+    <a href="https://codepen.io/boldfacedesign/pen/EoGgD">https://codepen.io/boldfacedesign/pen/EoGgD</a>
+    <div id="wrapper">
+        <h1 class="chrome">CHROME</h1>
+        <h3 class="dreams">Dreams</h3>
+        <h1 class="vectro"><span class="vectro-body">VECTRO</span><span class="vectro-red">I</span><span
+                class="vectro-green">I</span><span class="vectro-blue">I</span></h1>
+        <div class="street-machine">
+            <h1 class="street">STREET</h1>
+            <h3 class="machine">Machine</h3>
+        </div>
+        <h1 class="victory"><span class="victory-v">V</span>ictory</h1>
+        <h1 class="victory"><span class="victory-v">P</span>okomon</h1>
+        <h1 class="victory"><span class="victory-v">に</span>ほんご</h1>
+        <div class="future-cop">
+            <h3 class="future">Future</h3>
+            <h1 class="cop">COP</h1>
+        </div>
+    </div>
+    <script>
+        if (navigator.platform.indexOf('Win') != -1) {
+            window.document.getElementById("wrapper").setAttribute("class", "windows");
+        } else if (navigator.platform.indexOf('Mac') != -1) {
+            window.document.getElementById("wrapper").setAttribute("class", "mac");
+        }
+    </script>
+</body>
+
+</html>

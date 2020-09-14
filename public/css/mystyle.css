@@ -1,0 +1,227 @@
+
+/* -------基本枠組み-------- */
+
+body{
+  display: grid;
+  grid-template: 
+  "header" 10%
+  "main" 85%
+  "footer" 5%
+  / 1fr;
+}
+
+/* -------ヘッダー-------- */
+.header {
+  padding: 10px;
+  text-align: center;
+  grid-area: header;
+}
+/* -------メイン-------- */
+.main {
+  padding: 10px;
+
+  text-align: center;
+  grid-area: main;
+}
+/* -------フッター-------- */
+.footer {
+  padding: 10px;
+
+  text-align: center;
+  grid-area: footer;
+}
+
+/* -------マイページ枠組み-------- */
+.grid_mypage{
+  justify-content: center;
+  display: grid;
+  grid-template: 
+  "button button button" 20%
+  ". . ." 10px
+  "status . item" 75%
+  / 45% 10px 45%;
+}
+
+.enter_button{
+  grid-area: button;
+}
+.status{
+  grid-area: status;
+  border: solid 1px black;
+  overflow: scroll;
+}
+.item{
+  grid-area: item;
+  border: solid 1px black;
+}
+
+/* -------チャットページ枠組み-------- */
+/* ゲージ部分 */
+.grid_gauge{
+  justify-content: center;
+  display: grid;
+  grid-template: 
+  "enjo sintyoku" 90%
+  / 45% 45%;
+}
+.enjo{
+  grid-area: enjo;
+  border: solid 1px black;
+
+}
+.sintyoku{
+  border: solid 1px black;
+
+  grid-area: sintyoku;
+}
+
+/* チャット部分 */
+.grid_chat{
+  justify-content: center;
+  display: grid;
+  grid-template: 
+  "chat . img" 250px
+  ". . ." 10px
+  "commands . select_btns" 250px
+  / 45% 10px 45%;
+}
+.messages{
+  border: solid 1px black;
+
+  height: 200px;
+  overflow: scroll;
+  grid-area: chat;
+}
+.img{
+  border: solid 1px black;
+  grid-area: img;
+  justify-content: center;
+  align-items:center;
+  display: grid;
+  grid-template: 
+  "enemy_status . enemy" 45%
+  ". . ." 10px
+  "me . me_status" 45%
+  / 45% 10px 45%;
+}
+.me_img{
+  height: 100px;
+  grid-area: me;
+}
+.me_status{
+  height: 100px;
+  grid-area: me_status;
+}
+.enemy_img{
+  height: 100px;
+  grid-area: enemy;
+}
+.enemy_status{
+  height: 100px;
+  grid-area: enemy_status;
+}
+
+/* コマンド部分 */
+.grid_commands{
+  border: solid 1px black;
+  grid-area: commands;
+  justify-content: center;
+  display: grid;
+  grid-template: 
+  "btn1 btn1 . btn2 btn2" 25%
+  ". . . . ." 10px
+  "btn3 btn3 . btn4 btn4" 25%
+  ". . . . ." 10px
+  "textbox textbox textbox textbox send_btn" 10%
+  / 15% 30% 5px 30% 15%;
+}
+.btn1{
+  grid-area: btn1;
+}
+.btn2{
+  grid-area: btn2;
+}
+.btn3{
+  grid-area: btn3;
+}
+.btn4{
+  grid-area: btn4;
+}
+.textbox{
+  grid-area: textbox;
+}
+.send_btn{
+  grid-area: send_btn;
+}
+/* セレクトボタン部分 */
+.select_btns{
+  border: solid 1px black;
+
+  grid-area: select_btns;
+}
+
+/* -----------タイムアウトの画面---------- */
+.time_out{
+  background-color: blueviolet;
+  position: absolute;
+  z-index: 5;
+  width: 100%;
+  height: 500px;
+}
+/* -----------リザルトの画面---------- */
+.result{
+  background-color: orange;
+  position: absolute;
+  z-index: 5;
+  width: 100%;
+  height: 500px;
+}
+
+
+/* ----------メッセージの書式---------- */
+.announce{
+  color: black;
+}
+.my_do{
+  color: blue;
+}
+.friends_do{
+  color: green;
+}
+.enemy_do{
+  color: red;
+}
+
+/* --------------------ローディング用-------------------- */
+/* ローディング画面 */
+#loading {
+  width: 100vw;
+  height: 100vh;
+  transition: all 1s;
+  background-color: #0bd;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+.spinner {
+  width: 100px;
+  height: 100px;
+  margin: 200px auto;
+  background-color: #fff;
+  border-radius: 100%;
+  animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+/* ローディングアニメーション */
+@keyframes sk-scaleout {
+  0% {
+    transform: scale(0);
+  } 100% {
+    transform: scale(1.0);
+    opacity: 0;
+  }
+}
+.loaded {
+  opacity: 0;
+  visibility: hidden;
+}
