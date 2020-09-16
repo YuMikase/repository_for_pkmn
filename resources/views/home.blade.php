@@ -145,26 +145,30 @@
   <!--仮設置終わり-->
   <!--色追加テスト-->
 <div class="bg-primary" style="font-family:Courier,Times,serif;">
-  <h2>Courierあいうえお1234</h2>
+  <h2>Courierあいうえお1234開始</h2>
 </div>
 <div class="bg-test2" style="font-family:Times,serif;">
-  <h2>Timesあいうえお1234</h2>
+  <h2>Timesあいうえお1234開始</h2>
 </div>
 <div class="bg-test2" style="font-family:'メイリオ',serif;">
-  <h2>メイリオaiueo1234</h2>
+  <h2>メイリオaiueo1234開始</h2>
 </div>
 <div class="bg-test2" style="font-family:'ヒラギノ角ゴ',serif;">
-  <h2>ヒラギノ角ゴaiueo1234</h2>
+  <h2>ヒラギノ角ゴaiueo123開始4開始</h2>
 </div>
 <div class="bg-test2" style="font-family:'Grandstander',cursive;">
-  <h2>Grandstanderあいうえお1234</h2>
+  <h2>Grandstande開始rあいうえお1234開始開始</h2>
 </div>
-<div class="bg-test2" style="font-family: 'Press Start 2P', cursive;">
-  <h2>Pressstartあいうえお1234なんかうまくはんえいされてないな？</h2>
+<div class="bg-test2" style="font-family: 'Press Start 2P', 'Kosugi Maru',cursive;">
+  <h2>開始Pressstartあいうえお1234なんかうまくはんえいされてないな？開始</h2>
 </div>
 <div class="bg-test2" style="font-family: 'Sigmar One', cursive;">
-  <h2>SigmarOneあいうえお1234</h2>
+  <h2>SigmarOneあいうえお1234開始</h2>
 </div>
+<div class="bg-test2" style="font-family: 'Kosugi Maru', cursive;">
+  <h2>SigmarOneあいうえお1234これは日本語もいけるかな開始</h2>
+</div>
+
 
 
   <!--色追加テスト-->
