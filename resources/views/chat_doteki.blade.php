@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+<style>
+    .noMoney {
+        text-decoration: line-through;
+        color: red;
+    }
+</style>
+
 @section('content')
     <div id="chat">
 
@@ -25,19 +32,20 @@
                             <div class="col-6">
                                 <div class="row h-50">
                                     <div class="col border">
-                                        <div class="row">
+                                        <img class="img-fluid mt-2" style="position:absolute; height:10vh; width:40vh;" alt="ロゴ" src="{{ asset('/img/arrowL.png') }}">
+                                        <div class="row ml-3">
                                             <span class="col-2 m-1 badge badge-light">工数</span>
                                             <div class="col-8 p-0 m-1 progress">
                                                 <div class="progress-bar bg-success" role="progressbar" v-bind:style="'width:'+time+'%'" v-bind:aria-valuenow="time" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row ml-3">
                                             <span class="col-2 m-1 badge badge-light">進捗</span>
                                             <div class="col-8 p-0 m-1 progress">
                                                 <div class="progress-bar bg-info" role="progressbar" v-bind:style="'width:'+progress+'%'" v-bind:aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
-                                        <div class="row" v-if="onDebug">
+                                        <div class="row ml-3" v-if="onDebug">
                                             <span class="col-2 m-1 badge badge-light">炎上</span>
                                             <div class="col-8 p-0 m-1 progress">
                                                 <div class="progress-bar bg-danger" role="progressbar" v-bind:style="'width:'+barning+'%'" v-bind:aria-valuenow="barning" aria-valuemin="0" aria-valuemax="100"></div>
@@ -47,20 +55,22 @@
                                 </div>
                                 <div class="row h-50">
                                     <div class="col border">
-                                        <img class="img-fluid" style="height:20vh; width:20vh;" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
+                                        <img class="img-fluid" style="height:20vh; width:20vh; z-index:1; position:absolute;" alt="ロゴ" v-bind:src="meImg">
+                                        <div  class="text-center" style="color:lightgray; font-size: 60px;">YOU</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="row h-50">
                                     <div class="col border">
-                                        <img class="img-fluid" style="height:20vh; width:20vh;" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
+                                        <img class="img-fluid" style="height:20vh; width:20vh; z-index:1; position:absolute;" alt="ロゴ" v-bind:src="enemyImg">
+                                        <div  class="text-center" style="color:lightgray; font-size: 60px;">MATTER</div>
                                     </div>
                                 </div>
                                 <div class="row h-50">
                                     <div class="col border">
-                                        <div class="row"><p></p></div>
-                                        <h4 class="row m-1">所持金：<span class="badge badge-light" v-text="'￥'+money" v-bind:style="{ color: color}"></span></h4>
+                                        <h4 class="row" style="margin-top:35%; margin-left:35%;">あなた：{{ $user_name }}</h4>
+                                        <img class="img-fluid mt-2" style="position:absolute; height:10vh; width:40vh; top:45%; left:5%;" alt="ロゴ" src="{{ asset('/img/arrowLr.png') }}">
                                     </div>
                                 </div>
                             </div>
@@ -81,9 +91,9 @@
                                 </div>
                                 <div class="row" style="height:6vh;">
                                     <div class="col input-group">
-                                        <input type="text" class="form-control" placeholder="Your message" aria-describedby="button-addon2" v-model="message">
+                                        <input type="text" class="form-control" placeholder="Your message" aria-describedby="button-addon2" v-model="message" v-on:mouseover="infoLoad('メッセージ', 'メッセージを入力。同じ案件にアサインされているメンバーがそのメッセージを見ることができる。')" v-on:mouseleave="infoLoad()">
                                         <div class="input-group-append">
-                                          <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="send('chat', 'chat')">送信</button>
+                                          <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="send('chat', 'chat')" v-on:mouseover="infoLoad('送信', '入力されたメッセージを送信する。')" v-on:mouseleave="infoLoad()">送信</button>
                                         </div>
                                     </div>
                                 </div>
@@ -92,23 +102,20 @@
                     </div> 
                     <div class="col-5">
                         <div class="row h-25 border">
-                            <div class="col-4 border h-100">
-                                <img class="img-fluid" style="height:10vh; width:10vh;" alt="ロゴ" src="{{ asset('/img/'.$image.'.png') }}">
-                            </div>
                             <div class="col-8 ">
-                                <div class="row h-25 border">INFO_TITLE</div>
-                                <div class="row h-75 border">INFO_TEXT</div>
+                                <div class="row h-25 border"><span v-text='infoTitle'></span></div>
+                                <div class="row h-75 border"><span v-text='infoText'></span></div>
                             </div>
                         </div>
                         <div class="row h-75 border">
                             <div class="col" v-if="!onCommands && !onItems">
                                 <div class="row h-50">
-                                    <button class="col m-1 btn  btn-primary" type="button" name="button" @click="toggleBattle()">BATTLE</button>
-                                    <button class="col m-1 btn  btn-primary" type="button" name="button" @click="onDebugButon()" v-bind:disabled="onDebug">DEBUG</button>
+                                    <button class="col m-1 btn  btn-primary" type="button" name="button" @click="toggleBattle()" v-on:mouseover="infoLoad('BATTLE', 'バトルアクション。コマンド選択へ進む。')" v-on:mouseleave="infoLoad()">BATTLE</button>
+                                <button class="col m-1 btn  btn-primary" type="button" name="button" @click="onDebugButon()" v-bind:disabled="onDebug" v-on:mouseover="infoLoad('DEBUG', 'デバッグアクション。炎上度を 5 秒間確認することができる。また、工数が 1 進む。')" v-on:mouseleave="infoLoad()">DEBUG</button>
                                 </div>
                                 <div class="row h-50">
-                                    <button class="col m-1 btn  btn-primary" type="button" name="button" @click="toggleItem()">ITEM</button>
-                                    <button class="col m-1 btn  btn-primary" type="button" name="button" onClick="home()" >RUN</button>
+                                    <button class="col m-1 btn  btn-primary" type="button" name="button" @click="toggleItem()" v-on:mouseover="infoLoad('ITEM', 'アイテムアクション。アイテム選択へ進む。')" v-on:mouseleave="infoLoad()">ITEM</button>
+                                    <button class="col m-1 btn  btn-primary" type="button" name="button" onClick="home()" v-on:mouseover="infoLoad('RUN', 'ランアクション。ホーム画面へ戻る。')" v-on:mouseleave="infoLoad()">RUN</button>
                                 </div>
                             </div>
 
@@ -117,17 +124,17 @@
                                 <div class="row h-75">
                                     <div class="col">
                                         <div class="row h-50">
-                                            <button class="col m-1 btn  btn-primary" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[0] )" ><span v-text="commands[0]['name']"></span></button>
-                                            <button class="col m-1 btn  btn-success" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[1] )" ><span v-text="commands[1]['name']"></span></button>
+                                            <button class="col m-1 btn  btn-primary" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[0] )" v-on:mouseover="infoLoad(commands[0]['name'], '工数を' + commands[0]['time'] + '進めて進捗度を ' + commands[0]['progress'] + ' 進める。また、炎上度を ' + commands[0]['barning'] + ' 進める。')" v-on:mouseleave="infoLoad()"><span v-text="commands[0]['name']"></span></button>
+                                            <button class="col m-1 btn  btn-success" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[1] )" v-on:mouseover="infoLoad(commands[1]['name'], '工数を' + commands[1]['time'] + '進めて進捗度を ' + commands[1]['progress'] + ' 進める。また、炎上度を ' + commands[1]['barning'] + ' 進める。')" v-on:mouseleave="infoLoad()"><span v-text="commands[1]['name']"></span></button>
                                         </div>
                                         <div class="row h-50">
-                                            <button class="col m-1 btn  btn-danger" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[2] )" ><span v-text="commands[2]['name']"></span></button>
-                                            <button class="col m-1 btn  btn-warning" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[3] )" ><span v-text="commands[3]['name']"></span></button>    
+                                            <button class="col m-1 btn  btn-danger" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[2] )" v-on:mouseover="infoLoad(commands[2]['name'], '工数を' + commands[2]['time'] + '進めて進捗度を ' + commands[2]['progress'] + ' 進める。また、炎上度を ' + commands[2]['barning'] + ' 進める。')" v-on:mouseleave="infoLoad()"><span v-text="commands[2]['name']"></span></button>
+                                            <button class="col m-1 btn  btn-warning" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[3] )" v-on:mouseover="infoLoad(commands[3]['name'], '工数を' + commands[3]['time'] + '進めて進捗度を ' + commands[3]['progress'] + ' 進める。また、炎上度を ' + commands[3]['barning'] + ' 進める。')" v-on:mouseleave="infoLoad()"><span v-text="commands[3]['name']"></span></button>    
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row h-25">
-                                    <button class="col m-1 btn  btn-secondary" type="button" name="button" v-bind:disabled="isProcessing" @click="toggleBattle()">RETURN</button>
+                                    <button class="col m-1 btn  btn-secondary" type="button" name="button" v-bind:disabled="isProcessing" @click="toggleBattle()" v-on:mouseover="infoLoad('RETURN', 'アクション選択へ戻る。')" v-on:mouseleave="infoLoad()">RETURN</button>
                                 </div>
                             </div>
 
@@ -135,8 +142,8 @@
                             <div class="col" v-if="onItems">
                                 <div class="row" style="height: 320px; overflow: scroll;">
                                     <div class="list-group m-1 w-100">
-                                        <button class="list-group-item list-group-item-action" v-for="i in items">
-                                            <div @click='useItem(i.id)' class="row">
+                                        <button class="list-group-item list-group-item-action" v-for="i in items" v-bind:disabled="onUse || ( has_items[i.id] <= 0 )">
+                                            <div @click='useItem(i.id)' class="row" v-on:mouseover="infoLoad(i.name, i.explain)" v-on:mouseleave="infoLoad()" v-bind:class="{ noMoney: (has_items[i.id] <= 0) }">
                                                 <div class="col-2"><span class="badge badge-light" v-text="i.type"></span></div>
                                                 <div class="col-8"><span v-text="i.name"></span></div>
                                                 <div class="col-2"><span class="badge badge-light" v-text="has_items[i.id]"></span></div>
@@ -145,7 +152,7 @@
                                     </div>
                                 </div>
                                 <div class="row h-25">
-                                    <button class="col m-1 btn  btn-secondary" type="button" name="button" v-bind:disabled="isProcessing" @click="toggleItem()">RETURN</button>
+                                    <button class="col m-1 btn  btn-secondary" type="button" name="button" v-bind:disabled="isProcessing" @click="toggleItem()" v-on:mouseover="infoLoad('RETURN', 'アクション選択へ戻る。')" v-on:mouseleave="infoLoad()">RETURN</button>
                                 </div>
                             </div>
                         </div>
@@ -173,6 +180,7 @@
                 onDebug: false,
                 matterEnded: false,
                 onItems: false,
+                onUse: false,
                 barning: 0,
                 progress: 0,
                 time: 0,
@@ -180,7 +188,11 @@
                 items: @json($items),
                 has_items: {},
                 money:'',
-                color: 'black'
+                color: 'black',
+                infoTitle: '',
+                infoText: '',
+                enemyImg: '/img/normal.png',
+                meImg: '/img/normal.png',
             },
             methods: {
                 toggleBattle() {
@@ -191,7 +203,12 @@
                 },
                 onDebugButon() {
                     this.onDebug = !this.onDebug;
-                    setTimeout(() => {this.onDebug = !this.onDebug;}, 5000);
+                    var params = { matter_id:this.id };
+                    axios.post("/ajax/debug", params)
+                        .then((response) => {
+                            //成功時処理
+                            setTimeout(() => {this.onDebug = !this.onDebug;}, 5000);
+                        });
                 },
                 getMessages() {
                     const url = "/ajax/chat/"+this.id;
@@ -209,6 +226,14 @@
                             this.time = response.data[2];
                         });
                 },
+                getImg() {
+                    const url = "/ajax/img/"+this.id;
+                    axios.get(url)
+                        .then((response) => {
+                            this.enemyImg = response.data[0];
+                            this.meImg = response.data[1];
+                        });
+                },
                 getCommands() {
                     const url = "/ajax/command/"+this.user_id;
                     axios.get(url)
@@ -222,6 +247,7 @@
                     axios.get("../../getHasItems")
                         .then((response) => {
                             this.has_items = response.data;
+                            this.onUse = false;
                         });
                 },
                 getHasMoney() {
@@ -232,20 +258,22 @@
                         });
                 },
                 useItem(item_id) {
-                    var params = { item_id: item_id};
+                    this.onUse = true;
+                    var params = { item_id: item_id,matter_id:this.id};
                     axios.post("/shop/use", params)
                         .then((response) => {
                             //成功時処理
                             this.getHasItems();
+                        });
+                    const url = "/ajax/command/"+this.user_id;
+                    axios.get(url)
+                        .then((response) => {
+                            this.commands = response.data;
                         });
                 },
-                result(item_id) {
-                    var params = { item_id: item_id};
-                    axios.post("/shop/use", params)
-                        .then((response) => {
-                            //成功時処理
-                            this.getHasItems();
-                        });
+                infoLoad(title, text) {
+                    this.infoTitle = title;
+                    this.infoText = text;
                 },
                 send(type,value) {
                     const url = "/ajax/"+type+"/"+this.id;
@@ -268,6 +296,7 @@
                                 this.getCommands();
                                 this.getBars();
                                 this.getHasMoney();
+                                this.getImg();
                             });
                             break;
                     }
@@ -280,12 +309,14 @@
                 this.getBars();
                 this.getHasItems();
                 this.getHasMoney();
+                this.getImg();
 
                 Echo.channel('chat')
                     .listen('MessageCreated', (e) => {
                         
                         this.getMessages(); // 全メッセージを再読込
                         this.getBars();
+                        this.getImg();
 
                     });
                 Echo.channel('chat'+this.id)

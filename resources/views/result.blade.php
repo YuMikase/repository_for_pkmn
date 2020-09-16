@@ -17,18 +17,11 @@
 </div>
 <footer class="footer">
   <div class="container">
-    <button class="col m-1 btn  btn-primary" type="button" name="button" onclick="location.href='/'">案件を終了する。</button>
+    <button class="col m-1 btn  btn-primary" type="button" name="button" onclick="location.href='/'">案件を退出する。</button>
   </div>
 </footer>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script>
-    @if (session('flash_message'))
-        $(function () {
-               toastr.success('{{ session('flash_message') }}');
-        });
-    @endif
-</script>
 
 @endsection

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Events\MessageCreated;
 use Illuminate\Support\Facades\Auth;
 use App\Matter;
-use App\Message;
+use App\Messages;
 
 use App\MatterHasUser;
 
@@ -20,15 +20,18 @@ class ChatController extends Controller
 
 	}
 
-	public function result($id) {
-		$messages = Message::where('matter_id',$id)->orderBy('id', 'desc')->get()->toArray();
+	public function result(Request $request,$id) {
+		$request->session()->flash('flash_message','案件は終了しました。');
+		$request->session()->reflash();
+		
+		$messages = Messages::where('matter_id',$id)->orderBy('id', 'desc')->get()->toArray();
 	    return view('result',compact('messages'));
 
 	}
 
-	public function index_doteki($id) {
+	public function index_doteki(Request $request,$id) {
 		$matter = Matter::find($id);
-		if ( empty($matter) || $matter->end_flag ) {
+		if ( $matter->end_flag ) {
 			return redirect('/result/'.$id);
 		}
 		$reward = config('rate_type')[$matter->rate_type]['reward'];
@@ -91,7 +94,7 @@ class ChatController extends Controller
         $user->skill4  = $rand_commands[3];
 
 		$user->save();
-	    $message = \App\Message::create([
+	    $message = \App\Messages::create([
 	    	'matter_id' => $id,
 	        'body' => $commands[$input_command]['name']."を押しました。",
 	        'user_name' => $user_name ,
