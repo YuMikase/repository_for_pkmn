@@ -96,10 +96,10 @@ class ChatController extends Controller
 		};
 		
 		// 案件終了時処理
-		if( $matter->time >= $matter->time_limit) {
+		if( $matter->time == $matter->time_limit) {
+			$matter->time += 1;
 			$matter->end_flag = 1;
 			$matter->save();
-			self::createMatter();
 			//参加ユーザー全取得
 			$matter_has_users = MatterHasUser::where('matter_id', $id)->get();
 			foreach ($matter_has_users as $key => $value) {
@@ -108,7 +108,6 @@ class ChatController extends Controller
 				//報酬処理
 				$result = ($value['command_count'] * 1000) + (($matter->time_limit - $matter->time) * 2000) + ($matter->barning * -2000) + ($matter->progress * 2000);
 
-				
 				if($result > 0){
 					$user->money += $result;
 					Messages::create([
@@ -118,11 +117,23 @@ class ChatController extends Controller
 				        'type' => "system"
 			    	]);
 				}
-
+				//sessionにflash_message格納
+				$request->session()->flash('flash_message','案件は終了しました。');
+				$request->session()->reflash();
 				//言語スキル処理
-				$user_lang_skill = UserLangSkill::where('user_id', $value['user_id'])->where('skill', $commands[$input_command]['lang'])->first();
+				$user_lang_skill = UserLangSkill::where('user_id', $value['user_id'])->where('skill', $rate_type['name'])->first();
 
-				$user_lang_skill['level'] += $value['command_count']/3;
+				//上昇するレベルの値
+				$up_level = floor($value['command_count']/3);
+
+				$user_lang_skill['level'] += $up_level;
+
+				Messages::create([
+				    	'matter_id' => $id,
+				        'body' => $user->name.'は'.$rate_type['name'].'のレベルが'.$up_level.'上がった！',
+				        'user_name' => "システムメッセージ",
+				        'type' => "system"
+			    ]);
 
 				Log::debug($user_lang_skill['level']);
 
@@ -140,6 +151,54 @@ class ChatController extends Controller
 				floor($bars['progress'] / $bars['progress_limit'] * 100),
 				floor($bars['time'] / $bars['time_limit'] * 100),
 		];
+	}
+	
+	public function index_img($matter_id) {// ユーザーのコマンドを取得
+		$matter = \App\Matter::find($matter_id);
+		
+		// とりあえず3段階で評価
+		// 炎上
+		$barning_par = $matter['barning'] / $matter['barning_limit'];
+		if ( $barning_par >= 0.66 ) {
+			$enemyImg = '/img/three.png';
+		} elseif ( $barning_par >= 0.33 ) {
+			$enemyImg = '/img/two.png';
+		} else {
+			$enemyImg = '/img/normal.png';
+		}
+		// 進捗
+		$progress_par = $matter['progress'] / $matter['progress_limit'];
+		if ( $progress_par >= 0.66 ) {
+			$meImg = '/img/four.png';
+		} elseif ( $progress_par >= 0.33 ) {
+			$meImg = '/img/two.png';
+		} else {
+			$meImg = '/img/normal.png';
+		}
+
+		return [ $enemyImg, $meImg ];
+	}
+
+	public function onDebug(Request $req)
+	{
+		// 各種情報取得
+		$user_name = Auth::user()->name;
+		$matter_id = $req->matter_id;
+		
+		// timeを進める
+		$matter = Matter::find($matter_id);
+		$matter->time += 1;
+		$matter->save();
+
+		// メッセージ作成
+		$message = Messages::create([
+            'matter_id' => $matter_id,
+            'body' => $user_name.'はデバッグを行い炎上度を確かめた。',
+            'user_name' => $user_name,
+            'type' => "debug"
+		]);
+		event(new MessageCreated($message));
+
 	}
 
 	public static function createMatter()
