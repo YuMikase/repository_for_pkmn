@@ -241,7 +241,7 @@ label {
 }
 
 button {
-  border-radius: 5;
+  border-radius: 0;
 }
 
 button:focus {
@@ -10932,3 +10932,4 @@ a.text-dark:focus {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+

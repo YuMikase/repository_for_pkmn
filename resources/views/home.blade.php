@@ -8,7 +8,7 @@
 </style>
 
 @section('content')
-<!--酢黒る-->
+<!--
 <div class="contaienr py-3">
   <div class="row justify-content-center">
     <div class="col-10 border" style="background-color:#f3c35c;">
@@ -23,12 +23,12 @@
           <li class="nav-item"><a class="nav-link active" href="#matter1">案件１</a></li>
           <li class="nav-item"><a class="nav-link" href="#matter2">案健２</a></li>
           <li class="nav-item dropdown">
-    <!--      <li class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ドロップダウン</a>
+      <li class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ドロップダウン</a>
             <div class="dropdown-menu dropdown-menu-right">
               <a class="dropdown-item" href="#menu1">メニュー1</a>
               ...
-            </div></li>-->
-          <li class="nav-item"><a class="nav-link" href="#matter3">案件3</a></li>
+            </div></li>
+                      <li class="nav-item"><a class="nav-link" href="#matter3">案件3</a></li>
           <li class="nav-item"><a class="nav-link" href="#matter3">案件4</a></li>
         </ul>
       </div>
@@ -50,7 +50,7 @@
     </div>
   </div>
 </div>
-
+-->
 <!--カルーセル仮設置-->
 <div class="container mb-5">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

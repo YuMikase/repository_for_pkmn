@@ -41,6 +41,18 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//タイトルに遷移に(一先ず/titleで、おいおい / からredirectで行けるように)
+Route::get('/title',function(){
+  return view('title');
+});
+//以下でredirect
+Route::get('/',function(){
+  return redirect('title');
+});
+
+/*画面遷移の変更のため、以前のものをコメントアウト
+
 Route::get('/', function () {
     return redirect('/login');
 });
+*/

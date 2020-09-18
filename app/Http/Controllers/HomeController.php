@@ -61,7 +61,13 @@ class HomeController extends Controller
         $matters = Matter::withCount('users')->where('end_flag',false)->get();
 
         $langSkills = UserLangSkill::where('user_id', Auth::user()->id)->get()->toArray();
-        
+
         return view('home', compact('user', 'matters', 'langSkills', 'items'));
     }
+    //以下、タイトルへのルーティングのために追加
+    public function title()
+    {
+        return view('title');
+    }
+
 }
