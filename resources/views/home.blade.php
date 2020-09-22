@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 <style>
+  :root {
+    --color-text:#191970;
+    --color-back:#fffacd;
+    --color-point:#e76133;
+  }
   .noMoney {
     text-decoration: line-through;
     color: red;
@@ -8,48 +13,57 @@
 </style>
 
 @section('content')
-<!--酢黒る-->
-<div class="contaienr py-3">
-  <div class="row justify-content-center">
-    <div class="col-10 border border-primary">
-      <div style="height:300px;" class="overflow-auto" >
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">案件</a>
-      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navbar" aria-controls="Navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="Navbar">
-        <ul class="nav nav-pills flex-column flex-lg-row ml-auto">
-          <li class="nav-item"><a class="nav-link active" href="#matter1">案件１</a></li>
-          <li class="nav-item"><a class="nav-link" href="#matter2">案健２</a></li>
-          <li class="nav-item dropdown">
-    <!--      <li class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ドロップダウン</a>
-            <div class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" href="#menu1">メニュー1</a>
-              ...
-            </div></li>-->
-          <li class="nav-item"><a class="nav-link" href="#matter3">案件3</a></li>
-          <li class="nav-item"><a class="nav-link" href="#matter3">案件4</a></li>
-        </ul>
-      </div>
-    </nav>
-    <div class="container overflow-auto"data-spy="scroll" data-target="#Navbar">
-      @foreach ($matters as $matter)
-        <div id="matter{{ $matter['id'] }}" class="border">
-          <h3>案件{{ $matter['id'] }} ( {{ config('rate_type')[$matter['rate_type']]['name'] }}の案件 ) </h3>
-          <p>
-            案件{{ $matter['id'] }}：
-            工数【 {{ $matter['time'] }} / {{ $matter['time_limit'] }} ( {{ floor($matter['time'] / $matter['time_limit'] * 100) }} % ) 】
-            進捗【{{ $matter['progress'] }} / {{ $matter['progress_limit'] }} ( {{ floor($matter['progress'] / $matter['progress_limit'] * 100) }} % ) 】           
-            <button type="button" class="btn btn-primary"><a href="chat/doteki/{{ $matter['id'] }}">参加</a></button>
-          </p>
-        </div>
-      @endforeach
-    </div>
+
+{{-- カルーセル --}}
+<div id="carousel" class="carousel slide" data-ride="carousel" style="width:800px; height:500px; margin:30px auto;">
+  {{-- インジケーター --}}
+  <ol class="carousel-indicators">
+    @for ($i = 0; $i < count($matters); $i++)
+        @if ( $i === 0 )
+          <li data-target="#carousel" data-slide-to="{{ $i }}" class="active"></li>  
+        @else
+          <li data-target="#carousel" data-slide-to="{{ $i }}"></li>            
+        @endif
+    @endfor
+  </ol>
+  {{-- 中身 --}}
+  <div class="carousel-inner">
+    @for ($i = 0; $i < count($matters); $i++)
+        @if ( $i === 0 )
+          <div class="carousel-item active">
+        @else
+          <div class="carousel-item">
+        @endif
+            <img class="d-block w-100 h-100" src="{{ asset('img/photo0000-5281.jpg')}}" alt="IMAGE">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>No. {{ $matters[$i]['id'] }}　　{{ config('rate_type')[$matters[$i]['rate_type']]['name'] }}の案件</h5>
+              <div class="m-3">
+                <span class="m-1 badge badge-light" style="float:left;">工数</span>
+                <div class="m-1 progress">
+                    <div class="progress-bar bg-success" role="progressbar" style="width:{{ round($matters[$i]['time'] / $matters[$i]['time_limit'] * 100) }}%" aria-valuenow="{{ round($matters[$i]['time'] / $matters[$i]['time_limit'] * 100) }}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <br>
+                <span class="m-1 badge badge-light" style="float:left;">進捗</span>
+                <div class="m-1 progress">
+                    <div class="progress-bar bg-info" role="progressbar" style="width:{{ round($matters[$i]['progress'] / $matters[$i]['progress_limit'] * 100) }}%" aria-valuenow="{{ round($matters[$i]['time'] / $matters[$i]['time_limit'] * 100) }}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+              <a href="/chat/doteki/{{ $matters[$i]['id'] }}"><button type="button" class="btn" style="color:var(--color-back); background-color:var(--color-point);">参加</button></a>
+            </div>
+          </div>
+    @endfor
   </div>
-    </div>
-  </div>
+  {{-- 前後のリンク --}}
+  <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
+
 
 <div class='container'>
   <div class='row justify-content-md-center w-100'>

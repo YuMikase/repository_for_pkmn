@@ -58,7 +58,7 @@ class HomeController extends Controller
         }
 
         //補充後改めて取得
-        $matters = Matter::withCount('users')->where('end_flag',false)->get();
+        $matters = Matter::withCount('users')->where('end_flag',false)->get()->toArray();
 
         $langSkills = UserLangSkill::where('user_id', Auth::user()->id)->get()->toArray();
         
