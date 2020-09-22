@@ -19,9 +19,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body style="color:#191970; background-color:#fffacd;">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel bg-info">
+        {{-- <nav class="navbar navbar-expand-md navbar-light navbar-laravel bg-info">
             <div class="container">
                 <a class="navbar-brand text-white" href="{{ url('/') }}">
                     {{ config('app.name', 'Pocomon') }}
@@ -65,7 +65,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
     </div>
     @yield('content')
 </body>
