@@ -34,8 +34,9 @@
         @else
           <div class="carousel-item">
         @endif
-            <img class="d-block w-100 h-100" src="{{ asset('img/photo0000-5281.jpg')}}" alt="IMAGE">
-            <div class="carousel-caption d-none d-md-block">
+            <img class="d-block w-100 h-100" src="{{ asset('img/matter/'.$matters[$i]['rate_type'].'.jpg')}}" alt="IMAGE">
+            {{-- キャプション --}}
+            <div class="carousel-caption d-none d-md-block" style="background-color: rgba(0, 0, 0, 0.5)">
               <h5>No. {{ $matters[$i]['id'] }}　　{{ config('rate_type')[$matters[$i]['rate_type']]['name'] }}の案件</h5>
               <div class="m-3">
                 <span class="m-1 badge badge-light" style="float:left;">工数</span>
