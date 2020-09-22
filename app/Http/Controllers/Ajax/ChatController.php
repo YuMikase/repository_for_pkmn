@@ -106,13 +106,27 @@ class ChatController extends Controller
 				$user = User::find($value['user_id']);
 
 				//報酬処理
-				$result = ($value['command_count'] * 1000) + (($matter->time_limit - $matter->time) * 2000) + ($matter->barning * -2000) + ($matter->progress * 2000);
+				$result = $value['command_count'] * 1000;
 
+				//基本給
+				$user->money+= $result;
+				if($value['command_count'] > 0){
+					Messages::create([
+				    	'matter_id' => $id,
+				        'body' => $user->name.'は$'.$result.'を手に入れた。',
+				        'user_name' => "システムメッセージ",
+				        'type' => "system"
+			    	]);
+				}
+
+				$result =  $matter->barning * -10000 + $matter->progress * 10000;
+
+				//ボーナス
 				if($result > 0){
 					$user->money += $result;
 					Messages::create([
 				    	'matter_id' => $id,
-				        'body' => $user->name.'は'.$result.'を手に入れた。',
+				        'body' => $user->name.'はボーナスとして$'.$result.'を手に入れた。',
 				        'user_name' => "システムメッセージ",
 				        'type' => "system"
 			    	]);
