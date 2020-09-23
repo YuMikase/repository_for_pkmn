@@ -106,7 +106,7 @@ class ChatController extends Controller
 				$user = User::find($value['user_id']);
 
 				//報酬処理
-				$result = $value['command_count'] * 1000;
+				$result = $value['command_count'] * 20000;
 
 				//基本給
 				$user->money+= $result;
