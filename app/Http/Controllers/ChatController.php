@@ -49,7 +49,7 @@ class ChatController extends Controller
 		if ( empty( MatterHasUser::where('matter_id', $id)->where('user_id', $user->id)->first() ) ) {
 			MatterHasUser::create(['matter_id' => $matter->id, 'user_id' => $user->id]);
 		}
-	    return view('chat_doteki',compact('user','image','user_name','id','cmds_now','items', 'reward'));
+	    return view('chat_doteki',compact('user','image','user_name','id','cmds_now','items', 'reward', 'matter'));
 
 	}
 

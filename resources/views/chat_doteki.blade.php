@@ -32,7 +32,8 @@
                             <div class="col-6">
                                 <div class="row h-50">
                                     <div class="col border">
-                                        <img class="img-fluid mt-2" style="position:absolute; height:10vh; width:40vh;" alt="ロゴ" src="{{ asset('/img/arrowL.png') }}">
+                                        <img class="img-fluid mt-2" style="position:absolute; height:40%; width:65%; top:55px;" alt="ロゴ" src="{{ asset('/img/arrowL.png') }}">
+                                        <h4 class="row ml-3">{{ config('rate_type')[$matter['rate_type']]['name'] }}の案件</h4>
                                         <div class="row ml-3">
                                             <span class="col-2 m-1 badge badge-light">工数</span>
                                             <div class="col-8 p-0 m-1 progress">
@@ -69,8 +70,8 @@
                                 </div>
                                 <div class="row h-50">
                                     <div class="col border">
-                                        <h4 class="row" style="margin-top:35%; margin-left:35%;">あなた：{{ $user_name }}</h4>
-                                        <img class="img-fluid mt-2" style="position:absolute; height:10vh; width:40vh; top:45%; left:5%;" alt="ロゴ" src="{{ asset('/img/arrowLr.png') }}">
+                                        <h4 class="row" style="position:absolute; top:50%; left:30%;">あなた：{{ $user_name }}</h4>
+                                        <img class="img-fluid mt-2" style="position:absolute; height:40%; width:65%; top:40%; left:10%;" alt="ロゴ" src="{{ asset('/img/arrowLr.png') }}">
                                     </div>
                                 </div>
                             </div>

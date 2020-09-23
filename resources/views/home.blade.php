@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 <style>
+  :root {
+    --color-text:#191970;
+    --color-back:#fffacd;
+    --color-point:#e76133;
+  }
   .noMoney {
     text-decoration: line-through;
     color: red;
@@ -8,6 +13,7 @@
 </style>
 
 @section('content')
+<<<<<<< HEAD
 <!--
 <div class="contaienr py-3">
   <div class="row justify-content-center">
@@ -48,7 +54,58 @@
     </div>
   </div>
     </div>
+=======
+
+{{-- カルーセル --}}
+<div id="carousel" class="carousel slide" data-ride="carousel" style="width:800px; height:500px; margin:30px auto;">
+  {{-- インジケーター --}}
+  <ol class="carousel-indicators">
+    @for ($i = 0; $i < count($matters); $i++)
+        @if ( $i === 0 )
+          <li data-target="#carousel" data-slide-to="{{ $i }}" class="active"></li>  
+        @else
+          <li data-target="#carousel" data-slide-to="{{ $i }}"></li>            
+        @endif
+    @endfor
+  </ol>
+  {{-- 中身 --}}
+  <div class="carousel-inner">
+    @for ($i = 0; $i < count($matters); $i++)
+        @if ( $i === 0 )
+          <div class="carousel-item active">
+        @else
+          <div class="carousel-item">
+        @endif
+            <img class="d-block w-100 h-100" src="{{ asset('img/matter/'.$matters[$i]['rate_type'].'.jpg')}}" alt="IMAGE">
+            {{-- キャプション --}}
+            <div class="carousel-caption d-none d-md-block" style="background-color: rgba(0, 0, 0, 0.5)">
+              <h5>No. {{ $matters[$i]['id'] }}　　{{ config('rate_type')[$matters[$i]['rate_type']]['name'] }}の案件</h5>
+              <div class="m-3">
+                <span class="m-1 badge badge-light" style="float:left;">工数</span>
+                <div class="m-1 progress">
+                    <div class="progress-bar bg-success" role="progressbar" style="width:{{ round($matters[$i]['time'] / $matters[$i]['time_limit'] * 100) }}%" aria-valuenow="{{ round($matters[$i]['time'] / $matters[$i]['time_limit'] * 100) }}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <br>
+                <span class="m-1 badge badge-light" style="float:left;">進捗</span>
+                <div class="m-1 progress">
+                    <div class="progress-bar bg-info" role="progressbar" style="width:{{ round($matters[$i]['progress'] / $matters[$i]['progress_limit'] * 100) }}%" aria-valuenow="{{ round($matters[$i]['time'] / $matters[$i]['time_limit'] * 100) }}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+              <a href="/chat/doteki/{{ $matters[$i]['id'] }}"><button type="button" class="btn" style="color:var(--color-back); background-color:var(--color-point);">参加</button></a>
+            </div>
+          </div>
+    @endfor
+>>>>>>> b26c3207feafafa86a66de82cf48de98682b03ec
   </div>
+  {{-- 前後のリンク --}}
+  <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
 -->
 <!--カルーセル仮設置-->
@@ -179,6 +236,7 @@
 
 
   <!--色追加テスト-->
+
 
 <div class='container'>
   <div class='row justify-content-md-center w-100'>

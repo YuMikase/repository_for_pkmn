@@ -27,7 +27,11 @@
 </head>
 <body style="color:#191970; background-color:#fffacd;">
     <div id="app">
+<<<<<<< HEAD
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color:#e76133;">
+=======
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color: rgba(0, 0, 0, 0.5)">
+>>>>>>> b26c3207feafafa86a66de82cf48de98682b03ec
             <div class="container">
                 <a class="navbar-brand text-white" href="{{ url('/') }}">
                     {{ config('app.name', 'Pocomon') }}
@@ -56,7 +60,7 @@
                             @endif
                         @else
                         <li class="nav-item">
-                            <a class="text-dark" href="{{ route('logout') }}"
+                            <a class="text-light" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}

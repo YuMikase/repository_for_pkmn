@@ -1,8 +1,63 @@
 @extends('layouts.app')
 
+{{-- webフォント読み込み --}}
+<link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --title-height : 100px;
+        --title-width : 500px;
+        --title-position-top : calc( 15vh - var(--title-height) / 2 );
+        --title-position-left : calc( 50vw - var(--title-width) / 2 );
+        --form-height : 500px;
+        --form-width : 800px;
+        --form-position-top : calc( var(--title-position-top) * 2 + var(--title-height) );
+        --form-position-left : calc( 50vw - var(--form-width) / 2);
+    }
+
+    .title_big {
+        width: var(--title-width);
+        height: var(--title-height);
+        position: absolute;
+        top: var(--title-position-top);
+        left: var(--title-position-left);
+        font-family: 'Press Start 2P', 'Kosugi Maru',cursive;
+        text-align: center;
+
+        z-index: 5;
+        font-size: 60px;
+        color:#191970;
+    }
+    .title_small {
+        width: var(--title-width);
+        height: var(--title-height);
+        position: absolute;
+        top: var(--title-position-top);
+        left: var(--title-position-left);
+        font-family: 'Press Start 2P', 'Kosugi Maru',cursive;
+        text-align: center;
+
+        z-index: 10;
+        font-size: 58px;
+        color: #e76133;
+    }
+
+    #form_reg_login {
+        width: var(--form-width);
+        height: var(--form-height);
+        position: absolute;
+        top: var(--form-position-top);
+        left: var(--form-position-left);
+    }
+</style>
+
 @section('content')
 
 <!--タイトルタイポグラフィー-->
+<<<<<<< HEAD
 <div id="title" class="container">
   <div class="row justify-content-center">
     <div class="col-10" style="font-family: 'Press Start 2P', 'Kosugi Maru',cursive;">
@@ -10,8 +65,13 @@
     </div>
     </div>
 </div>
+=======
+>>>>>>> b26c3207feafafa86a66de82cf48de98682b03ec
 
-<div class="container">
+<div class="title_small">Pokomon</div>
+<div class="title_big">Pokomon</div>
+
+<div id="form_reg_login" class="container">
     <div class="row justify-content-center">
       <!--登録フォーム-->
         <div class="col-md-6">
