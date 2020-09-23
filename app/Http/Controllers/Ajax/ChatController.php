@@ -113,7 +113,7 @@ class ChatController extends Controller
 				if($value['command_count'] > 0){
 					Messages::create([
 				    	'matter_id' => $id,
-				        'body' => $user->name.'は$'.$result.'を手に入れた。',
+				        'body' => $user->name.'は￥'.$result.'を手に入れた。',
 				        'user_name' => "システムメッセージ",
 				        'type' => "system"
 			    	]);
@@ -126,7 +126,7 @@ class ChatController extends Controller
 					$user->money += $result;
 					Messages::create([
 				    	'matter_id' => $id,
-				        'body' => $user->name.'はボーナスとして$'.$result.'を手に入れた。',
+				        'body' => $user->name.'はボーナスとして￥'.$result.'を手に入れた。',
 				        'user_name' => "システムメッセージ",
 				        'type' => "system"
 			    	]);
