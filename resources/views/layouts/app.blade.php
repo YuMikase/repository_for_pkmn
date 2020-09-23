@@ -50,7 +50,7 @@
                             @endif
                         @else
                         <li class="nav-item">
-                            <a class="text-dark" href="{{ route('logout') }}"
+                            <a class="text-light" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
