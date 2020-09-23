@@ -21,7 +21,7 @@
 </head>
 <body style="color:#191970; background-color:#fffacd;">
     <div id="app">
-        {{-- <nav class="navbar navbar-expand-md navbar-light navbar-laravel bg-info">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color: rgba(0, 0, 0, 0.5)">
             <div class="container">
                 <a class="navbar-brand text-white" href="{{ url('/') }}">
                     {{ config('app.name', 'Pocomon') }}
@@ -65,7 +65,7 @@
                     </ul>
                 </div>
             </div>
-        </nav> --}}
+        </nav>
     </div>
     @yield('content')
 </body>
