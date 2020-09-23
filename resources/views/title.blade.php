@@ -9,7 +9,7 @@
   </div>
   <div class="row">
     <div class="col-10 border border-primary text-center mx-auto mt-5" style="font-family: 'Press Start 2P', 'Kosugi Maru',cursive;">
-          <font size=60><a href="/login">PRESS START</a></font>
+          <font size=10><a href="/login">PRESS START</a></font>
     </div>
   </div>
 </div>
