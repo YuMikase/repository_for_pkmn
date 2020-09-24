@@ -131,9 +131,7 @@ class ChatController extends Controller
 				        'type' => "system"
 			    	]);
 				}
-				//sessionにflash_message格納
-				$request->session()->flash('flash_message','案件は終了しました。');
-				$request->session()->reflash();
+
 				//言語スキル処理
 				$user_lang_skill = UserLangSkill::where('user_id', $value['user_id'])->where('skill', $rate_type['name'])->first();
 
