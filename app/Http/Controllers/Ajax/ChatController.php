@@ -140,14 +140,15 @@ class ChatController extends Controller
 				//上昇するレベルの値
 				$up_level = floor($value['command_count']/3);
 
-				$user_lang_skill['level'] += $up_level;
-
-				Messages::create([
-				    	'matter_id' => $id,
-				        'body' => $user->name.'は'.$rate_type['name'].'のレベルが'.$up_level.'上がった！',
-				        'user_name' => "システムメッセージ",
-				        'type' => "system"
-			    ]);
+				if($up_level > 0){
+					$user_lang_skill['level'] += $up_level;
+					Messages::create([
+					    	'matter_id' => $id,
+					        'body' => $user->name.'は'.$rate_type['name'].'のレベルが'.$up_level.'上がった！',
+					        'user_name' => "システムメッセージ",
+					        'type' => "system"
+				    ]);
+				}
 
 				Log::debug($user_lang_skill['level']);
 
