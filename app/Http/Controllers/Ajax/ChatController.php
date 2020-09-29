@@ -110,7 +110,7 @@ class ChatController extends Controller
 	
 					//基本給
 					$user->money+= $result;
-					if($value['command_count'] > 0){
+					if($result > 0){
 						Messages::create([
 							'matter_id' => $id,
 							'body' => $user->name.'は￥'.$result.'を手に入れた。',
