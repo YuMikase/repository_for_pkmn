@@ -97,7 +97,6 @@ class ChatController extends Controller
 		
 		// 案件終了時処理
 		if( $matter->time >= $matter->time_limit) {
-			$matter->time += 1;
 
 			// 案件終了（＝報酬付与完了）フラグをみて報酬処理
 			if ( $matter->end_flag == 0 ) {
