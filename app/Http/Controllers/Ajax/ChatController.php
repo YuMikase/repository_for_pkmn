@@ -109,8 +109,8 @@ class ChatController extends Controller
 					$result = $value['command_count'] * 20000;
 	
 					//基本給
-					$user->money+= $result;
 					if($result > 0){
+						$user->money+= $result;
 						Messages::create([
 							'matter_id' => $id,
 							'body' => $user->name.'は￥'.$result.'を手に入れた。',
