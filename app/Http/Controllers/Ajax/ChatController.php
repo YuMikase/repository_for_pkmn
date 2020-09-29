@@ -119,7 +119,7 @@ class ChatController extends Controller
 			    	]);
 				}
 
-				$result =  $matter->barning * -10000 + $matter->progress * 10000;
+				$result =  $matter->barning * -500 + $matter->progress * 500;
 
 				//ボーナス
 				if($result > 0){
