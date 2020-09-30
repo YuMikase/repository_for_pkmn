@@ -96,65 +96,72 @@ class ChatController extends Controller
 		};
 		
 		// 案件終了時処理
-		if( $matter->time == $matter->time_limit) {
-			$matter->time += 1;
-			$matter->end_flag = 1;
-			$matter->save();
-			//参加ユーザー全取得
-			$matter_has_users = MatterHasUser::where('matter_id', $id)->get();
-			foreach ($matter_has_users as $key => $value) {
-				$user = User::find($value['user_id']);
+		if( $matter->time >= $matter->time_limit) {
 
-				//報酬処理
-				$result = $value['command_count'] * 20000;
-
-				//基本給
-				$user->money+= $result;
-				if($value['command_count'] > 0){
-					Messages::create([
-				    	'matter_id' => $id,
-				        'body' => $user->name.'は￥'.$result.'を手に入れた。',
-				        'user_name' => "システムメッセージ",
-				        'type' => "system"
-			    	]);
+			// 案件終了（＝報酬付与完了）フラグをみて報酬処理
+			if ( $matter->end_flag == 0 ) {
+				//参加ユーザー全取得
+				$matter_has_users = MatterHasUser::where('matter_id', $id)->get();
+				foreach ($matter_has_users as $key => $value) {
+					$user = User::find($value['user_id']);
+	
+					//報酬処理
+					$result = $value['command_count'] * 20000;
+	
+					//基本給
+					if($result > 0){
+						$user->money+= $result;
+						Messages::create([
+							'matter_id' => $id,
+							'body' => $user->name.'は￥'.$result.'を手に入れた。',
+							'user_name' => "システムメッセージ",
+							'type' => "system"
+						]);
+					}
+	
+					$result =  $matter->barning * -500 + $matter->progress * 500;
+	
+					//ボーナス
+					if($result > 0){
+						$user->money += $result;
+						Messages::create([
+							'matter_id' => $id,
+							'body' => $user->name.'はボーナスとして￥'.$result.'を手に入れた。',
+							'user_name' => "システムメッセージ",
+							'type' => "system"
+						]);
+					}
+	
+					//言語スキル処理
+					$user_lang_skill = UserLangSkill::where('user_id', $value['user_id'])->where('skill', $rate_type['name'])->first();
+	
+					//上昇するレベルの値
+					$up_level = floor($value['command_count']/3);
+	
+					if($up_level > 0){
+						$user_lang_skill['level'] += $up_level;
+						Messages::create([
+								'matter_id' => $id,
+								'body' => $user->name.'は'.$rate_type['name'].'のレベルが'.$up_level.'上がった！',
+								'user_name' => "システムメッセージ",
+								'type' => "system"
+						]);
+					}
+	
+					Log::debug($user_lang_skill['level']);
+	
+					$user_lang_skill->save();
+					$user->save();
 				}
 
-				$result =  $matter->barning * -10000 + $matter->progress * 10000;
+				// 案件終了（＝報酬付与完了）フラグたてる
+				$matter->end_flag = 1;
+				$matter->save();
 
-				//ボーナス
-				if($result > 0){
-					$user->money += $result;
-					Messages::create([
-				    	'matter_id' => $id,
-				        'body' => $user->name.'はボーナスとして￥'.$result.'を手に入れた。',
-				        'user_name' => "システムメッセージ",
-				        'type' => "system"
-			    	]);
-				}
-
-				//言語スキル処理
-				$user_lang_skill = UserLangSkill::where('user_id', $value['user_id'])->where('skill', $rate_type['name'])->first();
-
-				//上昇するレベルの値
-				$up_level = floor($value['command_count']/3);
-
-				if($up_level > 0){
-					$user_lang_skill['level'] += $up_level;
-					Messages::create([
-					    	'matter_id' => $id,
-					        'body' => $user->name.'は'.$rate_type['name'].'のレベルが'.$up_level.'上がった！',
-					        'user_name' => "システムメッセージ",
-					        'type' => "system"
-				    ]);
-				}
-
-				Log::debug($user_lang_skill['level']);
-
-				$user_lang_skill->save();
-				$user->save();
-
+				// 案件終了時のイベント発火
+				event(new MatterEnded($matter));
 			}
-			event(new MatterEnded($matter));
+			
 		}
 
 	}
