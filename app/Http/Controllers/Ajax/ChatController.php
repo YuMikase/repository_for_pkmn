@@ -104,6 +104,11 @@ class ChatController extends Controller
 				$matter_has_users = MatterHasUser::where('matter_id', $id)->get();
 				foreach ($matter_has_users as $key => $value) {
 					$user = User::find($value['user_id']);
+
+					//倍率計算
+					$per = ($matter["barning_limit"] / $matter["barning"]) / ($matter["barning_limit"] / $matter["barning"]);
+
+					Log::debug($per);
 	
 					//報酬処理
 					$result = $value['command_count'] * 20000;
