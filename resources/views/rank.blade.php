@@ -18,7 +18,7 @@
           <tr>
             <td>{{$loop->iteration}}位</td>
             <td>{{$user['name']}}</td>
-            <td>{{$user['money']}}</td>
+            <td>￥{{$user['money']}}</td>
           </tr>
         @endforeach
       </tbody>
