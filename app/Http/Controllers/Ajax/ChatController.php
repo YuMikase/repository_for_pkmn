@@ -124,7 +124,7 @@ class ChatController extends Controller
 						]);
 					}
 	
-					$result =  floor($matter->barning * -500 + $matter->progress * 500 * $per);
+					$result =  floor($value['command_count'] * ($matter->barning * -35 + $matter->progress * 35 * $per));
 	
 					//ボーナス
 					if($result > 0){
