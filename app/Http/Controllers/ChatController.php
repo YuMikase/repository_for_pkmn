@@ -7,7 +7,7 @@ use App\Events\MessageCreated;
 use Illuminate\Support\Facades\Auth;
 use App\Matter;
 use App\Messages;
-
+use App\User;
 use App\MatterHasUser;
 
 class ChatController extends Controller
@@ -24,8 +24,17 @@ class ChatController extends Controller
 		$request->session()->flash('flash_message','案件は終了しました。');
 		$request->session()->reflash();
 		
-		$messages = Messages::where('matter_id',$id)->orderBy('id', 'desc')->get()->toArray();
+		$messages = Messages::orderBy('id', 'desc')->get()->toArray();
 	    return view('result',compact('messages'));
+
+	}
+
+	public function rank(Request $request) {
+		$request->session()->flash('flash_message','所持金の順位です。');
+		$request->session()->reflash();
+		
+		$users = User::orderBy('money', 'desc')->get()->toArray();
+	    return view('rank',compact('users'));
 
 	}
 
