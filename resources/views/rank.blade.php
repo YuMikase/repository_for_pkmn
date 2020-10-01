@@ -6,8 +6,11 @@
 
 <div class="col-12 overflow-auto" style="height:600px" >
   @foreach ($users as $user)
-    <span>{{$user['name']}}は${{$user['money']}}獲得です！</span><br>
+    <span class="h2">{{$user['name']}}は ${{$user['money']}}獲得です！</span><br>
     <hr style="border:0;border-top:1px solid red;">
+    <br>
+    <br>
+    <br>
   @endforeach
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
