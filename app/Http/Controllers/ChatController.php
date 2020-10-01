@@ -24,7 +24,7 @@ class ChatController extends Controller
 		$request->session()->flash('flash_message','案件は終了しました。');
 		$request->session()->reflash();
 		
-		$messages = Messages::orderBy('id', 'desc')->get()->toArray();
+		$messages = Messages::where('matter_id',$id)->orderBy('id', 'desc')->get()->toArray();
 	    return view('result',compact('messages'));
 
 	}
@@ -33,7 +33,7 @@ class ChatController extends Controller
 		$request->session()->flash('flash_message','所持金の順位です。');
 		$request->session()->reflash();
 		
-		$users = User::orderBy('money', 'desc')->get()->toArray();
+		$users = User::orderBy('money','desc')->get()->toArray();
 	    return view('rank',compact('users'));
 
 	}
