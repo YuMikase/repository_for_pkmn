@@ -40,7 +40,7 @@ class ChatController extends Controller
 
 	public function index_doteki(Request $request,$id) {
 		$matter = Matter::find($id);
-		if ( $matter->end_flag ) {
+		if ( $matter->end_flag == 99 ) {
 			return redirect('/result/'.$id);
 		}
 		$reward = config('rate_type')[$matter->rate_type]['reward'];

@@ -160,7 +160,7 @@ class ChatController extends Controller
 				}
 
 				// 案件終了（＝報酬付与完了）フラグたてる
-				$matter->end_flag = 1;
+				$matter->end_flag = 99;
 				$matter->save();
 
 				// 案件終了時のイベント発火
