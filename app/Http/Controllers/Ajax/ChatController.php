@@ -106,11 +106,11 @@ class ChatController extends Controller
 					$user = User::find($value['user_id']);
 
 					//倍率計算
-					$per = ($matter["progress"] / $matter["progress_limit"]) / ($matter["barning"] / $matter["barning_limit"]) > 2.5 ? 2.5 : ($matter["progress_limit"] / $matter["progress"]) / ($matter["barning_limit"] / $matter["barning"]);
+					$per = ($matter["progress"] / $matter["progress_limit"]) / ($matter["barning"] / $matter["barning_limit"]) > 2.5 ? 2.5 : ($matter["progress"] / $matter["progress_limit"]) / ($matter["barning"] / $matter["barning_limit"]);
 
-					Log::debug("進捗率".$matter["progress_limit"] / $matter["progress"]);
+					Log::debug("進捗率".$matter["progress"] / $matter["progress_limit"]);
 					Log::debug("倍率".$per);
-					Log::debug("炎上率".$$matter["barning_limit"] / $matter["barning"]);
+					Log::debug("炎上率".$matter["barning"] / $matter["barning_limit"]);
 	
 					//報酬処理
 					$result = floor($value['command_count'] * 20000 * $per);
