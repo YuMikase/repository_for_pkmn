@@ -30,48 +30,58 @@ class ShopController extends Controller
     public function use(Request $re) {
         $commands = config('command');
         $user = Auth::user();
-
-        $has = UserHasItem::where('user_id', $user['id'])->where('item_id', $re->item_id)->first();
-        $matter = Matter::find($re->matter_id);
-
+        $user_name = Auth::user()->name;
         $item = config('item')[$re->item_id];
 
-        $has->has = $has->has - 1;
-        $has->save(); 
+        $matter = Matter::find($re->matter_id);
 
-        //コマンドシャッフル実装。
-        $rand_commands = array_rand($commands, 4);
-        shuffle($rand_commands);
-        $user = Auth::user();
-        $user->skill1  = $rand_commands[0];
-        $user->skill2  = $rand_commands[1];
-        $user->skill3  = $rand_commands[2];
-        $user->skill4  = $rand_commands[3];
-        $user->save();
+        Log::debug($matter->barning + $item['barning']);
 
         //アイテム使用処理
-        $matter->progress += $item['progress'];
-        $matter->barning += $item['barning'];
+        if($matter->barning + $item['barning'] >= 0){
+            $has = UserHasItem::where('user_id', $user['id'])->where('item_id', $re->item_id)->first();
+            $matter->progress += $item['progress'];
+            $matter->barning += $item['barning'];
+            $has->has = $has->has - 1; 
+            //コマンドシャッフル実装。
+            $rand_commands = array_rand($commands, 4);
+            shuffle($rand_commands);
+            $user = Auth::user();
+            $user->skill1  = $rand_commands[0];
+            $user->skill2  = $rand_commands[1];
+            $user->skill3  = $rand_commands[2];
+            $user->skill4  = $rand_commands[3];
+            $user->save();
 
-        $matter->save();
 
-        $user_name = Auth::user()->name;
+            //コミット
+            $has->save();
+            $matter->save();
+            $message = Messages::create([
+                'matter_id' => $re->matter_id,
+                'body' => $user_name."は".$item['name'].'を使った。',
+                'user_name' => $user_name,
+                'type' => "item"
+            ]);
 
-        $message = Messages::create([
+            $message = Messages::create([
+                'matter_id' => $re->matter_id,
+                'body' => $user_name.$item['message'],
+                'user_name' => $user_name,
+                'type' => "effect"
+            ]);
+        }else{
+            $message = Messages::create([
             'matter_id' => $re->matter_id,
-            'body' => $user_name."は".$item['name'].'を使った。',
+            'body' => $user_name."は".$item['name'].'を使えなかった。',
             'user_name' => $user_name,
             'type' => "item"
-        ]);
-
-        $message = Messages::create([
-            'matter_id' => $re->matter_id,
-            'body' => $user_name.$item['message'],
-            'user_name' => $user_name,
-            'type' => "effect"
-        ]);
+            ]);
+        }
+            
 
         event(new MessageCreated($message));
+
     }
 
     public function getHasItems() {
