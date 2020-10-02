@@ -106,7 +106,7 @@ class ChatController extends Controller
 					$user = User::find($value['user_id']);
 
 					//倍率計算
-					$per = ($matter["progress_limit"] / $matter["progress"]) / ($matter["barning_limit"] / $matter["barning"]);
+					$per = ($matter["progress_limit"] / $matter["progress"]) / ($matter["barning_limit"] / $matter["barning"]) > 2.5 ? 2.5 : ($matter["progress_limit"] / $matter["progress"]) / ($matter["barning_limit"] / $matter["barning"]);
 
 					Log::debug("倍率".$per);
 	
