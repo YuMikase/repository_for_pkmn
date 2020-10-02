@@ -16,7 +16,7 @@ class CreateMattersTable extends Migration
         Schema::create('matters', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('skill_count');
-            $table->integer('barning');
+            $table->integer('barning')->unsigned();
             $table->integer('progress');
             $table->integer('time');
             $table->timestamps();
