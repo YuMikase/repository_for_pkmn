@@ -79,11 +79,11 @@
         @endforeach
       </ul>
     </div>
-    <div class='col-6  mx-auto border border-primary'style=" height: 75vw;">
+    <div class='col-6  mx-auto border border-primary' style=" height: 75vw; overflow:scroll;">
         <div id="shop" class="item h-100">
           <h3>アイテム　所持金：<span class="badge badge-light" v-text="'￥'+money" v-bind:style="{ color: color}"></span></h3>
-          <div class="overflow-auto">
-            <div class="list-group" style=" font-size: 1.25vw;">
+
+            <div class="list-group　" style=" font-size: 1.25vw;">
               <button class="list-group-item list-group-item-action" v-for="i in items" v-bind:disabled="onBuy || ( money < i.money )">
                   <div @click='buy(i.id)' class="row" v-bind:class="{ noMoney: (money < i.money) }">
                       <div class="col-2 px-0"><span class="badge badge-light" v-text="i.type"></span></div>
@@ -93,7 +93,6 @@
                   </div>
               </button>
             </div>
-          </div>
         </div>
     </div>
   </div>
