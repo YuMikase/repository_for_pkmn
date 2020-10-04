@@ -152,7 +152,7 @@
                                 {{-- アイテム --}}
                                 <div class="row h-100" v-if="onItems">
                                     <div class="col">
-                                        <div class="row" style="height: 250px; overflow-y: scroll;">
+                                        <div class="row" style="height: 75%; overflow-y: scroll;">
                                             <div class="list-group m-1 w-100">
                                                 <button class="list-group-item list-group-item-action" style="min-height:47px;" v-for="i in items" v-bind:disabled="onUse || ( has_items[i.id] <= 0 )">
                                                     <div @click='useItem(i.id)' class="row" v-on:mouseover="infoLoad(i.name, i.explain)" v-on:mouseleave="infoLoad()" v-bind:class="{ noMoney: (has_items[i.id] <= 0) }">
