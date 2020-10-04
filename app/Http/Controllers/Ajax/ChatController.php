@@ -104,9 +104,16 @@ class ChatController extends Controller
 				$matter_has_users = MatterHasUser::where('matter_id', $id)->get();
 				foreach ($matter_has_users as $key => $value) {
 					$user = User::find($value['user_id']);
+
+					//倍率計算
+					$per = ($matter["progress"] / $matter["progress_limit"]) / ($matter["barning"] / $matter["barning_limit"]) > 2.5 ? 2.5 : ($matter["progress"] / $matter["progress_limit"]) / ($matter["barning"] / $matter["barning_limit"]);
+
+					Log::debug("進捗率".$matter["progress"] / $matter["progress_limit"]);
+					Log::debug("倍率".$per);
+					Log::debug("炎上率".$matter["barning"] / $matter["barning_limit"]);
 	
 					//報酬処理
-					$result = $value['command_count'] * 20000;
+					$result = floor($value['command_count'] * 20000 * $per);
 	
 					//基本給
 					if($result > 0){
@@ -119,7 +126,7 @@ class ChatController extends Controller
 						]);
 					}
 	
-					$result =  $matter->barning * -500 + $matter->progress * 500;
+					$result =  floor($value['command_count'] * ($matter->barning * -35 + $matter->progress * 35 * $per));
 	
 					//ボーナス
 					if($result > 0){
@@ -155,7 +162,7 @@ class ChatController extends Controller
 				}
 
 				// 案件終了（＝報酬付与完了）フラグたてる
-				$matter->end_flag = 1;
+				$matter->end_flag = 99;
 				$matter->save();
 
 				// 案件終了時のイベント発火

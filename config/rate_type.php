@@ -9,14 +9,14 @@ return [
         'name' => 'PHP',
         'barning' => [
             'PHP' => 0.5,
-            'Python' => 1.0,
-            'Ruby' => 1.0,
+            'Python' => 1.5,
+            'Ruby' => 1.5,
             'Normal' => 1.0,
         ],
         'progress' => [
             'PHP' => 2.0,
-            'Python' => 1.0,
-            'Ruby' => 1.0,
+            'Python' => 0.7,
+            'Ruby' => 0.7,
             'Normal' => 1.0,
         ],
         'time' => [
@@ -36,15 +36,15 @@ return [
         'id' => 201,
         'name' => 'Python',
         'barning' => [
-            'PHP' => 1.0,
+            'PHP' => 1.5,
             'Python' => 0.5,
-            'Ruby' => 1.0,
+            'Ruby' => 1.5,
             'Normal' => 1.0,
         ],
         'progress' => [
-            'PHP' => 1.0,
+            'PHP' => 0.7,
             'Python' => 2.0,
-            'Ruby' => 1.0,
+            'Ruby' => 0.7,
             'Normal' => 1.0,
         ],
         'time' => [
@@ -63,14 +63,14 @@ return [
         'id' => 301,
         'name' => 'Ruby',
         'barning' => [
-            'PHP' => 1.0,
-            'Python' => 1.0,
+            'PHP' => 1.5,
+            'Python' => 1.5,
             'Ruby' => 0.5,
             'Normal' => 1.0,
         ],
         'progress' => [
-            'PHP' => 1.0,
-            'Python' => 1.0,
+            'PHP' => 0.7,
+            'Python' => 0.7,
             'Ruby' => 2.0,
             'Normal' => 1.0,
         ],
@@ -93,13 +93,13 @@ return [
             'PHP' => 1.0,
             'Python' => 1.0,
             'Ruby' => 1.0,
-            'Normal' => 1.0,
+            'Normal' => 0.8,
         ],
         'progress' => [
             'PHP' => 1.0,
             'Python' => 1.0,
             'Ruby' => 1.0,
-            'Normal' => 1.0,
+            'Normal' => 1.2,
         ],
         'time' => [
             'PHP' => 1.0,

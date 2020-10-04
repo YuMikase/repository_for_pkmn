@@ -7,7 +7,7 @@ use App\Events\MessageCreated;
 use Illuminate\Support\Facades\Auth;
 use App\Matter;
 use App\Messages;
-
+use App\User;
 use App\MatterHasUser;
 
 class ChatController extends Controller
@@ -29,9 +29,18 @@ class ChatController extends Controller
 
 	}
 
+	public function rank(Request $request) {
+		$request->session()->flash('flash_message','所持金の順位です。');
+		$request->session()->reflash();
+		
+		$users = User::orderBy('money','desc')->get()->toArray();
+	    return view('rank',compact('users'));
+
+	}
+
 	public function index_doteki(Request $request,$id) {
 		$matter = Matter::find($id);
-		if ( $matter->end_flag ) {
+		if ( $matter->end_flag == 99 ) {
 			return redirect('/result/'.$id);
 		}
 		$reward = config('rate_type')[$matter->rate_type]['reward'];

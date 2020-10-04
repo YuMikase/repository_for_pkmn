@@ -16,6 +16,7 @@ Route::get('chat/{id}', 'ChatController@index')->middleware('auth');
 Route::post('chat/{id}', 'ChatController@progress')->middleware('auth');
 Route::get('result/{id}', 'ChatController@result')->middleware('auth');
 Route::get('chat/doteki/{id}', 'ChatController@index_doteki')->middleware('auth');
+Route::get('rank/', 'ChatController@rank')->middleware('auth');
 
 Route::post('/sendmessage', 'MessageController@send');
 

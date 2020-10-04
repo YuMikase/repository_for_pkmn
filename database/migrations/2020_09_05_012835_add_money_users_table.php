@@ -14,7 +14,7 @@ class AddMoneyUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('money')->default('0');
+            $table->bigInteger('money')->default('0');
         });
 
     }
