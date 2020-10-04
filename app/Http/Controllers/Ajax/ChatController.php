@@ -187,21 +187,24 @@ class ChatController extends Controller
 		// 炎上
 		$barning_par = $matter['barning'] / $matter['barning_limit'];
 		if ( $barning_par >= 0.66 ) {
-			$enemyImg = '/img/three.png';
+			$enemyImg = '/img/e_3.png';
+			$meImg = '/img/p_3.png';
 		} elseif ( $barning_par >= 0.33 ) {
-			$enemyImg = '/img/two.png';
+			$enemyImg = '/img/e_2.png';
+			$meImg = '/img/p_2.png';
 		} else {
-			$enemyImg = '/img/normal.png';
+			$enemyImg = '/img/e_1.png';
+			$meImg = '/img/p_1.png';
 		}
 		// 進捗
-		$progress_par = $matter['progress'] / $matter['progress_limit'];
-		if ( $progress_par >= 0.66 ) {
-			$meImg = '/img/four.png';
-		} elseif ( $progress_par >= 0.33 ) {
-			$meImg = '/img/two.png';
-		} else {
-			$meImg = '/img/normal.png';
-		}
+		// $progress_par = $matter['progress'] / $matter['progress_limit'];
+		// if ( $progress_par >= 0.66 ) {
+		// 	$meImg = '/img/p_3.png';
+		// } elseif ( $progress_par >= 0.33 ) {
+		// 	$meImg = '/img/p_2.png';
+		// } else {
+		// 	$meImg = '/img/p_1.png';
+		// }
 
 		return [ $enemyImg, $meImg ];
 	}
