@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
 
 <style>
+/*  定数で書いてしまうとレスポンシブにしたときに対応してくれないのでいったん変種 */
     :root {
         --title-height : 100px;
         --title-width : 500px;
@@ -18,7 +19,7 @@
         --form-position-left : calc( 50vw - var(--form-width) / 2);
     }
 
-    .title_big {
+  /*  .title_big {
         width: var(--title-width);
         height: var(--title-height);
         position: absolute;
@@ -31,40 +32,41 @@
         font-size: 60px;
         color:#191970;
     }
-    .title_small {
-        width: var(--title-width);
+    */
+    #title {
+        /*width: var(--title-width);
         height: var(--title-height);
         position: absolute;
         top: var(--title-position-top);
         left: var(--title-position-left);
+        */
         font-family: 'Press Start 2P', 'Kosugi Maru',cursive;
         text-align: center;
-
+        text-shadow: 5px 5px 5px #191970;
         z-index: 10;
-        font-size: 58px;
+        font-size: 10vw;
         color: #e76133;
     }
 
-    #form_reg_login {
+  /*  #form_reg_login {
         width: var(--form-width);
         height: var(--form-height);
         position: absolute;
         top: var(--form-position-top);
         left: var(--form-position-left);
     }
+*/
 </style>
 
 @section('content')
 
 <!--タイトルタイポグラフィー-->
 
-<div class="title_small">Pokomon</div>
-<div class="title_big">Pokomon</div>
-
+<div id="title" class="container justify-content-center">Pokomon</div>
 <div id="form_reg_login" class="container">
     <div class="row justify-content-center">
       <!--登録フォーム-->
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-10 col-xs-10 mx-auto my-2">
           <div class="card">
               <div class="card-header">{{ __('Register') }}</div>
 
@@ -134,7 +136,7 @@
           </div>
         </div>
       <!--ログイン-->
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-10 col-xs-10 mx-auto my-2">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
