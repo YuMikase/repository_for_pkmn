@@ -85,7 +85,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="card mt-5" style="background-color: rgba(0, 0, 0, 0); border:none;">
-                                    <span class="text-center" style="font-size: clamp(3vw, 16px, 5vw);">あなた：{{ $user_name }}</span>
+                                    <span class="text-center" style="font-size: clamp(2vw, 16px, 5vw);">{{ $user_name }}</span>
                                     <img class="img-fluid" alt="ロゴ" src="{{ asset('/img/arrowLr.png') }}">
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                                         </div>
                                         <div class="row h-50">
                                             <button class="col m-1 btn  btn-primary" type="button" name="button" @click="toggleItem()" v-on:mouseover="infoLoad('ITEM', 'アイテムアクション。アイテム選択へ進む。')" v-on:mouseleave="infoLoad()">ITEM</button>
-                                            <button class="col m-1 btn  btn-primary" type="button" name="button" onClick="home()" v-on:mouseover="infoLoad('RUN', 'ランアクション。ホーム画面へ戻る。')" v-on:mouseleave="infoLoad()">RUN</button>
+                                            <button class="col m-1 btn  btn-primary" type="button" name="button" onClick="home()" v-on:mouseover="infoLoad('BACK', 'ホーム画面へ戻る。')" v-on:mouseleave="infoLoad()">BACK</button>
                                         </div>
                                     </div>
                                 </div>
@@ -146,6 +146,28 @@
                                             <button class="col m-1 btn  btn-secondary" type="button" name="button" v-bind:disabled="isProcessing" @click="toggleBattle()" v-on:mouseover="infoLoad('RETURN', 'アクション選択へ戻る。')" v-on:mouseleave="infoLoad()">RETURN</button>
                                         </div>
                                     </div>
+                                </div>
+
+
+                                {{-- アイテム --}}
+                                <div class="row h-100" v-if="onItems">
+                                    <div class="col">
+                                        <div class="row" style="height: 250px; overflow-y: scroll;">
+                                            <div class="list-group m-1 w-100">
+                                                <button class="list-group-item list-group-item-action" v-for="i in items" v-bind:disabled="onUse || ( has_items[i.id] <= 0 )">
+                                                    <div @click='useItem(i.id)' class="row" v-on:mouseover="infoLoad(i.name, i.explain)" v-on:mouseleave="infoLoad()" v-bind:class="{ noMoney: (has_items[i.id] <= 0) }">
+                                                        <div class="col-2"><span class="badge badge-light" v-text="i.type"></span></div>
+                                                        <div class="col-8"><span v-text="i.name"></span></div>
+                                                        <div class="col-2"><span class="badge badge-light" v-text="has_items[i.id]"></span></div>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="row h-25">
+                                            <button class="col m-1 btn  btn-secondary" type="button" name="button" v-bind:disabled="isProcessing" @click="toggleItem()" v-on:mouseover="infoLoad('RETURN', 'アクション選択へ戻る。')" v-on:mouseleave="infoLoad()">RETURN</button>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                                 
                             </div>

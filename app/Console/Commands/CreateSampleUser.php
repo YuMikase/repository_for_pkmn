@@ -44,6 +44,10 @@ class CreateSampleUser extends Command
      
         $datas = [
             [
+                'name' => 'サンプルユーザー',
+                'email' => 'sample@mail.com',
+            ],
+            [
                 'name' => 'おぐら',
                 'email' => 'ogura@mail.com',
             ],
@@ -60,107 +64,107 @@ class CreateSampleUser extends Command
                 'email' => 'mikase@mail.com',
             ],
             [
-                'name' => 'チームA',
+                'name' => 'ユーザーA',
                 'email' => 'amail@mail.com',
             ],
             [
-                'name' => 'チームB',
+                'name' => 'ユーザーB',
                 'email' => 'bmail@mail.com',
             ],
             [
-                'name' => 'チームC',
+                'name' => 'ユーザーC',
                 'email' => 'cmail@mail.com',
             ],
             [
-                'name' => 'チームD',
+                'name' => 'ユーザーD',
                 'email' => 'dmail@mail.com',
             ],
             [
-                'name' => 'チームE',
+                'name' => 'ユーザーE',
                 'email' => 'email@mail.com',
             ],
             [
-                'name' => 'チームF',
+                'name' => 'ユーザーF',
                 'email' => 'fmail@mail.com',
             ],
             [
-                'name' => 'チームG',
+                'name' => 'ユーザーG',
                 'email' => 'gmail@mail.com',
             ],
             [
-                'name' => 'チームH',
+                'name' => 'ユーザーH',
                 'email' => 'hmail@mail.com',
             ],
             [
-                'name' => 'チームI',
+                'name' => 'ユーザーI',
                 'email' => 'imail@mail.com',
             ],
             [
-                'name' => 'チームJ',
+                'name' => 'ユーザーJ',
                 'email' => 'jmail@mail.com',
             ],
             [
-                'name' => 'チームK',
+                'name' => 'ユーザーK',
                 'email' => 'kmail@mail.com',
             ],
             [
-                'name' => 'チームL',
+                'name' => 'ユーザーL',
                 'email' => 'lmail@mail.com',
             ],
             [
-                'name' => 'チームM',
+                'name' => 'ユーザーM',
                 'email' => 'mmail@mail.com',
             ],
             [
-                'name' => 'チームN',
+                'name' => 'ユーザーN',
                 'email' => 'nmail@mail.com',
             ],
             [
-                'name' => 'チームO',
+                'name' => 'ユーザーO',
                 'email' => 'omail@mail.com',
             ],
             [
-                'name' => 'チームP',
+                'name' => 'ユーザーP',
                 'email' => 'pmail@mail.com',
             ],
             [
-                'name' => 'チームQ',
+                'name' => 'ユーザーQ',
                 'email' => 'qmail@mail.com',
             ],
             [
-                'name' => 'チームR',
+                'name' => 'ユーザーR',
                 'email' => 'rmail@mail.com',
             ],
             [
-                'name' => 'チームS',
+                'name' => 'ユーザーS',
                 'email' => 'smail@mail.com',
             ],
             [
-                'name' => 'チームT',
+                'name' => 'ユーザーT',
                 'email' => 'tmail@mail.com',
             ],
             [
-                'name' => 'チームU',
+                'name' => 'ユーザーU',
                 'email' => 'umail@mail.com',
             ],
             [
-                'name' => 'チームV',
+                'name' => 'ユーザーV',
                 'email' => 'vmail@mail.com',
             ],
             [
-                'name' => 'チームW',
+                'name' => 'ユーザーW',
                 'email' => 'wmail@mail.com',
             ],
             [
-                'name' => 'チームX',
+                'name' => 'ユーザーX',
                 'email' => 'xmail@mail.com',
             ],
             [
-                'name' => 'チームY',
+                'name' => 'ユーザーY',
                 'email' => 'ymail@mail.com',
             ],
             [
-                'name' => 'チームZ',
+                'name' => 'ユーザーZ',
                 'email' => 'zmail@mail.com',
             ],
 
