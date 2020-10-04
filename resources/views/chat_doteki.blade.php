@@ -100,7 +100,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     <div class="col-5">
                         <div class="row h-25 border">
                             <div class="col-8 ">
@@ -130,7 +130,7 @@
                                         </div>
                                         <div class="row h-50">
                                             <button class="col m-1 btn  btn-danger" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[2] )" v-on:mouseover="infoLoad(commands[2]['name'], '工数を' + commands[2]['time'] + '進めて進捗度を ' + commands[2]['progress'] + ' 進める。また、炎上度を ' + commands[2]['barning'] + ' 進める。')" v-on:mouseleave="infoLoad()"><span v-text="commands[2]['name']"></span></button>
-                                            <button class="col m-1 btn  btn-warning" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[3] )" v-on:mouseover="infoLoad(commands[3]['name'], '工数を' + commands[3]['time'] + '進めて進捗度を ' + commands[3]['progress'] + ' 進める。また、炎上度を ' + commands[3]['barning'] + ' 進める。')" v-on:mouseleave="infoLoad()"><span v-text="commands[3]['name']"></span></button>    
+                                            <button class="col m-1 btn  btn-warning" type="button" name="button" v-bind:disabled="isProcessing" @click="send('command', commands[3] )" v-on:mouseover="infoLoad(commands[3]['name'], '工数を' + commands[3]['time'] + '進めて進捗度を ' + commands[3]['progress'] + ' 進める。また、炎上度を ' + commands[3]['barning'] + ' 進める。')" v-on:mouseleave="infoLoad()"><span v-text="commands[3]['name']"></span></button>
                                         </div>
                                     </div>
                                 </div>
@@ -161,7 +161,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 
     <script src="/js/app.js"></script>
@@ -287,7 +287,7 @@
                                 this.message = '';
                             });
                             break;
-                    
+
                         case "command":
                             this.isProcessing = true;
                             var params = { message: value.lang+" : "+value.name+'のコマンドを発動',user_name:this.user_name,command: value.id };
@@ -301,7 +301,7 @@
                             });
                             break;
                     }
-                    
+
                 }
             },
             mounted() {
@@ -314,7 +314,7 @@
 
                 Echo.channel('chat')
                     .listen('MessageCreated', (e) => {
-                        
+
                         this.getMessages(); // 全メッセージを再読込
                         this.getBars();
                         this.getImg();
@@ -324,7 +324,7 @@
                     .listen('MatterEnded', (e) => {
                         this.matterEnded = true;
                     });
-                
+
                 this.onLoading = false;
             }
         });
