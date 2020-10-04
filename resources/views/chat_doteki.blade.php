@@ -28,14 +28,14 @@
             <div class="container-fluid">
                 <div class="row h-75">
                     {{-- 敵味方画像 --}}
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 m-1 border">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 m-1 border">
                         <div class="row m-1">
                             <div class="col-6">
     
                                 {{-- タイトル、進捗ゲージ --}}
                                 <div class="card" style="background-color: rgba(0, 0, 0, 0); border:none;">
                                     
-                                    <span style="font-size: clamp(3vw, 16px, 5vw);">{{ config('rate_type')[$matter['rate_type']]['name'] }}の案件</span>
+                                    <span class="text-center" style="font-size: clamp(3vw, 16px, 5vw);">{{ config('rate_type')[$matter['rate_type']]['name'] }}の案件</span>
                                         <div class="row mt-1">
                                             <div class="col">
                                                 <span class="badge badge-light float-left">工数</span>
@@ -84,8 +84,8 @@
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="card" style="background-color: rgba(0, 0, 0, 0); border:none;">
-                                    <span style="font-size: clamp(3vw, 16px, 5vw);">あなた：{{ $user_name }}</span>
+                                <div class="card mt-5" style="background-color: rgba(0, 0, 0, 0); border:none;">
+                                    <span class="text-center" style="font-size: clamp(3vw, 16px, 5vw);">あなた：{{ $user_name }}</span>
                                     <img class="img-fluid" alt="ロゴ" src="{{ asset('/img/arrowLr.png') }}">
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                     </div>
     
                     {{-- インフォメーション＋コマンド --}}
-                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
                         <div class="row h-100">
                             {{-- インフォメーション --}}
                             <div class="col-12 h-25 order-2 order-md-1 border m-1">
