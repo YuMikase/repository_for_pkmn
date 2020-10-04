@@ -66,7 +66,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="card" style="background-color: rgba(0, 0, 0, 0); border:none;">
-                                    <img class="card-img" style="max-width:150px; max-height:150px;" alt="ロゴ" v-bind:src="enemyImg">
+                                    <img class="card-img m-auto" style="width: clamp(100px, 100%, 200px);" alt="ロゴ" v-bind:src="enemyImg">
                                     <div class="card-img-overlay">
                                         <p class="text-center" style="color:rgba(255, 255, 255, 0.585); font-size: clamp(3vw, 16px, 5vw);">MATTER</p>
                                     </div>
@@ -77,7 +77,7 @@
                         <div class="row m-1">
                             <div class="col-6">
                                 <div class="card" style="background-color: rgba(0, 0, 0, 0); border:none;">
-                                    <img class="card-img" style="max-width:150px; max-height:150px;" alt="ロゴ" v-bind:src="meImg">
+                                    <img class="card-img m-auto" style="width: clamp(100px, 100%, 200px);" alt="ロゴ" v-bind:src="meImg">
                                     <div class="card-img-overlay">
                                         <p class="text-center" style="color:rgba(255, 255, 255, 0.585); font-size: clamp(3vw, 16px, 5vw);">YOU</p>
                                     </div>
@@ -95,7 +95,7 @@
                             <div class="card card-scroll col-12">
                                 <ul class="list-group list-group-flush" style="overflow-y: scroll; max-height: 100px;">
                                     <li class="list-group-item p-1 m-1" v-for="m in messages">
-                                        <span style="font-size: 4px" v-text="m.created_at+' : user_name : '+m.user_name"></span>
+                                        <span style="font-size: 10px;" v-text="m.created_at+' : user_name : '+m.user_name"></span>
                                         <br>
                                         <span v-text="m.body"></span>
                                     </li>
