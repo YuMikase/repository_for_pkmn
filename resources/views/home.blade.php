@@ -112,7 +112,7 @@
               <span>所持金：<span v-text="'￥'+money" v-bind:style="{ color: color}"></span></span>
             </div>
             <div class="list-group" style="max-height:300px; overflow-y:scroll;">
-                <button class="list-group-item list-group-item-action"  v-for="i in items" v-bind:disabled="onBuy || ( money < i.money )">
+                <button class="list-group-item list-group-item-action" style="min-height:47px;" v-for="i in items" v-bind:disabled="onBuy || ( money < i.money )">
                     <div @click='buy(i.id)' class="row" v-bind:class="{ noMoney: (money < i.money) }">
                         <div class="col-2 px-0"><span class="badge badge-light" v-text="i.type"></span></div>
                         <div class="col-6 px-0"><span v-text="i.name"></span></div>
