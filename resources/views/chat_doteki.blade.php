@@ -66,7 +66,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="card" style="background-color: rgba(0, 0, 0, 0); border:none;">
-                                    <img class="card-img m-auto" style="width: clamp(100px, 100%, 200px);" alt="ロゴ" v-bind:src="enemyImg">
+                                    <img class="card-img m-auto" style="width: clamp(100px, 150px, 200px); max-height: 150px;" alt="ロゴ" v-bind:src="enemyImg">
                                     <div class="card-img-overlay">
                                         <p class="text-center" style="color:rgba(255, 255, 255, 0.585); font-size: clamp(3vw, 16px, 5vw);">MATTER</p>
                                     </div>
@@ -77,7 +77,7 @@
                         <div class="row m-1">
                             <div class="col-6">
                                 <div class="card" style="background-color: rgba(0, 0, 0, 0); border:none;">
-                                    <img class="card-img m-auto" style="width: clamp(100px, 100%, 200px);" alt="ロゴ" v-bind:src="meImg">
+                                    <img class="card-img m-auto" style="width: clamp(100px, 150px, 200px); max-height: 150px;" alt="ロゴ" v-bind:src="meImg">
                                     <div class="card-img-overlay">
                                         <p class="text-center" style="color:rgba(255, 255, 255, 0.585); font-size: clamp(3vw, 16px, 5vw);">YOU</p>
                                     </div>
@@ -108,12 +108,12 @@
                     <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
                         <div class="row h-100">
                             {{-- インフォメーション --}}
-                            <div class="col-12 h-25 order-2 order-md-1 border m-1">
-                                    <div class="row h-25 m-1"><span v-text='infoTitle' style="font-size:16px;"></span></div>
-                                    <div class="row h-75 m-1"><span v-text='infoText' style="font-size:12px;"></span></div>
+                            <div class="col-12 h-50 order-2 order-md-1 border m-1">
+                                    <div class="row h-25 m-1"><span v-text='infoTitle' style="font-size:20px;"></span></div>
+                                    <div class="row h-75 m-1"><span v-text='infoText' style="font-size:16px;"></span></div>
                             </div>
                             {{-- コマンド --}}
-                            <div class="col-12 h-75 order-1 order-md-2 border m-1">
+                            <div class="col-12 h-50 order-1 order-md-2 border m-1">
                                 <div class="row h-100" v-if="!onCommands && !onItems">
                                     <div class="col">
                                         <div class="row h-50">
