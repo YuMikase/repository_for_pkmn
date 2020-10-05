@@ -92,7 +92,12 @@ class ChatController extends Controller
 
 		//言語情報が一致していた場合のみ加算
 		if (strcmp($rate_type['name'], $commands[$input_command]['lang']) == 0 ) {
+			//言語スキル処理
+			$user_lang_skill = UserLangSkill::where('user_id', $user->id)->where('skill', $rate_type['name'])->first();
 			MatterHasUser::where('matter_id', $id)->where('user_id', $user->id)->increment('command_count');
+			$matter->progress += ($user_lang_skill['level'] * 5);
+			$matter->save();
+
 		};
 		
 		// 案件終了時処理
